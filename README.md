@@ -37,7 +37,7 @@ If you have trouble getting the bot up and running, feel free to [create an issu
 
 Since this is a self-hosted solution, you will need to provide your own Bot Token to get your bot up and running.
 
-If you don't know how to get your own bot token, you can follow [this Github's Tutorial](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token) to create yourself one.
+If you don't know how to get your own bot token, you can follow [this Github Tutorial](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token) to create yourself one.
 
 Once you have your bot token, you can run the program for the first time. 
 Your `config/toolkit.json` file should look like this :
