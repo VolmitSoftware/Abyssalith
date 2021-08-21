@@ -33,7 +33,7 @@ public class Set extends VolmitCommand {
         embed.addField(moneyEmoji+ moneyName+ " set: ", args.get(1) + " Set By: " + e.getAuthor().getAsMention(), false);
 
         User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
-        u.money(Integer.parseInt(args.get(1)));
+        u.money(Double.parseDouble(args.get(1)));
 
 
         embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);

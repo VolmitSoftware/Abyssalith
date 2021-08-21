@@ -8,8 +8,8 @@ import volmbot.io.DataType;
 @Accessors(chain = true, fluent = true)
 public class User implements DataType {
     private long id = 0;
-    private long experience = 0;
-    private long money = 0;
+    private double experience = 0;
+    private double money = 0.00;
 
     //private UserStatistics stats = new UserStatistics();
     private long messagesSent = 0;

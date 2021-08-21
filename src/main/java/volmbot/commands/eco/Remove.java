@@ -34,7 +34,7 @@ public class Remove extends VolmitCommand {
 
         User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
 
-        u.money(Integer.parseInt(args.get(1)) - u.money());
+        u.money(Double.parseDouble(args.get(1)) - u.money());
 
         embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
         embed.send(e.getMessage(), true, 1000);
