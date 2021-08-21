@@ -36,7 +36,7 @@ public class DataLoader
 
     private <T extends DataType> void registerLoader(Class<T> c)
     {
-        loaders.put(c, new TypedLoader<>(c));
+        loaders.put(c, new TypedLoader<>(c, storage));
     }
 
     public void cleanup(long olderThan)

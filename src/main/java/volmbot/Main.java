@@ -1,6 +1,7 @@
 package volmbot;
 
 import art.arcane.quill.execution.Looper;
+import lombok.Getter;
 import lombok.NonNull;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -10,6 +11,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import volmbot.commands.*;
+import volmbot.data.User;
 import volmbot.io.DataLoader;
 import volmbot.io.storage.FileSystemStorageAccess;
 import volmbot.listeners.*;
@@ -24,6 +26,8 @@ import java.util.Objects;
 public class Main extends ListenerAdapter {
     public static final Logger LOGGER = LoggerFactory.getLogger(WebSocket.Listener.class);
     public static final IBotProvider provider = new BotProvider();
+
+   @Getter
     private static final DataLoader loader = createLoader();
 
     private static DataLoader createLoader() {
@@ -76,6 +80,10 @@ public class Main extends ListenerAdapter {
                 return 1000;
             }
         }.start();
+
+        User u = loader.getUser(1234);
+        u.experience(69).points(96723);
+        loader.cleanup(-1);
 
         Runtime.getRuntime().addShutdownHook(new Thread(loader::close));
     }
