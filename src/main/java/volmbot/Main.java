@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import volmbot.commands.*;
+import volmbot.data.Message;
 import volmbot.data.User;
 import volmbot.io.DataLoader;
 import volmbot.io.storage.FileSystemStorageAccess;

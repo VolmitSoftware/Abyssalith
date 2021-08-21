@@ -2,6 +2,9 @@ package volmbot.io;
 
 import art.arcane.quill.collections.KMap;
 import art.arcane.quill.execution.Looper;
+import art.arcane.quill.math.M;
+import art.arcane.quill.random.RNG;
+import volmbot.Main;
 import volmbot.data.Message;
 import volmbot.data.User;
 
@@ -18,8 +21,8 @@ public class DataLoader
     private Looper cleaner = new Looper() {
         @Override
         protected long loop() {
-            cleanup(TimeUnit.SECONDS.toMillis(15));
-            return TimeUnit.SECONDS.toMillis(5);
+            cleanup(10000);
+            return 1000;
         }
     };
 

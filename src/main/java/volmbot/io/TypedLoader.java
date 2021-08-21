@@ -25,6 +25,11 @@ public class TypedLoader<T extends DataType> {
         lastUse = new KMap<>();
     }
 
+    public int size()
+    {
+        return cache.size();
+    }
+
     public void cleanup(long olderThan)
     {
         lock.lock();
@@ -42,7 +47,7 @@ public class TypedLoader<T extends DataType> {
 
     private synchronized void unload(Long i) {
         lastUse.remove(i);
-        T m = cache.get(i);
+        T m = cache.remove(i);
         storage.set(type.getSimpleName().toLowerCase(Locale.ROOT), i, storage.toString(m));
         Main.info("Saved " + type.getSimpleName() + "[" + i + "]");
     }
