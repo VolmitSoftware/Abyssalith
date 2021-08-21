@@ -6,13 +6,10 @@ import lombok.NonNull;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.events.ReadyEvent;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import volmbot.commands.*;
-import volmbot.data.Message;
-import volmbot.data.User;
 import volmbot.io.DataLoader;
 import volmbot.io.storage.FileSystemStorageAccess;
 import volmbot.listeners.*;
@@ -59,6 +56,7 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new OwOListener());
         getJDA().addEventListener(new AutoWiki());
         getJDA().addEventListener(new Prefix());
+        getJDA().addEventListener(new UserWatcher());
         // Money Commands
         getJDA().addEventListener(new Eco());
 
