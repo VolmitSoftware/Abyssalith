@@ -4,10 +4,7 @@ import art.arcane.quill.format.Form;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import volmbot.Main;
 import volmbot.data.User;
-import volmbot.io.DataLoader;
 import volmbot.toolbox.Toolkit;
-import volmbot.toolbox.UserDirector;
-import volmbot.util.Econator;
 import volmbot.util.VolmitCommand;
 import volmbot.util.VolmitEmbed;
 
@@ -36,9 +33,10 @@ public class Set extends VolmitCommand {
         embed.addField(moneyEmoji+ moneyName+ " set: ", args.get(1) + " Set By: " + e.getAuthor().getAsMention(), false);
 
         User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
-        u.points(Integer.parseInt(args.get(1)));
+        u.money(Integer.parseInt(args.get(1)));
 
-        embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.points()), false);
+
+        embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
         embed.send(e.getMessage(), true, 1000);
     }
 }

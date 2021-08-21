@@ -2,6 +2,7 @@ package volmbot.io;
 
 import art.arcane.quill.collections.KMap;
 import art.arcane.quill.execution.Looper;
+import volmbot.data.Message;
 import volmbot.data.User;
 
 import java.io.File;
@@ -27,11 +28,16 @@ public class DataLoader
         this.storage = storage;
         cleaner.start();
         registerLoader(User.class);
+        registerLoader(Message.class);
     }
 
     public User getUser(long id)
     {
         return getLoader(User.class).get(id);
+    }
+    public Message getMessage(long id)
+    {
+        return getLoader(Message.class).get(id);
     }
 
     private <T extends DataType> void registerLoader(Class<T> c)

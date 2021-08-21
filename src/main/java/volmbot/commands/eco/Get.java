@@ -1,9 +1,10 @@
 package volmbot.commands.eco;
 
+import art.arcane.quill.format.Form;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import volmbot.Main;
+import volmbot.data.User;
 import volmbot.toolbox.Toolkit;
-import volmbot.toolbox.UserDirector;
-import volmbot.util.Econator;
 import volmbot.util.VolmitCommand;
 import volmbot.util.VolmitEmbed;
 
@@ -27,10 +28,13 @@ public class Get extends VolmitCommand {
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         String moneyName = Toolkit.get().MoneyName;
         String moneyEmoji = Toolkit.get().MoneyEmoji;
-        UserDirector m = UserDirector.load(e.getMessage().getMentionedMembers().get(0).getIdLong());
+
+        User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
+
+
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
-        embed.addField(moneyEmoji+ moneyName+ " Total: ", m.getMoney() + " Requested  By: " + e.getAuthor().getAsMention(), false);
-        embed.addField("Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", m.getMoney(), false);
+        embed.addField(moneyEmoji+ moneyName+ " Total: ", Form.f(u.money()) + " Requested  By: " + e.getAuthor().getAsMention(), false);
+        embed.addField("Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
         embed.send(e.getMessage(), true, 1000);
     }
 }

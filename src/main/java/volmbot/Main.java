@@ -31,7 +31,7 @@ public class Main extends ListenerAdapter {
     private static final DataLoader loader = createLoader();
 
     private static DataLoader createLoader() {
-        return new DataLoader(new FileSystemStorageAccess(new File("newdata")));
+        return new DataLoader(new FileSystemStorageAccess(new File("DataStructure")));
     }
 
     // BOT BUILDER BOYS
@@ -58,12 +58,10 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new OwOListener());
         getJDA().addEventListener(new AutoWiki());
         getJDA().addEventListener(new Prefix());
-        getJDA().addEventListener(new ReactionListener()); //BROKEN
         // Money Commands
         getJDA().addEventListener(new Eco());
 
         // Commands
-        getJDA().addEventListener(new ReactionRole());
         getJDA().addEventListener(new Links());
         getJDA().addEventListener(new Stats());
         getJDA().addEventListener(new Ping());

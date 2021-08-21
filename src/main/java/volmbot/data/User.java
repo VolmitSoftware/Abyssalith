@@ -11,7 +11,7 @@ import volmbot.io.DataType;
 public class User implements DataType {
     private long id = 0;
     private long experience = 0;
-    private long points = 0;
+    private long money = 0;
     private UserStatistics stats = new UserStatistics();
 
     @Data
