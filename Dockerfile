@@ -1,9 +1,6 @@
 FROM openjdk:11
-RUN dir -a
-RUN  chmod +x ./gradlew 
-RUN dir -a
-RUN ./gradlew shadowJar
-RUN dir -a
-COPY /build/libs .
-WORKDIR /
+COPY . /ab
+RUN cd /ab && dir -a
+RUN cd /ab && chmod +x ./gradlew && ./gradlew shadowJar
+WORKDIR /ab/build/libs
 CMD ["java", "-Xmx500m", "-Xms500m", "-jar", "Abyssalith-1.0-all"]
