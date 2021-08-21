@@ -1,6 +1,6 @@
 # Abyssalith, The Discord Bot
 
-This bot's repository is just a repo for a small server bot being that can do things. This is using Naming conventions from [Volmit Software](https://github.com/VolmitSoftware) This bot is only showing off the JDA at the current time, and making a bot to learn it. You are more than welcome to keep this code for whatever you want as this is just a proof of concept.
+This bot's repository is just a repo for a small server bot being that can do things. This is using Naming conventions from [Volmit Software](https://github.com/VolmitSoftware) This bot is only showing off the JDA at the current time, and making a bot to learn it. You are more than welcome to keep this code for whatever you want as this is just a proof of concept. Additionally this bot uses a cloud data system (redis) for data storage so you would need to use that as well
 
 ## Getting Started
 
