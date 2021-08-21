@@ -1,6 +1,7 @@
 package volmbot.io.storage;
 
 import art.arcane.quill.io.IO;
+import volmbot.Main;
 import volmbot.io.StorageAccess;
 
 import java.io.File;
@@ -12,6 +13,7 @@ public class FileSystemStorageAccess implements StorageAccess {
     public FileSystemStorageAccess(File root)
     {
         this.root = root;
+        Main.info("Created Storage Access (File System) in " + root.getAbsolutePath());
     }
 
     private File fileFor(String typeName, Long key)

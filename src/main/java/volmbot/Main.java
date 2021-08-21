@@ -81,14 +81,8 @@ public class Main extends ListenerAdapter {
             }
         }.start();
 
-        User u = loader.getUser(1234);
-        u.experience(69).points(96723);
-        loader.cleanup(-1);
-
         Runtime.getRuntime().addShutdownHook(new Thread(loader::close));
     }
-
-
 
     @Override
     public void onReady(@NonNull ReadyEvent e) {
@@ -102,20 +96,25 @@ public class Main extends ListenerAdapter {
         System.exit(1);
     }
 
-    public static void warn(String message) {
-        LOGGER.warn(" \\/ {}", message);
+    private static void log(String tag, Object t)
+    {
+        System.out.println("[" + tag + "]: " + t);
     }
 
-    public static void info(String message) {
-        LOGGER.info(" \\/ {}", message);
+    public static void warn(Object message) {
+        log("WARN", message);
     }
 
-    public static void error(String message) {
-        LOGGER.error(" \\/ {}", message);
+    public static void info(Object message) {
+        log("INFO", message);
     }
 
-    public static void debug(String message) {
-        LOGGER.debug(" \\/ {}", message);
+    public static void error(Object message) {
+        log("ERROR", message);
+    }
+
+    public static void debug(Object message) {
+        log("DEBUG", message);
     }
 }
 
