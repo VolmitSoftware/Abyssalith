@@ -1,4 +1,5 @@
 FROM openjdk:11
+RUN  chmod +x ./gradlew 
 RUN ./gradlew shadowJar
 COPY /build/libs .
 WORKDIR /
