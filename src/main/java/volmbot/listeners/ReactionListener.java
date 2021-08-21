@@ -1,5 +1,6 @@
 package volmbot.listeners;
 
+import art.arcane.quill.lang.Alphabet;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
@@ -24,9 +25,12 @@ public class ReactionListener extends ListenerAdapter {
                         try {
                             String id = oMsg.getRoles().get(ff);
                             Role r = e.getGuild().getRoleById(id);
-                            assert r != null;
-                            e.getGuild().addRoleToMember(e.getUserIdLong(), r).queue();
-                            Main.info("Added: " + r + " to " + e.getUserIdLong());
+                            if(r != null)
+                            {
+                                e.getGuild().addRoleToMember(e.getUserIdLong(), r).queue();
+                                Main.info("Added: " + r + " to " + e.getUserIdLong());
+                            }
+
                             break;
                         } catch (IndexOutOfBoundsException ev) {
                             Main.info("had a strokE");

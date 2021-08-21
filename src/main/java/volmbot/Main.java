@@ -10,22 +10,25 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import volmbot.commands.*;
+import volmbot.io.DataLoader;
+import volmbot.io.storage.FileSystemStorageAccess;
 import volmbot.listeners.*;
 import volmbot.toolbox.Toolkit;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
 import java.net.http.WebSocket;
 import java.util.Objects;
 
 
 public class Main extends ListenerAdapter {
-
-
     public static final Logger LOGGER = LoggerFactory.getLogger(WebSocket.Listener.class);
-
-
     public static final IBotProvider provider = new BotProvider();
+    private static final DataLoader loader = createLoader();
 
+    private static DataLoader createLoader() {
+        return new DataLoader(new FileSystemStorageAccess(new File("newdata")));
+    }
 
     // BOT BUILDER BOYS
     public static JDA getJDA() {
@@ -73,6 +76,8 @@ public class Main extends ListenerAdapter {
                 return 1000;
             }
         }.start();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(loader::close));
     }
 
 
