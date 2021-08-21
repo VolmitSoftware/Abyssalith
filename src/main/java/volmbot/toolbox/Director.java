@@ -45,11 +45,8 @@ public class Director {
     public void save() {
         File f = new File("data/" + id + ".json");
         f.getParentFile().mkdirs();
-
-        //Try-catch, but better ;)
+        
         J.attempt(() -> IO.writeAll(f, new Gson().toJson(this)));
-
-        //Never used: Hunk<String> dna = Hunk.newMappedHunk(5, 5, 5);
 
 
     }
