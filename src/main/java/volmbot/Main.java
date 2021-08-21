@@ -31,7 +31,7 @@ public class Main extends ListenerAdapter {
     private static final DataLoader loader = createLoader();
 
     private static DataLoader createLoader() {
-        return new DataLoader(new FileSystemStorageAccess(new File("DataStructure")));
+        return new DataLoader(new FileSystemStorageAccess(new File("Data")));
     }
 
     // BOT BUILDER BOYS

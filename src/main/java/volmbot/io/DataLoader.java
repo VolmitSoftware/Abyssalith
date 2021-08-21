@@ -18,8 +18,8 @@ public class DataLoader
     private Looper cleaner = new Looper() {
         @Override
         protected long loop() {
-            cleanup(TimeUnit.MINUTES.toMillis(5));
-            return TimeUnit.MINUTES.toMillis(1);
+            cleanup(TimeUnit.SECONDS.toMillis(15));
+            return TimeUnit.SECONDS.toMillis(5);
         }
     };
 

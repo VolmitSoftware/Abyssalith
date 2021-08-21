@@ -31,7 +31,6 @@ public class Get extends VolmitCommand {
 
         User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
 
-
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji+ moneyName+ " Total: ", Form.f(u.money()) + " Requested  By: " + e.getAuthor().getAsMention(), false);
         embed.addField("Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
