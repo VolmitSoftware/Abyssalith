@@ -57,6 +57,7 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new AutoWiki());
         getJDA().addEventListener(new Prefix());
         getJDA().addEventListener(new UserWatcher());
+        getJDA().addEventListener(new ReactionDirector());
         // Money Commands
         getJDA().addEventListener(new Eco());
 
