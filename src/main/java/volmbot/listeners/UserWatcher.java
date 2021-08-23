@@ -1,22 +1,19 @@
 package volmbot.listeners;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageDeleteEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import volmbot.Main;
 import volmbot.data.User;
-
-import java.util.concurrent.ThreadLocalRandom;
+import volmbot.toolbox.Toolkit;
 
 public class UserWatcher extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot()) {
             User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong());
-            double v = ThreadLocalRandom.current().nextDouble(0.8, 1.0);
 
-            u.experience(u.experience() + v);
+            u.experience(u.experience() + Toolkit.get().MsgXp.rand());
             u.messagesSent(u.messagesSent() + 1);
         }
     }
@@ -25,8 +22,7 @@ public class UserWatcher extends ListenerAdapter {
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
         if (!e.getUser().isBot()) {
             User u = Main.getLoader().getUser(e.getUser().getIdLong());
-            double v = ThreadLocalRandom.current().nextDouble(0.01, 0.025);
-            u.experience(u.experience() + v);
+            u.experience(u.experience() + Toolkit.get().MsgXp.rand());
             u.reactions(u.reactions() + 1);
         }
     }
@@ -37,8 +33,7 @@ public class UserWatcher extends ListenerAdapter {
             e.getUserId();
             User u = Main.getLoader().getUser(e.getUserIdLong());
             u.reactions(u.reactions() - 1);
-            double v = ThreadLocalRandom.current().nextDouble(0.01, 0.025);
-            u.experience(u.experience() - v);
+            u.experience(u.experience() - Toolkit.get().MsgXp.rand());
         }
     }
 }

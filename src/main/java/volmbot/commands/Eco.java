@@ -2,6 +2,7 @@ package volmbot.commands;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import volmbot.commands.eco.*;
+import volmbot.toolbox.Toolkit;
 import volmbot.util.VolmitCommand;
 
 import java.util.List;
@@ -11,8 +12,8 @@ public class Eco extends VolmitCommand {
     public Eco() {
         super(
                 "eco",
-                new String[]{},
-                new String[]{}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{"eco", "money"},
+                new String[]{Toolkit.get().ModRole}, // Add role name here. Empty: always / 1+: at least one.
                 "Economy Category",
                 true,
                 "Eco <subcommand>",

@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import volmbot.Main;
+import volmbot.util.Range;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,8 @@ public class Toolkit extends ListenerAdapter {
     public String BotGIF = "";//Leave blank change in config
     public String BotColor = "";//Leave blank change in config
     public String BotToken = "";//Leave blank change in config
+    public Range MsgXp = Range.jitter(0.9, 0.2);
+    public String RoleString = "";//Leave blank change in config
     public String BotOwnerID = "";//Leave blank change in config
     public String BotPrefix = "";//Leave blank change in config
     public List<String> owo = Arrays.asList("OwO", "owo", "uwu", "()w()", "OvO", "owO");
@@ -68,6 +71,8 @@ public class Toolkit extends ListenerAdapter {
             try {
                 Toolkit tk = new Gson().fromJson(IO.readAll(f), Toolkit.class);
                 System.out.println(tk.BotToken);
+                tk.save();
+                fw.checkModified();
                 return tk;
             } catch (IOException e) {
                 e.printStackTrace();

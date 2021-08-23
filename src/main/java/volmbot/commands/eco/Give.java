@@ -16,7 +16,7 @@ public class Give extends VolmitCommand {
         super(
                 "give", //Name
                 new String[]{}, //Alias's
-                new String[]{"ADMINISTRATOR"}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Toolkit.get().ModRole}, // Always permitted if empty. User must have at least one if specified.
                 "Gives a Number of currency to the user", // Description
                 true, // Does it use Args
                 "eco give 10 @Psycho" //Example - the prefix
