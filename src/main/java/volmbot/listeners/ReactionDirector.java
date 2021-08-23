@@ -31,16 +31,39 @@ public class ReactionDirector extends ListenerAdapter {
 
     //TODO, actually get it to work
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
-        Message m = e.retrieveMessage().complete();
+        Message m = e.getChannel().retrieveMessageById(e.getMessageIdLong()).complete();
 
-        if (m.getAuthor().getId().equals(e.getMember().getId()) && m.getMentionedRoles().size() > 0) {
+        System.out.println(m.getAuthor().getIdLong()); // Get the message author
+        System.out.println(e.getMember().getUser().getIdLong());
+
+
+        if (/*!m.getAuthor().getId().equals(e.getMember().getId()) &&*/ m.getMentionedRoles().size() > 0) {
 
             String Message = m.getContentRaw().toLowerCase();
             if (Message.contains("fff")) {
                 List<MessageReaction> oReaction = m.getReactions();
                 List<Role> oRole = m.getMentionedRoles();
+
+                System.out.println("[oRole]: "+oRole);
+                System.out.println("[oReaction]: "+ oReaction);
+
+                int iter = 0;
+
                 for (MessageReaction reaction : oReaction) {
-                    System.out.println("Message ID: " + reaction.getMessageId() + " Reaction Authors? " + reaction.retrieveUsers().complete() + "REACTION ID: " + reaction);
+
+                    if(true){
+
+                        System.out.println("[TRUE] Is a React Role: " +reaction);
+
+
+                        Role mr = oRole.get(iter);
+                        //e.getGuild().addRoleToMember(e.getUserIdLong(), mr).queue();
+                    }else {
+                        System.out.println("[FAILED] Is NOT React Role: " +reaction);
+                    }
+
+
+                    iter++;
                 }
                 for (Role role : oRole) {
                     System.out.println(role);
