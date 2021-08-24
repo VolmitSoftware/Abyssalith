@@ -53,7 +53,7 @@ public class Main extends ListenerAdapter {
 
         // Listeners
         getJDA().addEventListener(new Toolkit());
-        getJDA().addEventListener(new OwOListener());
+        getJDA().addEventListener(new ButtonManager());
         getJDA().addEventListener(new AutoWiki());
         getJDA().addEventListener(new Prefix());
         getJDA().addEventListener(new UserWatcher());
