@@ -8,7 +8,6 @@ public class PasteListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot()) {
             if (e.getMessage().getContentRaw().toLowerCase().contains("https://pastebin.com/")) {
-
                 String str = e.getMessage().getContentRaw();
                 String[] pbArr = str.split(" ");
                 for (String s : pbArr){
