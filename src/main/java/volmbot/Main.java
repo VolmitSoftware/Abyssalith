@@ -47,21 +47,18 @@ public class Main extends ListenerAdapter {
         Toolkit.get().botUser = getJDA().getUserById(Toolkit.get().botID);
         Toolkit.get().botName = Objects.requireNonNull(Toolkit.get().botUser).getName();
 
-        /// Listener Registrar
         // Log incoming messages
         getJDA().addEventListener(new Main());
-
         // Listeners
         getJDA().addEventListener(new Toolkit());
         getJDA().addEventListener(new ButtonManager());
+        getJDA().addEventListener(new ButtonHandler());
         getJDA().addEventListener(new AutoWiki());
         getJDA().addEventListener(new Prefix());
         getJDA().addEventListener(new UserWatcher());
         getJDA().addEventListener(new ReactionDirector());
-        // Money Commands
-        getJDA().addEventListener(new Eco());
-
         // Commands
+        getJDA().addEventListener(new Eco()); // Money Subcommand
         getJDA().addEventListener(new Links());
         getJDA().addEventListener(new Stats());
         getJDA().addEventListener(new Ping());
