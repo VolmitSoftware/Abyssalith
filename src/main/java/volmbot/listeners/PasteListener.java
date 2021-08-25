@@ -13,7 +13,7 @@ public class PasteListener extends ListenerAdapter {
                 String[] pbArr = str.split(" ");
                 for (String s : pbArr){
                     if (s.contains("https://pastebin.com/")) {
-                        e.getChannel().sendMessage("Would you like me to scan this for you?: " + s).queue(f -> {
+                        e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s +">").queue(f -> {
                             f.editMessageComponents().setActionRow(
                                     Button.success("pastbinlinknew", "Yes please!"),
                                     Button.danger("no", "No, go away!")

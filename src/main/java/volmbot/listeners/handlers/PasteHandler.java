@@ -18,7 +18,7 @@ public class PasteHandler extends ListenerAdapter {
 
         if (e.getComponentId().equals("pastbinlinknew")) {
 
-            String[] args = e.getMessage().getContentRaw().split("/", 10);
+            String[] args = e.getMessage().getContentRaw().replaceAll(">", "").split("/", 10);
             System.out.println(args[3]);
 
 
