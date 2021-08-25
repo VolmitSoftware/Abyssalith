@@ -15,8 +15,6 @@ import volmbot.util.Range;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class Toolkit extends ListenerAdapter {
     // Set from config
@@ -32,7 +30,6 @@ public class Toolkit extends ListenerAdapter {
     public String RoleString = "";//Leave blank change in config
     public String BotOwnerID = "";//Leave blank change in config
     public String BotPrefix = "";//Leave blank change in config
-    public List<String> owo = Arrays.asList("OwO", "owo", "uwu", "()w()", "OvO", "owO");
     // Set from main class
     public transient Long botID;
     public transient User botUser;
