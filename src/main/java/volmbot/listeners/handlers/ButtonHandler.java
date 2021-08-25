@@ -1,4 +1,4 @@
-package volmbot.listeners;
+package volmbot.listeners.handlers;
 
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -7,12 +7,7 @@ public class ButtonHandler extends ListenerAdapter {
 
     @Override
     public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
-        if (e.getComponentId().equals("primary")) {
-            e.getUser().openPrivateChannel().complete().sendMessage("Hello!").queue();
-            e.editButton(e.getButton()).complete();
-            //event.reply("Hello :)").queue(); // send a message in the channel
-
-        } else if (e.getComponentId().equals("success")) {
+        if (e.getComponentId().equals("success")) {
             e.getUser().openPrivateChannel().complete().sendMessage("Hello!").queue();
             e.editButton(e.getButton()).complete();
 
@@ -20,18 +15,10 @@ public class ButtonHandler extends ListenerAdapter {
             e.getUser().openPrivateChannel().complete().sendMessage("Hello!").queue();
             e.editButton(e.getButton()).complete();
 
-        } else if (e.getComponentId().equals("danger")) {
-            e.editMessage("You have chosen death.").queue(); // update the message
-            e.getUser().openPrivateChannel().complete().sendMessage("**[ WELCOME TO THE DANGER ZONE ]** \nThis is death, here you go: Please pet him...").queue();
-            e.getUser().openPrivateChannel().complete().sendMessage("https://i.imgur.com/9MOCnUd.png").queue();
-            e.editButton(e.getButton()).complete();
-
         }
     }
 
 }
-
-
 
 
 //--------HOW TO MAKE A BUTTON-----------//

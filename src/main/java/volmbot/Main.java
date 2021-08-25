@@ -9,10 +9,13 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import volmbot.commands.Shutdown;
 import volmbot.commands.*;
 import volmbot.io.DataLoader;
 import volmbot.io.storage.FileSystemStorageAccess;
 import volmbot.listeners.*;
+import volmbot.listeners.handlers.ButtonHandler;
+import volmbot.listeners.handlers.PasteHandler;
 import volmbot.toolbox.Toolkit;
 
 import javax.security.auth.login.LoginException;
@@ -51,7 +54,8 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new Main());
         // Listeners
         getJDA().addEventListener(new Toolkit());
-        getJDA().addEventListener(new ButtonManager());
+        getJDA().addEventListener(new PasteListener());
+        getJDA().addEventListener(new PasteHandler());
         getJDA().addEventListener(new ButtonHandler());
         getJDA().addEventListener(new AutoWiki());
         getJDA().addEventListener(new Prefix());
