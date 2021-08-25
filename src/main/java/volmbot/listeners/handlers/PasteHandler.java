@@ -53,12 +53,12 @@ public class PasteHandler extends ListenerAdapter {
                 embed.addField("Unknown Block Data ", "- Iris cant find block data (nbt mapping issue) ", false);
                 prob++;
             }
-            if (doc.text().contains("[Multiverse-Core]")) { // Use element.text() to get the text of the element as a String
-                embed.addField("Using Multiverse ", "- You are using multiverse, are you using that for an iris world?", false);
+            if (doc.text().contains("IT IS HIGHLY RECOMMENDED YOU RESTART THE SERVER BEFORE GENERATING!")) { // Use element.text() to get the text of the element as a String
+                embed.addField("Restart your server", "- Iris needs to restart the server for the datapacks to work properly", false);
                 prob++;
             }
-            if (doc.text().contains("SERVER IS RUNNING IN OFFLINE/INSECURE MODE!")) { // Use element.text() to get the text of the element as a String
-                embed.addField("Server Offline", "- Turn your server into online mode to download a pack properly!", false);
+            if (doc.text().contains("[Multiverse-Core]")) { // Use element.text() to get the text of the element as a String
+                embed.addField("Using Multiverse ", "- You are using multiverse, are you using that for an iris world?", false);
                 prob++;
             }
             if (doc.text().contains("DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH")) { // Use element.text() to get the text of the element as a String
