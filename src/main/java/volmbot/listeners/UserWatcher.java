@@ -18,43 +18,37 @@ public class UserWatcher extends ListenerAdapter {
             u.experience(u.experience() + Toolkit.get().MsgXp.rand()); //XP
             u.messagesSent(u.messagesSent() + 1);
             double xp = u.experience();
+            double base = Toolkit.get().BaseXpLevel; // 500  (Xp level schema block)
+            double bxpm = Toolkit.get().BaseXpMultiplier; // 1.25  (Multiplier)
+            int rolerator = 1;
 
+            for (String erole : Toolkit.get().ExperienceRoles) {
 
-            Role r;
-
-
-            if (xp < 150) {
-
-                if ((e.getGuild().getRolesByName("[n00b]", true).size() != 1)) { // Create the role
-                    e.getGuild().createRole().setName("[N00b]").setMentionable(false).setColor(Color.orange).complete();
+                if (xp < base){
+                    roleManager(e, Toolkit.get().ExperienceRoles[0]);
+                    break;
                 }
-                r = e.getGuild().getRolesByName("[n00b]", true).get(0); // Manage the role
-                e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
+                if (xp > base && xp < (base*bxpm)*rolerator){
+                    roleManager(e, erole);
+                    for (String oerole : Toolkit.get().ExperienceRoles) {
 
-            } else if (xp > 150 && xp < 500) {
-
-
-            } else if (xp > 1000 && xp < 2000) {
-
-            } else if (xp > 2000 && xp < 4500) {
-
-            } else if (xp > 4500 && xp < 69419) {
-
-            } else if (xp > 69420 && xp < 69425) {
-
-            } else if (xp > 69425 && xp < 9000) {
-
+                        roleValidator(e, oerole);
+                        if (oerole != erole) {
+                            Role or = e.getGuild().getRolesByName(oerole, true).get(0);
+                            e.getGuild().removeRoleFromMember(e.getMember().getIdLong(), or).queue();
+                        }
+                    }
+                    break;
+                }
+                rolerator++;
             }
-
-
         }
     }
-
 
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
         if (!e.getUser().isBot()) {
             User u = Main.getLoader().getUser(e.getUser().getIdLong());
-            u.experience(u.experience() + Toolkit.get().MsgXp.rand());
+            u.experience((u.experience() + Toolkit.get().MsgXp.rand()));
             u.reactions(u.reactions() + 1);
         }
     }
@@ -66,6 +60,28 @@ public class UserWatcher extends ListenerAdapter {
             User u = Main.getLoader().getUser(e.getUserIdLong());
             u.reactions(u.reactions() - 1);
             u.experience(u.experience() - Toolkit.get().MsgXp.rand());
+        }
+    }
+
+    private void roleManager(GuildMessageReceivedEvent e, String role) {
+        Role r;
+        if(e.getGuild().getRolesByName(role, false).size() == 1 && e.getGuild().getRolesByName(role, false).contains(e.getGuild().getRolesByName(role, true).get(0)) ) {
+            r = e.getGuild().getRolesByName(role, true).get(0);
+            if (r != null) {
+                e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
+            }
+        } else {
+            e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().ExperienceRolesColor)).complete();
+            r = e.getGuild().getRolesByName(role, true).get(0);
+            e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
+        }
+
+    }
+    private void roleValidator(GuildMessageReceivedEvent e, String role) {
+        if(e.getGuild().getRolesByName(role, false).size() != 1) {
+            e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().ExperienceRolesColor)).complete();
+        }else if (e.getGuild().getRolesByName(role, false).size() > 1){
+            System.out.println("For some reason there are too many roles here im having a stroke...");
         }
     }
 }

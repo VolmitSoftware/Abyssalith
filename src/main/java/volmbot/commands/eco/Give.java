@@ -29,13 +29,12 @@ public class Give extends VolmitCommand {
         String moneyName = Toolkit.get().MoneyName;
         String moneyEmoji = Toolkit.get().MoneyEmoji;
 
-        System.out.println("Made it here...");
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji+ moneyName+ " given: ", args.get(1) + " From: " + e.getAuthor().getAsMention(), false);
 
         User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
 
-        u.money(Double.parseDouble(args.get(1)) + u.money());
+        u.money(Float.parseFloat(args.get(1)) + u.money());
 
         embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ",  "" + Form.f(u.money()), false);
         embed.send(e.getMessage(), true, 1000);

@@ -26,10 +26,16 @@ public class Toolkit extends ListenerAdapter {
     public String BotGIF = "";//Leave blank change in config
     public String BotColor = "";//Leave blank change in config
     public String BotToken = "";//Leave blank change in config
-    public Range MsgXp = Range.jitter(0.9, 0.2);
+    public Range MsgXp = Range.jitter(0.9f, 0.2f);
     public String RoleString = "";//Leave blank change in config
     public String BotOwnerID = "";//Leave blank change in config
     public String BotPrefix = "";//Leave blank change in config
+    public String[] ExperienceRoles = new String[] {"", "", ""};
+    public String ExperienceRolesColor = "0x000000";//Leave blank change in config
+    public double BaseXpLevel = 500f;//Leave blank change in config
+    public double BaseXpMultiplier = 1.25f;//Leave blank change in config
+
+
     // Set from main class
     public transient Long botID;
     public transient User botUser;

@@ -16,17 +16,17 @@ import lombok.experimental.Accessors;
 public class Range {
 
     @Builder.Default
-    private double min = 0;
+    private float min = 0;
     @Builder.Default
-    private double max = 1;
-    public static Range jitter(double center, double jitter){
+    private float max = 1;
+    public static Range jitter(float center, float jitter){
         return new Range(center - (jitter/2), center + (jitter/2));
     }
-    public double rand(){
-        return RNG.r.d(min,max);
+    public float rand(){
+        return RNG.r.f(min,max);
     }
 
-    public boolean contains(double d) {
+    public boolean contains(float d) {
         return d>=min&&d<=max;
     }
 

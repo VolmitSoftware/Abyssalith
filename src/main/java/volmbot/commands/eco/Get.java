@@ -29,9 +29,6 @@ public class Get extends VolmitCommand {
         String moneyName = Toolkit.get().MoneyName;
         String moneyEmoji = Toolkit.get().MoneyEmoji;
         if (!e.getMessage().getMentionedMembers().isEmpty()) {
-
-            System.out.println("dwa");
-
             User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
 
             VolmitEmbed embed = new VolmitEmbed("Balance Page Report!", e.getMessage());
