@@ -30,9 +30,10 @@ public class Toolkit extends ListenerAdapter {
     public String RoleString = "";//Leave blank change in config
     public String BotOwnerID = "";//Leave blank change in config
     public String BotPrefix = "";//Leave blank change in config
-    public String[] ExperienceRoles = new String[] {"", "", ""};
     public String ExperienceRolesColor = "0x000000";
-    public double BaseXpLevel = 500f;//Leave blank change in config
+    public String LevelName = "Level ";//Leave blank change in config
+    public int MaxXPLevels = 50;
+    public String GuildId = "0000000000000000000000";
     public double BaseXpMultiplier = 1.25f;//Leave blank change in config
 
 

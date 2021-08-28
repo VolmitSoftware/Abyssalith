@@ -1,10 +1,13 @@
 package volmbot;
 
+import art.arcane.quill.execution.J;
 import art.arcane.quill.execution.Looper;
 import lombok.Getter;
 import lombok.NonNull;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
@@ -21,6 +24,7 @@ import volmbot.toolbox.Toolkit;
 import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.net.http.WebSocket;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -88,6 +92,29 @@ public class Main extends ListenerAdapter {
     public void onReady(@NonNull ReadyEvent e) {
         LOGGER.info("{} IS WATCHING THE UNIVERSE", e.getJDA().getSelfUser().getAsTag());
         System.out.println("[ BOT HAS STARTED! ]");
+
+
+        // NOT WORKING -- Discord cant update the user count fast enough for it to even make a difference
+        J.a(() -> {
+            J.sleep(1000);
+            System.out.println("Cleaning unused roles from guild");
+            for(Role r : getJDA().getGuilds().get(0).getRoles()) {
+                List<Role> roles = getJDA().getGuilds().get(0).getRolesByName(r.getName(), false);
+                System.out.println("Roles: "+ roles);
+
+                Role role = getJDA().getGuilds().get(0).getRoleById(getJDA().getGuilds().get(0).getRolesByName(r.getName(), false).get(0).getIdLong());
+                System.out.println("Role: "+ role);
+
+                List<Member> members = getJDA().getGuilds().get(0).getMembers()getMembersWithRoles(role);
+                System.out.println("Members Size: "+ members.size());
+
+//                if (members.size() == 0  && r.getName().contains(Toolkit.get().LevelName)){
+//                    getJDA().getGuilds().get(0).getRolesByName(r.getName(), true).get(0).delete().queue();
+//                    System.out.println("Done!");
+//                }
+            }
+            System.out.println("Done!");
+        });
     }
 
     public static void shutdown() {
