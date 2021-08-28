@@ -1,7 +1,10 @@
 package volmbot.listeners;
 
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageReaction;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -25,9 +28,6 @@ public class ReactionDirector extends ListenerAdapter {
         }
 
     }
-
-
-
 
 
     //TODO, actually get it to work
@@ -59,14 +59,14 @@ public class ReactionDirector extends ListenerAdapter {
 
                     for (Role role : e.getMember().getRoles()) {
 
-                        if (oRole.get(iter).getName().equals(role.getName()) ) {
+                        if (oRole.get(iter).getName().equals(role.getName())) {
                             System.out.println("[ALREADY HAVE ROLE, REMOVING]: " + iter);
                             e.getGuild().removeRoleFromMember(e.getUserIdLong(), mr).queue(); // Remove role
                             hadRole = true;
                         }
 
                     }
-                    if (!hadRole ) {
+                    if (!hadRole) {
                         e.getGuild().addRoleToMember(e.getUserIdLong(), mr).queue(); // Add role
                         System.out.println("[DID NOT HAVE ROLE, ADDING]: " + iter);
 
@@ -74,16 +74,16 @@ public class ReactionDirector extends ListenerAdapter {
                     reaction.removeReaction(oeUser).queue();
 
                 } else //noinspection ConstantConditions
-                    if( oeUserID == authUserID) {
-                    //this is just wrong ^, it will not always be false
-                    System.out.println("RoleMaster is adding a role");
-                    if(oRole.size() < oReaction.size()){
+                    if (oeUserID == authUserID) {
+                        //this is just wrong ^, it will not always be false
+                        System.out.println("RoleMaster is adding a role");
+                        if (oRole.size() < oReaction.size()) {
+                            reaction.removeReaction(oeUser).queue();
+                        }
+
+                    } else {
                         reaction.removeReaction(oeUser).queue();
                     }
-
-                }else{
-                    reaction.removeReaction(oeUser).queue();
-                }
                 iter++;
 
             }
