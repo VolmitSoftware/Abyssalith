@@ -1,6 +1,5 @@
 package volmbot.commands;
 
-import art.arcane.quill.format.Form;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import volmbot.Main;
 import volmbot.data.User;
@@ -15,7 +14,7 @@ public class RRoles extends VolmitCommand {
     public RRoles() {
         super(
                 "ReactionRoles",
-                new String[]{"roles","rr"},
+                new String[]{"reactionRoles","roles","rr"},
                 new String[]{Toolkit.get().AdminRole}, // Always permitted if empty. User must have at least one if specified.
                 "Tutorial for the Reaction-Role System.",
                 false,
