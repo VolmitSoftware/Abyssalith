@@ -21,17 +21,17 @@ public class Toolkit extends ListenerAdapter {
     public String ModRole = "";//Leave blank change in config
     public String AdminRole = "";//Leave blank change in config
     public String MoneyName = "";//Leave blank change in config
-    public String MoneyEmoji = "";//Leave blank change in config
-    public String Company = "";//Leave blank change in config
+    public String MoneyEmoji = ":coin:";
+    public String Company = "NextdoorSoftworks";
     public String BotGIF = "";//Leave blank change in config
-    public String BotColor = "";//Leave blank change in config
+    public String BotColor = "0x000000";
     public String BotToken = "";//Leave blank change in config
     public Range MsgXp = Range.jitter(0.9f, 0.2f);
     public String RoleString = "";//Leave blank change in config
     public String BotOwnerID = "";//Leave blank change in config
     public String BotPrefix = "";//Leave blank change in config
     public String[] ExperienceRoles = new String[] {"", "", ""};
-    public String ExperienceRolesColor = "0x000000";//Leave blank change in config
+    public String ExperienceRolesColor = "0x000000";
     public double BaseXpLevel = 500f;//Leave blank change in config
     public double BaseXpMultiplier = 1.25f;//Leave blank change in config
 
