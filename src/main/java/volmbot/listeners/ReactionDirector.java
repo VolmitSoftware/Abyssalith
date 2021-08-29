@@ -1,31 +1,44 @@
 package volmbot.listeners;
 
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageReaction;
-import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import volmbot.toolbox.Toolkit;
 
 import java.util.List;
 
 public class ReactionDirector extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+        System.out.println("The size is: " + e.getMessage().getMentionedRoles().size());
         if (!e.getMessage().getAuthor().isBot() && e.getMember().hasPermission(Permission.VIEW_AUDIT_LOGS) && e.getMessage().getMentionedRoles().size() > 0) {
             //TODO IMPLEMENT ROLE SYSTEM LATER, .haspermission can't return null ever, retarded api ^
             String Message = e.getMessage().getContentRaw().toLowerCase();
             if (Message.toLowerCase().contains(Toolkit.get().RoleString.toLowerCase())) { // Check the descriminator
+                SelectionMenu menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!") // shows the placeholder indicating what this menu is for
+                        .addOption("REMOVE ALL ROLES", "role-remove", Emoji.fromUnicode("\uD83D\uDEAB"))
+                        .addOption("Arcane Mage", "arcane-mage", Emoji.fromUnicode("\uD83E\uDE84"))
+                        .addOption("Fire Mage", "fire-mage", Emoji.fromUnicode("\uD83D\uDD25"))
+                        .addOption("Frost Mage", "frost-mage", Emoji.fromUnicode("\uD83E\uDDCA"))
+                        .build();
+
+                e.getChannel().sendMessage("Would you like me to Role-ify this for you?")
+                        .setActionRow(menu)
+                        .queue(f -> {
+                            System.out.println(menu.getOptions());
+                });
+
                 List<Role> oRole = e.getMessage().getMentionedRoles();
                 for (Role role : oRole) { // iterate the roles
-                    System.out.println(role);
+                    // I WANT TO RECURSIVELY ADD THEM HERE
                 }
 
             }
 
         }
+
 
     }
 

@@ -33,7 +33,6 @@ public class Toolkit extends ListenerAdapter {
     public String ExperienceRolesColor = "0x000000";
     public String LevelName = "Level ";//Leave blank change in config
     public int MaxXPLevels = 50;
-    public String GuildId = "0000000000000000000000";
     public double BaseXpMultiplier = 1.25f;//Leave blank change in config
 
 

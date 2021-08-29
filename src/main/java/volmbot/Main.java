@@ -33,7 +33,7 @@ public class Main extends ListenerAdapter {
     public static final Logger LOGGER = LoggerFactory.getLogger(WebSocket.Listener.class);
     public static final IBotProvider provider = new BotProvider();
 
-   @Getter
+    @Getter
     private static final DataLoader loader = createLoader();
 
     private static DataLoader createLoader() {
@@ -94,24 +94,21 @@ public class Main extends ListenerAdapter {
         LOGGER.info("{} IS WATCHING THE UNIVERSE", e.getJDA().getSelfUser().getAsTag());
         System.out.println("[ BOT HAS STARTED! ]");
 
-
-        // NOT WORKING -- Discord cant update the user count fast enough for it to even make a difference
         J.a(() -> {
             J.sleep(1000);
             System.out.println("[INFO]: Cleaning unused roles from guild");
             List<String> ff = new ArrayList<>();
-            for(Role r : getJDA().getGuilds().get(0).getRoles()) {
-                List<Role> roles = getJDA().getGuilds().get(0).getRolesByName(r.getName(), false);
+            for (Role r : getJDA().getGuilds().get(0).getRoles()) {
                 Role role = getJDA().getGuilds().get(0).getRoleById(getJDA().getGuilds().get(0).getRolesByName(r.getName(), false).get(0).getIdLong());
                 List<Member> members = getJDA().getGuilds().get(0).getMembersWithRoles(role);
-                if (members.size() == 0  && r.getName().contains(Toolkit.get().LevelName)){
+                if (members.size() == 0 && r.getName().contains(Toolkit.get().LevelName)) {
                     getJDA().getGuilds().get(0).getRolesByName(r.getName(), true).get(0).delete().queue();
                     ff.add(getJDA().getGuilds().get(0).getRolesByName(r.getName(), true).get(0).getName());
                 }
             }
             if (ff.size() > 0) {
                 System.out.println("[INFO]: Cleaned roles: " + ff);
-            }else {
+            } else {
                 System.out.println("[INFO]: No roles to clean!");
             }
         });
@@ -123,8 +120,7 @@ public class Main extends ListenerAdapter {
         System.exit(1);
     }
 
-    private static void log(String tag, Object t)
-    {
+    private static void log(String tag, Object t) {
         System.out.println("[" + tag + "]: " + t);
     }
 

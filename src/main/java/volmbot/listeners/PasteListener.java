@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.interactions.components.Button;
 public class PasteListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot()) {
-            if (e.getMessage().getContentRaw().toLowerCase().contains("https://pastebin.com/")) {
+            if (e.getMessage().getContentRaw().contains("https://pastebin.com/")) {
                 String str = e.getMessage().getContentRaw();
                 String[] pbArr = str.split(" ");
                 for (String s : pbArr){

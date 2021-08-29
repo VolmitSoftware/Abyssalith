@@ -23,7 +23,6 @@ public class UserWatcher extends ListenerAdapter {
             int validator = XP.getLevelForXp(uxp);
 
             if (validator < Toolkit.get().MaxXPLevels) {
-                System.out.println(XP.getLevelForXp(uxp));
                 roleValidator(e, Toolkit.get().LevelName + XP.getLevelForXp(uxp));
                 roleManager(e, Toolkit.get().LevelName + XP.getLevelForXp(uxp), validator);
             }
@@ -60,13 +59,13 @@ public class UserWatcher extends ListenerAdapter {
                     try {
                         rv = e.getGuild().getRolesByName(Toolkit.get().LevelName + vint, true).get(0);
                         e.getGuild().removeRoleFromMember(e.getMember().getIdLong(), rv).queue();
-                    } catch (Exception ex) {
-                        System.out.println("Stop removing roles without actually resetting XP");
+                    } catch (Exception ignored) {
                     }
                 }
             }
         } else {
             e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().ExperienceRolesColor)).complete();
+            Main.info("New Maximum level created!");
             r = e.getGuild().getRolesByName(role, true).get(0);
             rv = e.getGuild().getRolesByName(Toolkit.get().LevelName + vint, true).get(0);
             e.getGuild().removeRoleFromMember(e.getMember().getIdLong(), rv).queue();
@@ -78,6 +77,7 @@ public class UserWatcher extends ListenerAdapter {
     private void roleValidator(GuildMessageReceivedEvent e, String role) {
         if (e.getGuild().getRolesByName(role, false).size() < 1) {
             e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().ExperienceRolesColor)).complete();
+            Main.info("New Maximum level created!");
         } else if (e.getGuild().getRolesByName(role, false).size() > 1) {
             System.out.println("For some reason there are too many roles here im having a stroke...");
         }
