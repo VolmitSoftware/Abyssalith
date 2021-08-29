@@ -17,29 +17,32 @@ public class ReactionDirector extends ListenerAdapter {
             //TODO IMPLEMENT ROLE SYSTEM LATER, .haspermission can't return null ever, retarded api ^
             String Message = e.getMessage().getContentRaw().toLowerCase();
             if (Message.toLowerCase().contains(Toolkit.get().RoleString.toLowerCase())) { // Check the descriminator
-                SelectionMenu menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!") // shows the placeholder indicating what this menu is for
-                        .addOption("REMOVE ALL ROLES", "role-remove", Emoji.fromUnicode("\uD83D\uDEAB"))
-                        .addOption("Arcane Mage", "arcane-mage", Emoji.fromUnicode("\uD83E\uDE84"))
-                        .addOption("Fire Mage", "fire-mage", Emoji.fromUnicode("\uD83D\uDD25"))
-                        .addOption("Frost Mage", "frost-mage", Emoji.fromUnicode("\uD83E\uDDCA"))
-                        .build();
+                if (e.getMessage().getMentionedRoles().size() > 2) {
 
-                e.getChannel().sendMessage("Would you like me to Role-ify this for you?")
-                        .setActionRow(menu)
-                        .queue(f -> {
-                            System.out.println(menu.getOptions());
-                });
+                    SelectionMenu.Builder menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!");// shows the placeholder indicating what this menu is for
+                    menu.addOption("REMOVE ALL ROLES", "role-remove", Emoji.fromUnicode("\uD83D\uDEAB")); //TODO implement this system later
 
-                List<Role> oRole = e.getMessage().getMentionedRoles();
-                for (Role role : oRole) { // iterate the roles
-                    // I WANT TO RECURSIVELY ADD THEM HERE
+                    List<Role> oRole = e.getMessage().getMentionedRoles();
+                    for (Role role : oRole) { // iterate the roles
+                        List<Emote> em = e.getGuild().getEmotesByName(role.getName(), true);
+                        Emoji use = null;
+
+                        if(em.size() >= 1){
+                            use = Emoji.fromEmote(em.get(0));
+                        }else{
+                            use = Emoji.fromUnicode("\uD83E\uDE84");
+                        }
+                        menu.addOption(role.getName(), role.getId(), "This gives you the role: "+ role.getName(), use);
+                    }
+
+                    e.getChannel().sendMessage("React to the roles that you want!")
+                            .setActionRow(menu.build())
+                            .queue(f -> {
+                            });
+                    //e.getMessage().delete().queue();
                 }
-
             }
-
         }
-
-
     }
 
 
