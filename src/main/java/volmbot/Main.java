@@ -24,6 +24,7 @@ import volmbot.toolbox.Toolkit;
 import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.net.http.WebSocket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -97,23 +98,22 @@ public class Main extends ListenerAdapter {
         // NOT WORKING -- Discord cant update the user count fast enough for it to even make a difference
         J.a(() -> {
             J.sleep(1000);
-            System.out.println("Cleaning unused roles from guild");
+            System.out.println("[INFO]: Cleaning unused roles from guild");
+            List<String> ff = new ArrayList<>();
             for(Role r : getJDA().getGuilds().get(0).getRoles()) {
                 List<Role> roles = getJDA().getGuilds().get(0).getRolesByName(r.getName(), false);
-                System.out.println("Roles: "+ roles);
-
                 Role role = getJDA().getGuilds().get(0).getRoleById(getJDA().getGuilds().get(0).getRolesByName(r.getName(), false).get(0).getIdLong());
-                System.out.println("Role: "+ role);
-
-                List<Member> members = getJDA().getGuilds().get(0).getMembers()getMembersWithRoles(role);
-                System.out.println("Members Size: "+ members.size());
-
-//                if (members.size() == 0  && r.getName().contains(Toolkit.get().LevelName)){
-//                    getJDA().getGuilds().get(0).getRolesByName(r.getName(), true).get(0).delete().queue();
-//                    System.out.println("Done!");
-//                }
+                List<Member> members = getJDA().getGuilds().get(0).getMembersWithRoles(role);
+                if (members.size() == 0  && r.getName().contains(Toolkit.get().LevelName)){
+                    getJDA().getGuilds().get(0).getRolesByName(r.getName(), true).get(0).delete().queue();
+                    ff.add(getJDA().getGuilds().get(0).getRolesByName(r.getName(), true).get(0).getName());
+                }
             }
-            System.out.println("Done!");
+            if (ff.size() > 0) {
+                System.out.println("[INFO]: Cleaned roles: " + ff);
+            }else {
+                System.out.println("[INFO]: No roles to clean!");
+            }
         });
     }
 
