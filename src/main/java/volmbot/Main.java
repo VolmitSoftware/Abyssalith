@@ -18,6 +18,7 @@ import volmbot.io.DataLoader;
 import volmbot.io.storage.FileSystemStorageAccess;
 import volmbot.listeners.*;
 import volmbot.listeners.handlers.ButtonHandler;
+import volmbot.listeners.handlers.MenuHandler;
 import volmbot.listeners.handlers.PasteHandler;
 import volmbot.toolbox.Toolkit;
 
@@ -60,6 +61,7 @@ public class Main extends ListenerAdapter {
         // Listeners
         getJDA().addEventListener(new Toolkit());
         getJDA().addEventListener(new PasteListener());
+        getJDA().addEventListener(new MenuHandler());
         getJDA().addEventListener(new PasteHandler());
         getJDA().addEventListener(new ButtonHandler());
         getJDA().addEventListener(new AutoWiki());
