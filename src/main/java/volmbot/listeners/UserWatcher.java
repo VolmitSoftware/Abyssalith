@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import volmbot.Main;
 import volmbot.data.User;
 import volmbot.toolbox.Toolkit;
-import volmbot.util.XP;
+import volmbot.util.*;
 
 import java.awt.*;
 

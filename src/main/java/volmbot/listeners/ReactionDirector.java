@@ -1,26 +1,26 @@
 package volmbot.listeners;
 
-import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import volmbot.toolbox.Toolkit;
+import volmbot.util.PermHandler;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ReactionDirector extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-        System.out.println("The size is: " + e.getMessage().getMentionedRoles().size());
-        if (!e.getMessage().getAuthor().isBot() && e.getMember().hasPermission(Permission.VIEW_AUDIT_LOGS) && e.getMessage().getMentionedRoles().size() > 0) {
-            //TODO IMPLEMENT ROLE SYSTEM LATER, .haspermission can't return null ever, retarded api ^
+        if (!e.getMessage().getAuthor().isBot() && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) && e.getMessage().getMentionedRoles().size() > 0) {
+
             String Message = e.getMessage().getContentRaw().toLowerCase();
             if (Message.toLowerCase().contains(Toolkit.get().RoleString.toLowerCase())) { // Check the descriminator
-                if (e.getMessage().getMentionedRoles().size() > 2) {
+                if (e.getMessage().getMentionedRoles().size() > 100) {
 
                     SelectionMenu.Builder menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!");// shows the placeholder indicating what this menu is for
-                    menu.addOption("REMOVE ALL ROLES", "role-remove", Emoji.fromUnicode("\uD83D\uDEAB")); //TODO implement this system later
+                    menu.addOption("REMOVE ALL ROLES", "role-remove", Emoji.fromUnicode("\uD83D\uDEAB"));
 
                     List<Role> oRole = e.getMessage().getMentionedRoles();
                     for (Role role : oRole) { // iterate the roles
@@ -50,9 +50,9 @@ public class ReactionDirector extends ListenerAdapter {
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
         Message m = e.getChannel().retrieveMessageById(e.getMessageIdLong()).complete();
         String Message = m.getContentRaw().toLowerCase();
-
+        Member mem = e.getGuild().getMember(m.getAuthor());
         if (Message.toLowerCase().contains(Toolkit.get().RoleString.toLowerCase())
-                && m.getAuthor().getId().equalsIgnoreCase("173261518572486656") //TODO GET AUTHOR ID ELSEWISE
+                && PermHandler.hasAdmin(mem)
                 && m.getMentionedRoles().size() > 0) {
 
             List<MessageReaction> oReaction = m.getReactions();
@@ -64,11 +64,8 @@ public class ReactionDirector extends ListenerAdapter {
             long oeUserID = oeUser.getIdLong();
             long authUserID = authUser.getIdLong();
 
-
             boolean hadRole = false;
-
             int iter = 0;
-
             for (MessageReaction reaction : oReaction) {
                 if (reaction.retrieveUsers().complete().contains(m.getAuthor()) && reaction.retrieveUsers().complete().contains(oeUser) && oeUserID != authUserID) {
                     Role mr = oRole.get(iter);
