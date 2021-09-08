@@ -8,13 +8,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import volmbot.Main;
 import volmbot.data.User;
 import volmbot.toolbox.Toolkit;
-import volmbot.util.*;
+import volmbot.util.XP;
 
-import java.awt.*;
-
-
+import java.awt.Color;
 public class UserWatcher extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+
         if (!e.getMessage().getAuthor().isBot()) {
             User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
             u.experience(u.experience() + Toolkit.get().MsgXp.rand()); //XP
@@ -51,7 +50,8 @@ public class UserWatcher extends ListenerAdapter {
         Role r;
         Role rv;
         int vint = v - 1;
-        if (e.getGuild().getRolesByName(role, false).size() == 1 && e.getGuild().getRolesByName(role, false).contains(e.getGuild().getRolesByName(role, true).get(0))) {
+
+        if (e.getGuild().hasRole(role)) {
             r = e.getGuild().getRolesByName(role, true).get(0);
             if (r != null) {
                 e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();

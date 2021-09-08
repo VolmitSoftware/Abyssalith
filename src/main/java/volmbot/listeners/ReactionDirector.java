@@ -15,7 +15,7 @@ public class ReactionDirector extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot() && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) && e.getMessage().getMentionedRoles().size() > 0) {
 
-            String Message = e.getMessage().getContentRaw().toLowerCase();
+            String Message = e.getMessage().lower();
             if (Message.toLowerCase().contains(Toolkit.get().RoleString.toLowerCase())) { // Check the descriminator
                 if (e.getMessage().getMentionedRoles().size() > 100) {
 
