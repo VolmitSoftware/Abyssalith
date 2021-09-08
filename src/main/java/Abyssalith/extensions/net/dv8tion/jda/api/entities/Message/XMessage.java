@@ -10,4 +10,7 @@ public class XMessage {
   public static String lower(@This Message self) {
     return self.getContentRaw()lc;
   }
+  public static boolean imUser(@This Message self) {
+    return !self.getAuthor().isBot();
+  }
 }

@@ -13,8 +13,7 @@ import volmbot.util.XP;
 import java.awt.Color;
 public class UserWatcher extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-
-        if (!e.getMessage().getAuthor().isBot()) {
+        if (!e.getMessage().imUser()) {
             User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
             u.experience(u.experience() + Toolkit.get().MsgXp.rand()); //XP
             u.messagesSent(u.messagesSent() + 1);

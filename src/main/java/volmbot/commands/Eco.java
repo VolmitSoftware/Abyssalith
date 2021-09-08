@@ -25,5 +25,8 @@ public class Eco extends VolmitCommand {
                 }
         );
     }
+    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        e.getMessage().delete().queue(); // delete the sent message
+    }
 
 }

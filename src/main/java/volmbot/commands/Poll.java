@@ -57,7 +57,9 @@ public class Poll extends VolmitCommand {
             event.getChannel().sendMessage("Wrong Usage").queue();
             //todo Wrong usage
         }
+        event.getMessage().delete().queue(); // delete the sent message
     }
+
 
 
 }

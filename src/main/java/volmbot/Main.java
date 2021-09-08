@@ -94,11 +94,11 @@ public class Main extends ListenerAdapter {
     @Override
     public void onReady(@NonNull ReadyEvent e) {
         LOGGER.info("{} IS WATCHING THE UNIVERSE", e.getJDA().getSelfUser().getAsTag());
-        System.out.println("[ BOT HAS STARTED! ]");
+        System.println("[ BOT HAS STARTED! ]");
 
         J.a(() -> {
             J.sleep(1000);
-            System.out.println("[INFO]: Cleaning unused roles from guild");
+            System.println("[INFO]: Cleaning unused roles from guild");
             List<String> ff = new ArrayList<>();
             for (Role r : getJDA().getGuilds().get(0).getRoles()) {
                 Role role = getJDA().getGuilds().get(0).getRoleById(getJDA().getGuilds().get(0).getRolesByName(r.getName(), false).get(0).getIdLong());
@@ -109,9 +109,9 @@ public class Main extends ListenerAdapter {
                 }
             }
             if (ff.size() > 0) {
-                System.out.println("[INFO]: Cleaned roles: " + ff);
+                System.println("[INFO]: Cleaned roles: " + ff);
             } else {
-                System.out.println("[INFO]: No roles to clean!");
+                System.println("[INFO]: No roles to clean!");
             }
         });
     }
@@ -123,7 +123,7 @@ public class Main extends ListenerAdapter {
     }
 
     private static void log(String tag, Object t) {
-        System.out.println("[" + tag + "]: " + t);
+        System.println("[" + tag + "]: " + t);
     }
 
     public static void warn(Object message) {

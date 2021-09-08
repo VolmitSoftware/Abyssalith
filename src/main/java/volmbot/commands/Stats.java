@@ -89,6 +89,7 @@ public class Stats extends VolmitCommand {
         if (!gs.avatar.equals("not set"))
             eb.setThumbnail(gs.avatar);
         e.getMessage().getTextChannel().sendMessage(eb.build()).queue();
+        e.getMessage().delete().queue(); // delete the sent message
 
     }
 
