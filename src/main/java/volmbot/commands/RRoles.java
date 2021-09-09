@@ -16,7 +16,7 @@ public class RRoles extends VolmitCommand {
                 "ReactionRoles",
                 new String[]{"reactionRoles","roles","rr"},
                 new String[]{Toolkit.get().AdminRole}, // Always permitted if empty. User must have at least one if specified.
-                "Tutorial for the Reaction-Role System.",
+                "Entering this command gives you a tutorial on how to use the Reaction-Role System.",
                 false,
                 null
         );

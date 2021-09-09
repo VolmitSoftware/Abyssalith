@@ -1,10 +1,14 @@
 package volmbot.listeners;
 
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.User;
+import art.arcane.quill.execution.J;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import volmbot.toolbox.Toolkit;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BotWatcher extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -14,12 +18,13 @@ public class BotWatcher extends ListenerAdapter {
     }
 
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
-        if (e.getUser().isBot()) {
-            System.println("Bot reaction captured");
-        }else{
-            User ou = e.getUser();
-            e.getChannel().retrieveMessageById(e.getMessageIdLong()).complete().delete().queue(); // Try and delete the message
-            System.println("Is user Bot?" + ou.isBot());
+        if (!e.getUser().isBot() && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getAuthor().isBot() && e.getReaction().toString().contains("U+274c")) {
+
+            J.a(() -> {
+                J.sleep(1000);
+                System.println("[INFO]: Cleaning bot response as requested");
+                e.getChannel().retrieveMessageById(e.getMessageIdLong()).complete().delete().queue(); // Try and delete the message
+            });
         }
     }
 }

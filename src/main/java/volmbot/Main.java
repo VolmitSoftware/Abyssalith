@@ -73,7 +73,8 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new Eco()); // Money Subcommand
         getJDA().addEventListener(new Links());
         getJDA().addEventListener(new GStats());
-        getJDA().addEventListener(new Ping());
+        getJDA().addEventListener(new MStats());
+        getJDA().addEventListener(new Passive());
         getJDA().addEventListener(new RRoles());
         getJDA().addEventListener(new Poll());
         getJDA().addEventListener(new Log());
