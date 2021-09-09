@@ -20,7 +20,7 @@ public class Commands extends VolmitCommand {
                 "Commands",
                 new String[]{"commands","?","help"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
-                "Sends the command help page (this one)",
+                "Sends the command help page (this one) If you would like to see the Passives that this bot does you can type `" + Toolkit.get().BotPrefix+"passive` and see what this bot does Passively",
                 false,
                 null
         );
@@ -38,14 +38,14 @@ public class Commands extends VolmitCommand {
         embed.addField(
                 "All commands you can use",
                 Toolkit.get().BotPrefix + "<command> for more help on the command",
-                false
+                true
         );
 
         // Loop over and add all commands with their respective information
         for (VolmitCommand command : botCommands) {
             String cmd = Toolkit.get().BotPrefix + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
             if (command.getCommands().size() < 2) {
-                embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), true);
+                embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), false);
             } else {
                 StringBuilder body = new StringBuilder();
                 body
@@ -71,7 +71,7 @@ public class Commands extends VolmitCommand {
                 embed.addField(
                         cmd,
                         body.toString(),
-                        true
+                        false
                 );
             }
         }

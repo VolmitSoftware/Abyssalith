@@ -13,10 +13,10 @@ public class Ping extends VolmitCommand {
     // Constructor
     public Ping() {
         super(
-                "ping",
-                new String[]{"hello","p"},
+                "passive",
+                new String[]{"passives","psv"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
-                "This is a debug Ping Keep-alive stats command",
+                "This command shows the passive things im doing while on your server",
                 false,
                 null
         );
@@ -24,17 +24,11 @@ public class Ping extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
-        VolmitEmbed embed = new VolmitEmbed(" PONG!", e.getMessage());
+        VolmitEmbed embed = new VolmitEmbed(" Passives!", e.getMessage());
         User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
-        embed.setDescription("These are your Stats as an example of the return systems enjoy!");
-        embed.addField("This is your id!","`"+u.id()+"`", false);
-        embed.addField("This is how broke you are!","You have: `"+ Form.f(u.money())+ "` " + Toolkit.get().MoneyName, false);
-        embed.addField("This is your Experience!",Form.f(u.experience()) + "**xp**", false);
-        embed.addField("This are your Stats","" +
-                "Messages sent:"+u.messagesSent()
-                +"\n"
-                +"Reactions added:"+u.reactions() , false);
-
+        embed.setDescription("While im on your server im doing a lot of things in the background to make things run really smoothly, and store as minimal data as possible! This command is to show you the transparency that i wished many other bot authors did, but dont.");
+        embed.addField("What data am I saving? (USERS)","Here is a list of what i save: User id's and matching XP on a per user basis\nNumber if Messages / reactions sent or added (i don't save messages at all)", false);
+        embed.addField("What data am I saving? (USERS)","Here is a list of what i save: Guild ID & Chat ID's\nMember ID's (Cached and removed on a per message Basis)", false);
         embed.send(e.getMessage(), true, 1000);
 
     }

@@ -66,12 +66,13 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new ButtonHandler());
         getJDA().addEventListener(new AutoWiki());
         getJDA().addEventListener(new Prefix());
-        getJDA().addEventListener(new UserWatcher());
+        getJDA().addEventListener(new UserWatcher()); // Watches the User's instances for stuff
+        getJDA().addEventListener(new BotWatcher()); // Watches the Bot instance's for stuff
         getJDA().addEventListener(new ReactionDirector());
         // Commands
         getJDA().addEventListener(new Eco()); // Money Subcommand
         getJDA().addEventListener(new Links());
-        getJDA().addEventListener(new Stats());
+        getJDA().addEventListener(new GStats());
         getJDA().addEventListener(new Ping());
         getJDA().addEventListener(new RRoles());
         getJDA().addEventListener(new Poll());
