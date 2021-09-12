@@ -1,9 +1,10 @@
 package volmbot.commands.eco;
 
+import art.arcane.quill.format.Form;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import volmbot.Main;
+import volmbot.data.User;
 import volmbot.toolbox.Toolkit;
-import volmbot.toolbox.UserDirector;
-import volmbot.util.Econator;
 import volmbot.util.VolmitCommand;
 import volmbot.util.VolmitEmbed;
 
@@ -15,7 +16,7 @@ public class Get extends VolmitCommand {
         super(
                 "Get", //Name
                 new String[]{"bal", "balance"}, //Alias's
-                new String[]{"ADMINISTRATOR"}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Toolkit.get().ModRole}, // Always permitted if empty. User must have at least one if specified.
                 "Get's the users balance", // Description
                 false, // Does it use Args
                 "eco get @Psycho" //Example - the prefix
@@ -27,10 +28,20 @@ public class Get extends VolmitCommand {
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         String moneyName = Toolkit.get().MoneyName;
         String moneyEmoji = Toolkit.get().MoneyEmoji;
-        UserDirector m = UserDirector.load(e.getMessage().getMentionedMembers().get(0).getIdLong());
-        VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
-        embed.addField(moneyEmoji+ moneyName+ " Total: ", m.getMoney() + " Requested  By: " + e.getAuthor().getAsMention(), false);
-        embed.addField("Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", m.getMoney(), false);
-        embed.send(e.getMessage(), true, 1000);
+        if (!e.getMessage().getMentionedMembers().isEmpty()) {
+            User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
+
+            VolmitEmbed embed = new VolmitEmbed("Balance Page Report!", e.getMessage());
+            embed.addField(moneyEmoji + moneyName + " Total: ", Form.f(u.money()) , false);
+            embed.addField("Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
+            embed.send(e.getMessage(), true, 1000);
+        }else{
+            User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong());
+            VolmitEmbed embed = new VolmitEmbed("Balance Page Report!", e.getMessage());
+            embed.addField(moneyEmoji + moneyName + " Total: ", Form.f(u.money()), false);
+            embed.addField("Total For " + e.getMessage().getAuthor().getName() + ": ", Form.f(u.money()), false);
+            embed.send(e.getMessage(), true, 1000);
+
+        }
     }
 }

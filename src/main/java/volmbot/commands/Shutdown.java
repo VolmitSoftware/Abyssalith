@@ -15,7 +15,7 @@ public class Shutdown extends VolmitCommand {
         super(
                 "stop",
                 new String[]{"stop","kill","s"},
-                new String[]{}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{Toolkit.get().AdminRole}, // Add role name here. Empty: always / 1+: at least one.
                 "Stops the Bot boi",
                 false,
                 null

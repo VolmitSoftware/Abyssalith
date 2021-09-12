@@ -1,9 +1,10 @@
 package volmbot.commands.eco;
 
+import art.arcane.quill.format.Form;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import volmbot.Main;
+import volmbot.data.User;
 import volmbot.toolbox.Toolkit;
-import volmbot.toolbox.UserDirector;
-import volmbot.util.Econator;
 import volmbot.util.VolmitCommand;
 import volmbot.util.VolmitEmbed;
 
@@ -15,7 +16,7 @@ public class Give extends VolmitCommand {
         super(
                 "give", //Name
                 new String[]{}, //Alias's
-                new String[]{"ADMINISTRATOR"}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Toolkit.get().ModRole}, // Always permitted if empty. User must have at least one if specified.
                 "Gives a Number of currency to the user", // Description
                 true, // Does it use Args
                 "eco give 10 @Psycho" //Example - the prefix
@@ -28,12 +29,14 @@ public class Give extends VolmitCommand {
         String moneyName = Toolkit.get().MoneyName;
         String moneyEmoji = Toolkit.get().MoneyEmoji;
 
-        System.out.println("Made it here...");
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji+ moneyName+ " given: ", args.get(1) + " From: " + e.getAuthor().getAsMention(), false);
-        Econator.Add(e.getMessage(), Integer.parseInt(args.get(1)));
-        UserDirector m = UserDirector.load(e.getMessage().getMentionedMembers().get(0).getIdLong());
-        embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", m.getMoney(), false);
+
+        User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
+
+        u.money(Float.parseFloat(args.get(1)) + u.money());
+
+        embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ",  "" + Form.f(u.money()), false);
         embed.send(e.getMessage(), true, 1000);
     }
 }

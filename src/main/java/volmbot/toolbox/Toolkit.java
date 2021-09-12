@@ -11,29 +11,35 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import volmbot.Main;
+import volmbot.util.Range;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class Toolkit extends ListenerAdapter {
     // Set from config
-    public String ModRole;//Leave blank change in config
-    public String AdminRole;//Leave blank change in config
-    public String MoneyName;//Leave blank change in config
-    public String MoneyEmoji;//Leave blank change in config
-    public String Company;//Leave blank change in config
-    public String BotGIF;//Leave blank change in config
-    public String BotColor;//Leave blank change in config
-    public String BotToken;//Leave blank change in config
-    public String BotOwnerID;//Leave blank change in config
-    public String BotPrefix;//Leave blank change in config
-    public List<String> owo = Arrays.asList("OwO", "owo", "uwu", "()w()", "OvO", "owO");
+    public String ModRole = "";//Leave blank change in config
+    public String AdminRole = "";//Leave blank change in config
+    public String MoneyName = "";//Leave blank change in config
+    public String MoneyEmoji = ":coin:";
+    public String Company = "NextdoorSoftworks";
+    public String BotGIF = "";//Leave blank change in config
+    public String BotColor = "0x000000";
+    public String BotToken = "";//Leave blank change in config
+    public Range MsgXp = Range.jitter(0.9f, 0.2f);
+    public String RoleString = "";//Leave blank change in config
+    public String BotOwnerID = "";//Leave blank change in config
+    public String BotPrefix = "";//Leave blank change in config
+    public String ExperienceRolesColor = "0x000000";
+    public String LevelName = "Level ";//Leave blank change in config
+    public int MaxXPLevels = 50;
+    public double BaseXpMultiplier = 1.25f;//Leave blank change in config
+
+
     // Set from main class
-    public Long botID;
-    public User botUser;
-    public String botName;
+    public transient Long botID;
+    public transient User botUser;
+    public transient String botName;
 
     // Used for hot-loading and config
     private static final FileWatcher fw = new FileWatcher(getFile());
@@ -68,6 +74,8 @@ public class Toolkit extends ListenerAdapter {
             try {
                 Toolkit tk = new Gson().fromJson(IO.readAll(f), Toolkit.class);
                 System.out.println(tk.BotToken);
+                tk.save();
+                fw.checkModified();
                 return tk;
             } catch (IOException e) {
                 e.printStackTrace();

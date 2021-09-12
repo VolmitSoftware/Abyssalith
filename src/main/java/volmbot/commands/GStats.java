@@ -12,9 +12,9 @@ import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Stats extends VolmitCommand {
+public class GStats extends VolmitCommand {
     // Constructor
-    public Stats() {
+    public GStats() {
         super(
                 "stats",
                 new String[]{"stats","statistics"},
@@ -89,6 +89,7 @@ public class Stats extends VolmitCommand {
         if (!gs.avatar.equals("not set"))
             eb.setThumbnail(gs.avatar);
         e.getMessage().getTextChannel().sendMessage(eb.build()).queue();
+        e.getMessage().delete().queue(); // delete the sent message
 
     }
 

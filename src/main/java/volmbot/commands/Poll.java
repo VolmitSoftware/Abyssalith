@@ -20,10 +20,10 @@ public class Poll extends VolmitCommand {
         super(
                 "poll",
                 new String[]{"poll","query"},
-                new String[]{/*Toolkit.get().ModRole*/}, // Add role name here. Empty: always / 1+: at least one.
-                "Poll creator. (max 20 options)",
+                new String[]{Toolkit.get().ModRole}, // Add role name here. Empty: always / 1+: at least one.
+                "Poll creator. (max 20 options separated by commas)",
                 true,
-                "poll option one, option two, c, d, e"
+                null
         );
     }
 
@@ -57,7 +57,9 @@ public class Poll extends VolmitCommand {
             event.getChannel().sendMessage("Wrong Usage").queue();
             //todo Wrong usage
         }
+        event.getMessage().delete().queue(); // delete the sent message
     }
+
 
 
 }
