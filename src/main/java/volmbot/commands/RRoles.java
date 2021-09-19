@@ -24,6 +24,7 @@ public class RRoles extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        i("Command List Initialized");
         VolmitEmbed embed = new VolmitEmbed(" REACTION ROLES!!", e.getMessage());
         User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
         embed.setDescription("*This should explain how to use the reaction roles system, should you have any questions!*");

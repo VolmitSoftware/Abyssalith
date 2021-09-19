@@ -47,14 +47,11 @@ public class Main extends ListenerAdapter {
     public static JDA getJDA() {
         return provider.get().getJDA();
     }
-
     public static void main(String[] args) throws LoginException {
         LogListener.listener.set(new LogListener() {
 
             @Override
-            public void i(String tag, Object f) {
-                info(tag + ": " + f);
-            }
+            public void i(String tag, Object f) { info(tag + ": " + f); }
 
             @Override
             public void f(String tag, Object f) {
@@ -73,8 +70,7 @@ public class Main extends ListenerAdapter {
         });
         org.slf4j.simple.SimpleServiceProvider.class.getSimpleName();
         // Status
-        LOGGER.info("Initializing");
-
+        System.println("Initializing");
 
         Toolkit.get().botID = getJDA().getSelfUser().getIdLong();
         Toolkit.get().botUser = getJDA().getUserById(Toolkit.get().botID);
@@ -118,12 +114,12 @@ public class Main extends ListenerAdapter {
 
     @Override
     public void onReady(@NonNull ReadyEvent e) {
-        LOGGER.info("{} IS WATCHING THE UNIVERSE", e.getJDA().getSelfUser().getAsTag());
-        System.println("[ BOT HAS STARTED! ]");
+        LOGGER.debug("{} IS WATCHING THE UNIVERSE", e.getJDA().getSelfUser().getAsTag());
+        i("BOT HAS STARTED!");
 
         J.a(() -> {
             J.sleep(1000);
-            System.println("[INFO]: Cleaning unused roles from guild");
+            i("Cleaning unused roles from guild");
             List<String> ff = new ArrayList<>();
             for (Role r : getJDA().getGuilds().get(0).getRoles()) {
                 Role role = getJDA().getGuilds().get(0).getRoleById(getJDA().getGuilds().get(0).getRolesByName(r.getName(), false).get(0).getIdLong());
@@ -134,35 +130,33 @@ public class Main extends ListenerAdapter {
                 }
             }
             if (ff.size() > 0) {
-                System.println("[INFO]: Cleaned roles: " + ff);
+                i("Cleaned roles: " + ff);
             } else {
-                System.println("[INFO]: No roles to clean!");
+                i("No roles to clean!");
             }
         });
     }
 
     public static void shutdown() {
+        System.println("Terminating the bot instance");
         getJDA().getPresence().setStatus(OnlineStatus.OFFLINE);
         getJDA().shutdown();
         System.exit(1);
     }
 
     private static void log(String tag, Object t) {
-        System.println("[" + tag + "]: " + t);
+        System.println("[" + tag + "] -> " + t);
     }
 
     public static void warn(Object message) {
         log("WARN", message);
     }
-
     public static void info(Object message) {
         log("INFO", message);
     }
-
     public static void error(Object message) {
         log("ERROR", message);
     }
-
     public static void debug(Object message) {
         log("DEBUG", message);
     }

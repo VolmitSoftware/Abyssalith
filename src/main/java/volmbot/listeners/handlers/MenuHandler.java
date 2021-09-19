@@ -12,7 +12,6 @@ import net.dv8tion.jda.api.interactions.components.Button;
 import net.dv8tion.jda.api.interactions.components.selections.SelectOption;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import volmbot.toolbox.Toolkit;
-import volmbot.util.PermHandler;
 
 import java.util.ArrayList;
 import java.util.List;

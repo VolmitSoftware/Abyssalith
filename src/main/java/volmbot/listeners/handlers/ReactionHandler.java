@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 import volmbot.toolbox.Toolkit;
-import volmbot.util.PermHandler;
 
 import java.util.List;
 import java.util.Objects;

@@ -30,6 +30,7 @@ public class Commands extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        i("Command List Initialized");
 
         // Init embed
         VolmitEmbed embed = new VolmitEmbed("The Abyssalith - " + Toolkit.get().botName + " Info Page!", e.getMessage());

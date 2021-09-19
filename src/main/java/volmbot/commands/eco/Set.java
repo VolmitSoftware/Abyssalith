@@ -26,6 +26,7 @@ public class Set extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        i("Eco.Set Instanced");
         String moneyName = Toolkit.get().MoneyName;
         String moneyEmoji = Toolkit.get().MoneyEmoji;
 
@@ -34,7 +35,6 @@ public class Set extends VolmitCommand {
 
         User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
         u.money(Float.parseFloat(args.get(1)));
-
 
         embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
         embed.send(e.getMessage(), true, 1000);

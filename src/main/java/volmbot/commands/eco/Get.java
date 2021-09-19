@@ -26,6 +26,7 @@ public class Get extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        i("Eco.Get Instanced");
         String moneyName = Toolkit.get().MoneyName;
         String moneyEmoji = Toolkit.get().MoneyEmoji;
         if (!e.getMessage().getMentionedMembers().isEmpty()) {

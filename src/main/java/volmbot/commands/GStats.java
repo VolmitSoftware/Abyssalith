@@ -32,6 +32,7 @@ public class GStats extends VolmitCommand {
         private Member owner;
 
         private GuildStats(Guild g) {
+            i("Sending Guild Stats");
 
             List<Member> l = g.getMembers();
 

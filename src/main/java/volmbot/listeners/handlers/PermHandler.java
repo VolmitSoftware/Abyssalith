@@ -1,4 +1,4 @@
-package volmbot.util;
+package volmbot.listeners.handlers;
 
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;

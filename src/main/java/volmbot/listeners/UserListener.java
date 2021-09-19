@@ -65,7 +65,7 @@ public class UserListener extends ListenerAdapter {
             }
         } else {
             e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().ExperienceRolesColor)).complete();
-            Main.info("New Maximum level created!");
+            i("New Maximum level created!");
             r = e.getGuild().getRolesByName(role, true).get(0);
             rv = e.getGuild().getRolesByName(Toolkit.get().LevelName + vint, true).get(0);
             e.getGuild().removeRoleFromMember(e.getMember().getIdLong(), rv).queue();
@@ -77,9 +77,9 @@ public class UserListener extends ListenerAdapter {
     private void roleValidator(GuildMessageReceivedEvent e, String role) {
         if (e.getGuild().getRolesByName(role, false).size() < 1) {
             e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().ExperienceRolesColor)).complete();
-            Main.info("New Maximum level created!");
+            i("[RV] - New Maximum level created!");
         } else if (e.getGuild().getRolesByName(role, false).size() > 1) {
-            System.out.println("For some reason there are too many roles here im having a stroke...");
+            w("For some reason there are too many roles here im having a stroke...");
         }
     }
 }

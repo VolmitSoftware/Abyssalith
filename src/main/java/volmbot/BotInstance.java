@@ -21,11 +21,11 @@ public class BotInstance {
                 .build();
         jda.getPresence().setStatus(OnlineStatus.IDLE);
         jda.getPresence().setActivity(Activity.watching("The Universe"));
-        i("Bot Loaded");
+        i("Bot instance Re-Instantiated");
     }
 
     public void close() {
-        System.out.println("Closing a bot with ");
+        i("Terminating Bot Instance");
         jda.shutdown();
     }
 

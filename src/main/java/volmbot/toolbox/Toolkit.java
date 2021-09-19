@@ -18,6 +18,8 @@ import java.io.IOException;
 
 public class Toolkit extends ListenerAdapter {
     // Set from config
+    public String BanishedRole = "";//Leave blank change in config
+    public boolean BanishedInsteadOfKick = true;
     public String ModRole = "";//Leave blank change in config
     public String AdminRole = "";//Leave blank change in config
     public String MoneyName = "";//Leave blank change in config
@@ -48,7 +50,6 @@ public class Toolkit extends ListenerAdapter {
     public void save() {
         File file = getFile();
         file.getParentFile().mkdirs();
-
         J.attempt(() -> IO.writeAll(file, new JSONObject(new Gson().toJson(this)).toString(4)));
     }
 
@@ -88,9 +89,4 @@ public class Toolkit extends ListenerAdapter {
         return new File("config/toolkit.json");
     }
 
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-        if (!e.getMessage().getAuthor().isBot()) {
-            get();
-        }
-    }
 }

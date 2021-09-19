@@ -30,6 +30,7 @@ public class Poll extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent event) {
+        i("Poll System Initalized");
 
         String msg = event.getMessage().getContentRaw();
         if(!args.isEmpty()) {

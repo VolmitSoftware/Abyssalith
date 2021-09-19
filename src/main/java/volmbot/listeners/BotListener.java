@@ -18,7 +18,7 @@ public class BotListener extends ListenerAdapter {
 
             J.a(() -> {
                 J.sleep(1000);
-                System.println("[INFO]: Cleaning bot response as requested");
+                i("[INFO]: Cleaning bot response as requested");
                 e.getChannel().retrieveMessageById(e.getMessageIdLong()).complete().delete().queue(); // Try and delete the message
             });
         }

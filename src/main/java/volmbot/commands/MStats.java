@@ -25,6 +25,7 @@ public class MStats extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        i("Revealing User Statistics");
         VolmitEmbed embed = new VolmitEmbed(" PONG!", e.getMessage());
         User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
         embed.setDescription("These are your Stats as an example of the return systems enjoy!");

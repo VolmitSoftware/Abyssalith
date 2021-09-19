@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.interactions.components.Button;
 public class PasteListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot()) {
+            i("Started the Paste Service");
             if (e.getMessage().getContentRaw().contains("https://pastebin.com/")) {
                 String str = e.getMessage().getContentRaw();
                 String[] pbArr = str.split(" ");
@@ -17,6 +18,7 @@ public class PasteListener extends ListenerAdapter {
                                     Button.success("pastbinlinknew", "Yes please!"),
                                     Button.danger("no", "No, go away!")
                             ).queue();
+                            i("Sent Paste Service Buttons");
                         });
                     }
                 }

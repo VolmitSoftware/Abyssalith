@@ -25,6 +25,7 @@ public class Shutdown extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        w("Terminating the Bot");
         String oidcheck = e.getMessage().getAuthor().getId();
         if (oidcheck.equals(Toolkit.get().BotOwnerID)) {
             Main.warn("KILLING BOT");

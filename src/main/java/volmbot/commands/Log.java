@@ -21,6 +21,7 @@ public class Log extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        i("Compliance is everything");
         VolmitEmbed embed = new VolmitEmbed("**WHAT IS A LOG?**", e.getMessage());
         embed.setDescription("This message was sent because we are asking for a log, and you don't know how to get one, or sent something that is not a log. *If you are worried about privacy you can have a private thread for support, just ask the support team and we can get that setup for you!*");
         embed.addField("*__Why do we ask for Logs__*",

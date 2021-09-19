@@ -21,6 +21,7 @@ public class Links extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
+        i("Links Posted");
         VolmitEmbed embed = new VolmitEmbed(" Here you go!", e.getMessage());
         //Commands
         embed.addField("**WIKI LINKS**:", "" +
