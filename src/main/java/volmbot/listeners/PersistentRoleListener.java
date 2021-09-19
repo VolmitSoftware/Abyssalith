@@ -60,5 +60,11 @@ public class PersistentRoleListener extends ListenerAdapter {
             }
             i("Found Missing Roles, Rebinding to : " + e.getMember().getEffectiveName());
         }
+        if (lRoles.size() > e.getMember().getRoles().size() && !e.getMember().getUser().isBot()) {
+            for (Role r : e.getMember().getRoles()) {
+                u.roleIds().add(r.getId());
+            }
+            w("ROLE MISMATCH, REFACTORING ROLES IN USER: " + e.getMember().getEffectiveName());
+        }
     }
 }
