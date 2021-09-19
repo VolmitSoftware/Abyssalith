@@ -239,8 +239,8 @@ public class VolmitCommand extends ListenerAdapter {
                         "\n`" + Toolkit.get().BotPrefix +
                                 (command.getCommands().size() == 2 ?
                                         command.getCommands().get(1) :
-                                        " " + command.getCommands().subList(1, command.getCommands().size()))
-                                        .replace("[", "").replace("]", "") +
+                                        " " + command.getCommands().subList(1, command.getCommands().size())).toString()
+                                        .replaceAbs("[", "").replaceAbs("]", "") +
                                 "`\n" +
                                 command.getDescription() +
                                 (command.getExample() != null ? "\n**Usage**\n`" + Toolkit.get().BotPrefix + command.getExample() + "`" : "");

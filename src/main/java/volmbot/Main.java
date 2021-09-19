@@ -1,5 +1,6 @@
 package volmbot;
 
+import art.arcane.amulet.logging.LogListener;
 import art.arcane.quill.execution.J;
 import art.arcane.quill.execution.Looper;
 import lombok.Getter;
@@ -20,6 +21,7 @@ import volmbot.listeners.*;
 import volmbot.listeners.handlers.ButtonHandler;
 import volmbot.listeners.handlers.MenuHandler;
 import volmbot.listeners.handlers.PasteHandler;
+import volmbot.listeners.handlers.ReactionHandler;
 import volmbot.toolbox.Toolkit;
 
 import javax.security.auth.login.LoginException;
@@ -47,6 +49,28 @@ public class Main extends ListenerAdapter {
     }
 
     public static void main(String[] args) throws LoginException {
+        LogListener.listener.set(new LogListener() {
+
+            @Override
+            public void i(String tag, Object f) {
+                info(tag + ": " + f);
+            }
+
+            @Override
+            public void f(String tag, Object f) {
+                error(tag + ": " + f);
+            }
+
+            @Override
+            public void w(String tag, Object f) {
+                warn(tag + ": " + f);
+            }
+
+            @Override
+            public void d(String tag, Object f) {
+                debug(tag + ": " + f);
+            }
+        });
         org.slf4j.simple.SimpleServiceProvider.class.getSimpleName();
         // Status
         LOGGER.info("Initializing");
@@ -64,11 +88,9 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new MenuHandler());
         getJDA().addEventListener(new PasteHandler());
         getJDA().addEventListener(new ButtonHandler());
-        getJDA().addEventListener(new AutoWiki());
-        getJDA().addEventListener(new Prefix());
-        getJDA().addEventListener(new UserWatcher()); // Watches the User's instances for stuff
-        getJDA().addEventListener(new BotWatcher()); // Watches the Bot instance's for stuff
-        getJDA().addEventListener(new ReactionDirector());
+        getJDA().addEventListener(new UserListener()); // Watches the User's instances for stuff
+        getJDA().addEventListener(new BotListener()); // Watches the Bot instance's for stuff
+        getJDA().addEventListener(new ReactionHandler());
         // Commands
         getJDA().addEventListener(new Eco()); // Money Subcommand
         getJDA().addEventListener(new Links());
@@ -78,6 +100,7 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new RRoles());
         getJDA().addEventListener(new Poll());
         getJDA().addEventListener(new Log());
+        getJDA().addEventListener(new PersistentRoleListener()); // Persistent Roles
 //        getJDA().addEventListener(new Paste()); REPLACED WITH PASTE HANDLER
         getJDA().addEventListener(new Shutdown());
         getJDA().addEventListener(new Commands(getJDA())); // This one MUST be last
