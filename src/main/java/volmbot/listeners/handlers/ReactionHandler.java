@@ -1,4 +1,4 @@
-package volmbot.listeners;
+package volmbot.listeners.handlers;
 
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -11,7 +11,7 @@ import volmbot.util.PermHandler;
 import java.util.List;
 import java.util.Objects;
 
-public class ReactionDirector extends ListenerAdapter {
+public class ReactionHandler extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot() && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) && e.getMessage().getMentionedRoles().size() > 0) {
 

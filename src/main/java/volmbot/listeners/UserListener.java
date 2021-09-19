@@ -11,7 +11,8 @@ import volmbot.toolbox.Toolkit;
 import volmbot.util.XP;
 
 import java.awt.Color;
-public class UserWatcher extends ListenerAdapter {
+
+public class UserListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getMessage().imUser()) {
             User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER

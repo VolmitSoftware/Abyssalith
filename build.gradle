@@ -37,7 +37,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'systems.manifold:manifold-ext:2021.1.16'
     implementation 'net.dv8tion:JDA:4.3.0_310'
-    implementation 'art.arcane:Amulet:1.0.6'
+    implementation 'com.github.ArcaneArts:Amulet:1.0.14'
     implementation 'systems.manifold:manifold-ext-rt:2021.1.16'
     implementation 'systems.manifold:manifold-rt:2021.1.16'
     implementation 'com.github.ArcaneArts:Quill:1.1.3'
