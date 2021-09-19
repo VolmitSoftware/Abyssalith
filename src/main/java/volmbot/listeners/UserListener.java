@@ -10,7 +10,7 @@ import volmbot.data.User;
 import volmbot.toolbox.Toolkit;
 import volmbot.util.XP;
 
-import java.awt.Color;
+import java.util.Objects;
 
 public class UserListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -54,7 +54,7 @@ public class UserListener extends ListenerAdapter {
         if (e.getGuild().hasRole(role)) {
             r = e.getGuild().getRolesByName(role, true).get(0);
             if (r != null) {
-                e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
+                e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()).getIdLong(), r).queue();
                 if (v > 0) {
                     try {
                         rv = e.getGuild().getRolesByName(Toolkit.get().LevelName + vint, true).get(0);
@@ -64,19 +64,21 @@ public class UserListener extends ListenerAdapter {
                 }
             }
         } else {
-            e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().XpRoleColor)).complete();
+
+            e.getGuild().createRole().setName(role).setMentionable(false).complete();
             i("New Maximum level created!");
             r = e.getGuild().getRolesByName(role, true).get(0);
             rv = e.getGuild().getRolesByName(Toolkit.get().LevelName + vint, true).get(0);
-            e.getGuild().removeRoleFromMember(e.getMember().getIdLong(), rv).queue();
+            e.getGuild().removeRoleFromMember(Objects.requireNonNull(e.getMember()).getIdLong(), rv).queue();
             e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
+
         }
 
     }
 
     private void roleValidator(GuildMessageReceivedEvent e, String role) {
         if (e.getGuild().getRolesByName(role, false).size() < 1) {
-            e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().XpRoleColor)).complete();
+            e.getGuild().createRole().setName(role).setMentionable(false).complete();
             i("[RV] - New Maximum level created!");
         } else if (e.getGuild().getRolesByName(role, false).size() > 1) {
             w("For some reason there are too many roles here im having a stroke...");

@@ -17,7 +17,6 @@ public class BotListener extends ListenerAdapter {
         if (!e.getUser().isBot() && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getAuthor().isBot() && e.getReaction().toString().contains("U+274c")) {
 
             J.a(() -> {
-                J.sleep(50);
                 i(" Cleaning bot response as requested");
                 e.getChannel().retrieveMessageById(e.getMessageIdLong()).complete().delete().queue(); // Try and delete the message
             });

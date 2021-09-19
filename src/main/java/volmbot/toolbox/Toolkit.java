@@ -33,7 +33,6 @@ public class Toolkit extends ListenerAdapter {
     public String RoleAdministrator = "";//Leave blank change in config
     public boolean UseBanishedInsteadOfKick = true;
     public boolean UseLingua = true;
-    public String XpRoleColor = "0x000000";
     public Range XpPerMessage = Range.jitter(0.9f, 0.2f);
     public int XpMaxLevels = 50; // Max roles that can be made by this bot (Level)
     public double XpBaseMultiplier = 1.25f;//Leave blank change in config
