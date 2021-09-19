@@ -8,7 +8,7 @@ public class XP {
     {
         // Higher values take exponentially more xp per level increase.
         // Lower values make more consistent leveling. I.e. lvl 1 > 2 takes a little less than lvl 34 > 35
-        return Toolkit.get().BaseXpMultiplier;
+        return Toolkit.get().XpBaseMultiplier;
     }
     public static double getXpForLevel(double level)
     {

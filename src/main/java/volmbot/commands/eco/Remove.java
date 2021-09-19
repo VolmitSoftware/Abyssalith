@@ -16,7 +16,7 @@ public class Remove extends VolmitCommand {
         super(
                 "remove", //Name
                 new String[]{}, //Alias's
-                new String[]{Toolkit.get().ModRole}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Toolkit.get().RoleModerator}, // Always permitted if empty. User must have at least one if specified.
                 "Takes a Number of currency to the user", // Description
                 true, // Does it use Args
                 "eco remove 10 @Psycho" //Example - the prefix

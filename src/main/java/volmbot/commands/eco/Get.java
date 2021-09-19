@@ -16,7 +16,7 @@ public class Get extends VolmitCommand {
         super(
                 "Get", //Name
                 new String[]{"bal", "balance"}, //Alias's
-                new String[]{Toolkit.get().ModRole}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Toolkit.get().RoleModerator}, // Always permitted if empty. User must have at least one if specified.
                 "Get's the users balance", // Description
                 false, // Does it use Args
                 "eco get @Psycho" //Example - the prefix

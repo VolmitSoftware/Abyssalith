@@ -13,7 +13,7 @@ public class Eco extends VolmitCommand {
         super(
                 "eco",
                 new String[]{"eco", "money"},
-                new String[]{Toolkit.get().ModRole}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{Toolkit.get().RoleModerator}, // Add role name here. Empty: always / 1+: at least one.
                 "Economy Category",
                 true,
                 "Eco <subcommand>",

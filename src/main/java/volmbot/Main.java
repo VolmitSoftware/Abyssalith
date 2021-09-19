@@ -80,10 +80,14 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new Main());
         // Listeners
         getJDA().addEventListener(new Toolkit());
-        getJDA().addEventListener(new PasteListener());
+        //Hanlers
         getJDA().addEventListener(new MenuHandler());
         getJDA().addEventListener(new PasteHandler());
         getJDA().addEventListener(new ButtonHandler());
+        //Listeners
+        getJDA().addEventListener(new PasteListener());
+        getJDA().addEventListener(new LanguageListener());
+        getJDA().addEventListener(new PersistentRoleListener()); // Persistent Roles
         getJDA().addEventListener(new UserListener()); // Watches the User's instances for stuff
         getJDA().addEventListener(new BotListener()); // Watches the Bot instance's for stuff
         getJDA().addEventListener(new ReactionHandler());
@@ -96,7 +100,6 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new RRoles());
         getJDA().addEventListener(new Poll());
         getJDA().addEventListener(new Log());
-        getJDA().addEventListener(new PersistentRoleListener()); // Persistent Roles
 //        getJDA().addEventListener(new Paste()); REPLACED WITH PASTE HANDLER
         getJDA().addEventListener(new Shutdown());
         getJDA().addEventListener(new Commands(getJDA())); // This one MUST be last

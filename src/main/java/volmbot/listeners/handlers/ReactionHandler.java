@@ -15,7 +15,7 @@ public class ReactionHandler extends ListenerAdapter {
         if (!e.getMessage().getAuthor().isBot() && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) && e.getMessage().getMentionedRoles().size() > 0) {
 
             String Message = e.getMessage().lower();
-            if (Message.toLowerCase().contains(Toolkit.get().RoleString.toLowerCase())) { // Check the descriminator
+            if (Message.toLowerCase().contains(Toolkit.get().ReactionRoleString.toLowerCase())) { // Check the descriminator
                 if (e.getMessage().getMentionedRoles().size() > 100) {
 
                     SelectionMenu.Builder menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!");// shows the placeholder indicating what this menu is for
@@ -50,7 +50,7 @@ public class ReactionHandler extends ListenerAdapter {
         Message m = e.getChannel().retrieveMessageById(e.getMessageIdLong()).complete();
         String Message = m.getContentRaw().toLowerCase();
         Member mem = e.getGuild().getMember(m.getAuthor());
-        if (Message.toLowerCase().contains(Toolkit.get().RoleString.toLowerCase())
+        if (Message.toLowerCase().contains(Toolkit.get().ReactionRoleString.toLowerCase())
                 && PermHandler.hasAdmin(mem)
                 && m.getMentionedRoles().size() > 0) {
 

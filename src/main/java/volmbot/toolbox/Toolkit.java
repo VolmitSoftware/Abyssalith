@@ -18,24 +18,25 @@ import java.io.IOException;
 
 public class Toolkit extends ListenerAdapter {
     // Set from config
-    public String BanishedRole = "";//Leave blank change in config
-    public boolean BanishedInsteadOfKick = true;
-    public String ModRole = "";//Leave blank change in config
-    public String AdminRole = "";//Leave blank change in config
-    public String MoneyName = "";//Leave blank change in config
-    public String MoneyEmoji = ":coin:";
-    public String Company = "NextdoorSoftworks";
+    public String BotCompany = "NextdoorSoftworks";
     public String BotGIF = "";//Leave blank change in config
     public String BotColor = "0x000000";
     public String BotToken = "";//Leave blank change in config
-    public Range MsgXp = Range.jitter(0.9f, 0.2f);
-    public String RoleString = "";//Leave blank change in config
     public String BotOwnerID = "";//Leave blank change in config
     public String BotPrefix = "";//Leave blank change in config
-    public String ExperienceRolesColor = "0x000000";
     public String LevelName = "Level ";//Leave blank change in config
-    public int MaxXPLevels = 50; // Max roles that can be made by this bot (Level)
-    public double BaseXpMultiplier = 1.25f;//Leave blank change in config
+    public String MoneyName = "";//Leave blank change in config
+    public String MoneyEmoji = ":coin:";
+    public String ReactionRoleString = "";//Leave blank change in config
+    public String RoleBanished = "";//Leave blank change in config
+    public String RoleModerator = "";//Leave blank change in config
+    public String RoleAdministrator = "";//Leave blank change in config
+    public boolean UseBanishedInsteadOfKick = true;
+    public boolean UseLingua = true;
+    public String XpRoleColor = "0x000000";
+    public Range XpPerMessage = Range.jitter(0.9f, 0.2f);
+    public int XpMaxLevels = 50; // Max roles that can be made by this bot (Level)
+    public double XpBaseMultiplier = 1.25f;//Leave blank change in config
 
     // Set from main class
     public transient Long botID;

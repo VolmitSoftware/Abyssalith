@@ -16,7 +16,7 @@ public class Set extends VolmitCommand {
         super(
                 "set", //Name
                 new String[]{}, //Alias's
-                new String[]{Toolkit.get().ModRole}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Toolkit.get().RoleModerator}, // Always permitted if empty. User must have at least one if specified.
                 "Sets the users balance", // Description
                 true, // Does it use Args
                 "eco set 10 @Psycho" //Example - the prefix

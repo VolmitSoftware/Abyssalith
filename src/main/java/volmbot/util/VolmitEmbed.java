@@ -24,7 +24,7 @@ public class VolmitEmbed extends EmbedBuilder {
         this.setAuthor("Requested by: " + name, null)
                 .setTitle(!title.equals("") ? title : "\u200E")
                 .setColor(Color.decode(Toolkit.get().BotColor))
-                .setFooter(Toolkit.get().Company, Toolkit.get().BotGIF);
+                .setFooter(Toolkit.get().BotCompany, Toolkit.get().BotGIF);
     }
 
     /*
@@ -37,7 +37,7 @@ public class VolmitEmbed extends EmbedBuilder {
         this.setAuthor("Requested by: " + message.getAuthor().getName(), null, message.getAuthor().getAvatarUrl())
                 .setTitle(!title.equals("") ? title : "\u200E")
                 .setColor(Color.decode(Toolkit.get().BotColor))
-                .setFooter("Made By: " + Toolkit.get().Company, Toolkit.get().BotGIF);
+                .setFooter("Made By: " + Toolkit.get().BotCompany, Toolkit.get().BotGIF);
     }
 
     /*
@@ -48,7 +48,7 @@ public class VolmitEmbed extends EmbedBuilder {
         this.message = null;
         this.setTitle(title)
                 .setColor(Color.decode(Toolkit.get().BotColor))
-                .setFooter(Toolkit.get().Company, Toolkit.get().BotGIF);
+                .setFooter(Toolkit.get().BotCompany, Toolkit.get().BotGIF);
     }
 
     /*
@@ -60,7 +60,7 @@ public class VolmitEmbed extends EmbedBuilder {
         this.message = null;
         this.setTitle(title).setColor(Color.decode(Toolkit.get().BotColor));
         if (!useShort) {
-            this.setFooter(Toolkit.get().Company, Toolkit.get().BotGIF);
+            this.setFooter(Toolkit.get().BotCompany, Toolkit.get().BotGIF);
         }
     }
 
@@ -71,7 +71,7 @@ public class VolmitEmbed extends EmbedBuilder {
     public VolmitEmbed() {
         this.message = null;
         this.setColor(Color.decode(Toolkit.get().BotColor))
-                .setFooter(Toolkit.get().Company, Toolkit.get().BotGIF);
+                .setFooter(Toolkit.get().BotCompany, Toolkit.get().BotGIF);
     }
 
     // Send embed in the channel of the message already saved. Does not send if no message was specified.

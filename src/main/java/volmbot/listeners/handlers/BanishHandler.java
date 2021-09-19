@@ -10,7 +10,7 @@ public class BanishHandler {
 
     public static boolean bok(Member m) {
         List<Role> rl = m.getRoles();
-        Role banishedRole = m.getGuild().getRolesByName(Toolkit.get().BanishedRole, true).get(0);
+        Role banishedRole = m.getGuild().getRolesByName(Toolkit.get().RoleBanished, true).get(0);
         if (rl.isEmpty())
             return false;
         return rl.contains(banishedRole);

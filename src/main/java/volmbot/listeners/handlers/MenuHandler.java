@@ -23,7 +23,7 @@ public class MenuHandler extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot() && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) && e.getMessage().getMentionedRoles().size() > 0) {
             String Message = e.getMessage().getContentRaw().toLowerCase();
-            if (Message.contains(Toolkit.get().RoleString.toLowerCase())) { // Check the descriminator
+            if (Message.contains(Toolkit.get().ReactionRoleString.toLowerCase())) { // Check the descriminator
                 if (e.getMessage().getMentionedRoles().size() > 4) {
 
                     SelectionMenu.Builder menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!");// shows the placeholder indicating what this menu is for

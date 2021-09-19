@@ -16,12 +16,12 @@ public class UserListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getMessage().imUser()) {
             User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
-            u.experience(u.experience() + Toolkit.get().MsgXp.rand()); //XP
+            u.experience(u.experience() + Toolkit.get().XpPerMessage.rand()); //XP
             u.messagesSent(u.messagesSent() + 1);
             double uxp = u.experience();
             int validator = XP.getLevelForXp(uxp);
 
-            if (validator < Toolkit.get().MaxXPLevels) {
+            if (validator < Toolkit.get().XpMaxLevels) {
                 roleValidator(e, Toolkit.get().LevelName + XP.getLevelForXp(uxp));
                 roleManager(e, Toolkit.get().LevelName + XP.getLevelForXp(uxp), validator);
             }
@@ -31,7 +31,7 @@ public class UserListener extends ListenerAdapter {
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
         if (!e.getUser().isBot()) {
             User u = Main.getLoader().getUser(e.getUser().getIdLong());
-            u.experience((u.experience() + Toolkit.get().MsgXp.rand()));
+            u.experience((u.experience() + Toolkit.get().XpPerMessage.rand()));
             u.reactions(u.reactions() + 1);
         }
     }
@@ -42,7 +42,7 @@ public class UserListener extends ListenerAdapter {
             e.getUserId();
             User u = Main.getLoader().getUser(e.getUserIdLong());
             u.reactions(u.reactions() - 1);
-            u.experience(u.experience() - Toolkit.get().MsgXp.rand());
+            u.experience(u.experience() - Toolkit.get().XpPerMessage.rand());
         }
     }
 
@@ -64,7 +64,7 @@ public class UserListener extends ListenerAdapter {
                 }
             }
         } else {
-            e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().ExperienceRolesColor)).complete();
+            e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().XpRoleColor)).complete();
             i("New Maximum level created!");
             r = e.getGuild().getRolesByName(role, true).get(0);
             rv = e.getGuild().getRolesByName(Toolkit.get().LevelName + vint, true).get(0);
@@ -76,7 +76,7 @@ public class UserListener extends ListenerAdapter {
 
     private void roleValidator(GuildMessageReceivedEvent e, String role) {
         if (e.getGuild().getRolesByName(role, false).size() < 1) {
-            e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().ExperienceRolesColor)).complete();
+            e.getGuild().createRole().setName(role).setMentionable(false).setColor(Color.decode(Toolkit.get().XpRoleColor)).complete();
             i("[RV] - New Maximum level created!");
         } else if (e.getGuild().getRolesByName(role, false).size() > 1) {
             w("For some reason there are too many roles here im having a stroke...");
