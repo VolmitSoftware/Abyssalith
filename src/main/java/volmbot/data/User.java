@@ -1,10 +1,21 @@
 package volmbot.data;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import volmbot.io.DataType;
 
-@Data
+import java.util.HashSet;
+import java.util.Set;
+
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
 @Accessors(chain = true, fluent = true)
 public class User implements DataType {
     private long id = 0;
@@ -14,14 +25,6 @@ public class User implements DataType {
     //private UserStatistics stats = new UserStatistics();
     private long messagesSent = 0;
     private long reactions = 0;
+    private Set<String> roleIds = new HashSet<>();
 
-
-//    @Data
-//    @Accessors(chain = true, fluent = true)
-//    static class UserStatistics
-//    {
-//        private long messagesSent = 0;
-//        private long voiceMinutes = 0;
-//        private long reactions = 0;
-//    }
 }

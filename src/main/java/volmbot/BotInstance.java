@@ -21,7 +21,9 @@ public class BotInstance {
                 .build();
         jda.getPresence().setStatus(OnlineStatus.IDLE);
         jda.getPresence().setActivity(Activity.watching("The Universe"));
+        i("Bot Loaded");
     }
+
     public void close() {
         System.out.println("Closing a bot with ");
         jda.shutdown();
