@@ -47,7 +47,7 @@ public class PersistentRoleListener extends ListenerAdapter {
         if (!e.getMember().getUser().isBot()) {
             User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             u.roleIds().remove(e.getRoles().get(0).getId());
-            i("Removed role from : " + e.getMember().getEffectiveName() + "Role ID: " + e.getRoles().get(0).getId());
+            i("Removed role from : " + e.getMember().getEffectiveName() + " Role ID: " + e.getRoles().get(0).getId());
         }
     }
 

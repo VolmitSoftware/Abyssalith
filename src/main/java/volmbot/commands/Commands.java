@@ -2,6 +2,7 @@ package volmbot.commands;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import volmbot.listeners.handlers.BanishHandler;
 import volmbot.toolbox.Toolkit;
 import volmbot.util.VolmitCommand;
 import volmbot.util.VolmitEmbed;

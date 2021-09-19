@@ -34,9 +34,8 @@ public class Toolkit extends ListenerAdapter {
     public String BotPrefix = "";//Leave blank change in config
     public String ExperienceRolesColor = "0x000000";
     public String LevelName = "Level ";//Leave blank change in config
-    public int MaxXPLevels = 50;
+    public int MaxXPLevels = 50; // Max roles that can be made by this bot (Level)
     public double BaseXpMultiplier = 1.25f;//Leave blank change in config
-
 
     // Set from main class
     public transient Long botID;
@@ -88,5 +87,4 @@ public class Toolkit extends ListenerAdapter {
     private static File getFile() {
         return new File("config/toolkit.json");
     }
-
 }

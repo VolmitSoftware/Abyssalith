@@ -145,7 +145,7 @@ public class Main extends ListenerAdapter {
     }
 
     private static void log(String tag, Object t) {
-        System.println("[" + tag + "] -> " + t);
+        System.println("[" + tag + "]-> " + t);
     }
 
     public static void warn(Object message) {
