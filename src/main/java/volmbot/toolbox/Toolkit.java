@@ -19,23 +19,24 @@ import java.io.IOException;
 public class Toolkit extends ListenerAdapter {
     // Set from config
     public String BotCompany = "NextdoorSoftworks";
-    public String BotGIF = "";//Leave blank change in config
+    public String BotGIF = "";
     public String BotColor = "0x000000";
-    public String BotToken = "";//Leave blank change in config
-    public String BotOwnerID = "";//Leave blank change in config
-    public String BotPrefix = "";//Leave blank change in config
-    public String LevelName = "Level ";//Leave blank change in config
-    public String MoneyName = "";//Leave blank change in config
+    public String BotToken = "";
+    public String BotOwnerID = "";
+    public String BotPrefix = "";
+    public String LevelName = "Level ";
+    public String MoneyName = "";
     public String MoneyEmoji = ":coin:";
-    public String ReactionRoleString = "";//Leave blank change in config
-    public String RoleBanished = "";//Leave blank change in config
-    public String RoleModerator = "";//Leave blank change in config
-    public String RoleAdministrator = "";//Leave blank change in config
-    public boolean UseBanishedInsteadOfKick = true;
+    public String ReactionRoleString = "";
+    public String RoleBanished = "";
+    public String RoleModerator = "";
+    public String RoleAdministrator = "";
+    public boolean UseBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
     public boolean UseLingua = true;
+    public boolean UsePersistentRoles = true;
     public Range XpPerMessage = Range.jitter(0.9f, 0.2f);
     public int XpMaxLevels = 50; // Max roles that can be made by this bot (Level)
-    public double XpBaseMultiplier = 1.25f;//Leave blank change in config
+    public double XpBaseMultiplier = 1.25f;
 
     // Set from main class
     public transient Long botID;

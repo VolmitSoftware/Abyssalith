@@ -18,6 +18,7 @@ public class LanguageListener extends ListenerAdapter {
                     Language.JAPANESE, Language.DUTCH, Language.CZECH).build();
 
             if (!detector.detectLanguageOf(e.getMessage().lower()).equals(Language.ENGLISH)) {
+                //todo: Figure out why this is necessary, and implement a better way to detect/use languages
                 i("Someone is speaking: "+  "" + detector.detectLanguageOf(e.getMessage().lower()));
                 d("Language Debug: "+ detector.computeLanguageConfidenceValues(e.getMessage().lower()));
             }

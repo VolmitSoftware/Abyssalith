@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import volmbot.Main;
 import volmbot.data.User;
+import volmbot.toolbox.Toolkit;
 
 import java.util.Objects;
 import java.util.Set;
@@ -15,7 +16,7 @@ import java.util.Set;
 public class PersistentRoleListener extends ListenerAdapter {
 
     public void onGuildMemberJoin(GuildMemberJoinEvent e) {
-        if (!e.getMember().getUser().isBot()) {
+        if (!e.getMember().getUser().isBot() && Toolkit.get().UsePersistentRoles) {
             i("Attempting to reattach roles for: " + e.getMember().getEffectiveName());
 
             User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
@@ -36,7 +37,7 @@ public class PersistentRoleListener extends ListenerAdapter {
     }
 
     public void onGuildMemberRoleAdd(GuildMemberRoleAddEvent e) {
-        if (!e.getMember().getUser().isBot()) {
+        if (!e.getMember().getUser().isBot() && Toolkit.get().UsePersistentRoles) {
             User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             u.roleIds().add(e.getRoles().get(0).getId());
             i("Attached role to : " + e.getMember().getEffectiveName() + "Role ID: " + e.getRoles().get(0).getId());
@@ -44,7 +45,7 @@ public class PersistentRoleListener extends ListenerAdapter {
     }
 
     public void onGuildMemberRoleRemove(GuildMemberRoleRemoveEvent e) {
-        if (!e.getMember().getUser().isBot()) {
+        if (!e.getMember().getUser().isBot() && Toolkit.get().UsePersistentRoles) {
             User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             u.roleIds().remove(e.getRoles().get(0).getId());
             i("Removed role from : " + e.getMember().getEffectiveName() + " Role ID: " + e.getRoles().get(0).getId());
@@ -54,7 +55,7 @@ public class PersistentRoleListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) { // THIS IS A FALLBACK TO KEEP ROLES UPDATED
         User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
         Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
-        if (lRoles.size() < e.getMember().getRoles().size() && !e.getMember().getUser().isBot()) {
+        if (lRoles.size() < e.getMember().getRoles().size() && !e.getMember().getUser().isBot() && Toolkit.get().UsePersistentRoles) {
             for (Role r : e.getMember().getRoles()) {
                 u.roleIds().add(r.getId());
             }
