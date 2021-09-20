@@ -57,6 +57,9 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.14.1'
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.jagrosh:jda-utilities:3.0.5'
+    implementation 'org.eclipse.jetty:jetty-server:9.4.28.v20200408'
+    implementation 'org.eclipse.jetty:jetty-servlet:9.4.28.v20200408'
+    implementation 'org.eclipse.jetty:jetty-webapp:9.4.28.v20200408'
 }
 
 if (JavaVersion.current() != JavaVersion.VERSION_1_8 &&

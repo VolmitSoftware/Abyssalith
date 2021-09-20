@@ -39,6 +39,7 @@ import java.util.function.Function;
 public class Kit extends ListenerAdapter {
 
     public void envInject() {
+        env("BOT_DUMMY_PORT", (f) -> DummyPort = Integer.parseInt(f));
         env("BOT_TOKEN", (f) -> BotToken = f);
         env("BOT_COMPANY", (f) -> BotCompany = f);
         env("BOT_GIF", (f) -> BotGIF = f);
@@ -65,6 +66,7 @@ public class Kit extends ListenerAdapter {
     public String BotGIF = "https://images-ext-2.discordapp.net/external/RTML29qcfmg0O2AdcxVRfTo_G8wNRz53le_CGIMyxR8/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/173261518572486656/a_63b6f52a118e915f11bc771985a078c8.gif";
     public String BotColor = "0xffff00";
     public String BotToken = ""; // LEAVE BLANK FOR TOKEN
+    public int DummyPort = 8187;
     public String BotOwnerID = "173261518572486656";
     public String BotPrefix = ".";
     public String LevelName = "Level ";

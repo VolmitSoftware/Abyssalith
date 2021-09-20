@@ -80,6 +80,13 @@ public class Main extends ListenerAdapter {
     }
 
     public static void main(String[] args) throws LoginException {
+        new Thread(() -> {
+            try {
+                new GarbageDigitalOceanHealthCheckWebServerEchoServer();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
         LogListener.listener.set(new LogListener() {
 
             @Override
