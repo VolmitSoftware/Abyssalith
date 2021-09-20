@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
     id 'io.freefair.lombok' version '5.2.1'
     id "com.github.johnrengelman.shadow" version "7.0.0"
 }
@@ -8,7 +9,7 @@ def name = 'Abyssalith'
 group 'com.volmit'
 version 'cloud' // Don't change this
 
-jar {
+application {
     mainClass = 'com.volmit.abyssalith.Main'
 }
 
