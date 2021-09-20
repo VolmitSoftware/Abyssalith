@@ -5,9 +5,8 @@ import com.volmit.abyssalith.commands.eco.Give;
 import com.volmit.abyssalith.commands.eco.Remove;
 import com.volmit.abyssalith.commands.eco.Set;
 import com.volmit.abyssalith.toolbox.Toolkit;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import volmbot.commands.eco.*;
 import com.volmit.abyssalith.util.VolmitCommand;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
@@ -29,6 +28,7 @@ public class Eco extends VolmitCommand {
                 }
         );
     }
+
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         i("Eco List Initialized");
         e.getMessage().delete().queue(); // delete the sent message

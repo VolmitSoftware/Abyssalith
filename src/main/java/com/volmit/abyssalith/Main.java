@@ -13,11 +13,17 @@ import com.volmit.abyssalith.commands.Passive;
 import com.volmit.abyssalith.commands.Poll;
 import com.volmit.abyssalith.commands.RRoles;
 import com.volmit.abyssalith.commands.Shutdown;
+import com.volmit.abyssalith.io.DataLoader;
+import com.volmit.abyssalith.io.storage.FileSystemStorageAccess;
 import com.volmit.abyssalith.listeners.BotListener;
 import com.volmit.abyssalith.listeners.LanguageListener;
 import com.volmit.abyssalith.listeners.PasteListener;
 import com.volmit.abyssalith.listeners.PersistentRoleListener;
 import com.volmit.abyssalith.listeners.UserListener;
+import com.volmit.abyssalith.listeners.handlers.ButtonHandler;
+import com.volmit.abyssalith.listeners.handlers.MenuHandler;
+import com.volmit.abyssalith.listeners.handlers.PasteHandler;
+import com.volmit.abyssalith.listeners.handlers.ReactionHandler;
 import com.volmit.abyssalith.toolbox.Toolkit;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,14 +35,6 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import volmbot.commands.*;
-import com.volmit.abyssalith.io.DataLoader;
-import com.volmit.abyssalith.io.storage.FileSystemStorageAccess;
-import volmbot.listeners.*;
-import com.volmit.abyssalith.listeners.handlers.ButtonHandler;
-import com.volmit.abyssalith.listeners.handlers.MenuHandler;
-import com.volmit.abyssalith.listeners.handlers.PasteHandler;
-import com.volmit.abyssalith.listeners.handlers.ReactionHandler;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
@@ -61,11 +59,14 @@ public class Main extends ListenerAdapter {
     public static JDA getJDA() {
         return provider.get().getJDA();
     }
+
     public static void main(String[] args) throws LoginException {
         LogListener.listener.set(new LogListener() {
 
             @Override
-            public void i(String tag, Object f) { info(tag + ": " + f); }
+            public void i(String tag, Object f) {
+                info(tag + ": " + f);
+            }
 
             @Override
             public void f(String tag, Object f) {
@@ -168,12 +169,15 @@ public class Main extends ListenerAdapter {
     public static void warn(Object message) {
         log("WARN", message);
     }
+
     public static void info(Object message) {
         log("INFO", message);
     }
+
     public static void error(Object message) {
         log("ERROR", message);
     }
+
     public static void debug(Object message) {
         log("DEBUG", message);
     }

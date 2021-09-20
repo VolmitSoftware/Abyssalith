@@ -1,10 +1,10 @@
 package com.volmit.abyssalith.commands;
 
 import com.volmit.abyssalith.toolbox.Toolkit;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ public class Commands extends VolmitCommand {
     public Commands(JDA jda) {
         super(
                 "Commands",
-                new String[]{"commands","?","help"},
+                new String[]{"commands", "?", "help"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
-                "Sends the command help page (this one) If you would like to see the Passives that this bot does you can type `" + Toolkit.get().BotPrefix+"passive` and see what this bot does Passively",
+                "Sends the command help page (this one) If you would like to see the Passives that this bot does you can type `" + Toolkit.get().BotPrefix + "passive` and see what this bot does Passively",
                 false,
                 null
         );

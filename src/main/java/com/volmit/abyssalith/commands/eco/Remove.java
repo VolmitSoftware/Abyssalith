@@ -31,7 +31,7 @@ public class Remove extends VolmitCommand {
         String moneyEmoji = Toolkit.get().MoneyEmoji;
 
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
-        embed.addField(moneyEmoji+ moneyName+ " removed: ", args.get(1) + " Removed By: " + e.getAuthor().getAsMention(), false);
+        embed.addField(moneyEmoji + moneyName + " removed: ", args.get(1) + " Removed By: " + e.getAuthor().getAsMention(), false);
 
         User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
 

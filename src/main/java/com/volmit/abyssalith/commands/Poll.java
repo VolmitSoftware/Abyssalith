@@ -5,7 +5,7 @@ import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Poll extends VolmitCommand {
     public Poll() {
         super(
                 "poll",
-                new String[]{"poll","query"},
+                new String[]{"poll", "query"},
                 new String[]{com.volmit.abyssalith.toolbox.Toolkit.get().RoleModerator}, // Add role name here. Empty: always / 1+: at least one.
                 "Poll creator. (max 20 options separated by commas)",
                 true,
@@ -33,9 +33,9 @@ public class Poll extends VolmitCommand {
         i("Poll System Initalized");
 
         String msg = event.getMessage().getContentRaw();
-        if(!args.isEmpty()) {
+        if (!args.isEmpty()) {
             List<String> pollArgs = Arrays.asList(msg.split(" ", 2)[1].split(","));
-            if(pollArgs.size()>20) {
+            if (pollArgs.size() > 20) {
                 event.getChannel().sendMessage("Exceeded the maximum amount of options available in the poll command!").queue();
                 return;
             }
@@ -46,11 +46,11 @@ public class Poll extends VolmitCommand {
                     .setTitle("Poll")
                     .setColor(Color.decode(Toolkit.get().BotColor))
                     .setFooter("React to this poll with the emoji corresponding to each option.");
-            for(int i=0; i<counter; i++) {
+            for (int i = 0; i < counter; i++) {
                 poll.appendDescription(emoji[i] + ": **" + pollArgs.get(i).trim() + "**\n");
             }
             event.getChannel().sendMessage(poll.build()).queue(reactPoll -> {
-                for(int i=0; i<counter; i++) {
+                for (int i = 0; i < counter; i++) {
                     reactPoll.addReaction(unicodeEmoji[i]).queue();
                 }
             });
@@ -60,7 +60,6 @@ public class Poll extends VolmitCommand {
         }
         event.getMessage().delete().queue(); // delete the sent message
     }
-
 
 
 }

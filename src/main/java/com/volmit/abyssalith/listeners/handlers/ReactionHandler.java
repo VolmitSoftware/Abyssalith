@@ -48,7 +48,8 @@ public class ReactionHandler extends ListenerAdapter {
                     }
                 }
             }
-        } catch (Exception ignored){}// just gets mad when its a bot, im not implementing a fix for this as its redundant
+        } catch (Exception ignored) {
+        }// just gets mad when its a bot, im not implementing a fix for this as its redundant
     }
 
 
@@ -96,21 +97,22 @@ public class ReactionHandler extends ListenerAdapter {
                         reaction.removeReaction(oeUser).queue();
 
                     } else if (oeUserID == authUserID) {
-                            //this is just wrong ^, it will not always be false
-                            System.out.println("RoleMaster is adding a role");
-                            if (oRole.size() < oReaction.size()) {
-                                reaction.removeReaction(oeUser).queue();
-                            }
-
-                        } else {
+                        //this is just wrong ^, it will not always be false
+                        System.out.println("RoleMaster is adding a role");
+                        if (oRole.size() < oReaction.size()) {
                             reaction.removeReaction(oeUser).queue();
                         }
+
+                    } else {
+                        reaction.removeReaction(oeUser).queue();
+                    }
                     iter++;
 
                 }
             }
 
-        }catch(Exception ignored){} // just gets mad when its a bot, im not implementing a fix for this as its redundant
+        } catch (Exception ignored) {
+        } // just gets mad when its a bot, im not implementing a fix for this as its redundant
     }
 
 

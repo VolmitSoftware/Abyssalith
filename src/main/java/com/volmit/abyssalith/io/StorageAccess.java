@@ -11,13 +11,11 @@ public interface StorageAccess {
 
     String get(String typeName, Long key);
 
-    default String toString(Object type)
-    {
+    default String toString(Object type) {
         return new Gson().toJson(type);
     }
 
-    default <T> T fromString(String data, Class<T> t)
-    {
+    default <T> T fromString(String data, Class<T> t) {
         return new Gson().fromJson(data, t);
     }
 }

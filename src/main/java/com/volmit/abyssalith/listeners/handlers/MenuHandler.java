@@ -21,7 +21,7 @@ public class MenuHandler extends ListenerAdapter {
 
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-        if (!e.getMessage().getAuthor().isBot() && e.getMessage().getMentionedRoles().size() > 0 && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) ) {
+        if (!e.getMessage().getAuthor().isBot() && e.getMessage().getMentionedRoles().size() > 0 && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember()))) {
             String Message = e.getMessage().getContentRaw().toLowerCase();
             if (Message.contains(Toolkit.get().ReactionRoleString.toLowerCase())) { // Check the descriminator
                 if (e.getMessage().getMentionedRoles().size() > 4) {
@@ -144,7 +144,8 @@ public class MenuHandler extends ListenerAdapter {
             if (!replied)
                 e.reply("hElp! call my owner! i had a fuckie wuckie").setEphemeral(true).queue(f -> {
                 });
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 }
 

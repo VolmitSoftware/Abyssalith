@@ -10,14 +10,12 @@ import java.io.IOException;
 public class FileSystemStorageAccess implements StorageAccess {
     private final File root;
 
-    public FileSystemStorageAccess(File root)
-    {
+    public FileSystemStorageAccess(File root) {
         this.root = root;
         Main.info("Created Storage Access (File System) in " + root.getAbsolutePath());
     }
 
-    private File fileFor(String typeName, Long key)
-    {
+    private File fileFor(String typeName, Long key) {
         File f = new File(root, typeName + "/" + key + ".json");
         f.getParentFile().mkdirs();
         return f;

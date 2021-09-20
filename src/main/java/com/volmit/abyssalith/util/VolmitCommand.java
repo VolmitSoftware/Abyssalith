@@ -187,10 +187,10 @@ public class VolmitCommand extends ListenerAdapter {
     }
 
     /* Checks if the specified command is this command */
-    private boolean checkCommand(String command){
+    private boolean checkCommand(String command) {
         if (command.equalsIgnoreCase(name)) return true;
-        for (String cmd : getCommands()){
-            if (command.equalsIgnoreCase(cmd)){
+        for (String cmd : getCommands()) {
+            if (command.equalsIgnoreCase(cmd)) {
                 return true;
             }
         }

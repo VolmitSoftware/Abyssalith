@@ -1,9 +1,9 @@
 package com.volmit.abyssalith.commands;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.toolbox.Toolkit;
 import com.volmit.abyssalith.util.VolmitCommand;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class Shutdown extends VolmitCommand {
     public Shutdown() {
         super(
                 "stop",
-                new String[]{"stop","kill","s"},
+                new String[]{"stop", "kill", "s"},
                 new String[]{Toolkit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
                 "Stops the Bot boi",
                 false,

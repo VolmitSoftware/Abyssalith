@@ -7,10 +7,10 @@ import art.arcane.quill.io.IO;
 import art.arcane.quill.json.JSONObject;
 import art.arcane.quill.logging.L;
 import com.google.gson.Gson;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.util.Range;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.io.File;
 import java.io.IOException;

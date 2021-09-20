@@ -17,13 +17,13 @@ import java.util.function.Predicate;
 public class PasteHandler extends ListenerAdapter {
 
     private static final KList<Definition> definitions = new KList<>(
-    new Definition("[Iris]: Couldn't find Object:", "Objects are Broken!", "- Iris cant find certain objects in your pack"),
-        new Definition("Couldn't read Biome file:","You have a typo in a Biome file", "- There is a typo in one of the files in your pack folder!"),
-        new Definition("[Iris]: Unknown Block Data:","Unknown Block Data", "- Iris cant find block data (nbt mapping issue) "),
-        new Definition("IT IS HIGHLY RECOMMENDED YOU RESTART THE SERVER BEFORE GENERATING!","Restart your server", "- Iris needs to restart the server for the datapacks to work properly"),
-        new Definition("[Multiverse-Core]","Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),
-        new Definition("DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH","Paper Watchdog Spam", "**PLEASE turn off the paper spam!** \n https://docs.volmit.com/iris/plugin/faq"),
-        new Definition(s -> !s.contains("[Iris] Enabling Iris"), "Iris not installed / not a full log", "This does not contain a **full** log with Iris installed, perhaps try again if you want more information.")
+            new Definition("[Iris]: Couldn't find Object:", "Objects are Broken!", "- Iris cant find certain objects in your pack"),
+            new Definition("Couldn't read Biome file:", "You have a typo in a Biome file", "- There is a typo in one of the files in your pack folder!"),
+            new Definition("[Iris]: Unknown Block Data:", "Unknown Block Data", "- Iris cant find block data (nbt mapping issue) "),
+            new Definition("IT IS HIGHLY RECOMMENDED YOU RESTART THE SERVER BEFORE GENERATING!", "Restart your server", "- Iris needs to restart the server for the datapacks to work properly"),
+            new Definition("[Multiverse-Core]", "Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),
+            new Definition("DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH", "Paper Watchdog Spam", "**PLEASE turn off the paper spam!** \n https://docs.volmit.com/iris/plugin/faq"),
+            new Definition(s -> !s.contains("[Iris] Enabling Iris"), "Iris not installed / not a full log", "This does not contain a **full** log with Iris installed, perhaps try again if you want more information.")
 
     );
 
@@ -31,7 +31,7 @@ public class PasteHandler extends ListenerAdapter {
     public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
 
         if (!e.getComponentId().equals("pastbinlinknew")) {
-            if (e.getComponentId().equals("no")){
+            if (e.getComponentId().equals("no")) {
                 e.getMessage().delete().queue();
             }
             return;
@@ -69,15 +69,16 @@ public class PasteHandler extends ListenerAdapter {
 
     /**
      * Test a text and add help fields to an embed
-     * @param text Text
+     *
+     * @param text  Text
      * @param embed Embed
      * @return Amount of problem definitions that matched
      */
-    private static int test(String text, VolmitEmbed embed){
+    private static int test(String text, VolmitEmbed embed) {
         AtomicInteger problems = new AtomicInteger();
 
         definitions.forEach(definition -> {
-            if (definition.appliesOn(text)){
+            if (definition.appliesOn(text)) {
                 embed.addField(definition.getField());
                 problems.getAndIncrement();
             }
@@ -86,7 +87,7 @@ public class PasteHandler extends ListenerAdapter {
         return problems.get();
     }
 
-    private static class Definition{
+    private static class Definition {
         private final boolean fullWidth;
         private final String helpBody;
         private final String helpTitle;
@@ -94,32 +95,35 @@ public class PasteHandler extends ListenerAdapter {
 
         /**
          * A problem definition
+         *
          * @param trueIfContains If text contains this, #appliesOn will return true
-         * @param title The title of the help field
-         * @param body The body of the help field
+         * @param title          The title of the help field
+         * @param body           The body of the help field
          */
-        public Definition(String trueIfContains, String title, String body){
+        public Definition(String trueIfContains, String title, String body) {
             this(s -> s.contains(trueIfContains), title, body);
         }
 
         /**
          * A problem definition
+         *
          * @param whenTrue The predicate on a string that returns true when the definition applies
-         * @param title The title of the help field
-         * @param body The body of the help field
+         * @param title    The title of the help field
+         * @param body     The body of the help field
          */
-        public Definition(Predicate<String> whenTrue, String title, String body){
+        public Definition(Predicate<String> whenTrue, String title, String body) {
             this(whenTrue, title, body, false);
         }
 
         /**
          * A problem definition
-         * @param whenTrue The predicate on a string that returns true when the definition applies
-         * @param title The title of the help field
-         * @param body The body of the help field
+         *
+         * @param whenTrue  The predicate on a string that returns true when the definition applies
+         * @param title     The title of the help field
+         * @param body      The body of the help field
          * @param fullWidth Whether the full line-width in the embed is required
          */
-        public Definition(Predicate<String> whenTrue, String title, String body, boolean fullWidth){
+        public Definition(Predicate<String> whenTrue, String title, String body, boolean fullWidth) {
             this.predicate = whenTrue;
             this.helpTitle = title;
             this.helpBody = body;
@@ -128,18 +132,20 @@ public class PasteHandler extends ListenerAdapter {
 
         /**
          * Get a message embed help-field from this definition
+         *
          * @return A message field
          */
-        public MessageEmbed.Field getField(){
+        public MessageEmbed.Field getField() {
             return new MessageEmbed.Field(helpTitle, helpBody, fullWidth, true);
         }
 
         /**
          * Whether this problem definition applies to
+         *
          * @param text A text
          * @return True if applies, false if not
          */
-        public boolean appliesOn(String text){
+        public boolean appliesOn(String text) {
             return predicate.test(text);
         }
     }

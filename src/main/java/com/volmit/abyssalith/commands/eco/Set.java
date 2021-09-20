@@ -2,11 +2,11 @@ package com.volmit.abyssalith.commands.eco;
 
 import art.arcane.quill.format.Form;
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.toolbox.Toolkit;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import com.volmit.abyssalith.data.User;
+import com.volmit.abyssalith.toolbox.Toolkit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class Set extends VolmitCommand {
         String moneyEmoji = Toolkit.get().MoneyEmoji;
 
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
-        embed.addField(moneyEmoji+ moneyName+ " set: ", args.get(1) + " Set By: " + e.getAuthor().getAsMention(), false);
+        embed.addField(moneyEmoji + moneyName + " set: ", args.get(1) + " Set By: " + e.getAuthor().getAsMention(), false);
 
         User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
         u.money(Float.parseFloat(args.get(1)));

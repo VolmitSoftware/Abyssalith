@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,19 +17,32 @@ public class GStats extends VolmitCommand {
     public GStats() {
         super(
                 "stats",
-                new String[]{"stats","statistics"},
+                new String[]{"stats", "statistics"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
                 "Reveals all statistic information from the server",
                 false,
                 null
         );
     }
+
     private class GuildStats {
 
-        private String name, id, region, avatar, afk, roles;
-        private int textChans, voiceChans, categories, rolesCount;
-        private long all, users, onlineUsers, bots, onlineBots;
-        private Member owner;
+        private final String name;
+        private final String id;
+        private final String region;
+        private final String avatar;
+        private final String afk;
+        private final String roles;
+        private final int textChans;
+        private final int voiceChans;
+        private final int categories;
+        private final int rolesCount;
+        private final long all;
+        private final long users;
+        private final long onlineUsers;
+        private final long bots;
+        private final long onlineBots;
+        private final Member owner;
 
         private GuildStats(Guild g) {
             i("Sending Guild Stats");
@@ -63,6 +76,7 @@ public class GStats extends VolmitCommand {
             return r.getGuild().getMembers().stream().filter(m -> m.getRoles().contains(r)).count();
         }
     }
+
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {

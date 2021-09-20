@@ -14,8 +14,7 @@ public class TypedLoader<T extends DataType> {
     private final ReentrantLock lock;
     private final StorageAccess storage;
 
-    public TypedLoader(Class<T> type, StorageAccess storage)
-    {
+    public TypedLoader(Class<T> type, StorageAccess storage) {
         this.storage = storage;
         this.type = type;
         lock = new ReentrantLock();
@@ -23,19 +22,15 @@ public class TypedLoader<T extends DataType> {
         lastUse = new KMap<>();
     }
 
-    public int size()
-    {
+    public int size() {
         return cache.size();
     }
 
-    public void cleanup(long olderThan)
-    {
+    public void cleanup(long olderThan) {
         lock.lock();
 
-        for(Long i : lastUse.k())
-        {
-            if(olderThan <= 0 || M.ms() - lastUse.get(i) > olderThan)
-            {
+        for (Long i : lastUse.k()) {
+            if (olderThan <= 0 || M.ms() - lastUse.get(i) > olderThan) {
                 unload(i);
             }
         }
@@ -50,17 +45,14 @@ public class TypedLoader<T extends DataType> {
         Main.info("Saved " + type.getSimpleName() + "[" + i + "]");
     }
 
-    public T get(long key)
-    {
+    public T get(long key) {
         lock.lock();
-        lastUse.compute(key, (k,v) -> M.ms());
+        lastUse.compute(key, (k, v) -> M.ms());
         T t = cache.get(key);
 
-        if(t == null)
-        {
+        if (t == null) {
             t = cache.computeIfAbsent(key, (v) -> {
-                if(storage.exists(type.getSimpleName().toLowerCase(Locale.ROOT), key))
-                {
+                if (storage.exists(type.getSimpleName().toLowerCase(Locale.ROOT), key)) {
                     Main.info("Loaded " + type.getSimpleName() + "[" + key + "]");
                     return storage.fromString(storage.get(type.getSimpleName().toLowerCase(Locale.ROOT), key), type);
                 }
