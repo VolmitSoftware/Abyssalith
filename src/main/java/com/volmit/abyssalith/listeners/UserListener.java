@@ -20,7 +20,7 @@ package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.XP;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -34,14 +34,14 @@ public class UserListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (e.getMessage().imUser()) {
             User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
-            u.experience(u.experience() + Toolkit.get().XpPerMessage.rand()); //XP
+            u.experience(u.experience() + Kit.get().XpPerMessage.rand()); //XP
             u.messagesSent(u.messagesSent() + 1);
             double uxp = u.experience();
             int validator = XP.getLevelForXp(uxp);
 
-            if (validator < Toolkit.get().XpMaxLevels) {
-                roleValidator(e, Toolkit.get().LevelName + XP.getLevelForXp(uxp));
-                roleManager(e, Toolkit.get().LevelName + XP.getLevelForXp(uxp), validator);
+            if (validator < Kit.get().XpMaxLevels) {
+                roleValidator(e, Kit.get().LevelName + XP.getLevelForXp(uxp));
+                roleManager(e, Kit.get().LevelName + XP.getLevelForXp(uxp), validator);
             }
         }
     }
@@ -49,7 +49,7 @@ public class UserListener extends ListenerAdapter {
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
         if (!e.getUser().isBot()) {
             User u = Main.getLoader().getUser(e.getUser().getIdLong());
-            u.experience((u.experience() + Toolkit.get().XpPerMessage.rand()));
+            u.experience((u.experience() + Kit.get().XpPerMessage.rand()));
             u.reactions(u.reactions() + 1);
         }
     }
@@ -60,7 +60,7 @@ public class UserListener extends ListenerAdapter {
             e.getUserId();
             User u = Main.getLoader().getUser(e.getUserIdLong());
             u.reactions(u.reactions() - 1);
-            u.experience(u.experience() - Toolkit.get().XpPerMessage.rand());
+            u.experience(u.experience() - Kit.get().XpPerMessage.rand());
         }
     }
 
@@ -75,7 +75,7 @@ public class UserListener extends ListenerAdapter {
                 e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()).getIdLong(), r).queue();
                 if (v > 0) {
                     try {
-                        rv = e.getGuild().getRolesByName(Toolkit.get().LevelName + vint, true).get(0);
+                        rv = e.getGuild().getRolesByName(Kit.get().LevelName + vint, true).get(0);
                         e.getGuild().removeRoleFromMember(e.getMember().getIdLong(), rv).queue();
                     } catch (Exception ignored) {
                     }
@@ -86,7 +86,7 @@ public class UserListener extends ListenerAdapter {
             e.getGuild().createRole().setName(role).setMentionable(false).complete();
             i("New Maximum level created!");
             r = e.getGuild().getRolesByName(role, true).get(0);
-            rv = e.getGuild().getRolesByName(Toolkit.get().LevelName + vint, true).get(0);
+            rv = e.getGuild().getRolesByName(Kit.get().LevelName + vint, true).get(0);
             e.getGuild().removeRoleFromMember(Objects.requireNonNull(e.getMember()).getIdLong(), rv).queue();
             e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
 

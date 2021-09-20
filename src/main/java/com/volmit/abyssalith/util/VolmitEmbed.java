@@ -19,7 +19,7 @@
 package com.volmit.abyssalith.util;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -41,8 +41,8 @@ public class VolmitEmbed extends EmbedBuilder {
         this.message = null;
         this.setAuthor("Requested by: " + name, null)
                 .setTitle(!title.equals("") ? title : "\u200E")
-                .setColor(Color.decode(com.volmit.abyssalith.toolbox.Toolkit.get().BotColor))
-                .setFooter(com.volmit.abyssalith.toolbox.Toolkit.get().BotCompany, com.volmit.abyssalith.toolbox.Toolkit.get().BotGIF);
+                .setColor(Color.decode(Kit.get().BotColor))
+                .setFooter(Kit.get().BotCompany, Kit.get().BotGIF);
     }
 
     /*
@@ -54,8 +54,8 @@ public class VolmitEmbed extends EmbedBuilder {
         this.message = message;
         this.setAuthor("Requested by: " + message.getAuthor().getName(), null, message.getAuthor().getAvatarUrl())
                 .setTitle(!title.equals("") ? title : "\u200E")
-                .setColor(Color.decode(com.volmit.abyssalith.toolbox.Toolkit.get().BotColor))
-                .setFooter("Made By: " + com.volmit.abyssalith.toolbox.Toolkit.get().BotCompany, com.volmit.abyssalith.toolbox.Toolkit.get().BotGIF);
+                .setColor(Color.decode(Kit.get().BotColor))
+                .setFooter("Made By: " + Kit.get().BotCompany, Kit.get().BotGIF);
     }
 
     /*
@@ -65,8 +65,8 @@ public class VolmitEmbed extends EmbedBuilder {
     public VolmitEmbed(String title) {
         this.message = null;
         this.setTitle(title)
-                .setColor(Color.decode(com.volmit.abyssalith.toolbox.Toolkit.get().BotColor))
-                .setFooter(com.volmit.abyssalith.toolbox.Toolkit.get().BotCompany, com.volmit.abyssalith.toolbox.Toolkit.get().BotGIF);
+                .setColor(Color.decode(Kit.get().BotColor))
+                .setFooter(Kit.get().BotCompany, Kit.get().BotGIF);
     }
 
     /*
@@ -76,9 +76,9 @@ public class VolmitEmbed extends EmbedBuilder {
      */
     public VolmitEmbed(String title, boolean useShort) {
         this.message = null;
-        this.setTitle(title).setColor(Color.decode(com.volmit.abyssalith.toolbox.Toolkit.get().BotColor));
+        this.setTitle(title).setColor(Color.decode(Kit.get().BotColor));
         if (!useShort) {
-            this.setFooter(com.volmit.abyssalith.toolbox.Toolkit.get().BotCompany, com.volmit.abyssalith.toolbox.Toolkit.get().BotGIF);
+            this.setFooter(Kit.get().BotCompany, Kit.get().BotGIF);
         }
     }
 
@@ -88,8 +88,8 @@ public class VolmitEmbed extends EmbedBuilder {
      */
     public VolmitEmbed() {
         this.message = null;
-        this.setColor(Color.decode(com.volmit.abyssalith.toolbox.Toolkit.get().BotColor))
-                .setFooter(com.volmit.abyssalith.toolbox.Toolkit.get().BotCompany, Toolkit.get().BotGIF);
+        this.setColor(Color.decode(Kit.get().BotColor))
+                .setFooter(Kit.get().BotCompany, Kit.get().BotGIF);
     }
 
     // Send embed in the channel of the message already saved. Does not send if no message was specified.

@@ -19,7 +19,7 @@
 package com.volmit.abyssalith.commands;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -33,7 +33,7 @@ public class Shutdown extends VolmitCommand {
         super(
                 "stop",
                 new String[]{"stop", "kill", "s"},
-                new String[]{Toolkit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{Kit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
                 "Stops the Bot boi",
                 false,
                 null
@@ -45,7 +45,7 @@ public class Shutdown extends VolmitCommand {
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         w("Terminating the Bot");
         String oidcheck = e.getMessage().getAuthor().getId();
-        if (oidcheck.equals(Toolkit.get().BotOwnerID)) {
+        if (oidcheck.equals(Kit.get().BotOwnerID)) {
             Main.warn("KILLING BOT");
             e.getMessage().delete().queue();
             Main.shutdown();

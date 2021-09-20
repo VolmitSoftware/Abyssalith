@@ -18,7 +18,7 @@
 
 package com.volmit.abyssalith;
 
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 
 import javax.security.auth.login.LoginException;
 import java.util.concurrent.CompletableFuture;
@@ -39,7 +39,7 @@ public class BotProvider implements IBotProvider {
     }
 
     private String realToken() {
-        return Toolkit.get().BotToken;
+        return Kit.get().BotToken;
     }
 
     @Override

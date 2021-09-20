@@ -21,7 +21,7 @@ package com.volmit.abyssalith.commands.eco;
 import art.arcane.quill.format.Form;
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -34,7 +34,7 @@ public class Set extends VolmitCommand {
         super(
                 "set", //Name
                 new String[]{}, //Alias's
-                new String[]{Toolkit.get().RoleModerator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().RoleModerator}, // Always permitted if empty. User must have at least one if specified.
                 "Sets the users balance", // Description
                 true, // Does it use Args
                 "eco set 10 @Psycho" //Example - the prefix
@@ -45,8 +45,8 @@ public class Set extends VolmitCommand {
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         i("Eco.Set Instanced");
-        String moneyName = Toolkit.get().MoneyName;
-        String moneyEmoji = Toolkit.get().MoneyEmoji;
+        String moneyName = Kit.get().MoneyName;
+        String moneyEmoji = Kit.get().MoneyEmoji;
 
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji + moneyName + " set: ", args.get(1) + " Set By: " + e.getAuthor().getAsMention(), false);

@@ -22,7 +22,7 @@ import com.volmit.abyssalith.commands.eco.Get;
 import com.volmit.abyssalith.commands.eco.Give;
 import com.volmit.abyssalith.commands.eco.Remove;
 import com.volmit.abyssalith.commands.eco.Set;
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -34,7 +34,7 @@ public class Eco extends VolmitCommand {
         super(
                 "eco",
                 new String[]{"eco", "money"},
-                new String[]{Toolkit.get().RoleModerator}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{Kit.get().RoleModerator}, // Add role name here. Empty: always / 1+: at least one.
                 "Economy Category",
                 true,
                 "Eco <subcommand>",

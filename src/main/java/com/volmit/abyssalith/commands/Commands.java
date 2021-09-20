@@ -18,7 +18,7 @@
 
 package com.volmit.abyssalith.commands;
 
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.JDA;
@@ -38,7 +38,7 @@ public class Commands extends VolmitCommand {
                 "Commands",
                 new String[]{"commands", "?", "help"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
-                "Sends the command help page (this one) If you would like to see the Passives that this bot does you can type `" + Toolkit.get().BotPrefix + "passive` and see what this bot does Passively",
+                "Sends the command help page (this one) If you would like to see the Passives that this bot does you can type `" + Kit.get().BotPrefix + "passive` and see what this bot does Passively",
                 false,
                 null
         );
@@ -51,25 +51,25 @@ public class Commands extends VolmitCommand {
         i("Command List Initialized");
 
         // Init embed
-        VolmitEmbed embed = new VolmitEmbed("The Abyssalith - " + Toolkit.get().botName + " Info Page!", e.getMessage());
+        VolmitEmbed embed = new VolmitEmbed("The Abyssalith - " + Kit.get().botName + " Info Page!", e.getMessage());
 
         // Add explanation
         embed.addField(
                 "All commands you can use",
-                Toolkit.get().BotPrefix + "<command> for more help on the command",
+                Kit.get().BotPrefix + "<command> for more help on the command",
                 true
         );
 
         // Loop over and add all commands with their respective information
         for (VolmitCommand command : botCommands) {
-            String cmd = Toolkit.get().BotPrefix + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+            String cmd = Kit.get().BotPrefix + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
             if (command.getCommands().size() < 2) {
                 embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), false);
             } else {
                 StringBuilder body = new StringBuilder();
                 body
                         .append("\n`")
-                        .append(Toolkit.get().BotPrefix)
+                        .append(Kit.get().BotPrefix)
                         .append(
                                 command.getCommands().size() == 2 ?
                                         command.getCommands().get(1) :

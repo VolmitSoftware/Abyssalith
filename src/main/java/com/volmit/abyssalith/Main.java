@@ -42,7 +42,7 @@ import com.volmit.abyssalith.listeners.handlers.ButtonHandler;
 import com.volmit.abyssalith.listeners.handlers.MenuHandler;
 import com.volmit.abyssalith.listeners.handlers.PasteHandler;
 import com.volmit.abyssalith.listeners.handlers.ReactionHandler;
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import lombok.Getter;
 import lombok.NonNull;
 import net.dv8tion.jda.api.JDA;
@@ -105,14 +105,14 @@ public class Main extends ListenerAdapter {
         // Status
         System.println("Initializing");
 
-        Toolkit.get().botID = getJDA().getSelfUser().getIdLong();
-        Toolkit.get().botUser = getJDA().getUserById(Toolkit.get().botID);
-        Toolkit.get().botName = Objects.requireNonNull(Toolkit.get().botUser).getName();
+        Kit.get().botID = getJDA().getSelfUser().getIdLong();
+        Kit.get().botUser = getJDA().getUserById(Kit.get().botID);
+        Kit.get().botName = Objects.requireNonNull(Kit.get().botUser).getName();
 
         // Log incoming messages
         getJDA().addEventListener(new Main());
         // Listeners
-        getJDA().addEventListener(new Toolkit());
+        getJDA().addEventListener(new Kit());
         //Hanlers
         getJDA().addEventListener(new MenuHandler());
         getJDA().addEventListener(new PasteHandler());
@@ -140,7 +140,7 @@ public class Main extends ListenerAdapter {
         new Looper() {
             @Override
             protected long loop() {
-                Toolkit.tick();
+                Kit.tick();
                 return 1000;
             }
         }.start();
@@ -160,7 +160,7 @@ public class Main extends ListenerAdapter {
             for (Role r : getJDA().getGuilds().get(0).getRoles()) {
                 Role role = getJDA().getGuilds().get(0).getRoleById(getJDA().getGuilds().get(0).getRolesByName(r.getName(), false).get(0).getIdLong());
                 List<Member> members = getJDA().getGuilds().get(0).getMembersWithRoles(role);
-                if (members.size() == 0 && r.getName().contains(Toolkit.get().LevelName)) {
+                if (members.size() == 0 && r.getName().contains(Kit.get().LevelName)) {
                     getJDA().getGuilds().get(0).getRolesByName(r.getName(), true).get(0).delete().queue();
                     ff.add(getJDA().getGuilds().get(0).getRolesByName(r.getName(), true).get(0).getName());
                 }

@@ -33,7 +33,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.io.File;
 import java.io.IOException;
 
-public class Toolkit extends ListenerAdapter {
+public class Kit extends ListenerAdapter {
     // Set from config
     public String BotCompany = "NextdoorSoftworks";
     public String BotGIF = "";
@@ -62,7 +62,7 @@ public class Toolkit extends ListenerAdapter {
 
     // Used for hot-loading and config
     private static final FileWatcher fw = new FileWatcher(getFile());
-    private static AtomicCache<Toolkit> instance = new AtomicCache<>();
+    private static AtomicCache<Kit> instance = new AtomicCache<>();
 
     public void save() {
         File file = getFile();
@@ -79,18 +79,18 @@ public class Toolkit extends ListenerAdapter {
         }
     }
 
-    public static Toolkit get() {
+    public static Kit get() {
         return instance.aquire(() -> {
             File f = getFile();
             System.out.println(f.getAbsolutePath());
             f.getParentFile().mkdirs();
-            Toolkit dummy = new Toolkit();
+            Kit dummy = new Kit();
 
             if (!f.exists()) {
                 dummy.save();
             }
             try {
-                Toolkit tk = new Gson().fromJson(IO.readAll(f), Toolkit.class);
+                Kit tk = new Gson().fromJson(IO.readAll(f), Kit.class);
                 System.out.println(tk.BotToken);
                 tk.save();
                 fw.checkModified();
@@ -103,6 +103,6 @@ public class Toolkit extends ListenerAdapter {
     }
 
     private static File getFile() {
-        return new File("config/toolkit.json");
+        return new File("config/MainConfig.json");
     }
 }

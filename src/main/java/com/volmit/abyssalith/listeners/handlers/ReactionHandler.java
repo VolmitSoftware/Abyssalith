@@ -18,7 +18,7 @@
 
 package com.volmit.abyssalith.listeners.handlers;
 
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.Member;
@@ -41,7 +41,7 @@ public class ReactionHandler extends ListenerAdapter {
             if (!e.getMessage().getAuthor().isBot() && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) && e.getMessage().getMentionedRoles().size() > 0) {
 
                 String Message = e.getMessage().lower();
-                if (Message.toLowerCase().contains(Toolkit.get().ReactionRoleString.toLowerCase())) { // Check the descriminator
+                if (Message.toLowerCase().contains(Kit.get().ReactionRoleString.toLowerCase())) { // Check the descriminator
                     if (e.getMessage().getMentionedRoles().size() > 100) {
 
                         SelectionMenu.Builder menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!");// shows the placeholder indicating what this menu is for
@@ -79,7 +79,7 @@ public class ReactionHandler extends ListenerAdapter {
             String Message = m.getContentRaw().toLowerCase();
             Member mem = e.getGuild().getMember(m.getAuthor());
 
-            if (Message.toLowerCase().contains(Toolkit.get().ReactionRoleString.toLowerCase())
+            if (Message.toLowerCase().contains(Kit.get().ReactionRoleString.toLowerCase())
                     && PermHandler.hasAdmin(Objects.requireNonNull(mem))
                     && m.getMentionedRoles().size() > 0) {
 

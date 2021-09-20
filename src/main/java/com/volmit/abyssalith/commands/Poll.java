@@ -18,7 +18,7 @@
 
 package com.volmit.abyssalith.commands;
 
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -38,7 +38,7 @@ public class Poll extends VolmitCommand {
         super(
                 "poll",
                 new String[]{"poll", "query"},
-                new String[]{com.volmit.abyssalith.toolbox.Toolkit.get().RoleModerator}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{Kit.get().RoleModerator}, // Add role name here. Empty: always / 1+: at least one.
                 "Poll creator. (max 20 options separated by commas)",
                 true,
                 null
@@ -62,7 +62,7 @@ public class Poll extends VolmitCommand {
             int counter = pollArgs.size();
             EmbedBuilder poll = new EmbedBuilder()
                     .setTitle("Poll")
-                    .setColor(Color.decode(Toolkit.get().BotColor))
+                    .setColor(Color.decode(Kit.get().BotColor))
                     .setFooter("React to this poll with the emoji corresponding to each option.");
             for (int i = 0; i < counter; i++) {
                 poll.appendDescription(emoji[i] + ": **" + pollArgs.get(i).trim() + "**\n");

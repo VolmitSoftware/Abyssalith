@@ -19,7 +19,7 @@
 package com.volmit.abyssalith.util;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import lombok.Getter;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
@@ -130,9 +130,9 @@ public class VolmitCommand extends ListenerAdapter {
         if (noPermission(Objects.requireNonNull(e.getMember()).getRoles(), e.getAuthor().getId())) return;
 
         // Convert args
-        List<String> args = new LinkedList<>(Arrays.asList(e.getMessage().getContentRaw().replace(Toolkit.get().BotPrefix, "").split(" ")));
+        List<String> args = new LinkedList<>(Arrays.asList(e.getMessage().getContentRaw().replace(Kit.get().BotPrefix, "").split(" ")));
         List<String> argc = new LinkedList<>(Arrays.asList(e.getMessage().getContentRaw().split(" ")));
-        if (!argc.get(0).contains(Toolkit.get().BotPrefix)) return; // ignore
+        if (!argc.get(0).contains(Kit.get().BotPrefix)) return; // ignore
 
 
         // Check match command
@@ -218,15 +218,15 @@ public class VolmitCommand extends ListenerAdapter {
 
     /* Sends a help message for this command's usage in the specified message's channel */
     public void sendHelp(Message message) {
-        VolmitEmbed embed = new VolmitEmbed(Toolkit.get().BotPrefix + getName() + " Command Usage", message);
+        VolmitEmbed embed = new VolmitEmbed(Kit.get().BotPrefix + getName() + " Command Usage", message);
 
-        String cmd = Toolkit.get().BotPrefix + getName().substring(0, 1).toUpperCase() + getName().substring(1);
+        String cmd = Kit.get().BotPrefix + getName().substring(0, 1).toUpperCase() + getName().substring(1);
         if (getCommands().size() < 2) {
             embed.addField(cmd, "`*no aliases*`\n" + getDescription(), true);
         } else {
             embed.addField(
                     cmd,
-                    "\n`" + Toolkit.get().BotPrefix +
+                    "\n`" + Kit.get().BotPrefix +
                             (getCommands().size() == 2 ?
                                     getCommands().get(1) :
                                     " " + getCommands().subList(1, getCommands().size()).toString()
@@ -236,7 +236,7 @@ public class VolmitCommand extends ListenerAdapter {
             );
         }
         if (getExample() != null) {
-            embed.addField("**Usage**", "`" + Toolkit.get().BotPrefix + getExample() + "`", false);
+            embed.addField("**Usage**", "`" + Kit.get().BotPrefix + getExample() + "`", false);
         }
         if (getRoles() != null && getRoles().size() != 0) {
             embed.addField("**Permitted for role(s)**", "`" + getRoles().toString() + "`", false);
@@ -249,19 +249,19 @@ public class VolmitCommand extends ListenerAdapter {
         VolmitEmbed embed = new VolmitEmbed(getName() + " Command Usage", message);
 
         getSubcommands().forEach(command -> {
-            String cmd = Toolkit.get().BotPrefix + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+            String cmd = Kit.get().BotPrefix + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
             if (command.getCommands().size() < 2) {
                 embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), true);
             } else {
                 String body =
-                        "\n`" + Toolkit.get().BotPrefix +
+                        "\n`" + Kit.get().BotPrefix +
                                 (command.getCommands().size() == 2 ?
                                         command.getCommands().get(1) :
                                         " " + command.getCommands().subList(1, command.getCommands().size())).toString()
                                         .replaceAbs("[", "").replaceAbs("]", "") +
                                 "`\n" +
                                 command.getDescription() +
-                                (command.getExample() != null ? "\n**Usage**\n`" + Toolkit.get().BotPrefix + command.getExample() + "`" : "");
+                                (command.getExample() != null ? "\n**Usage**\n`" + Kit.get().BotPrefix + command.getExample() + "`" : "");
                 embed.addField(
                         cmd,
                         body,

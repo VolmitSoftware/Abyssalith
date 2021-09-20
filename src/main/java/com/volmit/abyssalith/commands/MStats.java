@@ -21,7 +21,7 @@ package com.volmit.abyssalith.commands;
 import art.arcane.quill.format.Form;
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -49,7 +49,7 @@ public class MStats extends VolmitCommand {
         User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
         embed.setDescription("These are your Stats as an example of the return systems enjoy!");
         embed.addField("This is your id!", "`" + u.id() + "`", false);
-        embed.addField("This is how broke you are!", "You have: `" + Form.f(u.money()) + "` " + Toolkit.get().MoneyName, false);
+        embed.addField("This is how broke you are!", "You have: `" + Form.f(u.money()) + "` " + Kit.get().MoneyName, false);
         embed.addField("This is your Experience!", Form.f(u.experience()) + "**xp**", false);
         embed.addField("This are your Stats", "" +
                 "Messages sent:" + u.messagesSent()

@@ -18,7 +18,7 @@
 
 package com.volmit.abyssalith.listeners.handlers;
 
-import com.volmit.abyssalith.toolbox.Toolkit;
+import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.Member;
@@ -41,7 +41,7 @@ public class MenuHandler extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot() && e.getMessage().getMentionedRoles().size() > 0 && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember()))) {
             String Message = e.getMessage().getContentRaw().toLowerCase();
-            if (Message.contains(Toolkit.get().ReactionRoleString.toLowerCase())) { // Check the descriminator
+            if (Message.contains(Kit.get().ReactionRoleString.toLowerCase())) { // Check the descriminator
                 if (e.getMessage().getMentionedRoles().size() > 4) {
 
                     SelectionMenu.Builder menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!");// shows the placeholder indicating what this menu is for
