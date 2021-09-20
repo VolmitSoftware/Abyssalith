@@ -6,8 +6,8 @@ plugins {
 
 def name = 'Abyssalith'
 def mainClass = 'volmbot.Main'
-group 'org.example'
-version '1.0'
+group 'com.volmit'
+version 'cloud' // Don't change this
 
 jar {
     manifest {
