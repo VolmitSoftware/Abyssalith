@@ -105,4 +105,15 @@ public class Kit extends ListenerAdapter {
     private static File getFile() {
         return new File("config/MainConfig.json");
     }
+
+    public void envInject() {
+        String f = System.getenv("TOKEN");
+
+        if(f != null)
+        {
+            d("Token updated to " + f + " from ENVIRONMENT");
+            BotToken = f;
+            save();
+        }
+    }
 }

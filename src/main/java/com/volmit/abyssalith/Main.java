@@ -55,6 +55,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
+import javax.tools.Tool;
 import java.io.File;
 import java.net.http.WebSocket;
 import java.util.ArrayList;
@@ -101,6 +102,7 @@ public class Main extends ListenerAdapter {
                 debug(tag + ": " + f);
             }
         });
+        envInject();
         org.slf4j.simple.SimpleServiceProvider.class.getSimpleName();
         // Status
         System.println("Initializing");
@@ -146,6 +148,10 @@ public class Main extends ListenerAdapter {
         }.start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(loader::close));
+    }
+
+    private static void envInject() {
+        Kit.get().envInject();
     }
 
     @Override
