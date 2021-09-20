@@ -18,6 +18,7 @@
 
 package com.volmit.abyssalith.toolbox;
 
+import art.arcane.amulet.range.DoubleRange;
 import art.arcane.quill.cache.AtomicCache;
 import art.arcane.quill.execution.J;
 import art.arcane.quill.io.FileWatcher;
@@ -32,8 +33,33 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class Kit extends ListenerAdapter {
+
+    public void envInject() {
+        env("BOT_TOKEN", (f) -> BotToken = f);
+        env("BOT_COMPANY", (f) -> BotCompany = f);
+        env("BOT_GIF", (f) -> BotGIF = f);
+        env("BOT_COLOR", (f) -> BotColor = f);
+        env("BOT_OWNER_ID", (f) -> BotOwnerID = f);
+        env("BOT_PREFIX", (f) -> BotPrefix = f);
+        env("BOT_LEVEL_NAME", (f) -> LevelName = f);
+        env("BOT_MONEY_NAME", (f) -> MoneyName = f);
+        env("BOT_MONEY_EMOJI", (f) -> MoneyEmoji = f);
+        env("BOT_REACTION_ROLE_STRING", (f) -> ReactionRoleString = f);
+        env("BOT_ROLE_BANISHED", (f) -> RoleBanished = f);
+        env("BOT_ROLE_MODERATOR", (f) -> RoleModerator = f);
+        env("BOT_ROLE_ADMINISTRATOR", (f) -> RoleAdministrator = f);
+        env("BOT_USE_BANISHED_INSTEAD_KICK", (f) -> UseBanishedInsteadOfKick = Boolean.parseBoolean(f));
+        env("BOT_USE_LINGUA", (f) -> UseLingua = Boolean.parseBoolean(f));
+        env("BOT_USE_PERSISTENT_ROLES", (f) -> UsePersistentRoles = Boolean.parseBoolean(f));
+        env("BOT_XP_PER_MESSAGE", (f) -> XpPerMessage = new Range(Float.parseFloat(f.splitAbs("_")[0]), Float.parseFloat(f.splitAbs("_")[1])));
+        env("BOT_XP_MAX_LEVELS", (f) -> XpMaxLevels = Integer.parseInt(f));
+        env("BOT_XP_BASE_MULTIPLIER", (f) -> XpBaseMultiplier = Double.parseDouble(f));
+    }
+
     // Set from config
     public String BotCompany = "NextdoorSoftworks";
     public String BotGIF = "https://images-ext-2.discordapp.net/external/RTML29qcfmg0O2AdcxVRfTo_G8wNRz53le_CGIMyxR8/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/173261518572486656/a_63b6f52a118e915f11bc771985a078c8.gif";
@@ -53,7 +79,7 @@ public class Kit extends ListenerAdapter {
     public boolean UsePersistentRoles = true;
     public Range XpPerMessage = Range.jitter(0.9f, 0.2f);
     public int XpMaxLevels = 50; // Max roles that can be made by this bot (Level)
-    public double XpBaseMultiplier = 1.25f;
+    public double XpBaseMultiplier = 1.25d;
 
     // Set from main class
     public transient Long botID;
@@ -106,14 +132,14 @@ public class Kit extends ListenerAdapter {
         return new File("config/MainConfig.json");
     }
 
-    public void envInject() {
-        String f = System.getenv("TOKEN");
+    private void env(String key, Consumer<String> c)
+    {
+        String f = System.getenv(key);
 
         if(f != null)
         {
-            d("Token updated to " + f + " from ENVIRONMENT");
-            BotToken = f;
-            save();
+            d(key + " updated to " + f + " from ENVIRONMENT");
+            c.accept(f);
         }
     }
 }
