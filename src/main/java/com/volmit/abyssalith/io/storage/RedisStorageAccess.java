@@ -27,8 +27,9 @@ public class RedisStorageAccess implements StorageAccess {
 
     public RedisStorageAccess(String address, int port, String password)
     {
-        jedis = new Jedis("rediss://default:show-password@abyssalith-redis-do-user-9293631-0.b.db.ondigitalocean.com:25061");
+        jedis = new Jedis(address, port);
         jedis.auth(password);
+
 
         if(!jedis.isConnected())
         {
