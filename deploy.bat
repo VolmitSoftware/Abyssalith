@@ -12,9 +12,9 @@ echo Build #%BUILD%
 (
 echo %build%
 )>build.number
-start /wait gradlew clean shadowJar
+call gradlew clean shadowJar --info
 echo F|xcopy /y /s /f /q "build/libs/Abyssalith-cloud-all.jar" "staging/Abyssalith.jar"
-docker build . -t arcane/abyssalith:b%BUILD%
 doctl registry login
-docker tag arcane/abyssalith:b%BUILD% registry.digitalocean.com/cargo-dock/arcane/abyssalith:b%BUILD%
+docker build . -t registry.digitalocean.com/cargo-dock/arcane/abyssalith:b%BUILD%
 docker push registry.digitalocean.com/cargo-dock/arcane/abyssalith:b%BUILD%
+doctl registry garbage-collection start
