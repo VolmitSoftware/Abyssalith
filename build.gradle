@@ -5,14 +5,11 @@ plugins {
 }
 
 def name = 'Abyssalith'
-def mainClass = 'volmbot.Main'
 group 'com.volmit'
 version 'cloud' // Don't change this
 
 jar {
-    manifest {
-        attributes 'Main-Class': 'volmbot.Main','Contains-Sources':'java,class'
-    }
+    mainClass = 'com.volmit.abyssalith.Main'
 }
 
 shadowJar
