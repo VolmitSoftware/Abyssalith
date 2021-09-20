@@ -36,18 +36,18 @@ import java.io.IOException;
 public class Kit extends ListenerAdapter {
     // Set from config
     public String BotCompany = "NextdoorSoftworks";
-    public String BotGIF = "";
-    public String BotColor = "0x000000";
-    public String BotToken = "";
-    public String BotOwnerID = "";
-    public String BotPrefix = "";
+    public String BotGIF = "https://images-ext-2.discordapp.net/external/RTML29qcfmg0O2AdcxVRfTo_G8wNRz53le_CGIMyxR8/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/173261518572486656/a_63b6f52a118e915f11bc771985a078c8.gif";
+    public String BotColor = "0xffff00";
+    public String BotToken = ""; // LEAVE BLANK FOR TOKEN
+    public String BotOwnerID = "173261518572486656";
+    public String BotPrefix = ".";
     public String LevelName = "Level ";
-    public String MoneyName = "";
+    public String MoneyName = "VolmCoin";
     public String MoneyEmoji = ":coin:";
-    public String ReactionRoleString = "";
-    public String RoleBanished = "";
-    public String RoleModerator = "";
-    public String RoleAdministrator = "";
+    public String ReactionRoleString = "**ReactionRoles**";
+    public String RoleBanished = "Banished";
+    public String RoleModerator = "Support";
+    public String RoleAdministrator = "Administrator";
     public boolean UseBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
     public boolean UseLingua = true;
     public boolean UsePersistentRoles = true;
