@@ -20,13 +20,14 @@ package com.volmit.abyssalith.io.storage;
 
 import com.volmit.abyssalith.io.StorageAccess;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 public class RedisStorageAccess implements StorageAccess {
     private Jedis jedis;
 
     public RedisStorageAccess(String address, int port, String password)
     {
-        jedis = new Jedis(address, port);
+        jedis = new Jedis("rediss://default:show-password@abyssalith-redis-do-user-9293631-0.b.db.ondigitalocean.com:25061");
         jedis.auth(password);
 
         if(!jedis.isConnected())
