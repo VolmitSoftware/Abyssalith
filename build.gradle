@@ -1,13 +1,4 @@
-plugins {
-    id 'java'
-    id 'application'
-    id 'io.freefair.lombok' version '5.2.1'
-    id "com.github.johnrengelman.shadow" version "7.0.0"
-}
-
-def name = 'Abyssalith'
-group 'com.volmit'
-version 'cloud' /*
+/*
  * Abyssalith is a Discord Bot for Volmit Software's Community
  * Copyright (c) 2021 VolmitSoftware (Arcane Arts)
  *
@@ -23,16 +14,21 @@ version 'cloud' /*
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */ // Don't change this
+ */
 
+plugins {
+    id 'java'
+    id 'application'
+    id 'io.freefair.lombok' version '5.2.1'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+def name = 'Abyssalith'
+group 'com.volmit'
+version 'cloud' // Dont change this
 application {
     mainClass = 'com.volmit.abyssalith.Main'
 }
-
-shadowJar
-        {
-            minimize()
-        }
 
 repositories {
     mavenCentral()
