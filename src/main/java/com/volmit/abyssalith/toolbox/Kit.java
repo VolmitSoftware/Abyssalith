@@ -131,7 +131,7 @@ public class Kit extends ListenerAdapter {
     }
 
     private static File getFile() {
-        return new File("config/MainConfig.json");
+        return new File("Data/Config.json");
     }
 
     private void env(String key, Consumer<String> c)
