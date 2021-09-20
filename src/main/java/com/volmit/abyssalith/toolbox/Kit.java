@@ -59,9 +59,17 @@ public class Kit extends ListenerAdapter {
         env("BOT_XP_PER_MESSAGE", (f) -> XpPerMessage = new Range(Float.parseFloat(f.splitAbs("_")[0]), Float.parseFloat(f.splitAbs("_")[1])));
         env("BOT_XP_MAX_LEVELS", (f) -> XpMaxLevels = Integer.parseInt(f));
         env("BOT_XP_BASE_MULTIPLIER", (f) -> XpBaseMultiplier = Double.parseDouble(f));
+        env("BOT_REDIS", (f) -> UseRedis = Boolean.parseBoolean(f));
+        env("BOT_REDIS_ADDRESS", (f) -> RedisAddress = f);
+        env("BOT_REDIS_PORT", (f) -> RedisPort = Integer.parseInt(f));
+        env("BOT_REDIS_PASSWORD", (f) -> RedisPassword = f);
     }
 
     // Set from config
+    public boolean UseRedis = false;
+    public String RedisAddress = "";
+    public int RedisPort = 0;
+    public String RedisPassword = "";
     public String BotCompany = "VolmitSoftware";
     public String BotGIF = "https://images-ext-2.discordapp.net/external/RTML29qcfmg0O2AdcxVRfTo_G8wNRz53le_CGIMyxR8/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/173261518572486656/a_63b6f52a118e915f11bc771985a078c8.gif";
     public String BotColor = "0xffff00";

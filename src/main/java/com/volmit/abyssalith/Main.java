@@ -33,6 +33,7 @@ import com.volmit.abyssalith.commands.RRoles;
 import com.volmit.abyssalith.commands.Shutdown;
 import com.volmit.abyssalith.io.DataLoader;
 import com.volmit.abyssalith.io.storage.FileSystemStorageAccess;
+import com.volmit.abyssalith.io.storage.RedisStorageAccess;
 import com.volmit.abyssalith.listeners.BotListener;
 import com.volmit.abyssalith.listeners.LanguageListener;
 import com.volmit.abyssalith.listeners.PasteListener;
@@ -68,11 +69,7 @@ public class Main extends ListenerAdapter {
     public static final IBotProvider provider = new BotProvider();
 
     @Getter
-    private static final DataLoader loader = createLoader();
-
-    private static DataLoader createLoader() {
-        return new DataLoader(new FileSystemStorageAccess(new File("Data")));
-    }
+    private static DataLoader loader;
 
     // BOT BUILDER BOYS
     public static JDA getJDA() {
@@ -110,6 +107,20 @@ public class Main extends ListenerAdapter {
             }
         });
         envInject();
+
+
+        if(Kit.get().UseRedis)
+        {
+            Kit k = Kit.get();
+            loader = new DataLoader(new RedisStorageAccess(k.RedisAddress, k.RedisPort, k.RedisPassword));
+        }
+
+        else
+        {
+            loader = new DataLoader(new FileSystemStorageAccess(new File("botdata")));
+        }
+
+
         org.slf4j.simple.SimpleServiceProvider.class.getSimpleName();
         // Status
         System.println("Initializing");
