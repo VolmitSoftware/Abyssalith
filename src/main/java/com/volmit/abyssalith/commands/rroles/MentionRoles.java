@@ -35,8 +35,8 @@ public class MentionRoles extends VolmitCommand {
                 new String[]{"mr", "m"}, //Alias's
                 new String[]{Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This makes the Mentionable Roles applicable to users", // Description
-                true, // Does it use Args
-                "eco get @Psycho" //Example - the prefix
+                false, // Does it use Args
+                "rr m" //Example - the prefix
         );
     }
 

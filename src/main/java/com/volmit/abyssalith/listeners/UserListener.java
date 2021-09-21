@@ -68,30 +68,35 @@ public class UserListener extends ListenerAdapter {
         Role r;
         Role rv;
         int vint = v - 1;
+        try {
 
-        if (e.getGuild().hasRole(role)) {
-            r = e.getGuild().getRolesByName(role, true).get(0);
-            if (r != null) {
-                e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()).getIdLong(), r).queue();
-                if (v > 0) {
-                    try {
-                        rv = e.getGuild().getRolesByName(Kit.get().LevelName + vint, true).get(0);
-                        e.getGuild().removeRoleFromMember(e.getMember().getIdLong(), rv).queue();
-                    } catch (Exception ignored) {
+            if (e.getGuild().hasRole(role)) {
+                r = e.getGuild().getRolesByName(role, true).get(0);
+                if (r != null) {
+                    e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()).getIdLong(), r).queue();
+                    if (v > 0) {
+                        for (Role rol : e.getMember().getRoles()) {
+                            if (rol.getName().contains(Kit.get().LevelName)) {
+                                int rint =Integer.parseInt(rol.getName().replaceAbs(Kit.get().LevelName, ""));
+                                if (v > rint ){
+                                    e.getGuild().removeRoleFromMember( e.getMember().getId(), e.getGuild().getRolesByName(
+                                            Kit.get().LevelName + rint, false).get(0)).complete();
+                                    i("Removed, excessive child roles from user: " + e.getMember().getId());
+                                }else if (v != rint){
+                                    e.getGuild().removeRoleFromMember( e.getMember().getId(), e.getGuild().getRolesByName(
+                                            Kit.get().LevelName + rint, false).get(0)).complete();
+                                    w("Removed a role that was not possible to have reached, or something that does not match: "+ e.getMember().getId());
+                                }
+
+                            }
+
+                        }
+//                        e.getGuild().removeRoleFromMember(e.getMember().getIdLong(), rv).queue();
                     }
                 }
             }
-        } else {
-
-            e.getGuild().createRole().setName(role).setMentionable(false).complete();
-            i("New Maximum level created!");
-            r = e.getGuild().getRolesByName(role, true).get(0);
-            rv = e.getGuild().getRolesByName(Kit.get().LevelName + vint, true).get(0);
-            e.getGuild().removeRoleFromMember(Objects.requireNonNull(e.getMember()).getIdLong(), rv).queue();
-            e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
-
+        } catch (Exception ignored) {
         }
-
     }
 
     private void roleValidator(GuildMessageReceivedEvent e, String role) {
@@ -99,7 +104,14 @@ public class UserListener extends ListenerAdapter {
             e.getGuild().createRole().setName(role).setMentionable(false).complete();
             i("[RV] - New Maximum level created!");
         } else if (e.getGuild().getRolesByName(role, false).size() > 1) {
-            w("For some reason there are too many roles here im having a stroke...");
+            w("For some reason there are too many roles here im having a stroke... Managing...");
+            int i = 0;
+            for (Role r : e.getGuild().getRolesByName(role, false)) {
+                if (i != 0) {
+                    r.delete().complete();
+                }
+                i++;
+            }
         }
     }
 }

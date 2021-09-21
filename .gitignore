@@ -12,3 +12,5 @@ staging/
 Data/user/
 
 Data/Config.json
+
+*.json

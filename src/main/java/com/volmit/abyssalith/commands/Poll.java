@@ -38,7 +38,7 @@ public class Poll extends VolmitCommand {
         super(
                 "poll",
                 new String[]{"poll", "query"},
-                new String[]{Kit.get().RoleModerator}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{Kit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
                 "Poll creator. (max 20 options separated by commas)",
                 true,
                 null

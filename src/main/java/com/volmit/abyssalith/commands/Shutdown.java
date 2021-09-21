@@ -26,7 +26,6 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import java.util.List;
 
 public class Shutdown extends VolmitCommand {
-    public static boolean checkOverrideAdmin = false;
 
     // Constructor
     public Shutdown() {
@@ -51,7 +50,6 @@ public class Shutdown extends VolmitCommand {
             Main.shutdown();
         } else {
             e.getChannel().sendMessage("uR noT my DAddY!").queue();
-            checkOverrideAdmin = true;
         }
     }
 }

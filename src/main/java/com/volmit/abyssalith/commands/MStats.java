@@ -32,8 +32,8 @@ public class MStats extends VolmitCommand {
     // Constructor
     public MStats() {
         super(
-                "ping",
-                new String[]{"hello", "p"},
+                "MStats",
+                new String[]{"mystats", "ms"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
                 "This is a debug Ping Keep-alive stats command",
                 false,

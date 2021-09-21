@@ -177,7 +177,8 @@ public class Main extends ListenerAdapter {
                 }
             }
             if (ff.size() > 0) {
-                i("Cleaned roles: " + ff);
+                i("Cleaned roles: ");
+                System.println( ff );
             } else {
                 i("No roles to clean!");
             }
