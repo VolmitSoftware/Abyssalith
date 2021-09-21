@@ -32,7 +32,7 @@ public class Shutdown extends VolmitCommand {
         super(
                 "stop",
                 new String[]{"stop", "kill", "s"},
-                new String[]{Kit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{Kit.get().RoleAdministrator},
                 "Stops the Bot boi",
                 false,
                 null
