@@ -134,6 +134,7 @@ public class Main extends ListenerAdapter {
         // Commands
         getJDA().addEventListener(new Eco()); // Money Subcommand
         getJDA().addEventListener(new Links());
+        getJDA().addEventListener(new Warn());
         getJDA().addEventListener(new GStats());
         getJDA().addEventListener(new MStats());
         getJDA().addEventListener(new Passive());

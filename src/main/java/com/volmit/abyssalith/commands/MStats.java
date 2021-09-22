@@ -48,13 +48,12 @@ public class MStats extends VolmitCommand {
         VolmitEmbed embed = new VolmitEmbed(" PONG!", e.getMessage());
         User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
         embed.setDescription("These are your Stats as an example of the return systems enjoy!");
-        embed.addField("This is your id!", "`" + u.id() + "`", false);
-        embed.addField("This is how broke you are!", "You have: `" + Form.f(u.money()) + "` " + Kit.get().MoneyName, false);
-        embed.addField("This is your Experience!", Form.f(u.experience()) + "**xp**", false);
-        embed.addField("This are your Stats", "" +
-                "Messages sent:" + u.messagesSent()
-                + "\n"
-                + "Reactions added:" + u.reactions(), false);
+        embed.addField("Your Id", "`" + u.id() + "`", false);
+        embed.addField("Bank Balance", "They have: `" + Form.f(u.money()) + "` " + Kit.get().MoneyName, false);
+        embed.addField("Your Experience", Form.f(u.experience()) + "**xp**", false);
+        embed.addField("Micro Stats", "" + "Messages sent:" + u.messagesSent() + "\n" + "Reactions added:" + u.reactions(), false);
+        embed.addField("Warnings Received", u.warnings().size() + " Total Warnings", false);
+
 
         embed.send(e.getMessage(), true, 1000);
 

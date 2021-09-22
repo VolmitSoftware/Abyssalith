@@ -32,7 +32,7 @@ public class RRoles extends VolmitCommand {
         super(
                 "roles",
                 new String[]{"roles", "rr"},
-                new String[]{Kit.get().RoleModerator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "Entering this command gives you a tutorial on how to use the Reaction-Role System.",
                 true,
                 "rr <subcommand>",

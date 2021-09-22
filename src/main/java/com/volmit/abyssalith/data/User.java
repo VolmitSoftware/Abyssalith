@@ -25,6 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -43,5 +44,6 @@ public class User implements DataType {
     private long messagesSent = 0;
     private long reactions = 0;
     private Set<String> roleIds = new HashSet<>();
+    HashMap<Integer, String> warnings = new HashMap<>();
 
 }

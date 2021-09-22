@@ -26,11 +26,9 @@ import java.util.List;
 
 public class BanishHandler {
 
-    public static boolean bok(Member m) {
+    public static void bok(Member m) {
         List<Role> rl = m.getRoles();
         Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
-        if (rl.isEmpty())
-            return false;
-        return rl.contains(banishedRole);
+        if (rl.isEmpty()) {}
     }
 }
