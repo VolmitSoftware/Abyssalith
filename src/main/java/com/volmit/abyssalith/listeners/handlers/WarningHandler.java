@@ -22,6 +22,7 @@ import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 
 public class WarningHandler {
 
@@ -36,21 +37,26 @@ public class WarningHandler {
             System.println("[INFO]-> Sent message to " + m);
             warnFinal(m, guild);
         } else {
-//            BanishHandler.bok(m); // Apply Banished
             m.getUser().openPrivateChannel().complete().sendMessage("**You are Banned from Volmit Software's Discord.** \nShould have listened. **Banned**").queue();
             System.println("[INFO]-> Sent message to " + m);
             goodBye(m, guild);
         }
     }
 
-    public static void warnFinal(Member m, Guild g) {
+    private static void warnFinal(Member m, Guild g) {
         g.kick(m).complete();
         System.println("[INFO]-> Kicked member: " + m);
     }
 
-    public static void goodBye(Member m, Guild g) {
+    private static void goodBye(Member m, Guild g) {
         g.ban(m, 7, "5 warnings, not going to be missed").complete();
-        System.println("[INFO]-> Perm Ban set to: " + m);
+        System.println("[INFO]-> Attempting to Perm Ban: " + m);
+
+    }
+
+    public static void pBan(Member m, Guild g, Message msg) {
+        g.ban(m, 7, "Sending Phishing Links").complete();
+        System.println("[INFO]-> Attempting to Perm Ban: " + m + "for sending phishing links," + msg);
 
     }
 }

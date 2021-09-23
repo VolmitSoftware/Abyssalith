@@ -18,7 +18,6 @@
 
 package com.volmit.abyssalith.toolbox;
 
-import art.arcane.amulet.range.DoubleRange;
 import art.arcane.quill.cache.AtomicCache;
 import art.arcane.quill.execution.J;
 import art.arcane.quill.io.FileWatcher;
@@ -33,10 +32,12 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class Kit extends ListenerAdapter {
+
 
     public void envInject() {
         env("BOT_DUMMY_PORT", (f) -> DummyPort = Integer.parseInt(f));
@@ -66,10 +67,7 @@ public class Kit extends ListenerAdapter {
     }
 
     // Set from config
-    public boolean UseRedis = false;
-    public String RedisAddress = "";
-    public int RedisPort = 0;
-    public String RedisPassword = "";
+
     public String BotCompany = "VolmitSoftware";
     public String BotGIF = "https://images-ext-2.discordapp.net/external/RTML29qcfmg0O2AdcxVRfTo_G8wNRz53le_CGIMyxR8/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/173261518572486656/a_63b6f52a118e915f11bc771985a078c8.gif";
     public String BotColor = "0xffff00";
@@ -80,10 +78,15 @@ public class Kit extends ListenerAdapter {
     public String LevelName = "Level ";
     public String MoneyName = "VolmCoin";
     public String MoneyEmoji = ":coin:";
+    public List<String> Phishing = Arrays.asList("discordgift.site", "discord.link", "dis.cord", "disc0rd.gg", "discord.gift", "discorcl.click", "gavenitro.com", "discodnitro.info", "discord-airdrop.com", "steamnltros.ru", "discord-app.net", "discord-give.com", "diiscord.com");
+    public String RedisAddress = "";
+    public int RedisPort = 0;
+    public String RedisPassword = "";
     public String ReactionRoleString = "**ReactionRoles**";
     public String RoleBanished = "Banished";
     public String RoleModerator = "Support";
     public String RoleAdministrator = "Administrator";
+    public boolean UseRedis = false;
     public boolean UseBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
     public boolean UseLingua = true;
     public boolean UsePersistentRoles = true;

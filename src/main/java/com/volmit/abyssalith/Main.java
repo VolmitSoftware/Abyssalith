@@ -125,12 +125,14 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new PasteHandler());
         getJDA().addEventListener(new ButtonHandler());
         //Listeners
-        getJDA().addEventListener(new PasteListener());
-        getJDA().addEventListener(new LanguageListener());
-        getJDA().addEventListener(new PersistentRoleListener()); // Persistent Roles
-        getJDA().addEventListener(new UserListener()); // Watches the User's instances for stuff
         getJDA().addEventListener(new BotListener()); // Watches the Bot instance's for stuff
+        getJDA().addEventListener(new LanguageListener());
+        getJDA().addEventListener(new PasteListener());
+        getJDA().addEventListener(new PersistentRoleListener()); // Persistent Roles
+        getJDA().addEventListener(new PhishingListener()); // Persistent Roles
         getJDA().addEventListener(new ReactionHandler());
+        getJDA().addEventListener(new UserListener()); // Watches the User's instances for stuff
+
         // Commands
         getJDA().addEventListener(new Eco()); // Money Subcommand
         getJDA().addEventListener(new Links());
