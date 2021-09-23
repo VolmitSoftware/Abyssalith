@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith;
+package com.volmit.abyssalith.bot;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
