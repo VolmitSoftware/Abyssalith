@@ -1,4 +1,4 @@
-package com.volmit.abyssalith.util.startup;
+package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.JDA;

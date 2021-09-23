@@ -1,4 +1,4 @@
-package com.volmit.abyssalith.util.startup;
+package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.commands.Eco;
