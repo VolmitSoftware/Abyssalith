@@ -143,7 +143,6 @@ public class Main extends ListenerAdapter {
         getJDA().addEventListener(new RRoles());
         getJDA().addEventListener(new Poll());
         getJDA().addEventListener(new Log());
-//        getJDA().addEventListener(new Paste()); REPLACED WITH PASTE HANDLER
         getJDA().addEventListener(new Shutdown());
         getJDA().addEventListener(new Commands(getJDA())); // This one MUST be last
 
@@ -151,7 +150,7 @@ public class Main extends ListenerAdapter {
             @Override
             protected long loop() {
                 Kit.tick();
-                return 1000;
+                return 1000;   
             }
         }.start();
 
