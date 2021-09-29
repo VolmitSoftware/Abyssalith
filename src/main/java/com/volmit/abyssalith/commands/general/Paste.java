@@ -44,10 +44,10 @@ public class Paste extends VolmitCommand {
         VolmitEmbed embed = new VolmitEmbed("Raw Code Alternative!", e.getMessage());
         embed.setDescription("Generally speaking you can paste your code however you want, however its hard for some of us to read it when we are on our phones, or anything like that, using a paste service will help us help you");
         embed.addField("Possible Paste Sites!", "" +
-                "https://pastebin.com/ `512kb`\n" +
+                "https://pastebin.com/ `512kb` [Bot Supported]\n" +
                 "https://hastebin.com/ `400kb`\n" +
                 "https://gist.github.com/ `100mb`(need GitHub, **Free**)\n" +
-                "https://mclo.gs/ `2mb`, Hides IP's/sensitive info\n", false);
+                "https://mclo.gs/ `2mb`, Hides IP's/sensitive info, [Bot Supported]\n", false);
         embed.send(e.getMessage(), true, 1000);
 
     }

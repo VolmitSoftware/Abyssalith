@@ -40,6 +40,38 @@ public class PasteListener extends ListenerAdapter {
                 }
             }
         }
+        if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://mclo.gs/")) {
+            i("Started the McLogs Service");
+            String str = e.getMessage().getContentRaw();
+            String[] pbArr = str.split(" ");
+            for (String s : pbArr) {
+                if (s.contains("https://mclo.gs/")) {
+                    e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
+                        f.editMessageComponents().setActionRow(
+                                Button.success("mcloglinknew", "Yes please!"),
+                                Button.danger("no", "No, go away!")
+                        ).queue();
+                        i("Sent McLog Service Buttons");
+                    });
+                }
+            }
+        }
+        if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://hastebin.com/")) {
+            i("Started the Hastebin Service");
+            String str = e.getMessage().getContentRaw();
+            String[] pbArr = str.split(" ");
+            for (String s : pbArr) {
+                if (s.contains("https://hastebin.com/")) {
+                    e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
+                        f.editMessageComponents().setActionRow(
+                                Button.success("hastebinlinknew", "Yes please!"),
+                                Button.danger("no", "No, go away!")
+                        ).queue();
+                        i("Sent HasteBin Service Buttons");
+                    });
+                }
+            }
+        }
     }
 
 }

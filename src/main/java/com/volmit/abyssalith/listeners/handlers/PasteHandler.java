@@ -29,6 +29,7 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 
@@ -36,6 +37,7 @@ public class PasteHandler extends ListenerAdapter {
 
     private static final KList<Definition> definitions = new KList<>(
             new Definition("[Iris]: Couldn't find Object:", "Objects are Broken!", "- Iris cant find certain objects in your pack"),
+            new Definition("Ambiguous plugin name", "Duplicate Plugin Names", "- You have duplicate plugins on the server, this causes startup issues"),
             new Definition("Couldn't read Biome file:", "You have a typo in a Biome file", "- There is a typo in one of the files in your pack folder!"),
             new Definition("[Iris]: Unknown Block Data:", "Unknown Block Data", "- Iris cant find block data (nbt mapping issue) "),
             new Definition("IT IS HIGHLY RECOMMENDED YOU RESTART THE SERVER BEFORE GENERATING!", "Restart your server", "- Iris needs to restart the server for the datapacks to work properly"),
@@ -48,41 +50,56 @@ public class PasteHandler extends ListenerAdapter {
     @Override
     public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
 
-        if (!e.getComponentId().equals("pastbinlinknew")) {
-            if (e.getComponentId().equals("no")) {
-                e.getMessage().delete().queue();
+        if (e.getComponentId().equals("no")) {
+            Objects.requireNonNull(e.getMessage()).delete().queue();
+        } else if (e.getComponentId().equals("hastebinlinknew") || e.getComponentId().equals("pastbinlinknew") || e.getComponentId().equals("mcloglinknew")) {
+
+
+            i("Starting Interpreter Paste Service");
+            String properURL = null;
+            Document doc;
+            if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://pastebin.com")) {
+                i("Reached Pasebin");
+                String[] args = e.getMessage().getContentRaw().replaceAll(">", "").split("/", 5);
+                Main.info(args[3]);
+                String stem = args[3];
+                properURL = "https://pastebin.com/raw/" + stem;
+            } else if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://mclo.gs/")) {
+                i("Reached McLogs");
+                String[] args = e.getMessage().getContentRaw().replaceAll(">", "").split("/", 5);
+                Main.info(args[3]);
+                String stem = args[3];
+                properURL = "https://api.mclo.gs/1/raw/" + stem;
+            } else if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://hastebin.com/")) {
+                i("Reached Hastebin");
+                String[] args = e.getMessage().getContentRaw().replaceAll(">", "").split("/", 5);
+                Main.info(args[3]);
+                String stem = args[3];
+                properURL = "https://hastebin.com/raw/" + stem;
             }
-            return;
+
+            try {
+                URL url = new URL(properURL);
+                doc = Jsoup.parse(url.openStream(), "UTF-8", url.toString()); // Get Document object ('url' is a java.net.URL object)
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return;
+            }
+
+            VolmitEmbed embed = new VolmitEmbed("Automated Error Detector", e.getMessage());
+            embed.setTitle("Automated Detriment Detector");
+            embed.setDescription("Hello user! This is A.D.D. and I will do my best to read your file!\n" + "||Paste: " + properURL + "||");
+            Main.info("PROCESSING PASTEBIN FILE FROM " + properURL);
+            int problems = test(doc.text(), embed);
+
+
+            // NO PROBLEMS
+            if (problems == 0) {
+                embed.addField("Well, This is not good.", "I cant seem to figure anything out; try asking the support team about the issue!", false);
+            }
+
+            embed.send(e.getMessage(), true, 1000);
         }
-
-        String[] args = e.getMessage().getContentRaw().replaceAll(">", "").split("/", 10);
-        Main.info(args[3]);
-
-        String stem = args[3];
-        String properURL = "https://pastebin.com/raw/" + stem;
-        Document doc;
-
-        try {
-            URL url = new URL(properURL);
-            doc = Jsoup.parse(url.openStream(), "UTF-8", url.toString()); // Get Document object ('url' is a java.net.URL object)
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return;
-        }
-
-        VolmitEmbed embed = new VolmitEmbed("Automated Error Detector", e.getMessage());
-        embed.setTitle("Automated Detriment Detector");
-        embed.setDescription("Hello user! This is A.D.D. and I will do my best to read your file!\n" + "||Paste: " + properURL + "||");
-        Main.info("PROCESSING PASTEBIN FILE FROM " + properURL);
-        int problems = test(doc.text(), embed);
-
-
-        // NO PROBLEMS
-        if (problems == 0) {
-            embed.addField("Well, This is not good.", "I cant seem to figure anything out; try asking the support team about the issue!", false);
-        }
-
-        embed.send(e.getMessage(), true, 1000);
     }
 
     /**
