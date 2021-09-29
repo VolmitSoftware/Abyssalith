@@ -16,40 +16,38 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.commands;
+package com.volmit.abyssalith.commands.general;
 
-import com.volmit.abyssalith.commands.eco.Get;
-import com.volmit.abyssalith.commands.eco.Give;
-import com.volmit.abyssalith.commands.eco.Remove;
-import com.volmit.abyssalith.commands.eco.Set;
+import com.volmit.abyssalith.commands.rroles.LanguageRoles;
+import com.volmit.abyssalith.commands.rroles.MentionRoles;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
-public class Eco extends VolmitCommand {
+public class RRoles extends VolmitCommand {
     // Constructor
-    public Eco() {
+    public RRoles() {
         super(
-                "eco",
-                new String[]{"economy", "eco", "money"},
-                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
-                "Economy Category",
+                "roles",
+                new String[]{"roles", "rr"},
+                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                "Entering this command gives you a tutorial on how to use the Reaction-Role System.",
                 true,
-                "Eco <subcommand>",
+                "rr <subcommand>",
                 new VolmitCommand[]{
-                        new Give(),
-                        new Set(),
-                        new Remove(),
-                        new Get(),
+                        new MentionRoles(),
+                        new LanguageRoles()
+
                 }
         );
     }
 
+    // Handle
+    @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
-        i("Eco List Initialized");
+        i("Reaction Role List Initialized");
         e.getMessage().delete().queue(); // delete the sent message
     }
-
 }

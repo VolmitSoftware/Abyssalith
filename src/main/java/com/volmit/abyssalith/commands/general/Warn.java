@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.commands;
+package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
@@ -49,7 +49,7 @@ public class Warn extends VolmitCommand {
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         int as = args.size() - 1;
         StringBuilder s = new StringBuilder();
-        VolmitEmbed embed = new VolmitEmbed("⚠️ **Warnings** ⚠️", e.getMessage());
+        VolmitEmbed embed = new VolmitEmbed("⚠**Warnings**⚠", e.getMessage());
         User u;
 
 

@@ -16,38 +16,40 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.commands;
+package com.volmit.abyssalith.commands.general;
 
-import com.volmit.abyssalith.commands.rroles.LanguageRoles;
-import com.volmit.abyssalith.commands.rroles.MentionRoles;
+import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
-public class RRoles extends VolmitCommand {
-    // Constructor
-    public RRoles() {
-        super(
-                "roles",
-                new String[]{"roles", "rr"},
-                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
-                "Entering this command gives you a tutorial on how to use the Reaction-Role System.",
-                true,
-                "rr <subcommand>",
-                new VolmitCommand[]{
-                        new MentionRoles(),
-                        new LanguageRoles()
+public class Shutdown extends VolmitCommand {
 
-                }
+    // Constructor
+    public Shutdown() {
+        super(
+                "stop",
+                new String[]{"stop", "kill", "s"},
+                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator},
+                "Stops the Bot boi",
+                false,
+                null
         );
     }
 
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
-        i("Reaction Role List Initialized");
-        e.getMessage().delete().queue(); // delete the sent message
+        w("Terminating the Bot");
+        String oidcheck = e.getMessage().getAuthor().getId();
+        if (oidcheck.equals(Kit.get().BotOwnerID)) {
+            Main.warn("KILLING BOT");
+            e.getMessage().delete().queue();
+            Main.shutdown();
+        } else {
+            e.getChannel().sendMessage("uR noT my DAddY!").queue();
+        }
     }
 }

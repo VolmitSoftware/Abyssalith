@@ -19,16 +19,7 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.commands.Eco;
-import com.volmit.abyssalith.commands.GStats;
-import com.volmit.abyssalith.commands.Links;
-import com.volmit.abyssalith.commands.Log;
-import com.volmit.abyssalith.commands.MStats;
-import com.volmit.abyssalith.commands.Passive;
-import com.volmit.abyssalith.commands.Poll;
-import com.volmit.abyssalith.commands.RRoles;
-import com.volmit.abyssalith.commands.Shutdown;
-import com.volmit.abyssalith.commands.Warn;
+import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.listeners.BotListener;
 import com.volmit.abyssalith.listeners.LanguageListener;
 import com.volmit.abyssalith.listeners.PasteListener;
@@ -68,6 +59,7 @@ public class Commands extends ListenerAdapter {
         jda.addEventListener(new Eco()); // Money Subcommand
         jda.addEventListener(new Links());
         jda.addEventListener(new Warn());
+        jda.addEventListener(new Paste());
         jda.addEventListener(new GStats());
         jda.addEventListener(new MStats());
         jda.addEventListener(new Passive());
@@ -75,6 +67,6 @@ public class Commands extends ListenerAdapter {
         jda.addEventListener(new Poll());
         jda.addEventListener(new Log());
         jda.addEventListener(new Shutdown());
-        jda.addEventListener(new com.volmit.abyssalith.commands.Commands(jda)); // This one MUST be last
+        jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last
     }
 }

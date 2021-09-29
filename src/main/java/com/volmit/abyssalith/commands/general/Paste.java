@@ -16,26 +16,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.commands;
+package com.volmit.abyssalith.commands.general;
 
-import art.arcane.quill.format.Form;
-import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.data.User;
-import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
-public class MStats extends VolmitCommand {
+public class Paste extends VolmitCommand {
     // Constructor
-    public MStats() {
+    public Paste() {
         super(
-                "MStats",
-                new String[]{"mystats", "ms"},
+                "paste",
+                new String[]{"plink"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
-                "This is a debug Ping Keep-alive stats command",
+                "This command shows the possible paste locations",
                 false,
                 null
         );
@@ -44,17 +40,14 @@ public class MStats extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
-        i("Revealing User Statistics");
-        VolmitEmbed embed = new VolmitEmbed(" PONG!", e.getMessage());
-        User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
-        embed.setDescription("These are your Stats as an example of the return systems enjoy!");
-        embed.addField("Your Id", "`" + u.id() + "`", false);
-        embed.addField("Bank Balance", "They have: `" + Form.f(u.money()) + "` " + Kit.get().MoneyName, false);
-        embed.addField("Your Experience", Form.f(u.experience()) + "**xp**", false);
-        embed.addField("Micro Stats", "" + "Messages sent:" + u.messagesSent() + "\n" + "Reactions added:" + u.reactions(), false);
-        embed.addField("Warnings Received", u.warnings().size() + " Total Warnings", false);
-
-
+        i("Raw Code was Pasted");
+        VolmitEmbed embed = new VolmitEmbed("Raw Code Alternative!", e.getMessage());
+        embed.setDescription("Generally speaking you can paste your code however you want, however its hard for some of us to read it when we are on our phones, or anything like that, using a paste service will help us help you");
+        embed.addField("Possible Paste Sites!", "" +
+                "https://pastebin.com/ `512kb`\n" +
+                "https://hastebin.com/ `400kb`\n" +
+                "https://gist.github.com/ `100mb`(need GitHub, **Free**)\n" +
+                "https://mclo.gs/ `2mb`, Hides IP's/sensitive info\n", false);
         embed.send(e.getMessage(), true, 1000);
 
     }

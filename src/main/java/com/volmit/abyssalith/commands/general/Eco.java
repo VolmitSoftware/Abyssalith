@@ -16,40 +16,40 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.commands;
+package com.volmit.abyssalith.commands.general;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.commands.eco.Get;
+import com.volmit.abyssalith.commands.eco.Give;
+import com.volmit.abyssalith.commands.eco.Remove;
+import com.volmit.abyssalith.commands.eco.Set;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
-public class Shutdown extends VolmitCommand {
-
+public class Eco extends VolmitCommand {
     // Constructor
-    public Shutdown() {
+    public Eco() {
         super(
-                "stop",
-                new String[]{"stop", "kill", "s"},
-                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator},
-                "Stops the Bot boi",
-                false,
-                null
+                "eco",
+                new String[]{"economy", "eco", "money"},
+                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
+                "Economy Category",
+                true,
+                "Eco <subcommand>",
+                new VolmitCommand[]{
+                        new Give(),
+                        new Set(),
+                        new Remove(),
+                        new Get(),
+                }
         );
     }
 
-    // Handle
-    @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
-        w("Terminating the Bot");
-        String oidcheck = e.getMessage().getAuthor().getId();
-        if (oidcheck.equals(Kit.get().BotOwnerID)) {
-            Main.warn("KILLING BOT");
-            e.getMessage().delete().queue();
-            Main.shutdown();
-        } else {
-            e.getChannel().sendMessage("uR noT my DAddY!").queue();
-        }
+        i("Eco List Initialized");
+        e.getMessage().delete().queue(); // delete the sent message
     }
+
 }
