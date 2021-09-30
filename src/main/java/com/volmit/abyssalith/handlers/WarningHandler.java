@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.listeners.handlers;
+package com.volmit.abyssalith.handlers;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;

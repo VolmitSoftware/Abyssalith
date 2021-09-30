@@ -90,9 +90,9 @@ public class Kit extends ListenerAdapter {
     public boolean UseBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
     public boolean UseLingua = true;
     public boolean UsePersistentRoles = true;
-    public Range XpPerMessage = Range.jitter(0.9f, 0.2f);
+    public Range XpPerMessage = Range.jitter(0.85f, 0.15f);
     public int XpMaxLevels = 50; // Max roles that can be made by this bot (Level)
-    public double XpBaseMultiplier = 1.25d;
+    public double XpBaseMultiplier = 2.13d;
 
     // Set from main class
     public transient Long botID;

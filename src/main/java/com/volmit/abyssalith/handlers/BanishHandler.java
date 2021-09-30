@@ -16,20 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.listeners.handlers;
+package com.volmit.abyssalith.handlers;
 
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 
-public class PermHandler {
-    public static boolean hasAdmin(Member m) {
-        Role r = m.getGuild().getRolesByName(Kit.get().RoleAdministrator, false).get(0);
-        return m.getRoles().contains(r);
-    }
+import java.util.List;
 
-    public static boolean hasMod(Member m) {
-        Role r = m.getGuild().getRolesByName(Kit.get().RoleModerator, false).get(0);
-        return m.getRoles().contains(r);
+public class BanishHandler {
+
+    public static void bok(Member m) {
+        List<Role> rl = m.getRoles();
+        Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
+        if (rl.isEmpty()) {}
     }
 }

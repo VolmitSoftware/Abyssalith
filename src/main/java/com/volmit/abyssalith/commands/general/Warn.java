@@ -20,7 +20,7 @@ package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
-import com.volmit.abyssalith.listeners.handlers.WarningHandler;
+import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;

@@ -18,7 +18,7 @@
 
 package com.volmit.abyssalith.listeners;
 
-import com.volmit.abyssalith.listeners.handlers.WarningHandler;
+import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

@@ -16,23 +16,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.bot;
+package com.volmit.abyssalith.handlers;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import com.volmit.abyssalith.toolbox.Kit;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 
-@FunctionalInterface
-public interface IBotProvider {
-    CompletableFuture<BotInstance> getFuture();
+public class PermHandler {
+    public static boolean hasAdmin(Member m) {
+        Role r = m.getGuild().getRolesByName(Kit.get().RoleAdministrator, false).get(0);
+        return m.getRoles().contains(r);
+    }
 
-    default BotInstance get() {
-        try {
-            return getFuture().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static boolean hasMod(Member m) {
+        Role r = m.getGuild().getRolesByName(Kit.get().RoleModerator, false).get(0);
+        return m.getRoles().contains(r);
     }
 }

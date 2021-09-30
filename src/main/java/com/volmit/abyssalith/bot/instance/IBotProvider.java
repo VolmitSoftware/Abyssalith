@@ -16,19 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.listeners.handlers;
+package com.volmit.abyssalith.bot.instance;
 
-import com.volmit.abyssalith.toolbox.Kit;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Role;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
-import java.util.List;
+@FunctionalInterface
+public interface IBotProvider {
+    CompletableFuture<BotInstance> getFuture();
 
-public class BanishHandler {
-
-    public static void bok(Member m) {
-        List<Role> rl = m.getRoles();
-        Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
-        if (rl.isEmpty()) {}
+    default BotInstance get() {
+        try {
+            return getFuture().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
