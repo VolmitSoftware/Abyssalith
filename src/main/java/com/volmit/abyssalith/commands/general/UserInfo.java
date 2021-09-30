@@ -28,14 +28,14 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
-public class MStats extends VolmitCommand {
+public class UserInfo extends VolmitCommand {
     // Constructor
-    public MStats() {
+    public UserInfo() {
         super(
-                "MStats",
-                new String[]{"mystats", "ms"},
+                "myinfo",
+                new String[]{"minfo"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
-                "This is a debug Ping Keep-alive stats command",
+                "This command prints out all your info for the server",
                 false,
                 null
         );
@@ -45,14 +45,26 @@ public class MStats extends VolmitCommand {
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         i("Revealing User Statistics");
-        VolmitEmbed embed = new VolmitEmbed(" PONG!", e.getMessage());
+        VolmitEmbed embed = new VolmitEmbed(" User Info!", e.getMessage());
         User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
-        embed.setDescription("These are your Stats as an example of the return systems enjoy!");
+        String ments = u.recentMentions().toString()
+                .replaceAbs("{", "")
+                .replaceAbs("}", "")
+                .replaceAbs(", ", "\n")
+                .replaceAbs("0=[", "- [")
+                .replaceAbs("1=[", "- [")
+                .replaceAbs("2=[", "- [")
+                .replaceAbs("3=[", "- [")
+                .replaceAbs("4=[", "- [")
+                .replaceAbs("5=[", "- [");
+
+        embed.setDescription("These are your Stats that are stored in the server for usages, logging, and preventative measures!");
         embed.addField("Your Id", "`" + u.id() + "`", false);
         embed.addField("Bank Balance", "They have: `" + Form.f(u.money()) + "` " + Kit.get().MoneyName, false);
         embed.addField("Your Experience", Form.f(u.experience()) + "**xp**", false);
         embed.addField("Micro Stats", "" + "Messages sent:" + u.messagesSent() + "\n" + "Reactions added:" + u.reactions(), false);
         embed.addField("Warnings Received", u.warnings().size() + " Total Warnings", false);
+        embed.addField("Recent Mentions", ments, false);
 
 
         embed.send(e.getMessage(), true, 1000);

@@ -30,12 +30,12 @@ import java.awt.Color;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GStats extends VolmitCommand {
+public class ServerInfo extends VolmitCommand {
     // Constructor
-    public GStats() {
+    public ServerInfo() {
         super(
-                "stats",
-                new String[]{"stats", "statistics"},
+                "info",
+                new String[]{"sinfo"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
                 "Reveals all statistic information from the server",
                 false,

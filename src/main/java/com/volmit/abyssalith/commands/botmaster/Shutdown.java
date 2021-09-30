@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.commands.general;
+package com.volmit.abyssalith.commands.botmaster;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.toolbox.Kit;

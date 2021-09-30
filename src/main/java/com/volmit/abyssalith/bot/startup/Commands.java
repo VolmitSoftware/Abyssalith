@@ -19,12 +19,15 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.commands.botmaster.Debug;
+import com.volmit.abyssalith.commands.botmaster.Shutdown;
 import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.listeners.BotListener;
 import com.volmit.abyssalith.listeners.LanguageListener;
 import com.volmit.abyssalith.listeners.PasteListener;
 import com.volmit.abyssalith.listeners.PersistentRoleListener;
 import com.volmit.abyssalith.listeners.PhishingListener;
+import com.volmit.abyssalith.listeners.TagListener;
 import com.volmit.abyssalith.listeners.UserListener;
 import com.volmit.abyssalith.handlers.ButtonHandler;
 import com.volmit.abyssalith.handlers.MenuHandler;
@@ -42,6 +45,10 @@ public class Commands extends ListenerAdapter {
         jda.addEventListener(new Main());
         // Listeners
         jda.addEventListener(new Kit());
+        //Botmaster
+        jda.addEventListener(new Debug());
+        jda.addEventListener(new Shutdown());
+
         //Hanlers
         jda.addEventListener(new MenuHandler());
         jda.addEventListener(new PasteHandler());
@@ -50,6 +57,7 @@ public class Commands extends ListenerAdapter {
         jda.addEventListener(new BotListener()); // Watches the Bot instance's for stuff
         jda.addEventListener(new LanguageListener());
         jda.addEventListener(new PasteListener());
+        jda.addEventListener(new TagListener());
         jda.addEventListener(new PersistentRoleListener()); // Persistent Roles
         jda.addEventListener(new PhishingListener()); // Persistent Roles
         jda.addEventListener(new ReactionHandler());
@@ -60,13 +68,12 @@ public class Commands extends ListenerAdapter {
         jda.addEventListener(new Links());
         jda.addEventListener(new Warn());
         jda.addEventListener(new Paste());
-        jda.addEventListener(new GStats());
-        jda.addEventListener(new MStats());
+        jda.addEventListener(new ServerInfo());
+        jda.addEventListener(new UserInfo());
         jda.addEventListener(new Passive());
         jda.addEventListener(new RRoles());
         jda.addEventListener(new Poll());
         jda.addEventListener(new Log());
-        jda.addEventListener(new Shutdown());
         jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last
     }
 }
