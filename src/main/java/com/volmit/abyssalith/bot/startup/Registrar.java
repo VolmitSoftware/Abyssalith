@@ -22,20 +22,20 @@ import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.listeners.BotListener;
 import com.volmit.abyssalith.listeners.LanguageListener;
-import com.volmit.abyssalith.listeners.PasteListener;
+import com.volmit.abyssalith.listeners.PasteLinkListener;
 import com.volmit.abyssalith.listeners.PersistentRoleListener;
 import com.volmit.abyssalith.listeners.PhishingListener;
+import com.volmit.abyssalith.listeners.SelectionMenuListener;
 import com.volmit.abyssalith.listeners.TagListener;
 import com.volmit.abyssalith.listeners.UserListener;
-import com.volmit.abyssalith.handlers.ButtonHandler;
-import com.volmit.abyssalith.listeners.ReactionRoleListener;
-import com.volmit.abyssalith.handlers.PasteHandler;
-import com.volmit.abyssalith.handlers.ReactionHandler;
+import com.volmit.abyssalith.listeners.ButtonListener;
+import com.volmit.abyssalith.listeners.RolePageListener;
+import com.volmit.abyssalith.listeners.PasteListener;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class Commands extends ListenerAdapter {
+public class Registrar extends ListenerAdapter {
 
     public static void All(JDA jda) {
         //https://github.com/DV8FromTheWorld/JDA/releases/tag/v4.3.0 REMINDER FOR LATER TO ADD ALL AS SLASH COMMANDS
@@ -48,18 +48,18 @@ public class Commands extends ListenerAdapter {
 //        jda.addEventListener(new Debug());
 //        jda.addEventListener(new Shutdown());
 
-        //Hanlers
-        jda.addEventListener(new ReactionRoleListener());
-        jda.addEventListener(new PasteHandler());
-        jda.addEventListener(new ButtonHandler());
         //Listeners
         jda.addEventListener(new BotListener()); // Watches the Bot instance's for stuff
-        jda.addEventListener(new LanguageListener());
+        jda.addEventListener(new ButtonListener());
         jda.addEventListener(new PasteListener());
-        jda.addEventListener(new TagListener());
+
+        jda.addEventListener(new LanguageListener());
+        jda.addEventListener(new PasteLinkListener());
         jda.addEventListener(new PersistentRoleListener()); // Persistent Roles
         jda.addEventListener(new PhishingListener()); // Persistent Roles
-        jda.addEventListener(new ReactionHandler());
+        jda.addEventListener(new RolePageListener());
+        jda.addEventListener(new SelectionMenuListener());
+        jda.addEventListener(new TagListener());
         jda.addEventListener(new UserListener()); // Watches the User's instances for stuff
 
         // Commands

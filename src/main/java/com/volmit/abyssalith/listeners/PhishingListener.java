@@ -35,7 +35,7 @@ public class PhishingListener extends ListenerAdapter {
                         "`\nIf you feel this is a mistake, please send a friend request to: `⋈-NextdoorPsycho-⋈#0001` and explain the problem, otherwise your account was compromised, or you were unaware of what you were sending \n" +
                         "regardless, you have been banned, until you either fix your account, or handle the situation").queue();
                 try {
-                    WarningHandler.pBan(e.getMember(), e.getGuild(), e.getMessage()); // ez ban
+                    WarningHandler.phishBan(e.getMember(), e.getGuild(), e.getMessage()); // ez ban
                 } catch (Exception ignored) {} // Dont care about exceptions here, the only possible one is a permission one, and the bot needs to be able to handle it elsewise
             }
 

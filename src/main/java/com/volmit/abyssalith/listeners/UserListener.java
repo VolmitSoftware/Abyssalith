@@ -66,10 +66,7 @@ public class UserListener extends ListenerAdapter {
 
     private void roleManager(GuildMessageReceivedEvent e, String role, int v) {
         Role r;
-        Role rv;
-        int vint = v - 1;
         try {
-
             if (e.getGuild().hasRole(role)) {
                 r = e.getGuild().getRolesByName(role, true).get(0);
                 if (r != null) {

@@ -20,6 +20,7 @@ package com.volmit.abyssalith.handlers;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
+import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -37,6 +38,8 @@ public class WarningHandler {
             System.println("[INFO]-> Sent message to " + m);
             warnFinal(m, guild);
         } else {
+            RoleHandler.addRole(m, Kit.get().RoleBanished);
+
             m.getUser().openPrivateChannel().complete().sendMessage("**You are Banned from Volmit Software's Discord.** \nShould have listened. **Banned**").queue();
             System.println("[INFO]-> Sent message to " + m);
             goodBye(m, guild);
@@ -44,18 +47,18 @@ public class WarningHandler {
     }
 
     private static void warnFinal(Member m, Guild g) {
-        //g.kick(m).complete();
+        g.kick(m).complete();
         System.println("[INFO]-> Kicked member: " + m);
     }
 
     private static void goodBye(Member m, Guild g) {
-        //g.ban(m, 7, "5 warnings, not going to be missed").complete();
+        g.ban(m, 7, "5 warnings, not going to be missed").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m);
 
     }
 
-    public static void pBan(Member m, Guild g, Message msg) {
-        //g.ban(m, 7, "Sending Phishing Links").complete();
+    public static void phishBan(Member m, Guild g, Message msg) {
+        g.ban(m, 7, "Sending Phishing Links").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m + "for sending phishing links," + msg);
 
     }

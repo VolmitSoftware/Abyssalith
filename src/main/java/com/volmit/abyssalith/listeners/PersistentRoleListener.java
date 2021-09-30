@@ -20,6 +20,7 @@ package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
+import com.volmit.abyssalith.handlers.RoleHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
@@ -41,7 +42,8 @@ public class PersistentRoleListener extends ListenerAdapter {
             Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
             if (!lRoles.isEmpty() && e.getMember().getRoles().isEmpty()) {
                 for (String r : lRoles) {
-                    e.getGuild().addRoleToMember(e.getMember().getId(), Objects.requireNonNull(e.getGuild().getRoleById(r))).queue();
+                    RoleHandler.addRole(e.getMember(), e.getGuild().getRoleById(r));
+
                 }
                 i("Reattached cached roles for: " + e.getMember().getEffectiveName());
             }
@@ -58,7 +60,7 @@ public class PersistentRoleListener extends ListenerAdapter {
         if (!e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
             User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             u.roleIds().add(e.getRoles().get(0).getId());
-            i("Attached role to : " + e.getMember().getEffectiveName() + "Role ID: " + e.getRoles().get(0).getId());
+            i("Attached updated roles to : " + e.getMember().getEffectiveName() + "Role ID: " + e.getRoles().get(0).getId());
         }
     }
 

@@ -27,7 +27,7 @@ public class BanishHandler {
     public static void bok(Member m) {
         if (m.getGuild().getRolesByName(Kit.get().RoleBanished, true).size() == 1) {
             Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
-            m.getGuild().addRoleToMember(m.getIdLong(), banishedRole).queue();
+            RoleHandler.addRole(m, Kit.get().RoleBanished);
         }
     }
 
@@ -37,6 +37,6 @@ public class BanishHandler {
 
     public static void unbok(Member m) {
         Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
-        m.getGuild().removeRoleFromMember(m.getIdLong(), banishedRole).queue();
+        RoleHandler.removeRole(m, Kit.get().RoleBanished);
     }
 }

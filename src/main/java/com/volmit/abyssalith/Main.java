@@ -28,7 +28,7 @@ import com.volmit.abyssalith.io.DataLoader;
 import com.volmit.abyssalith.io.storage.FileSystemStorageAccess;
 import com.volmit.abyssalith.io.storage.RedisStorageAccess;
 import com.volmit.abyssalith.toolbox.Kit;
-import com.volmit.abyssalith.bot.startup.Commands;
+import com.volmit.abyssalith.bot.startup.Registrar;
 import com.volmit.abyssalith.bot.startup.RoleCleanup;
 import lombok.Getter;
 import lombok.NonNull;
@@ -88,7 +88,7 @@ public class Main extends ListenerAdapter {
         Kit.get().botID = getJDA().getSelfUser().getIdLong();
         Kit.get().botUser = getJDA().getUserById(Kit.get().botID);
         Kit.get().botName = Objects.requireNonNull(Kit.get().botUser).getName();
-        Commands.All(getJDA()); // ALL COMMANDS ARE HERE
+        Registrar.All(getJDA()); // ALL COMMANDS ARE HERE
 
         new Looper() {
             @Override

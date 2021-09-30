@@ -16,12 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.handlers;
+package com.volmit.abyssalith.listeners;
 
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class ButtonHandler extends ListenerAdapter {
+public class ButtonListener extends ListenerAdapter {
 
     @Override
     public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
