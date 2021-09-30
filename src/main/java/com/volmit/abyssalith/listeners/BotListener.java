@@ -25,19 +25,26 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class BotListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-        if (!e.getMessage().imUser() && !e.getMessage().getEmbeds().isEmpty()) {
+        if (!e.getMessage().imUser()
+                && !e.getMessage().getEmbeds().isEmpty()
+                && e.getMessage().getActionRows().size() == 0
+        ) {
             e.getMessage().addReaction("U+274C").queue();
         }
     }
 
-
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
-        if (!e.getUser().isBot() && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getAuthor().isBot() && e.getReaction().toString().contains("U+274c")) {
+        if (!e.getUser().isBot()
+                && e.getMessage().getAuthor().isBot()
+                && e.getReaction().toString().contains("U+274c")
+                && e.getMessage().getActionRows().size() == 0) {
 
             J.a(() -> {
                 i(" Cleaning bot response as requested");
-                e.getChannel().retrieveMessageById(e.getMessageIdLong()).complete().delete().queue(); // Try and delete the message
+                e.getMessage().delete().queue(); // Try and delete the message
             });
+        } else {
+            e.getMessage().removeReaction("U+274c").queue();
         }
     }
 }

@@ -91,6 +91,7 @@ public class Warn extends VolmitCommand {
             }
         }
         embed.send(e.getMessage(), false, 1000);
+        e.getMessage().delete().queue();
 
     }
 }

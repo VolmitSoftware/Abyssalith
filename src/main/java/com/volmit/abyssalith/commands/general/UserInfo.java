@@ -55,8 +55,7 @@ public class UserInfo extends VolmitCommand {
                 .replaceAbs("1=[", "- [")
                 .replaceAbs("2=[", "- [")
                 .replaceAbs("3=[", "- [")
-                .replaceAbs("4=[", "- [")
-                .replaceAbs("5=[", "- [");
+                .replaceAbs("4=[", "- [");
 
         embed.setDescription("These are your Stats that are stored in the server for usages, logging, and preventative measures!");
         embed.addField("Your Id", "`" + u.id() + "`", false);
