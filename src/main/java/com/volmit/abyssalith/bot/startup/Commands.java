@@ -45,9 +45,9 @@ public class Commands extends ListenerAdapter {
         jda.addEventListener(new Main());
         // Listeners
         jda.addEventListener(new Kit());
-        //Botmaster
-        jda.addEventListener(new Debug());
-        jda.addEventListener(new Shutdown());
+        //Botmaster KEEP OFFLINE UNLESS NEEDED
+//        jda.addEventListener(new Debug());
+//        jda.addEventListener(new Shutdown());
 
         //Hanlers
         jda.addEventListener(new MenuHandler());

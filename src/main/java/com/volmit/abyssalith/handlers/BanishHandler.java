@@ -22,13 +22,21 @@ import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 
-import java.util.List;
-
 public class BanishHandler {
 
     public static void bok(Member m) {
-        List<Role> rl = m.getRoles();
+        if (m.getGuild().getRolesByName(Kit.get().RoleBanished, true).size() == 1) {
+            Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
+            m.getGuild().addRoleToMember(m.getIdLong(), banishedRole).queue();
+        }
+    }
+
+    public static boolean ifbok(Member m) {
+        return (m.getRoles().contains(m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0)));
+    }
+
+    public static void unbok(Member m) {
         Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
-        if (rl.isEmpty()) {}
+        m.getGuild().removeRoleFromMember(m.getIdLong(), banishedRole).queue();
     }
 }
