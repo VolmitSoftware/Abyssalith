@@ -46,7 +46,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'systems.manifold:manifold-ext:2021.1.18'
-    implementation 'net.dv8tion:JDA:4.3.0_310'
+    implementation 'net.dv8tion:JDA:4.3.0_331'
     implementation 'com.github.pemistahl:lingua:1.1.0'
     implementation 'com.github.ArcaneArts:Amulet:21.9.17'
     implementation 'systems.manifold:manifold-ext-rt:2021.1.18'

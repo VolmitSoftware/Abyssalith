@@ -38,6 +38,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class Commands extends ListenerAdapter {
 
     public static void All(JDA jda) {
+        //https://github.com/DV8FromTheWorld/JDA/releases/tag/v4.3.0 REMINDER FOR LATER TO ADD ALL AS SLASH COMMANDS
 
         // Log incoming messages
         jda.addEventListener(new Main());
