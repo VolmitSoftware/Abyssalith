@@ -44,18 +44,18 @@ public class WarningHandler {
     }
 
     private static void warnFinal(Member m, Guild g) {
-        g.kick(m).complete();
+        //g.kick(m).complete();
         System.println("[INFO]-> Kicked member: " + m);
     }
 
     private static void goodBye(Member m, Guild g) {
-        g.ban(m, 7, "5 warnings, not going to be missed").complete();
+        //g.ban(m, 7, "5 warnings, not going to be missed").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m);
 
     }
 
     public static void pBan(Member m, Guild g, Message msg) {
-        g.ban(m, 7, "Sending Phishing Links").complete();
+        //g.ban(m, 7, "Sending Phishing Links").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m + "for sending phishing links," + msg);
 
     }

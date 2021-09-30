@@ -16,8 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.handlers;
+package com.volmit.abyssalith.listeners;
 
+import com.volmit.abyssalith.handlers.PermHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Emote;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class MenuHandler extends ListenerAdapter {
+public class ReactionRoleListener extends ListenerAdapter {
 
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -48,9 +49,12 @@ public class MenuHandler extends ListenerAdapter {
                     menu.addOption("REMOVE ALL ROLES", "role-remove-all", Emoji.fromUnicode("\uD83D\uDEAB"));
 
                     List<Role> oRole = e.getMessage().getMentionedRoles();
+
                     for (Role role : oRole) { // iterate the roles
+
                         List<Emote> em = e.getGuild().getEmotesByName(role.getName(), true);
                         Emoji use = null;
+
                         if (em.size() >= 1) {
                             use = Emoji.fromEmote(em.get(0));
                         } else {
@@ -62,14 +66,13 @@ public class MenuHandler extends ListenerAdapter {
                             .setActionRow(menu.build())
                             .queue(f -> {
                             });
+
                 } else if (e.getMessage().getMentionedRoles().size() <= 4) {
                     List<Button> b = new ArrayList<>();
-
                     b.add(Button.danger("b-role-remove-all", "🚫Clear🚫"));
                     for (Role r : e.getMessage().getMentionedRoles()) {
                         b.add(Button.secondary(r.getId(), r.getName()));
                     }
-
                     e.getChannel().sendMessage("Click the roles that you want!").queue(f -> {
                         f.editMessageComponents().setActionRow(b).queue();
                     });

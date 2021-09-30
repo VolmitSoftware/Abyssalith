@@ -49,13 +49,11 @@ public class MentionRoles extends VolmitCommand {
         embed.setDescription("*This should explain how to use the reaction roles system, should you have any questions!*");
         embed.addField("Create a Reaction-able Message!", " First of all your message needs to contain the following: `"
                 + Kit.get().ReactionRoleString
-                + "`, anywhere in the message, AND you need to be able to view audit log (for now)", false);
+                + "`, anywhere in the message, AND you need to be an Admin", false);
         embed.addField("Example: ", "" +
                 " - " + Kit.get().ReactionRoleString + " - \n"
-                + ":coin: for @role1 or :eyes: @role2 even :hearts: for @role3\n"
-                + "*__Supports Server Emotes__*", false);
-        embed.addField("Adding the reactions!", "Finally the author must react to the message with your reactions (*in order of mentioned roles*) to assign them eg: [:coin: :eyes: :hearts:] ", false);
-        embed.addField("*Notes*", "*This will remove any reactions that are NOT from the Message Author (prevents spam) Unless the rolemaster adds TOO MANY roles, it will clear the reactions for you to react once more*", false);
+                + "@role1 @role2  @role3\n"
+                + "*__SERVER MUST HAVE CORRESPONDING EMOTES TO NAMES OF ROLES__* ie: if you have a role called SolarFlare, you need a `:SolarFlare:` emote matching the name, This is not required, but it assigns an emoji to a role on use", false);
         embed.send(e.getMessage(), true, 1000);
 
     }

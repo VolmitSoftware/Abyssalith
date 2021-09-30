@@ -45,6 +45,7 @@ public class LanguageRoles extends VolmitCommand {
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         i("Mention Roles List Initialized"); //TODO ACTUALLY MAKE A LANGUAGE SYSTEM
         VolmitEmbed embed = new VolmitEmbed(" REACTION ROLES!!", e.getMessage());
+
         embed.send(e.getMessage(), true, 1000);
 
     }

@@ -30,7 +30,6 @@ public class BotListener extends ListenerAdapter {
         if (!e.getMessage().imUser()
                 && !e.getMessage().getEmbeds().isEmpty()
                 && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
-                && !Objects.requireNonNull(e.getMessage().getEmbeds().get(0).getTitle()).equalsIgnoreCase("Poll")
                 ) {
             e.getMessage().addReaction("U+274C").queue();
         }
@@ -41,7 +40,6 @@ public class BotListener extends ListenerAdapter {
                 && e.getMessage().getAuthor().isBot()  // is author a bot
                 && e.getReaction().toString().contains("U+274c")  // is the X reaction there
                 && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
-                && !Objects.requireNonNull(e.getMessage().getEmbeds().get(0).getTitle()).equalsIgnoreCase("Poll")
 
                 ) {
 
@@ -49,8 +47,6 @@ public class BotListener extends ListenerAdapter {
                 i(" Cleaning bot response as requested");
                 e.getMessage().delete().queue();
             });
-        } else if (e.getMessage().getActionRows().size() == 0) {
-            e.getMessage().removeReaction("U+274c").queue();
         }
     }
 }

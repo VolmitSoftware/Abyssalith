@@ -19,8 +19,6 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.commands.botmaster.Debug;
-import com.volmit.abyssalith.commands.botmaster.Shutdown;
 import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.listeners.BotListener;
 import com.volmit.abyssalith.listeners.LanguageListener;
@@ -30,7 +28,7 @@ import com.volmit.abyssalith.listeners.PhishingListener;
 import com.volmit.abyssalith.listeners.TagListener;
 import com.volmit.abyssalith.listeners.UserListener;
 import com.volmit.abyssalith.handlers.ButtonHandler;
-import com.volmit.abyssalith.handlers.MenuHandler;
+import com.volmit.abyssalith.listeners.ReactionRoleListener;
 import com.volmit.abyssalith.handlers.PasteHandler;
 import com.volmit.abyssalith.handlers.ReactionHandler;
 import com.volmit.abyssalith.toolbox.Kit;
@@ -50,7 +48,7 @@ public class Commands extends ListenerAdapter {
 //        jda.addEventListener(new Shutdown());
 
         //Hanlers
-        jda.addEventListener(new MenuHandler());
+        jda.addEventListener(new ReactionRoleListener());
         jda.addEventListener(new PasteHandler());
         jda.addEventListener(new ButtonHandler());
         //Listeners
@@ -72,7 +70,7 @@ public class Commands extends ListenerAdapter {
         jda.addEventListener(new UserInfo());
         jda.addEventListener(new Passive());
         jda.addEventListener(new RRoles());
-        jda.addEventListener(new Poll());
+        //jda.addEventListener(new Poll()); BROKEN
         jda.addEventListener(new Log());
         jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last
     }
