@@ -23,27 +23,33 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.Objects;
+
 public class BotListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().imUser()
                 && !e.getMessage().getEmbeds().isEmpty()
-                && e.getMessage().getActionRows().size() == 0
-        ) {
+                && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
+                && !Objects.requireNonNull(e.getMessage().getEmbeds().get(0).getTitle()).equalsIgnoreCase("Poll")
+                ) {
             e.getMessage().addReaction("U+274C").queue();
         }
     }
 
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
-        if (!e.getUser().isBot()
-                && e.getMessage().getAuthor().isBot()
-                && e.getReaction().toString().contains("U+274c")
-                && e.getMessage().getActionRows().size() == 0) {
+        if (!e.getUser().isBot()  // is the reactor a user
+                && e.getMessage().getAuthor().isBot()  // is author a bot
+                && e.getReaction().toString().contains("U+274c")  // is the X reaction there
+                && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
+                && !Objects.requireNonNull(e.getMessage().getEmbeds().get(0).getTitle()).equalsIgnoreCase("Poll")
+
+                ) {
 
             J.a(() -> {
                 i(" Cleaning bot response as requested");
-                e.getMessage().delete().queue(); // Try and delete the message
+                e.getMessage().delete().queue();
             });
-        } else {
+        } else if (e.getMessage().getActionRows().size() == 0) {
             e.getMessage().removeReaction("U+274c").queue();
         }
     }

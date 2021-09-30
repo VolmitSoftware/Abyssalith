@@ -62,6 +62,7 @@ public class Poll extends VolmitCommand {
             int counter = pollArgs.size();
             EmbedBuilder poll = new EmbedBuilder()
                     .setTitle("Poll")
+                    .setDescription("Please React to the poll!")
                     .setColor(Color.decode(Kit.get().BotColor))
                     .setFooter("React to this poll with the emoji corresponding to each option.");
             for (int i = 0; i < counter; i++) {
