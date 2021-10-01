@@ -10,65 +10,41 @@ import java.util.List;
 
 public class MenuHandler {
     public static void listMenuSend(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
-        SelectionMenu.Builder menu = SelectionMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
-        int mr = mentionedRoles.size();
-        menu.setMaxValues(mr);
+        sendMenu(genMenu(id, PlaceholderText, mentionedRoles, textChannel), textChannel);
+    }
 
-        Guild g = textChannel.getGuild();
+    public static SelectionMenu.Builder listMenu(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+        return genMenu(id, PlaceholderText, mentionedRoles, textChannel);
+    }
+    // Top one are callables, and instance the lists
 
-        for (Role mrole : mentionedRoles) {
-            if (!g.getEmotesByName(mrole.getName(), true).isEmpty())
-                menu.addOption(mrole.getName(), mrole.getId(), Emoji.fromEmote(g.getEmotesByName(mrole.getName(), true).get(0)));
 
-            if (g.getEmotesByName(mrole.getName(), true).isEmpty())
-                menu.addOption(mrole.getName(), mrole.getId());
-        }
-
-        textChannel.sendMessage("Select the roles that you want!")
+    // Bottom are functions for the code
+    private static void sendMenu(SelectionMenu.Builder menu, TextChannel textChannel) {
+        textChannel.sendMessage("Select the roles that you want!") // Send it to the chat!
                 .setActionRow(menu.build())
                 .queue(f -> {
                     System.println("Generated Abstracted Menu!");
                 });
+
     }
 
-    public static SelectionMenu.Builder listMenu(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+    private static SelectionMenu.Builder genMenu(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+        // This method returns an editable object for chaining purposes
         SelectionMenu.Builder menu = SelectionMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
         int mr = mentionedRoles.size();
         Guild g = textChannel.getGuild();
 
-        for (Role mrole : mentionedRoles) {
-            if (!g.getEmotesByName(mrole.getName(), true).isEmpty())
-                menu.addOption(mrole.getName(), mrole.getId(), Emoji.fromEmote(g.getEmotesByName(mrole.getName(), true).get(0)));
+        for (Role r : mentionedRoles) {
+            if (!g.getEmotesByName(r.getName(), true).isEmpty())
+                menu.addOption(r.getName(), r.getId(), Emoji.fromEmote(g.getEmotesByName(r.getName(), true).get(0)));
 
-            if (g.getEmotesByName(mrole.getName(), true).isEmpty())
-                menu.addOption(mrole.getName(), mrole.getId());
+            if (g.getEmotesByName(r.getName(), true).isEmpty())
+                menu.addOption(r.getName(), r.getId());
         }
         menu.setMaxValues(mr);
         return menu;
+
     }
 }
 
-
-//    SelectionMenu.Builder menu = SelectionMenu.create("menu:rolepage").setPlaceholder("Choose your Role(s)!");// shows the placeholder indicating what this menu is for
-//                    menu.addOption("REMOVE ALL ROLES", "role-remove-all", Emoji.fromUnicode("\uD83D\uDEAB"));
-//
-//                            List<Role> oRole = e.getMessage().getMentionedRoles();
-//        int mr = oRole.size();
-//
-//        for (Role role : oRole) { // iterate the roles
-//
-//        List<Emote> em = e.getGuild().getEmotesByName(role.getName(), true);
-//        Emoji use = null;
-//
-//        if (em.size() >= 1) {
-//        use = Emoji.fromEmote(em.get(0));
-//        } else {
-//        use = Emoji.fromUnicode("\uD83E\uDE84");
-//        }
-//        menu.addOption(role.getName(), role.getId(), "This gives you the role: " + role.getName(), use);
-//        }
-//        menu.setRequiredRange(0, mr);
-//        e.getChannel().sendMessage("Select the roles that you want!")
-//        .setActionRow(menu.build())
-//        .queue(f -> {
-//        });

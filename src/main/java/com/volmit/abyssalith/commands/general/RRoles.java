@@ -18,7 +18,6 @@
 
 package com.volmit.abyssalith.commands.general;
 
-import com.volmit.abyssalith.commands.rroles.LanguageRoles;
 import com.volmit.abyssalith.commands.rroles.MentionRoles;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -37,8 +36,7 @@ public class RRoles extends VolmitCommand {
                 true,
                 "rr <subcommand>",
                 new VolmitCommand[]{
-                        new MentionRoles(),
-                        new LanguageRoles()
+                        new MentionRoles()
 
                 }
         );

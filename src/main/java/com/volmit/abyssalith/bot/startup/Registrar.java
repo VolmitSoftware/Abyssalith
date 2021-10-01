@@ -19,40 +19,48 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.commands.general.*;
+import com.volmit.abyssalith.commands.general.Eco;
+import com.volmit.abyssalith.commands.general.Links;
+import com.volmit.abyssalith.commands.general.Log;
+import com.volmit.abyssalith.commands.general.Passive;
+import com.volmit.abyssalith.commands.general.Paste;
+import com.volmit.abyssalith.commands.general.RRoles;
+import com.volmit.abyssalith.commands.general.ServerInfo;
+import com.volmit.abyssalith.commands.general.UserInfo;
+import com.volmit.abyssalith.commands.general.Warn;
 import com.volmit.abyssalith.listeners.BotListener;
+import com.volmit.abyssalith.listeners.ButtonListener;
 import com.volmit.abyssalith.listeners.LanguageListener;
 import com.volmit.abyssalith.listeners.PasteLinkListener;
+import com.volmit.abyssalith.listeners.PasteListener;
 import com.volmit.abyssalith.listeners.PersistentRoleListener;
 import com.volmit.abyssalith.listeners.PhishingListener;
+import com.volmit.abyssalith.listeners.RolePageListener;
 import com.volmit.abyssalith.listeners.SelectionMenuListener;
 import com.volmit.abyssalith.listeners.TagListener;
 import com.volmit.abyssalith.listeners.UserListener;
-import com.volmit.abyssalith.listeners.ButtonListener;
-import com.volmit.abyssalith.listeners.RolePageListener;
-import com.volmit.abyssalith.listeners.PasteListener;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 
 public class Registrar extends ListenerAdapter {
 
     public static void All(JDA jda) {
         //https://github.com/DV8FromTheWorld/JDA/releases/tag/v4.3.0 REMINDER FOR LATER TO ADD ALL AS SLASH COMMANDS
 
-        // Log incoming messages
-        jda.addEventListener(new Main());
-        // Listeners
-        jda.addEventListener(new Kit());
-        //Botmaster KEEP OFFLINE UNLESS NEEDED
 //        jda.addEventListener(new Debug());
 //        jda.addEventListener(new Shutdown());
+        
 
         //Listeners
+        jda.addEventListener(new Main()); // [ DONT TOUCH THESE TWO LISTENERS ]
+        jda.addEventListener(new Kit());  // [ DONT TOUCH THESE TWO LISTENERS ]
         jda.addEventListener(new BotListener()); // Watches the Bot instance's for stuff
         jda.addEventListener(new ButtonListener());
         jda.addEventListener(new PasteListener());
-
         jda.addEventListener(new LanguageListener());
         jda.addEventListener(new PasteLinkListener());
         jda.addEventListener(new PersistentRoleListener()); // Persistent Roles
