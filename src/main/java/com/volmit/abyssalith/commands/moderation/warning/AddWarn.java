@@ -1,7 +1,5 @@
-package com.volmit.abyssalith.commands.moderation.mod.warnings;
+package com.volmit.abyssalith.commands.moderation.warning;
 
-import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -9,7 +7,8 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
-import java.util.Objects;
+
+
 
 
 
@@ -33,31 +32,29 @@ import java.util.Objects;
  *
  */
 
-public class ListWarn extends VolmitCommand {
+public class AddWarn extends VolmitCommand {
     // Constructor
-    public ListWarn() {
+    public AddWarn() {
         super(
-                "warns",
-                new String[]{"warns", "listwarns", "wns"},
+                "warn",
+                new String[]{"warn", "wn", "addwn"},
                 new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
-                "This command lists all of the warnings for a user",
+                "This command Applies Warnings to the person mentioned, or prints them",
                 false,
-                "mod warns <ID>"
+                "mod warn @psycho <warning>"
         );
     }
 
     // Handle
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
-        String[] s = e.getMessage().getContentRaw().split(" ");
-        if (e.getMessage().getMentionedMembers().size() == 0 && e.getGuild().getMemberById(s[2].toString()) != null) {
-            User u = Main.getLoader().getUser(e.getGuild().getMemberById(s[2].toString()).getIdLong());
+        i("MESSAGE: "+ e.getMessage().getContentRaw());
 
-            WarningHandler.warnShow(u, e.getChannel());
-
+        if(e.getMessage().getMentionedMembers().size() == 1){
+            Member m = e.getMessage().getMentionedMembers().get(0);
+            WarningHandler.warn(m, e);
         }
         e.getMessage().delete().queue();
-
 
     }
 }

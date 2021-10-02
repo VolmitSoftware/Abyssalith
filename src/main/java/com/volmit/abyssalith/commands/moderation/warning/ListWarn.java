@@ -1,14 +1,16 @@
-package com.volmit.abyssalith.commands.moderation.mod;
+package com.volmit.abyssalith.commands.moderation.warning;
 
-import com.volmit.abyssalith.commands.eco.Get;
-import com.volmit.abyssalith.commands.eco.Give;
-import com.volmit.abyssalith.commands.eco.Remove;
-import com.volmit.abyssalith.commands.eco.Set;
+import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.data.User;
+import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
+
+
+
 
 
 /*
@@ -31,28 +33,31 @@ import java.util.List;
  *
  */
 
-public class EcoHub extends VolmitCommand {
+public class ListWarn extends VolmitCommand {
     // Constructor
-    public EcoHub() {
+    public ListWarn() {
         super(
-                "eco",
-                new String[]{"economy", "eco", "money"},
-                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
-                "Economy Category",
-                true,
-                "Eco <subcommand>",
-                new VolmitCommand[]{
-                        new Give(),
-                        new Set(),
-                        new Remove(),
-                        new Get(),
-                }
+                "warns",
+                new String[]{"warns", "listwarns", "wns"},
+                new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                "This command lists all of the warnings for a user",
+                false,
+                "mod warns <ID>"
         );
     }
 
+    // Handle
+    @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
-        i("Eco List Initialized");
-        e.getMessage().delete().queue(); // delete the sent message
-    }
+        String[] s = e.getMessage().getContentRaw().split(" ");
+        if (e.getMessage().getMentionedMembers().size() == 0 && e.getGuild().getMemberById(s[2].toString()) != null) {
+            User u = Main.getLoader().getUser(e.getGuild().getMemberById(s[2].toString()).getIdLong());
 
+            WarningHandler.warnShow(u, e.getChannel());
+
+        }
+        e.getMessage().delete().queue();
+
+
+    }
 }

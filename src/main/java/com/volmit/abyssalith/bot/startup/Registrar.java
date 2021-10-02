@@ -19,12 +19,12 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.commands.moderation.mod.EcoHub;
+import com.volmit.abyssalith.commands.moderation.EcoHub;
 import com.volmit.abyssalith.commands.general.Links;
 import com.volmit.abyssalith.commands.general.Log;
 import com.volmit.abyssalith.commands.general.Passive;
 import com.volmit.abyssalith.commands.general.Paste;
-import com.volmit.abyssalith.commands.moderation.mod.ModHub;
+import com.volmit.abyssalith.commands.moderation.ModHub;
 import com.volmit.abyssalith.commands.moderation.reactionroles.RoleMenu;
 import com.volmit.abyssalith.commands.general.ServerInfo;
 import com.volmit.abyssalith.commands.general.UserInfo;
