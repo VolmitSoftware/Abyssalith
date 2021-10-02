@@ -37,7 +37,6 @@ public class WarningHandler {
 
     public static void warn(Member m, GuildMessageReceivedEvent e) { //intended for setting warnings
         System.println("Starting Warn Sequence");
-
         List<String> strList = new ArrayList<>(Arrays.asList(e.getMessage().getContentRaw().split(" ")));
         User u = Main.getLoader().getUser(m.getIdLong());
         strList.remove(0);
@@ -48,19 +47,21 @@ public class WarningHandler {
         e.getMessage().getTextChannel().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue(); // Build / Send
         m.getUser().openPrivateChannel().complete().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue();
 
-
-
-        if(u.warnings().size() == 4){
+        if (u.warnings().size() == 4) {
             warnFinal(m);
-        } else if (u.warnings().size() == 5){
+        } else if (u.warnings().size() == 5) {
             goodBye(m);
         }
     }
 
 
-    private static void warnToFile(User u, Member staffMember, String warning) {
-        System.println("Added warning to user");
-        u.warnings().put(u.warnings().size(), "[Assigned By: "+staffMember.getEffectiveName()+"]\n[Warning: "+warning+"]");
+
+    public static void warnShow(User u, TextChannel textChannel ) {
+        VolmitEmbed embed = new VolmitEmbed("**[ User's Warnings ]**");
+        embed.addField("Warnings: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : "), false);
+        embed.setColor(Color.WHITE);
+        textChannel.sendMessageEmbeds(embed.build()).queue();
+
     }
 
 
@@ -68,8 +69,6 @@ public class WarningHandler {
         System.println("Building Warning Message Embed");
 
         VolmitEmbed embed = new VolmitEmbed("**[ Warning Report ]**");
-
-
         embed.setDescription("*This user has been warned by a staff member for either breaking a rule so far that it subjectively needed to either get removed, or the user in question was warned by a staff/did something so obscene that the warning directive has been initiated*");
         embed.addField("The user:", "`" + m.getEffectiveName() + "`, Was warned by: `" + staffMember.getEffectiveName() + "`, because they were causing problems...", false);
         embed.addField("Reason:", "" + warning, false);
@@ -79,20 +78,21 @@ public class WarningHandler {
     }
 
 
+
+    private static void warnToFile(User u, Member staffMember, String warning) {
+        System.println("Added warning to user");
+        u.warnings().put(u.warnings().size(), "[**Assignor**: `" + staffMember.getEffectiveName() + "`][**Warning**:` " + warning + "`]");
+    }
     private static void warnFinal(Member m) {
         m.getGuild().kick(m).complete();
         System.println("[INFO]-> Kicked member: " + m);
     }
-
     private static void goodBye(Member m) {
         m.getGuild().ban(m, 1, "5 warnings, not going to be missed").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m);
-
     }
-
     public static void phishBan(Member m, Guild g, Message msg) {
         g.ban(m, 7, "Sending Phishing Links").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m + "for sending phishing links," + msg);
-
     }
 }

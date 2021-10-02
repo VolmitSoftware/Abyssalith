@@ -18,6 +18,8 @@
 
 package com.volmit.abyssalith.commands.general;
 
+import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -27,6 +29,7 @@ import static art.arcane.amulet.MagicalSugar.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Warn extends VolmitCommand {
     // Constructor
@@ -37,7 +40,7 @@ public class Warn extends VolmitCommand {
                 new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This command Applies Warnings to the person mentioned, or prints them",
                 true,
-                "warn @psycho being a bad developer\n or \n.warn show <userid>>"
+                "warn @psycho <warning>\nor\nwarn show <id>"
         );
     }
 
@@ -45,16 +48,14 @@ public class Warn extends VolmitCommand {
     @Override
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
         i("MESSAGE: "+ e.getMessage());
-        List<String> warningMsg = new java.util.ArrayList<>(List.of(""));
-        int argcnt = args.size()-1;
 
         if(args.get(1).contains("@") && e.getMessage().getMentionedMembers().size() > 0){
             Member m = e.getMessage().getMentionedMembers().get(0);
             WarningHandler.warn(m, e);
-
-            for(Integer s : 2 to argcnt){
-                warningMsg.add(args[s]);
-            }
+        }if(args.get(1).equals("show") && e.getGuild().getMemberById(args.get(2)) != null){
+            User u = Main.getLoader().getUser(Objects.requireNonNull(e.getGuild().getMemberById(args.get(2))).getIdLong());
+            WarningHandler.warnShow(u, e.getMessage().getTextChannel());
+        } else {
 
         }
 
