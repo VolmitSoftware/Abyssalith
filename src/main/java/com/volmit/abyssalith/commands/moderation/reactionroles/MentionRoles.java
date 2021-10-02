@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.abyssalith.commands.rroles;
+package com.volmit.abyssalith.commands.moderation.reactionroles;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;

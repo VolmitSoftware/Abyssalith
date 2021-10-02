@@ -19,15 +19,15 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.commands.general.Eco;
+import com.volmit.abyssalith.commands.moderation.mod.EcoHub;
 import com.volmit.abyssalith.commands.general.Links;
 import com.volmit.abyssalith.commands.general.Log;
 import com.volmit.abyssalith.commands.general.Passive;
 import com.volmit.abyssalith.commands.general.Paste;
-import com.volmit.abyssalith.commands.general.RRoles;
+import com.volmit.abyssalith.commands.moderation.mod.ModHub;
+import com.volmit.abyssalith.commands.moderation.reactionroles.RoleMenu;
 import com.volmit.abyssalith.commands.general.ServerInfo;
 import com.volmit.abyssalith.commands.general.UserInfo;
-import com.volmit.abyssalith.commands.general.Warn;
 import com.volmit.abyssalith.listeners.BotListener;
 import com.volmit.abyssalith.listeners.ButtonListener;
 import com.volmit.abyssalith.listeners.LanguageListener;
@@ -68,14 +68,14 @@ public class Registrar extends ListenerAdapter {
         jda.addEventListener(new UserListener()); // Watches the User's instances for stuff
 
         // Commands
-        jda.addEventListener(new Eco()); // Money Subcommand
+        jda.addEventListener(new EcoHub()); // Money Subcommand
+        jda.addEventListener(new ModHub()); // Money Subcommand
         jda.addEventListener(new Links());
-        jda.addEventListener(new Warn());
         jda.addEventListener(new Paste());
         jda.addEventListener(new ServerInfo());
         jda.addEventListener(new UserInfo());
         jda.addEventListener(new Passive());
-        jda.addEventListener(new RRoles());
+        jda.addEventListener(new RoleMenu());
         //jda.addEventListener(new Poll()); BROKEN
         jda.addEventListener(new Log());
         jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last

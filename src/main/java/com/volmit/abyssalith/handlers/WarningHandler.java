@@ -41,6 +41,7 @@ public class WarningHandler {
         User u = Main.getLoader().getUser(m.getIdLong());
         strList.remove(0);
         strList.remove(0);
+        strList.remove(0);
         String ss = strList.toString().replaceAbs(",", "").replaceAbs("[", "").replaceAbs("]", ""); // Un-Fuck String
 
         warnToFile(u, Objects.requireNonNull(e.getMember()), ss); // Add to file

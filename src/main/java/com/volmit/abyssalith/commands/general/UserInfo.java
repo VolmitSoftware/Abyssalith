@@ -67,6 +67,5 @@ public class UserInfo extends VolmitCommand {
 
 
         embed.send(e.getMessage(), true, 1000);
-
     }
 }

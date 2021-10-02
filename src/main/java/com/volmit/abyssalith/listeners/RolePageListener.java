@@ -43,6 +43,7 @@ public class RolePageListener extends ListenerAdapter {
             } else {
                 e.getChannel().sendMessage("CAn you mention more than 1 role please...").queue();
             }
+            e.getMessage().delete().queue();
         }
     }
 }
