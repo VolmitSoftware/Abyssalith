@@ -20,39 +20,72 @@ package com.volmit.abyssalith.handlers;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
-import com.volmit.abyssalith.toolbox.Kit;
+import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class WarningHandler {
 
-    public static void warn(Member m, Guild guild) {
-        User u = Main.getLoader().getUser(m.getIdLong());
-        int warns = u.warnings().size();
-        if (warns < 3) {
-            m.getUser().openPrivateChannel().complete().sendMessage("**You have been warned.** \nPlease cease whatever it is that you are doing.").queue();
-            System.println("[INFO]-> Sent message to " + m);
-        } else if (warns == 3) {
-            m.getUser().openPrivateChannel().complete().sendMessage("**You have been Kicked.** \nYou can rejoin, just think about what you have done").queue();
-            System.println("[INFO]-> Sent message to " + m);
-            warnFinal(m, guild);
-        } else {
-            RoleHandler.addRole(m, Kit.get().RoleBanished);
+    public static void warn(Member m, GuildMessageReceivedEvent e) { //intended for setting warnings
+        System.println("Starting Warn Sequence");
 
-            m.getUser().openPrivateChannel().complete().sendMessage("**You are Banned from Volmit Software's Discord.** \nShould have listened. **Banned**").queue();
-            System.println("[INFO]-> Sent message to " + m);
-            goodBye(m, guild);
+        List<String> strList = new ArrayList<>(Arrays.asList(e.getMessage().getContentRaw().split(" ")));
+        User u = Main.getLoader().getUser(m.getIdLong());
+        strList.remove(0);
+        strList.remove(0);
+        String ss = strList.toString().replaceAbs(",", "").replaceAbs("[", "").replaceAbs("]", ""); // Un-Fuck String
+
+        warnToFile(u, Objects.requireNonNull(e.getMember()), ss); // Add to file
+        e.getMessage().getTextChannel().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue(); // Build / Send
+        m.getUser().openPrivateChannel().complete().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue();
+
+
+
+        if(u.warnings().size() == 4){
+            warnFinal(m);
+        } else if (u.warnings().size() == 5){
+            goodBye(m);
         }
     }
 
-    private static void warnFinal(Member m, Guild g) {
-        g.kick(m).complete();
+
+    private static void warnToFile(User u, Member staffMember, String warning) {
+        System.println("Added warning to user");
+        u.warnings().put(u.warnings().size(), "[Assigned By: "+staffMember.getEffectiveName()+"]\n[Warning: "+warning+"]");
+    }
+
+
+    private static VolmitEmbed warnEmbedBuilder(Member m, String warning, Member staffMember) {
+        System.println("Building Warning Message Embed");
+
+        VolmitEmbed embed = new VolmitEmbed("**[ Warning Report ]**");
+
+
+        embed.setDescription("*This user has been warned by a staff member for either breaking a rule so far that it subjectively needed to either get removed, or the user in question was warned by a staff/did something so obscene that the warning directive has been initiated*");
+        embed.addField("The user:", "`" + m.getEffectiveName() + "`, Was warned by: `" + staffMember.getEffectiveName() + "`, because they were causing problems...", false);
+        embed.addField("Reason:", "" + warning, false);
+        embed.setColor(Color.RED);
+
+        return embed;
+    }
+
+
+    private static void warnFinal(Member m) {
+        m.getGuild().kick(m).complete();
         System.println("[INFO]-> Kicked member: " + m);
     }
 
-    private static void goodBye(Member m, Guild g) {
-        g.ban(m, 7, "5 warnings, not going to be missed").complete();
+    private static void goodBye(Member m) {
+        m.getGuild().ban(m, 1, "5 warnings, not going to be missed").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m);
 
     }

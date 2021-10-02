@@ -81,7 +81,7 @@ public class Main extends ListenerAdapter {
         if (Kit.get().UseRedis) {
             Kit k = Kit.get();
             loader = new DataLoader(new RedisStorageAccess(k.RedisAddress, k.RedisPort, k.RedisPassword));
-        } else { loader = new DataLoader(new FileSystemStorageAccess(new File("botdata"))); }
+        } else { loader = new DataLoader(new FileSystemStorageAccess(new File("Data/BotData"))); }
 
         org.slf4j.simple.SimpleServiceProvider.class.getSimpleName();
         System.println("Initializing");

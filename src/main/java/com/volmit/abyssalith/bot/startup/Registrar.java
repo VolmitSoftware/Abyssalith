@@ -37,14 +37,11 @@ import com.volmit.abyssalith.listeners.PersistentRoleListener;
 import com.volmit.abyssalith.listeners.PhishingListener;
 import com.volmit.abyssalith.listeners.RolePageListener;
 import com.volmit.abyssalith.listeners.SelectionMenuListener;
-import com.volmit.abyssalith.listeners.TagListener;
+import com.volmit.abyssalith.listeners.MentionListener;
 import com.volmit.abyssalith.listeners.UserListener;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 
 public class Registrar extends ListenerAdapter {
 
@@ -67,7 +64,7 @@ public class Registrar extends ListenerAdapter {
         jda.addEventListener(new PhishingListener()); // Persistent Roles
         jda.addEventListener(new RolePageListener());
         jda.addEventListener(new SelectionMenuListener());
-        jda.addEventListener(new TagListener());
+        jda.addEventListener(new MentionListener());
         jda.addEventListener(new UserListener()); // Watches the User's instances for stuff
 
         // Commands

@@ -27,15 +27,15 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
 
-public class TagListener extends ListenerAdapter {
+public class MentionListener extends ListenerAdapter {
     @SneakyThrows
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
 
         if (e.getMessage().getMentionedMembers().size() > 0) {
             for (Member m : e.getMessage().getMentionedMembers()) {
                 User u = Main.getLoader().getUser(m.getIdLong());
-                if (u.recentMentions().size() > 4) {
-                    u.recentMentions().clear();
+                if (u.recentMentions().size() > 2) {
+                    u.recentMentions().remove(u.recentMentions().size()-1);
                 }
                 u.recentMentions().put(u.recentMentions().size(), "[**USER**]" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " [**SAID**]: " + e.getMessage().getContentRaw());
             }
