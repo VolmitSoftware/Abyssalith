@@ -40,7 +40,7 @@ public class Warn extends VolmitCommand {
                 new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This command Applies Warnings to the person mentioned, or prints them",
                 true,
-                "warn @psycho <warning>\nor\nwarn show <id>"
+                "warn @psycho <warning>\nor\n.warn show <id>"
         );
     }
 
