@@ -14,7 +14,7 @@ public class ModHub extends VolmitCommand {
     public ModHub() {
         super(
                 "mod",
-                new String[]{"mod", "md", "moderator"},
+                new String[]{"mod", "m", "moderator"},
                 new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
                 "Moderation Category",
                 true,

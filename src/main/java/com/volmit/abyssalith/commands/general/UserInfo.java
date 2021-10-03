@@ -33,7 +33,7 @@ public class UserInfo extends VolmitCommand {
     public UserInfo() {
         super(
                 "myinfo",
-                new String[]{"myinfo", "minfo"},
+                new String[]{"myinfo", "myi"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
                 "This command prints out all your info for the server",
                 false,
