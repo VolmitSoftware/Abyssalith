@@ -62,7 +62,8 @@ public class Commands extends VolmitCommand {
 
         // Loop over and add all commands with their respective information
         for (VolmitCommand command : botCommands) {
-            String cmd = Kit.get().BotPrefix + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+            String cmd = /*Kit.get().BotPrefix + */ command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+                embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().BotPrefix+"`");
             if (command.getCommands().size() < 2) {
                 embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), false);
             } else {

@@ -219,8 +219,8 @@ public class VolmitCommand extends ListenerAdapter {
     /* Sends a help message for this command's usage in the specified message's channel */
     public void sendHelp(Message message) {
         VolmitEmbed embed = new VolmitEmbed(Kit.get().BotPrefix + getName() + " Command Usage", message);
-
-        String cmd = Kit.get().BotPrefix + getName().substring(0, 1).toUpperCase() + getName().substring(1);
+        embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().BotPrefix+"`");
+        String cmd = /*Kit.get().BotPrefix +*/ getName().substring(0, 1).toUpperCase() + getName().substring(1);
         if (getCommands().size() < 2) {
             embed.addField(cmd, "`*no aliases*`\n" + getDescription(), true);
         } else {
