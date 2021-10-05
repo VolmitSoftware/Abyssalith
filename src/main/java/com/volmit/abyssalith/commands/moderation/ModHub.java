@@ -1,5 +1,7 @@
 package com.volmit.abyssalith.commands.moderation;
 
+import com.volmit.abyssalith.commands.moderation.banish.Banish;
+import com.volmit.abyssalith.commands.moderation.banish.UnBanish;
 import com.volmit.abyssalith.commands.moderation.warning.AddWarn;
 import com.volmit.abyssalith.commands.moderation.warning.ListWarn;
 import com.volmit.abyssalith.toolbox.Kit;
@@ -21,7 +23,9 @@ public class ModHub extends VolmitCommand {
                 "Mod <subcommand>",
                 new VolmitCommand[]{
                         new AddWarn(),
-                        new ListWarn()
+                        new ListWarn(),
+                        new Banish(),
+                        new UnBanish()
                 }
         );
     }
