@@ -25,6 +25,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import static art.arcane.amulet.MagicalSugar.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -246,22 +247,23 @@ public class VolmitCommand extends ListenerAdapter {
 
     /* Sends a category help message for this category in the channel of the specified message */
     protected void sendCategoryHelp(Message message) {
-        VolmitEmbed embed = new VolmitEmbed(getName() + " Command Usage", message);
-
+        VolmitEmbed embed = new VolmitEmbed(getName().capitalizeWords() + " Command Usage", message);
+        String menuName = getName();
         getSubcommands().forEach(command -> {
-            String cmd = Kit.get().BotPrefix + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+            String cmd = Kit.get().BotPrefix + menuName +" " + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+
             if (command.getCommands().size() < 2) {
                 embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), true);
             } else {
                 String body =
-                        "\n`" + Kit.get().BotPrefix +
+                        "\n`" +
                                 (command.getCommands().size() == 2 ?
                                         command.getCommands().get(1) :
                                         " " + command.getCommands().subList(1, command.getCommands().size())).toString()
                                         .replaceAbs("[", "").replaceAbs("]", "") +
                                 "`\n" +
                                 command.getDescription() +
-                                (command.getExample() != null ? "\n**Usage**\n`" + Kit.get().BotPrefix + command.getExample() + "`" : "");
+                                (command.getExample() != null ? "\n**usage:**\n`" + Kit.get().BotPrefix + command.getExample() + "`" : "");
                 embed.addField(
                         cmd,
                         body,

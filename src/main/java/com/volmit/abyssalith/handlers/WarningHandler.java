@@ -96,4 +96,22 @@ public class WarningHandler {
         g.ban(m, 7, "Sending Phishing Links").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m + "for sending phishing links," + msg);
     }
+
+    public static void deleteLatestWarn(User u, TextChannel textChannel) {
+        u.warnings().remove(u.warnings().size()-1);
+        u.warnings().clear();
+        VolmitEmbed embed = new VolmitEmbed("**[ User's Updated Warnings ]**");
+        embed.addField("New Warning List: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : "), false);
+        embed.setColor(Color.GREEN);
+        textChannel.sendMessageEmbeds(embed.build()).queue();
+    }
+
+    public static void purge(User u, TextChannel textChannel) {
+        u.warnings().clear();
+        VolmitEmbed embed = new VolmitEmbed("**[ User's Updated Warnings ]**");
+        embed.addField("New Warning List: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : "), false);
+        embed.setColor(Color.GREEN);
+        textChannel.sendMessageEmbeds(embed.build()).queue();
+
+    }
 }

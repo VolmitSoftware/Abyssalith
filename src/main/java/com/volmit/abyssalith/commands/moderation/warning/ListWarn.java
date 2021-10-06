@@ -37,8 +37,8 @@ public class ListWarn extends VolmitCommand {
     // Constructor
     public ListWarn() {
         super(
-                "warns",
-                new String[]{"warns", "listwarns", "wns"},
+                "listwarns",
+                new String[]{"listwarns", "warns", "lw"},
                 new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This command lists all of the warnings for a user",
                 false,

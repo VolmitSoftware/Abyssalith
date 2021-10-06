@@ -157,7 +157,7 @@ public class VolmitEmbed extends EmbedBuilder {
             Main.error("No channel and message specified.");
         } else if (message != null) {
             List<String> finalReactions = reactions;
-            message.getChannel().sendMessage(this.build()).queue(msg -> {
+            message.getChannel().sendMessageEmbeds(this.build()).queue(msg -> {
                 for (String emoji : finalReactions) {
                     msg.addReaction(emoji).queue();
                 }
@@ -167,7 +167,7 @@ public class VolmitEmbed extends EmbedBuilder {
             }
         } else {
             List<String> finalReactions = reactions;
-            channel.sendMessage(this.build()).queue(msg -> {
+            channel.sendMessageEmbeds(this.build()).queue(msg -> {
                 for (String emoji : finalReactions) {
                     msg.addReaction(emoji).queue();
                 }

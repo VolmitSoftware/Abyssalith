@@ -37,7 +37,7 @@ public class AddWarn extends VolmitCommand {
     public AddWarn() {
         super(
                 "warn",
-                new String[]{"warn", "wn", "addwn"},
+                new String[]{"warn", "wn", "addwarn"},
                 new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This command Applies Warnings to the person mentioned, or prints them",
                 true,

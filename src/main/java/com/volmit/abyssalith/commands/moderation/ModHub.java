@@ -4,6 +4,8 @@ import com.volmit.abyssalith.commands.moderation.banish.Banish;
 import com.volmit.abyssalith.commands.moderation.banish.UnBanish;
 import com.volmit.abyssalith.commands.moderation.warning.AddWarn;
 import com.volmit.abyssalith.commands.moderation.warning.ListWarn;
+import com.volmit.abyssalith.commands.moderation.warning.PurgeWarns;
+import com.volmit.abyssalith.commands.moderation.warning.RemoveWarn;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -24,6 +26,8 @@ public class ModHub extends VolmitCommand {
                 new VolmitCommand[]{
                         new AddWarn(),
                         new ListWarn(),
+                        new PurgeWarns(),
+                        new RemoveWarn(),
                         new Banish(),
                         new UnBanish()
                 }
