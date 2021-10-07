@@ -8,13 +8,24 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 
 import java.util.List;
 
-public class MenuHandler {
-    public static void listMenuSend(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
-        sendMenu(genMenu(id, PlaceholderText, mentionedRoles, textChannel), textChannel);
+public class MenuHandler { // get and send menu
+    public static void RoleListMenu(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+        sendMenu(genMenuMultipleSelect(id, PlaceholderText, mentionedRoles, textChannel), textChannel);
     }
 
-    public static SelectionMenu.Builder listMenu(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
-        return genMenu(id, PlaceholderText, mentionedRoles, textChannel);
+    // return built menu for future modification
+    public static SelectionMenu.Builder RoleListMenuGen(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+        return genMenuMultipleSelect(id, PlaceholderText, mentionedRoles, textChannel);
+    }
+
+    // Get and set menu
+    public static void SingleRoleListMenu(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+        sendMenu(genMenuSingleSelect(id, PlaceholderText, mentionedRoles, textChannel), textChannel);
+    }
+
+    // return built menu for future modification
+    public static SelectionMenu.Builder SingleRoleListMenuGen(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+        return genMenuSingleSelect(id, PlaceholderText, mentionedRoles, textChannel);
     }
     // Top one are callables, and instance the lists
 
@@ -29,7 +40,7 @@ public class MenuHandler {
 
     }
 
-    private static SelectionMenu.Builder genMenu(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+    private static SelectionMenu.Builder genMenuMultipleSelect(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
         // This method returns an editable object for chaining purposes
         SelectionMenu.Builder menu = SelectionMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
         int mr = mentionedRoles.size();
@@ -43,6 +54,22 @@ public class MenuHandler {
                 menu.addOption(r.getName(), r.getId());
         }
         menu.setMaxValues(mr);
+        return menu;
+
+    }
+
+    private static SelectionMenu.Builder genMenuSingleSelect(String id, String PlaceholderText, List<Role> mentionedRoles, TextChannel textChannel) {
+        // This method returns an editable object for chaining purposes
+        SelectionMenu.Builder menu = SelectionMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
+        Guild g = textChannel.getGuild();
+
+        for (Role r : mentionedRoles) {
+            if (!g.getEmotesByName(r.getName(), true).isEmpty())
+                menu.addOption(r.getName(), r.getId(), Emoji.fromEmote(g.getEmotesByName(r.getName(), true).get(0)));
+
+            if (g.getEmotesByName(r.getName(), true).isEmpty())
+                menu.addOption(r.getName(), r.getId());
+        }
         return menu;
 
     }

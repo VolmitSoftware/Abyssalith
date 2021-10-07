@@ -35,7 +35,7 @@ public class RolePageListener extends ListenerAdapter {
                 && Message.contains(Kit.get().ReactionRoleString)) { // Contains reaction role string
 
             if (e.getMessage().getMentionedRoles().size() > 1) {
-                MenuHandler.listMenuSend("rolepage",
+                MenuHandler.RoleListMenu("rolepage",
                         "Choose your Role(s)!",
                         e.getMessage().getMentionedRoles(),
                         e.getChannel());
