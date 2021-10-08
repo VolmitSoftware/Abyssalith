@@ -76,7 +76,7 @@ public class Kit extends ListenerAdapter {
     public String BotOwnerID = "173261518572486656";
     public String BotPrefix = ".";
     public String LevelName = "Level ";
-    public String MoneyName = "VolmCoin";
+    public String MoneyName = "VolmitCoin";
     public String MoneyEmoji = ":coin:";
     public List<String> Phishing = Arrays.asList("discordgift.site", "discord.link", "dis.cord", "disc0rd.gg", "discord.gift", "discorcl.click", "gavenitro.com", "discodnitro.info", "discord-airdrop.com", "steamnltros.ru", "discord-app.net", "discord-give.com", "diiscord.com");
     public String RedisAddress = "";
@@ -111,7 +111,6 @@ public class Kit extends ListenerAdapter {
 
     public static void tick() {
         if (fw.checkModified()) {
-
             instance = new AtomicCache<>();
             L.v("Hot-loaded Config");
             Main.getJDA();
@@ -121,7 +120,7 @@ public class Kit extends ListenerAdapter {
     public static Kit get() {
         return instance.aquire(() -> {
             File f = getFile();
-            System.out.println(f.getAbsolutePath());
+            System.println("Config File location:\n" + f.getAbsolutePath());
             f.getParentFile().mkdirs();
             Kit dummy = new Kit();
 

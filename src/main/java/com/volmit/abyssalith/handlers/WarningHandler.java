@@ -54,6 +54,12 @@ public class WarningHandler {
             goodBye(m);
         }
     }
+    public static void warn(Member m, String string) { //intended for setting warnings
+        System.println("Starting Warn Sequence");
+        User u = Main.getLoader().getUser(m.getIdLong());
+
+        warnToFile(u, string); // Add to file
+    }
 
 
     public static void warnShow(User u, TextChannel textChannel) {
@@ -82,6 +88,10 @@ public class WarningHandler {
         System.println("Added warning to user");
         u.warnings().put(u.warnings().size(), "[**Assignor**: `" + staffMember.getEffectiveName() + "`][**Warning**:` " + warning + "`]");
     }
+    private static void warnToFile(User u, String warning) {
+        System.println("Added warning to user");
+        u.warnings().put(u.warnings().size(), "[**A.D.D. Warning**:` " + warning + "`]");
+    }
 
     private static void warnFinal(Member m) {
         m.getGuild().kick(m).complete();
@@ -89,11 +99,12 @@ public class WarningHandler {
     }
 
     private static void goodBye(Member m) {
-        m.getGuild().ban(m, 1, "5 warnings, not going to be missed").complete();
+        m.getGuild().ban(m, 1, "not going to be missed, welcome to appeal").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m);
     }
 
     public static void phishBan(Member m, Guild g, Message msg) {
+        warn(m, "[Banned by Bot], Sending Phishing Links");
         g.ban(m, 7, "Sending Phishing Links").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m + "for sending phishing links," + msg);
     }

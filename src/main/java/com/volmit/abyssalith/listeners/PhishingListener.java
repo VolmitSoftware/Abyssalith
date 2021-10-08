@@ -32,12 +32,12 @@ public class PhishingListener extends ListenerAdapter {
                 e.getMessage().delete().queue();
                 Objects.requireNonNull(e.getMember()).getUser().openPrivateChannel().complete().sendMessage("Hello, You have been banned from volmit for sending Phishing links: `\n" +
                         e.getMessage() +
-                        "`\nIf you feel this is a mistake, please send a friend request to: `⋈-NextdoorPsycho-⋈#0001` and explain the problem, otherwise your account was compromised, or you were unaware of what you were sending \n" +
+                        "`\nIf you feel this is a mistake, please send a friend request to: `⋈-NestorPsycho-⋈#0001` and explain the problem, otherwise your account was compromised, or you were unaware of what you were sending \n" +
                         "regardless, you have been banned, until you either fix your account, or handle the situation").queue();
                 try {
                     WarningHandler.phishBan(e.getMember(), e.getGuild(), e.getMessage()); // ez ban
                 } catch (Exception ignored) {
-                } // Dont care about exceptions here, the only possible one is a permission one, and the bot needs to be able to handle it elsewise
+                } // Don't care about exceptions here, the only possible one is a permission one, and the bot needs to be able to handle it elsewhere
             }
 
 
