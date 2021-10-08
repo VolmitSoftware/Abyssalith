@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.bot.instance;
 
 import com.volmit.abyssalith.toolbox.Kit;
@@ -28,6 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 
 public class GarbageDigitalOceanHealthCheckWebServerEchoServer {
     private Server server;
@@ -42,8 +42,7 @@ public class GarbageDigitalOceanHealthCheckWebServerEchoServer {
         w("HELTH SERVER STARTED");
     }
 
-    public static class Ser extends HttpServlet
-    {
+    public static class Ser extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             resp.getWriter().println("Hlathy");

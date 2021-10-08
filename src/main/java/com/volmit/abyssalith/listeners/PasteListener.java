@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.listeners;
 
 import art.arcane.quill.collections.KList;
@@ -32,6 +31,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
+
 
 public class PasteListener extends ListenerAdapter {
 

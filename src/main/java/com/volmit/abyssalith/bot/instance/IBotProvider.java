@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.bot.instance;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+
 
 @FunctionalInterface
 public interface IBotProvider {

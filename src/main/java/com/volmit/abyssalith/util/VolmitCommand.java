@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.util;
 
 import com.volmit.abyssalith.Main;
@@ -25,7 +24,6 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import static art.arcane.amulet.MagicalSugar.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -67,6 +65,7 @@ public class Ping extends VolmitCommand {
 }
 
 */
+
 
 public class VolmitCommand extends ListenerAdapter {
 
@@ -220,7 +219,7 @@ public class VolmitCommand extends ListenerAdapter {
     /* Sends a help message for this command's usage in the specified message's channel */
     public void sendHelp(Message message) {
         VolmitEmbed embed = new VolmitEmbed(Kit.get().BotPrefix + getName() + " Command Usage", message);
-        embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().BotPrefix+"`");
+        embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().BotPrefix + "`");
         String cmd = /*Kit.get().BotPrefix +*/ getName().substring(0, 1).toUpperCase() + getName().substring(1);
         if (getCommands().size() < 2) {
             embed.addField(cmd, "`*no aliases*`\n" + getDescription(), true);
@@ -250,7 +249,7 @@ public class VolmitCommand extends ListenerAdapter {
         VolmitEmbed embed = new VolmitEmbed(getName().capitalizeWords() + " Command Usage", message);
         String menuName = getName();
         getSubcommands().forEach(command -> {
-            String cmd = Kit.get().BotPrefix + menuName +" " + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+            String cmd = Kit.get().BotPrefix + menuName + " " + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
 
             if (command.getCommands().size() < 2) {
                 embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), true);

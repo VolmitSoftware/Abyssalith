@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.handlers.WarningHandler;
@@ -24,6 +23,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
+
 
 public class PhishingListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -36,7 +36,8 @@ public class PhishingListener extends ListenerAdapter {
                         "regardless, you have been banned, until you either fix your account, or handle the situation").queue();
                 try {
                     WarningHandler.phishBan(e.getMember(), e.getGuild(), e.getMessage()); // ez ban
-                } catch (Exception ignored) {} // Dont care about exceptions here, the only possible one is a permission one, and the bot needs to be able to handle it elsewise
+                } catch (Exception ignored) {
+                } // Dont care about exceptions here, the only possible one is a permission one, and the bot needs to be able to handle it elsewise
             }
 
 

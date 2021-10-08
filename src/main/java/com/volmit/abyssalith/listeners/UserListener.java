@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.Main;
@@ -27,9 +26,9 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import static art.arcane.amulet.MagicalSugar.*;
 
 import java.util.Objects;
+
 
 public class UserListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -75,15 +74,15 @@ public class UserListener extends ListenerAdapter {
                     if (v > 0) {
                         for (Role rol : e.getMember().getRoles()) {
                             if (rol.getName().contains(Kit.get().LevelName)) {
-                                int rint =Integer.parseInt(rol.getName().replaceAbs(Kit.get().LevelName, ""));
-                                if (v > rint ){
-                                    e.getGuild().removeRoleFromMember( e.getMember().getId(), e.getGuild().getRolesByName(
+                                int rint = Integer.parseInt(rol.getName().replaceAbs(Kit.get().LevelName, ""));
+                                if (v > rint) {
+                                    e.getGuild().removeRoleFromMember(e.getMember().getId(), e.getGuild().getRolesByName(
                                             Kit.get().LevelName + rint, false).get(0)).complete();
                                     i("Removed, excessive child roles from user: " + e.getMember().getId());
-                                }else if (v != rint){
-                                    e.getGuild().removeRoleFromMember( e.getMember().getId(), e.getGuild().getRolesByName(
+                                } else if (v != rint) {
+                                    e.getGuild().removeRoleFromMember(e.getMember().getId(), e.getGuild().getRolesByName(
                                             Kit.get().LevelName + rint, false).get(0)).complete();
-                                    w("Removed a role that was not possible to have reached, or something that does not match: "+ e.getMember().getId());
+                                    w("Removed a role that was not possible to have reached, or something that does not match: " + e.getMember().getId());
                                 }
 
                             }

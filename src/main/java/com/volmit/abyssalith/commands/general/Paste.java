@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -23,6 +22,7 @@ import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
+
 
 public class Paste extends VolmitCommand {
     // Constructor

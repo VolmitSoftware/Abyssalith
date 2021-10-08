@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.commands.botmaster;
 
 import com.volmit.abyssalith.Main;
@@ -25,6 +24,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 
+
 public class Shutdown extends VolmitCommand {
 
     // Constructor
@@ -32,7 +32,7 @@ public class Shutdown extends VolmitCommand {
         super(
                 "stop",
                 new String[]{"stop", "kill", "s"},
-                new String[]{Kit.get().RoleModerator,Kit.get().RoleAdministrator},
+                new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator},
                 "Stops the Bot boi",
                 false,
                 null

@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package Abyssalith.extensions.net.dv8tion.jda.api.entities.Guild;
 
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 import net.dv8tion.jda.api.entities.Guild;
+
 
 @Extension
 public class XGuild {

@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.listeners;
 
 import art.arcane.quill.execution.J;
@@ -23,14 +22,13 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.util.Objects;
 
 public class BotListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
         if (!e.getMessage().imUser()
                 && !e.getMessage().getEmbeds().isEmpty()
                 && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
-                ) {
+        ) {
             e.getMessage().addReaction("U+274C").queue();
         }
     }
@@ -41,7 +39,7 @@ public class BotListener extends ListenerAdapter {
                 && e.getReaction().toString().contains("U+274c")  // is the X reaction there
                 && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
 
-                ) {
+        ) {
 
             J.a(() -> {
                 i(" Cleaning bot response as requested");

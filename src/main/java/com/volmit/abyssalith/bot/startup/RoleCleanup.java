@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.toolbox.Kit;
@@ -26,6 +25,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class RoleCleanup extends ListenerAdapter {
 
@@ -43,7 +43,7 @@ public class RoleCleanup extends ListenerAdapter {
         }
         if (ff.size() > 0) {
             System.println("Cleaned roles: ");
-            System.println( ff );
+            System.println(ff);
         } else {
             System.println("No roles to clean!");
         }

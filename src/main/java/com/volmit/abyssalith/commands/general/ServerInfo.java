@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -26,9 +25,10 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class ServerInfo extends VolmitCommand {
     // Constructor

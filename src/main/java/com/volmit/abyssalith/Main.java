@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith;
 
 import art.arcane.amulet.logging.LogListener;
@@ -24,12 +23,12 @@ import art.arcane.quill.execution.Looper;
 import com.volmit.abyssalith.bot.instance.BotProvider;
 import com.volmit.abyssalith.bot.instance.GarbageDigitalOceanHealthCheckWebServerEchoServer;
 import com.volmit.abyssalith.bot.instance.IBotProvider;
+import com.volmit.abyssalith.bot.startup.Registrar;
+import com.volmit.abyssalith.bot.startup.RoleCleanup;
 import com.volmit.abyssalith.io.DataLoader;
 import com.volmit.abyssalith.io.storage.FileSystemStorageAccess;
 import com.volmit.abyssalith.io.storage.RedisStorageAccess;
 import com.volmit.abyssalith.toolbox.Kit;
-import com.volmit.abyssalith.bot.startup.Registrar;
-import com.volmit.abyssalith.bot.startup.RoleCleanup;
 import lombok.Getter;
 import lombok.NonNull;
 import net.dv8tion.jda.api.JDA;
@@ -44,12 +43,14 @@ import java.io.File;
 import java.net.http.WebSocket;
 import java.util.Objects;
 
+
 public class Main extends ListenerAdapter {
     public static final Logger LOGGER = LoggerFactory.getLogger(WebSocket.Listener.class);
     public static final IBotProvider provider = new BotProvider();
 
     @Getter
     private static DataLoader loader;
+
     public static JDA getJDA() {
         return provider.get().getJDA();
     }
@@ -64,13 +65,20 @@ public class Main extends ListenerAdapter {
         }).start();
         LogListener.listener.set(new LogListener() {
             @Override
-            public void i(String tag, Object f) {info(tag + ": " + f);}
+            public void i(String tag, Object f) {
+                info(tag + ": " + f);
+            }
+
             @Override
-            public void f(String tag, Object f) {error(tag + ": " + f);}
+            public void f(String tag, Object f) {
+                error(tag + ": " + f);
+            }
+
             @Override
             public void w(String tag, Object f) {
                 warn(tag + ": " + f);
             }
+
             @Override
             public void d(String tag, Object f) {
                 debug(tag + ": " + f);
@@ -81,7 +89,9 @@ public class Main extends ListenerAdapter {
         if (Kit.get().UseRedis) {
             Kit k = Kit.get();
             loader = new DataLoader(new RedisStorageAccess(k.RedisAddress, k.RedisPort, k.RedisPassword));
-        } else { loader = new DataLoader(new FileSystemStorageAccess(new File("Data/BotData"))); }
+        } else {
+            loader = new DataLoader(new FileSystemStorageAccess(new File("Data/BotData")));
+        }
 
         org.slf4j.simple.SimpleServiceProvider.class.getSimpleName();
         System.println("Initializing");
@@ -124,15 +134,19 @@ public class Main extends ListenerAdapter {
     private static void log(String tag, Object t) {
         System.println("[" + tag + "]-> " + t);
     }
+
     public static void warn(Object message) {
         log("WARN", message);
     }
+
     public static void info(Object message) {
         log("INFO", message);
     }
+
     public static void error(Object message) {
         log("ERROR", message);
     }
+
     public static void debug(Object message) {
         log("DEBUG", message);
     }

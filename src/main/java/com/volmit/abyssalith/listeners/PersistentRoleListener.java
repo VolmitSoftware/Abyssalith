@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.Main;
@@ -31,6 +30,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
 import java.util.Set;
+
 
 public class PersistentRoleListener extends ListenerAdapter {
 

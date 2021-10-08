@@ -15,33 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.commands.moderation.EcoHub;
-import com.volmit.abyssalith.commands.general.Links;
-import com.volmit.abyssalith.commands.general.Log;
-import com.volmit.abyssalith.commands.general.Passive;
-import com.volmit.abyssalith.commands.general.Paste;
 import com.volmit.abyssalith.commands.moderation.ModHub;
 import com.volmit.abyssalith.commands.moderation.reactionroles.RoleMenu;
-import com.volmit.abyssalith.commands.general.ServerInfo;
-import com.volmit.abyssalith.commands.general.UserInfo;
-import com.volmit.abyssalith.listeners.BotListener;
-import com.volmit.abyssalith.listeners.ButtonListener;
-import com.volmit.abyssalith.listeners.LanguageListener;
-import com.volmit.abyssalith.listeners.PasteLinkListener;
-import com.volmit.abyssalith.listeners.PasteListener;
-import com.volmit.abyssalith.listeners.PersistentRoleListener;
-import com.volmit.abyssalith.listeners.PhishingListener;
-import com.volmit.abyssalith.listeners.RolePageListener;
-import com.volmit.abyssalith.listeners.SelectionMenuListener;
-import com.volmit.abyssalith.listeners.MentionListener;
-import com.volmit.abyssalith.listeners.UserListener;
+import com.volmit.abyssalith.listeners.*;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
 
 public class Registrar extends ListenerAdapter {
 
@@ -50,7 +35,7 @@ public class Registrar extends ListenerAdapter {
 
 //        jda.addEventListener(new Debug());
 //        jda.addEventListener(new Shutdown());
-        
+
 
         //Listeners
         jda.addEventListener(new Main()); // [ DONT TOUCH THESE TWO LISTENERS ]

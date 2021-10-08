@@ -15,24 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.io.storage;
 
 import com.volmit.abyssalith.io.StorageAccess;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
+
 
 public class RedisStorageAccess implements StorageAccess {
     private Jedis jedis;
 
-    public RedisStorageAccess(String address, int port, String password)
-    {
+    public RedisStorageAccess(String address, int port, String password) {
         jedis = new Jedis(address, port);
         jedis.auth(password);
 
 
-        if(!jedis.isConnected())
-        {
+        if (!jedis.isConnected()) {
             throw new RuntimeException("Reids Connection Failure!");
         }
     }

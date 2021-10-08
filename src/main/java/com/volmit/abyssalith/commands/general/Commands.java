@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.toolbox.Kit;
@@ -26,6 +25,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Commands extends VolmitCommand {
 
@@ -63,7 +63,7 @@ public class Commands extends VolmitCommand {
         // Loop over and add all commands with their respective information
         for (VolmitCommand command : botCommands) {
             String cmd = /*Kit.get().BotPrefix + */ command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
-                embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().BotPrefix+"`");
+            embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().BotPrefix + "`");
             if (command.getCommands().size() < 2) {
                 embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), false);
             } else {

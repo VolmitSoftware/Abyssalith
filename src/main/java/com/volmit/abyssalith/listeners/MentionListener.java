@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.Main;
@@ -27,6 +26,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
 
+
 public class MentionListener extends ListenerAdapter {
     @SneakyThrows
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
@@ -35,7 +35,7 @@ public class MentionListener extends ListenerAdapter {
             for (Member m : e.getMessage().getMentionedMembers()) {
                 User u = Main.getLoader().getUser(m.getIdLong());
                 if (u.recentMentions().size() > 2) {
-                    u.recentMentions().remove(u.recentMentions().size()-1);
+                    u.recentMentions().remove(u.recentMentions().size() - 1);
                 }
                 u.recentMentions().put(u.recentMentions().size(), "[**USER**]" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " [**SAID**]: " + e.getMessage().getContentRaw());
             }

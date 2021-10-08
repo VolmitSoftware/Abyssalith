@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.handlers.MenuHandler;
@@ -25,6 +24,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
+
 
 public class RolePageListener extends ListenerAdapter {
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {

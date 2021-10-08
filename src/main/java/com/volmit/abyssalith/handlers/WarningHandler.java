@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.handlers;
 
 import com.volmit.abyssalith.Main;
@@ -32,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
 
 public class WarningHandler {
 
@@ -56,8 +56,7 @@ public class WarningHandler {
     }
 
 
-
-    public static void warnShow(User u, TextChannel textChannel ) {
+    public static void warnShow(User u, TextChannel textChannel) {
         VolmitEmbed embed = new VolmitEmbed("**[ User's Warnings ]**");
         embed.addField("Warnings: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : "), false);
         embed.setColor(Color.WHITE);
@@ -79,26 +78,28 @@ public class WarningHandler {
     }
 
 
-
     private static void warnToFile(User u, Member staffMember, String warning) {
         System.println("Added warning to user");
         u.warnings().put(u.warnings().size(), "[**Assignor**: `" + staffMember.getEffectiveName() + "`][**Warning**:` " + warning + "`]");
     }
+
     private static void warnFinal(Member m) {
         m.getGuild().kick(m).complete();
         System.println("[INFO]-> Kicked member: " + m);
     }
+
     private static void goodBye(Member m) {
         m.getGuild().ban(m, 1, "5 warnings, not going to be missed").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m);
     }
+
     public static void phishBan(Member m, Guild g, Message msg) {
         g.ban(m, 7, "Sending Phishing Links").complete();
         System.println("[INFO]-> Attempting to Perm Ban: " + m + "for sending phishing links," + msg);
     }
 
     public static void deleteLatestWarn(User u, TextChannel textChannel) {
-        u.warnings().remove(u.warnings().size()-1);
+        u.warnings().remove(u.warnings().size() - 1);
         u.warnings().clear();
         VolmitEmbed embed = new VolmitEmbed("**[ User's Updated Warnings ]**");
         embed.addField("New Warning List: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : "), false);

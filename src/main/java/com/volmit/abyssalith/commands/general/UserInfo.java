@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.commands.general;
 
 import art.arcane.quill.format.Form;
@@ -27,6 +26,7 @@ import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
+
 
 public class UserInfo extends VolmitCommand {
     // Constructor

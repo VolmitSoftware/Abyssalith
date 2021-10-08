@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.toolbox;
 
 import art.arcane.quill.cache.AtomicCache;
@@ -35,6 +34,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+
 
 public class Kit extends ListenerAdapter {
 
@@ -145,12 +145,10 @@ public class Kit extends ListenerAdapter {
         return new File("Data/Config.json");
     }
 
-    private void env(String key, Consumer<String> c)
-    {
+    private void env(String key, Consumer<String> c) {
         String f = System.getenv(key);
 
-        if(f != null)
-        {
+        if (f != null) {
             d(key + " updated to " + f + " from ENVIRONMENT");
             c.accept(f);
         }

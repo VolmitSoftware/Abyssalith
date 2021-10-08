@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package Abyssalith.extensions.net.dv8tion.jda.api.entities.Message;
 
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 import net.dv8tion.jda.api.entities.Message;
 
-import static art.arcane.amulet.MagicalSugar.*;
+import static art.arcane.amulet.MagicalSugar.lc;
+
 
 @Extension
 public class XMessage {

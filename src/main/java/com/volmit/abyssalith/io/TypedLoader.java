@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package com.volmit.abyssalith.io;
 
 import art.arcane.quill.collections.KMap;
@@ -24,6 +23,7 @@ import com.volmit.abyssalith.Main;
 
 import java.util.Locale;
 import java.util.concurrent.locks.ReentrantLock;
+
 
 public class TypedLoader<T extends DataType> {
     private final Class<T> type;

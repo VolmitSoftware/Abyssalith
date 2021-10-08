@@ -1,8 +1,9 @@
 # Abyssalith, The Discord Bot
 
-
-This bot's repository is just a repo for a small server bot being that can do things. This is using Naming conventions from [Volmit Software](https://github.com/VolmitSoftware). This bot is only showing off the JDA at the current time, and making a bot to learn it. You are more than welcome to keep this code for whatever you want, as this is just a proof of concept.
-
+This bot's repository is just a repo for a small server bot being that can do things. This is using Naming conventions
+from [Volmit Software](https://github.com/VolmitSoftware). This bot is only showing off the JDA at the current time, and
+making a bot to learn it. You are more than welcome to keep this code for whatever you want, as this is just a proof of
+concept.
 
 ## Getting Started
 
@@ -11,6 +12,7 @@ This bot's repository is just a repo for a small server bot being that can do th
 - When you compile the bot, and execute the bot (as a jar. Use a `.bat` file.) Make this your config file
 - You need to use `gradlew shadowJar`
 - Location of config file: `config/toolkit.json` in a folder next to your bot
+
 ```json
 {
     "ModRole": "",
@@ -28,23 +30,32 @@ This bot's repository is just a repo for a small server bot being that can do th
 ### Prerequisites
 
 - You need Gradle, Java 16, an internet connection, and some IDE (would suggest InteliJ). Good luck with that however :)
-- This bot also has a language system that you can use to automatically determine the language someone is speaking, however **THIS USES A LOT OF MEMORY** like up to 2gigs, if you are using every language from [Lingua](https://github.com/pemistahl/lingua) 's systems
-- [Manifold](https://plugins.jetbrains.com/plugin/10057-manifold) for using [Amulet](https://github.com/ArcaneArts/Amulet)
+- This bot also has a language system that you can use to automatically determine the language someone is speaking,
+  however **THIS USES A LOT OF MEMORY** like up to 2gigs, if you are using every language
+  from [Lingua](https://github.com/pemistahl/lingua) 's systems
+- [Manifold](https://plugins.jetbrains.com/plugin/10057-manifold) for
+  using [Amulet](https://github.com/ArcaneArts/Amulet)
 
 ### Installing
 
-- You can clone this repo and import the project in any Java IDE that you may want to use. This project was made using IntelliJ, but any should work as long as it supports gradle.
-- Make sure that you have imported the plugins required via the Gradle file (look up how to do that for your own environment) and that your IDE recognize the folder `java` as Source folder and `resources` as Resources folder.
-If you have trouble getting the bot up and running, feel free to [create an issue](https://github.com/NextdoorPsycho/Abyssalith/issues).
+- You can clone this repo and import the project in any Java IDE that you may want to use. This project was made using
+  IntelliJ, but any should work as long as it supports gradle.
+- Make sure that you have imported the plugins required via the Gradle file (look up how to do that for your own
+  environment) and that your IDE recognize the folder `java` as Source folder and `resources` as Resources folder. If
+  you have trouble getting the bot up and running, feel free
+  to [create an issue](https://github.com/NextdoorPsycho/Abyssalith/issues).
 
 ### Setting up your environment (Bot Token)
 
 Since this is a self-hosted solution, you will need to provide your own Bot Token to get your bot up and running.
 
-If you don't know how to get your own bot token, you can follow [this Github Tutorial](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token) to create yourself one.
+If you don't know how to get your own bot token, you can
+follow [this Github Tutorial](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token)
+to create yourself one.
 
-Once you have your bot token, you can run the program for the first time. 
-Your `config/toolkit.json` file should look like this :
+Once you have your bot token, you can run the program for the first time. Your `config/toolkit.json` file should look
+like this :
+
 ```json
 {
     "ModRole": "Moderator",
@@ -58,9 +69,12 @@ Your `config/toolkit.json` file should look like this :
     "MoneyName": "LitCoins"
 }
 ```
-The configuration file hotloads, and when you make any changes it will inform you in the console that it updated your settings.
+
+The configuration file hotloads, and when you make any changes it will inform you in the console that it updated your
+settings.
 
 ### Config Breakdown
+
     "ModRole": 
     - This is just a moderator role
     "AdminRole": 
@@ -80,7 +94,6 @@ The configuration file hotloads, and when you make any changes it will inform yo
     "MoneyName": 
     - name of your made up currency eg: `Pound sterling's`
 
-
 ## Built With
 
 - [JDA](https://github.com/DV8FromTheWorld/JDA) - The Java Discord APIs to allow a bot to run in Java
@@ -90,7 +103,8 @@ The configuration file hotloads, and when you make any changes it will inform yo
 
 - Brian Fopiano ([NextdoorPsycho](https://github.com/NextdoorPsycho)) - Original Creator and Owner of the softworks
 
-See also the list of [contributors](https://github.com/NextdoorPsycho/Abyssalith/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/NextdoorPsycho/Abyssalith/contributors) who participated in this
+project.
 
 ## License
 
