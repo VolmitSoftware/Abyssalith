@@ -38,8 +38,8 @@ public class BotInstance {
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .build();
         jda.getPresence().setStatus(OnlineStatus.IDLE);
-        jda.getPresence().setActivity(Activity.watching("The Universe"));
-        i("Bot instance Re-Instantiated");
+        jda.getPresence().setActivity(Activity.watching("The Universe: .?"));
+        i("Bot Instantiated");
     }
 
     public void close() {

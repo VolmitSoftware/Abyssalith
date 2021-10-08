@@ -52,7 +52,7 @@ public class ModHub extends VolmitCommand {
     }
 
     public void handle(List<String> args, GuildMessageReceivedEvent e) {
-        i("Warning List Initialized");
+        i("Mod List Initialized");
         e.getMessage().delete().queue(); // delete the sent message
     }
 

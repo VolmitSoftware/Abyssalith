@@ -130,7 +130,6 @@ public class Kit extends ListenerAdapter {
             }
             try {
                 Kit tk = new Gson().fromJson(IO.readAll(f), Kit.class);
-                System.out.println(tk.BotToken);
                 tk.save();
                 fw.checkModified();
                 return tk;

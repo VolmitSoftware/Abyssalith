@@ -58,7 +58,7 @@ public class WarningHandler {
 
     public static void warnShow(User u, TextChannel textChannel) {
         VolmitEmbed embed = new VolmitEmbed("**[ User's Warnings ]**");
-        embed.addField("Warnings: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : "), false);
+        embed.addField("Warnings: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : ").replaceAbs("]", ""), false);
         embed.setColor(Color.WHITE);
         textChannel.sendMessageEmbeds(embed.build()).queue();
 
