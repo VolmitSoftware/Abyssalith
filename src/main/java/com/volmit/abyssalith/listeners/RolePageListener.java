@@ -32,7 +32,7 @@ public class RolePageListener extends ListenerAdapter {
         if (!e.getMessage().getAuthor().isBot() // not a bot
                 && e.getMessage().getMentionedRoles().size() > 0 // mentioning roles
                 && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) // Has admin permissions
-                && Message.contains(Kit.get().ReactionRoleString)) { 
+                && Message.contains(Kit.get().ReactionRoleString)) { // Contains reaction role string
 
             if (e.getMessage().getMentionedRoles().size() > 1) {
                 MenuHandler.RoleListMenu("rolepage",
