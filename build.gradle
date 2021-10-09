@@ -36,9 +36,10 @@ repositories {
         allowInsecureProtocol true
         url 'http://jcenter.bintray.com'
     }
+    mavenCentral()
 }
 
-var manifold = "2021.1.24"
+var manifold = "2021.1.25"
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.20'
@@ -46,11 +47,11 @@ dependencies {
     annotationProcessor 'systems.manifold:manifold-ext:' + manifold
     implementation 'net.dv8tion:JDA:4.3.0_331'
     implementation 'com.github.pemistahl:lingua:1.1.0'
-    implementation 'art.arcane:Amulet:21.10.8'
+    implementation 'art.arcane:Amulet:21.10.10'
     implementation 'com.github.ArcaneArts:Quill:1.1.3'
     implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
     implementation 'org.slf4j:slf4j-simple:2.0.0-alpha1'
-    implementation 'org.jsoup:jsoup:1.14.2'
+    implementation 'org.jsoup:jsoup:1.14.3'
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.jagrosh:jda-utilities:3.0.5'
     implementation 'org.eclipse.jetty:jetty-server:9.4.28.v20200408'

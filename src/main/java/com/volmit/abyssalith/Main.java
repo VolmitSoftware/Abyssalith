@@ -35,6 +35,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import static art.arcane.amulet.MagicalSugar.*;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
