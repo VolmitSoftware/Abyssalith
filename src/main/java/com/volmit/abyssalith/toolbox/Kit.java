@@ -28,6 +28,7 @@ import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.util.Range;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import static art.arcane.amulet.MagicalSugar.*;
 
 import java.io.File;
 import java.io.IOException;
