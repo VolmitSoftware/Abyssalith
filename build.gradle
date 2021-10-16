@@ -42,10 +42,10 @@ repositories {
 var manifold = "2021.1.25"
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'systems.manifold:manifold-ext:' + manifold
-    implementation 'net.dv8tion:JDA:4.3.0_331'
+    implementation 'net.dv8tion:JDA:4.3.0_334'
     implementation 'com.github.pemistahl:lingua:1.1.0'
     implementation 'art.arcane:Amulet:21.10.10'
     implementation 'com.github.ArcaneArts:Quill:1.1.3'
