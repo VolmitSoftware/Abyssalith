@@ -39,9 +39,6 @@ public class PhishingListener extends ListenerAdapter {
                 } catch (Exception ignored) {
                 } // Don't care about exceptions here, the only possible one is a permission one, and the bot needs to be able to handle it elsewhere
             }
-
-
         }
-
     }
 }

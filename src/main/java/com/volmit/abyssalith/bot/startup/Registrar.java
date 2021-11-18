@@ -18,6 +18,7 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.commands.botmaster.Debug2;
 import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.commands.moderation.EcoHub;
 import com.volmit.abyssalith.commands.moderation.ModHub;
@@ -40,6 +41,7 @@ public class Registrar extends ListenerAdapter {
         //Listeners
         jda.addEventListener(new Main()); // [ DONT TOUCH THESE TWO LISTENERS ]
         jda.addEventListener(new Kit());  // [ DONT TOUCH THESE TWO LISTENERS ]
+
         jda.addEventListener(new BotListener()); // Watches the Bot instance's for stuff
         jda.addEventListener(new ButtonListener());
         jda.addEventListener(new PasteListener());
@@ -61,8 +63,11 @@ public class Registrar extends ListenerAdapter {
         jda.addEventListener(new UserInfo());
         jda.addEventListener(new Passive());
         jda.addEventListener(new RoleMenu());
-        //jda.addEventListener(new Poll()); BROKEN
         jda.addEventListener(new Log());
+
+        jda.addEventListener(new Debug2()); // dev
+
+
         jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last
     }
 }

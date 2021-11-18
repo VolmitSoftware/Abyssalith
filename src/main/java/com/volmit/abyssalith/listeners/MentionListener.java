@@ -19,7 +19,6 @@ package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.data.User;
-import lombok.SneakyThrows;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -28,9 +27,7 @@ import java.util.Objects;
 
 
 public class MentionListener extends ListenerAdapter {
-    @SneakyThrows
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-
         if (e.getMessage().getMentionedMembers().size() > 0) {
             for (Member m : e.getMessage().getMentionedMembers()) {
                 User u = Main.getLoader().getUser(m.getIdLong());
@@ -40,7 +37,5 @@ public class MentionListener extends ListenerAdapter {
                 u.recentMentions().put(u.recentMentions().size(), "[**USER**]" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " [**SAID**]: " + e.getMessage().getContentRaw());
             }
         }
-
-
     }
 }

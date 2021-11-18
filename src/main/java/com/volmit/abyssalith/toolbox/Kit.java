@@ -79,7 +79,7 @@ public class Kit extends ListenerAdapter {
     public String LevelName = "Level ";
     public String MoneyName = "VolmitCoin";
     public String MoneyEmoji = ":coin:";
-    public List<String> Phishing = Arrays.asList("discordgift.site", "discord.link", "dis.cord", "disc0rd.gg", "discord.gift", "discorcl.click", "gavenitro.com", "discodnitro.info", "discord-airdrop.com", "steamnltros.ru", "discord-app.net", "discord-give.com", "diiscord.com");
+    public List<String> Phishing = Arrays.asList("discordgift.site", "dicsordapp.co" ,"discord.link", "dis.cord", "disc0rd.gg", "discord.gift", "discorcl.click", "gavenitro.com", "discodnitro.info", "discord-airdrop.com", "steamnltros.ru", "discord-app.net", "discord-give.com", "diiscord.com");
     public String RedisAddress = "";
     public int RedisPort = 0;
     public String RedisPassword = "";
