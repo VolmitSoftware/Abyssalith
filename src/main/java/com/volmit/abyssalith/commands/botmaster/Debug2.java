@@ -51,7 +51,7 @@ public class Debug2 extends VolmitCommand {
         int port = 13; // What port am I opening to do the query
         int buffer; // character number
 
-        try (Socket socket = new Socket(hostname, port)) {
+        try (Socket socket = new Socket(hostname, port)) { // Try, with "strings" or "data" means it will tie up any loose ends like tcp sockets etc...
             InputStreamReader reader = new InputStreamReader(socket.getInputStream());
             StringBuilder data = new StringBuilder();
 
