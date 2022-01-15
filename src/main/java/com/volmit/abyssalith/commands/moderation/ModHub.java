@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.commands.moderation;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.commands.moderation.banish.Banish;
 import com.volmit.abyssalith.commands.moderation.banish.UnBanish;
 import com.volmit.abyssalith.commands.moderation.warning.AddWarn;
@@ -52,7 +53,7 @@ public class ModHub extends VolmitCommand {
     }
 
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Mod List Initialized");
+        Abyss.info("Mod List Initialized");
         e.getMessage().delete().queue(); // delete the sent message
     }
 

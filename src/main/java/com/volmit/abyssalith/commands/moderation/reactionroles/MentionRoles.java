@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.commands.moderation.reactionroles;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -43,9 +43,9 @@ public class MentionRoles extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Mention Roles List Initialized");
+        Abyss.info("Mention Roles List Initialized");
         VolmitEmbed embed = new VolmitEmbed(" REACTION ROLES!!", e.getMessage());
-        User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
+        User u = Abyss.getLoader().getUser(e.getAuthor().getIdLong());
         embed.setDescription("*This should explain how to use the reaction roles system, should you have any questions!*");
         embed.addField("Create a Reaction-able Message!", " First of all your message needs to contain the following: `"
                 + Kit.get().ReactionRoleString

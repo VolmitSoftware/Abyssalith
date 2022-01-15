@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.listeners;
 
+import com.volmit.abyssalith.Abyss;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Button;
@@ -25,7 +26,7 @@ import net.dv8tion.jda.api.interactions.components.Button;
 public class PasteLinkListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://pastebin.com/")) {
-            i("Started the Paste Service");
+            Abyss.info("Started the Paste Service");
             String str = e.getMessage().getContentRaw();
             String[] pbArr = str.split(" ");
             for (String s : pbArr) {
@@ -35,13 +36,13 @@ public class PasteLinkListener extends ListenerAdapter {
                                 Button.success("pastbinlinknew", "Yes please!"),
                                 Button.danger("no", "No, go away!")
                         ).queue();
-                        i("Sent Paste Service Buttons");
+                        Abyss.info("Sent Paste Service Buttons");
                     });
                 }
             }
         }
         if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://mclo.gs/")) {
-            i("Started the McLogs Service");
+            Abyss.info("Started the McLogs Service");
             String str = e.getMessage().getContentRaw();
             String[] pbArr = str.split(" ");
             for (String s : pbArr) {
@@ -51,13 +52,13 @@ public class PasteLinkListener extends ListenerAdapter {
                                 Button.success("mcloglinknew", "Yes please!"),
                                 Button.danger("no", "No, go away!")
                         ).queue();
-                        i("Sent McLog Service Buttons");
+                        Abyss.info("Sent McLog Service Buttons");
                     });
                 }
             }
         }
         if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://hastebin.com/")) {
-            i("Started the Hastebin Service");
+            Abyss.info("Started the Hastebin Service");
             String str = e.getMessage().getContentRaw();
             String[] pbArr = str.split(" ");
             for (String s : pbArr) {
@@ -67,7 +68,7 @@ public class PasteLinkListener extends ListenerAdapter {
                                 Button.success("hastebinlinknew", "Yes please!"),
                                 Button.danger("no", "No, go away!")
                         ).queue();
-                        i("Sent HasteBin Service Buttons");
+                        Abyss.info("Sent HasteBin Service Buttons");
                     });
                 }
             }

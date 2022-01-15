@@ -24,11 +24,10 @@ import art.arcane.quill.io.IO;
 import art.arcane.quill.json.JSONObject;
 import art.arcane.quill.logging.L;
 import com.google.gson.Gson;
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.util.Range;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import static art.arcane.amulet.MagicalSugar.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,7 +57,7 @@ public class Kit extends ListenerAdapter {
         env("BOT_USE_BANISHED_INSTEAD_KICK", (f) -> UseBanishedInsteadOfKick = Boolean.parseBoolean(f));
         env("BOT_USE_LINGUA", (f) -> UseLingua = Boolean.parseBoolean(f));
         env("BOT_USE_PERSISTENT_ROLES", (f) -> UsePersistentRoles = Boolean.parseBoolean(f));
-        env("BOT_XP_PER_MESSAGE", (f) -> XpPerMessage = new Range(Float.parseFloat(f.splitAbs("_")[0]), Float.parseFloat(f.splitAbs("_")[1])));
+        env("BOT_XP_PER_MESSAGE", (f) -> XpPerMessage = new Range(Float.parseFloat(f.split("_")[0]), Float.parseFloat(f.split("_")[1])));
         env("BOT_XP_MAX_LEVELS", (f) -> XpMaxLevels = Integer.parseInt(f));
         env("BOT_XP_BASE_MULTIPLIER", (f) -> XpBaseMultiplier = Double.parseDouble(f));
         env("BOT_REDIS", (f) -> UseRedis = Boolean.parseBoolean(f));
@@ -114,14 +113,14 @@ public class Kit extends ListenerAdapter {
         if (fw.checkModified()) {
             instance = new AtomicCache<>();
             L.v("Hot-loaded Config");
-            Main.getJDA();
+            Abyss.getJDA();
         }
     }
 
     public static Kit get() {
         return instance.aquire(() -> {
             File f = getFile();
-            System.println("Config File location:\n" + f.getAbsolutePath());
+            System.out.println("Config File location:\n" + f.getAbsolutePath());
             f.getParentFile().mkdirs();
             Kit dummy = new Kit();
 
@@ -148,7 +147,7 @@ public class Kit extends ListenerAdapter {
         String f = System.getenv(key);
 
         if (f != null) {
-            d(key + " updated to " + f + " from ENVIRONMENT");
+            Abyss.info(key + " updated to " + f + " from ENVIRONMENT");
             c.accept(f);
         }
     }

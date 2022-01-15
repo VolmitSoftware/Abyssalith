@@ -28,7 +28,7 @@ import java.util.Objects;
 public class PhishingListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
         for (String p : Kit.get().Phishing) {
-            if (e.getMessage().lower().contains(p)) {
+            if (e.getMessage().getContentRaw().toLowerCase().contains(p)) {
                 e.getMessage().delete().queue();
                 Objects.requireNonNull(e.getMember()).getUser().openPrivateChannel().complete().sendMessage("Hello, You have been banned from volmit for sending Phishing links: `\n" +
                         e.getMessage() +

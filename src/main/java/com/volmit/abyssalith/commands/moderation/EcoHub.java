@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.commands.moderation;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.commands.moderation.eco.Get;
 import com.volmit.abyssalith.commands.moderation.eco.Give;
 import com.volmit.abyssalith.commands.moderation.eco.Remove;
@@ -48,7 +49,7 @@ public class EcoHub extends VolmitCommand {
     }
 
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Eco List Initialized");
+        Abyss.info("Eco List Initialized");
         e.getMessage().delete().queue(); // delete the sent message
     }
 

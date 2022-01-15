@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.commands.moderation.banish;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.handlers.BanishHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -42,7 +43,7 @@ public class UnBanish extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Un-Applied Banish: " + e.getMessage().getContentRaw());
+        Abyss.info("Un-Applied Banish: " + e.getMessage().getContentRaw());
 
         if (e.getMessage().getMentionedMembers().size() == 1) {
             Member m = e.getMessage().getMentionedMembers().get(0);

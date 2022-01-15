@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.util;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
@@ -154,7 +154,7 @@ public class VolmitEmbed extends EmbedBuilder {
     public void send(Message message, MessageChannel channel, boolean deleteMSG, int deleteAfterMS, List<String> reactions) {
         if (reactions == null) reactions = new ArrayList<>();
         if (message == null && channel == null) {
-            Main.error("No channel and message specified.");
+            Abyss.error("No channel and message specified.");
         } else if (message != null) {
             List<String> finalReactions = reactions;
             message.getChannel().sendMessageEmbeds(this.build()).queue(msg -> {

@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.bot.startup;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.commands.moderation.EcoHub;
 import com.volmit.abyssalith.commands.moderation.ModHub;
@@ -37,7 +37,7 @@ public class Registrar extends ListenerAdapter {
 
 
         //Listeners
-        jda.addEventListener(new Main()); // [ DONT TOUCH THESE TWO LISTENERS ]
+        jda.addEventListener(new Abyss()); // [ DONT TOUCH THESE TWO LISTENERS ]
         jda.addEventListener(new Kit());  // [ DONT TOUCH THESE TWO LISTENERS ]
 
         jda.addEventListener(new BotListener()); // Watches the Bot instance's for stuff

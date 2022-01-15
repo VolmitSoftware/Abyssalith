@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.bot.instance;
 
+import com.volmit.abyssalith.Abyss;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -39,11 +40,11 @@ public class BotInstance {
                 .build();
         jda.getPresence().setStatus(OnlineStatus.IDLE);
         jda.getPresence().setActivity(Activity.watching("The Universe: .?"));
-        i("Bot Instantiated");
+        Abyss.info("Bot Instantiated");
     }
 
     public void close() {
-        i("Terminating Bot Instance");
+        Abyss.info("Terminating Bot Instance");
         jda.shutdown();
     }
 

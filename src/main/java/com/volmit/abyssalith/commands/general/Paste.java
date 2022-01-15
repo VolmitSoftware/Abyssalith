@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.commands.general;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -40,7 +41,7 @@ public class Paste extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Raw Code was Pasted");
+        Abyss.info("Raw Code was Pasted");
         VolmitEmbed embed = new VolmitEmbed("Raw Code Alternative!", e.getMessage());
         embed.setDescription("Generally speaking you can paste your code however you want, however its hard for some of us to read it when we are on our phones, or anything like that, using a paste service will help us help you\n**AND IF YOU PASTE ONE OF THE BOT SUPPORTED LINKS, THE BOT WILL SCAN FOR KNOWN PROBLEMS**");
         embed.addField("Possible Paste Sites!", "" +

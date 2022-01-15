@@ -53,7 +53,7 @@ public class MenuHandler { // get and send menu
         messageChannel.sendMessage("Select the roles that you want!") // Send it to the chat!
                 .setActionRow(menu.build())
                 .queue(f -> {
-                    System.println("Generated Abstracted Menu!");
+                    System.out.println("Generated Abstracted Menu!");
                 });
 
     }

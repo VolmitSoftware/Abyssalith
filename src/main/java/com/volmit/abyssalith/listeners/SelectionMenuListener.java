@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.listeners;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.handlers.RoleHandler;
 import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -33,7 +34,7 @@ public class SelectionMenuListener extends ListenerAdapter {
         //captures selection menu, and applies roles/removes roles from the user
 
         if (e.getComponentId().equalsIgnoreCase("menu:rolepage")) {
-            i("Subjugating selection Menu");
+            Abyss.info("Subjugating selection Menu");
             e.getComponentId();
 
             Set<String> roles = new HashSet<>();

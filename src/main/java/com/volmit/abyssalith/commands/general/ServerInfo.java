@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.commands.general;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -66,7 +67,7 @@ public class ServerInfo extends VolmitCommand {
         private final Member owner;
 
         private GuildStats(Guild g) {
-            i("Sending Guild Stats");
+            Abyss.info("Sending Guild Stats");
 
             List<Member> l = g.getMembers();
 

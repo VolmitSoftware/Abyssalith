@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.commands.general;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
@@ -48,7 +49,7 @@ public class Commands extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Command List Initialized");
+        Abyss.info("Command List Initialized");
 
         // Init embed
         VolmitEmbed embed = new VolmitEmbed("The Abyssalith - " + Kit.get().botName + " Info Page!", e.getMessage());

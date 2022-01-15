@@ -31,7 +31,7 @@ public class RoleCleanup extends ListenerAdapter {
 
     public static void Cleaner(JDA jda) {
 
-        System.println("Cleaning unused roles from guild");
+        System.out.println("Cleaning unused roles from guild");
         List<String> ff = new ArrayList<>();
         for (Role r : jda.getGuilds().get(0).getRoles()) {
             Role role = jda.getGuilds().get(0).getRoleById(jda.getGuilds().get(0).getRolesByName(r.getName(), false).get(0).getIdLong());
@@ -42,10 +42,10 @@ public class RoleCleanup extends ListenerAdapter {
             }
         }
         if (ff.size() > 0) {
-            System.println("Cleaned roles: ");
-            System.println(ff);
+            System.out.println("Cleaned roles: ");
+            System.out.println(ff);
         } else {
-            System.println("No roles to clean!");
+            System.out.println("No roles to clean!");
         }
     }
 }

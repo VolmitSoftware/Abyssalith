@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.listeners;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.data.User;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -30,7 +30,7 @@ public class MentionListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
         if (e.getMessage().getMentionedMembers().size() > 0) {
             for (Member m : e.getMessage().getMentionedMembers()) {
-                User u = Main.getLoader().getUser(m.getIdLong());
+                User u = Abyss.getLoader().getUser(m.getIdLong());
                 if (u.recentMentions().size() > 2) {
                     u.recentMentions().remove(u.recentMentions().size() - 1);
                 }

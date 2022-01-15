@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.commands.moderation;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -44,7 +45,7 @@ public class Poll extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent event) {
-        i("Poll System Initalized");
+        Abyss.info("Poll System Initalized");
 
         String msg = event.getMessage().getContentRaw();
         if (!args.isEmpty()) {

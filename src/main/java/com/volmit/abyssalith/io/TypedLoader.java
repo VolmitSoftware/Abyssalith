@@ -19,7 +19,7 @@ package com.volmit.abyssalith.io;
 
 import art.arcane.quill.collections.KMap;
 import art.arcane.quill.math.M;
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 
 import java.util.Locale;
 import java.util.concurrent.locks.ReentrantLock;
@@ -60,7 +60,7 @@ public class TypedLoader<T extends DataType> {
         lastUse.remove(i);
         T m = cache.remove(i);
         storage.set(type.getSimpleName().toLowerCase(Locale.ROOT), i, storage.toString(m));
-        Main.info("Saved " + type.getSimpleName() + "[" + i + "]");
+        Abyss.info("Saved " + type.getSimpleName() + "[" + i + "]");
     }
 
     public T get(long key) {
@@ -71,14 +71,14 @@ public class TypedLoader<T extends DataType> {
         if (t == null) {
             t = cache.computeIfAbsent(key, (v) -> {
                 if (storage.exists(type.getSimpleName().toLowerCase(Locale.ROOT), key)) {
-                    Main.info("Loaded " + type.getSimpleName() + "[" + key + "]");
+                    Abyss.info("Loaded " + type.getSimpleName() + "[" + key + "]");
                     return storage.fromString(storage.get(type.getSimpleName().toLowerCase(Locale.ROOT), key), type);
                 }
 
                 try {
                     T x = type.getConstructor().newInstance();
                     x.id(key);
-                    Main.info("Created " + type.getSimpleName() + "[" + key + "]");
+                    Abyss.info("Created " + type.getSimpleName() + "[" + key + "]");
                     return x;
                 } catch (Throwable e) {
                     e.printStackTrace();

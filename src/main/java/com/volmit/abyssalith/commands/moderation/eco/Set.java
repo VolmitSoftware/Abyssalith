@@ -18,7 +18,7 @@
 package com.volmit.abyssalith.commands.moderation.eco;
 
 import art.arcane.quill.format.Form;
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -44,14 +44,14 @@ public class Set extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Eco.Set Instanced");
+        Abyss.info("Eco.Set Instanced");
         String moneyName = Kit.get().MoneyName;
         String moneyEmoji = Kit.get().MoneyEmoji;
 
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji + moneyName + " set: ", args.get(1) + " Set By: " + e.getAuthor().getAsMention(), false);
 
-        User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
+        User u = Abyss.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
         u.money(Float.parseFloat(args.get(1)));
 
         embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);

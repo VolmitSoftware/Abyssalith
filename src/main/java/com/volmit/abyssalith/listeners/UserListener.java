@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.listeners;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.XP;
@@ -32,8 +32,8 @@ import java.util.Objects;
 
 public class UserListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
-        if (e.getMessage().imUser()) {
-            User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
+        if (!e.getMessage().getAuthor().isBot()) {
+            User u = Abyss.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
             u.experience(u.experience() + Kit.get().XpPerMessage.rand()); //XP
             u.messagesSent(u.messagesSent() + 1);
             double uxp = u.experience();
@@ -48,7 +48,7 @@ public class UserListener extends ListenerAdapter {
 
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
         if (!e.getUser().isBot()) {
-            User u = Main.getLoader().getUser(e.getUser().getIdLong());
+            User u = Abyss.getLoader().getUser(e.getUser().getIdLong());
             u.experience((u.experience() + Kit.get().XpPerMessage.rand()));
             u.reactions(u.reactions() + 1);
         }
@@ -56,9 +56,9 @@ public class UserListener extends ListenerAdapter {
 
     public void onMessageReactionRemove(MessageReactionRemoveEvent e) {
         long uid = e.getUserIdLong();
-        if (Main.getJDA().getSelfUser().getIdLong() != uid) {
+        if (Abyss.getJDA().getSelfUser().getIdLong() != uid) {
             e.getUserId();
-            User u = Main.getLoader().getUser(e.getUserIdLong());
+            User u = Abyss.getLoader().getUser(e.getUserIdLong());
             u.reactions(u.reactions() - 1);
             u.experience(u.experience() - Kit.get().XpPerMessage.rand());
         }
@@ -67,22 +67,22 @@ public class UserListener extends ListenerAdapter {
     private void roleManager(MessageReceivedEvent e, String role, int v) {
         Role r;
         try {
-            if (e.getGuild().hasRole(role)) {
+            if (e.getGuild().getRolesByName(role, false).size() == 1 && e.getGuild().getRolesByName(role, false).contains(e.getGuild().getRolesByName(role, true).get(0))) {
                 r = e.getGuild().getRolesByName(role, true).get(0);
                 if (r != null) {
                     e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()).getIdLong(), r).queue();
                     if (v > 0) {
                         for (Role rol : e.getMember().getRoles()) {
                             if (rol.getName().contains(Kit.get().LevelName)) {
-                                int rint = Integer.parseInt(rol.getName().replaceAbs(Kit.get().LevelName, ""));
+                                int rint = Integer.parseInt(rol.getName().replace(Kit.get().LevelName, ""));
                                 if (v > rint) {
                                     e.getGuild().removeRoleFromMember(e.getMember().getId(), e.getGuild().getRolesByName(
                                             Kit.get().LevelName + rint, false).get(0)).complete();
-                                    i("Removed, excessive child roles from user: " + e.getMember().getId());
+                                    Abyss.info("Removed, excessive child roles from user: " + e.getMember().getId());
                                 } else if (v != rint) {
                                     e.getGuild().removeRoleFromMember(e.getMember().getId(), e.getGuild().getRolesByName(
                                             Kit.get().LevelName + rint, false).get(0)).complete();
-                                    w("Removed a role that was not possible to have reached, or something that does not match: " + e.getMember().getId());
+                                    Abyss.warn("Removed a role that was not possible to have reached, or something that does not match: " + e.getMember().getId());
                                 }
 
                             }
@@ -99,9 +99,9 @@ public class UserListener extends ListenerAdapter {
     private void roleValidator(MessageReceivedEvent e, String role) {
         if (e.getGuild().getRolesByName(role, false).size() < 1) {
             e.getGuild().createRole().setName(role).setMentionable(false).complete();
-            i("[RV] - New Maximum level created!");
+            Abyss.info("[RV] - New Maximum level created!");
         } else if (e.getGuild().getRolesByName(role, false).size() > 1) {
-            w("For some reason there are too many roles here im having a stroke... Managing...");
+            Abyss.warn("For some reason there are too many roles here im having a stroke... Managing...");
             int i = 0;
             for (Role r : e.getGuild().getRolesByName(role, false)) {
                 if (i != 0) {

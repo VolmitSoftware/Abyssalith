@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.commands.botmaster;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -42,12 +42,12 @@ public class Shutdown extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        w("Terminating the Bot");
+        Abyss.warn("Terminating the Bot");
         String oidcheck = e.getMessage().getAuthor().getId();
         if (oidcheck.equals(Kit.get().BotOwnerID)) {
-            Main.warn("KILLING BOT");
+            Abyss.warn("KILLING BOT");
             e.getMessage().delete().queue();
-            Main.shutdown();
+            Abyss.shutdown();
         } else {
             e.getChannel().sendMessage("uR noT my DAddY!").queue();
         }

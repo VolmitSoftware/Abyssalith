@@ -17,11 +17,9 @@
  */
 package com.volmit.abyssalith;
 
-import art.arcane.amulet.logging.LogListener;
 import art.arcane.quill.execution.J;
 import art.arcane.quill.execution.Looper;
 import com.volmit.abyssalith.bot.instance.BotProvider;
-import com.volmit.abyssalith.bot.instance.GarbageDigitalOceanHealthCheckWebServerEchoServer;
 import com.volmit.abyssalith.bot.instance.IBotProvider;
 import com.volmit.abyssalith.bot.startup.Registrar;
 import com.volmit.abyssalith.bot.startup.RoleCleanup;
@@ -35,14 +33,12 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import static art.arcane.amulet.MagicalSugar.*;
 
-import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.util.Objects;
 
 
-public class Main extends ListenerAdapter {
+public class Abyss extends ListenerAdapter {
     public static final IBotProvider provider = new BotProvider();
 
     @Getter
@@ -52,35 +48,8 @@ public class Main extends ListenerAdapter {
         return provider.get().getJDA();
     }
 
-    public static void main(String[] args) throws LoginException {
-        new Thread(() -> {
-            try {
-                new GarbageDigitalOceanHealthCheckWebServerEchoServer();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-        LogListener.listener.set(new LogListener() {
-            @Override
-            public void i(String tag, Object f) {
-                info(tag + ": " + f);
-            }
+    public static void main(String[] args) {
 
-            @Override
-            public void f(String tag, Object f) {
-                error(tag + ": " + f);
-            }
-
-            @Override
-            public void w(String tag, Object f) {
-                warn(tag + ": " + f);
-            }
-
-            @Override
-            public void d(String tag, Object f) {
-                debug(tag + ": " + f);
-            }
-        });
         envInject();
 
         if (Kit.get().UseRedis) {
@@ -91,7 +60,7 @@ public class Main extends ListenerAdapter {
         }
 
         org.slf4j.simple.SimpleServiceProvider.class.getSimpleName();
-        System.println("Initializing");
+        System.out.println("Initializing");
         Kit.get().botID = getJDA().getSelfUser().getIdLong();
         Kit.get().botUser = getJDA().getUserById(Kit.get().botID);
         Kit.get().botName = Objects.requireNonNull(Kit.get().botUser).getName();
@@ -118,18 +87,18 @@ public class Main extends ListenerAdapter {
             J.sleep(1500);
             RoleCleanup.Cleaner(getJDA());
         });
-        i("BOT HAS STARTED!");
+        info("BOT HAS STARTED!");
     }
 
     public static void shutdown() {
-        System.println("Terminating the bot instance");
+        System.out.println("Terminating the bot instance");
         getJDA().getPresence().setStatus(OnlineStatus.OFFLINE);
         getJDA().shutdown();
         System.exit(1);
     }
 
     private static void log(String tag, Object t) {
-        System.println("[" + tag + "]-> " + t);
+        System.out.println("[" + tag + "]-> " + t);
     }
 
     public static void warn(Object message) {

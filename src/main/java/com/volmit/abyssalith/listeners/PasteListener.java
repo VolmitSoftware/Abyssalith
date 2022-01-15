@@ -18,7 +18,7 @@
 package com.volmit.abyssalith.listeners;
 
 import art.arcane.quill.collections.KList;
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
@@ -55,25 +55,25 @@ public class PasteListener extends ListenerAdapter {
         } else if (e.getComponentId().equals("hastebinlinknew") || e.getComponentId().equals("pastbinlinknew") || e.getComponentId().equals("mcloglinknew")) {
 
 
-            i("Starting Interpreter Paste Service");
+            Abyss.info("Starting Interpreter Paste Service");
             String properURL = null;
             Document doc;
             if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://pastebin.com")) {
-                i("Reached Pasebin");
+                Abyss.info("Reached Pasebin");
                 String[] args = e.getMessage().getContentRaw().replaceAll(">", "").split("/", 5);
-                Main.info(args[3]);
+                Abyss.info(args[3]);
                 String stem = args[3];
                 properURL = "https://pastebin.com/raw/" + stem;
             } else if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://mclo.gs/")) {
-                i("Reached McLogs");
+                Abyss.info("Reached McLogs");
                 String[] args = e.getMessage().getContentRaw().replaceAll(">", "").split("/", 5);
-                Main.info(args[3]);
+                Abyss.info(args[3]);
                 String stem = args[3];
                 properURL = "https://api.mclo.gs/1/raw/" + stem;
             } else if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://hastebin.com/")) {
-                i("Reached Hastebin");
+                Abyss.info("Reached Hastebin");
                 String[] args = e.getMessage().getContentRaw().replaceAll(">", "").split("/", 5);
-                Main.info(args[3]);
+                Abyss.info(args[3]);
                 String stem = args[3];
                 properURL = "https://hastebin.com/raw/" + stem;
             }
@@ -89,7 +89,7 @@ public class PasteListener extends ListenerAdapter {
             VolmitEmbed embed = new VolmitEmbed("Automated Error Detector", e.getMessage());
             embed.setTitle("Automated Detriment Detector");
             embed.setDescription("Hello user! This is A.D.D. and I will do my best to read your file!\n" + "||Paste: " + properURL + "||");
-            Main.info("PROCESSING PASTEBIN FILE FROM " + properURL);
+            Abyss.info("PROCESSING PASTEBIN FILE FROM " + properURL);
             int problems = test(doc.text(), embed);
 
 

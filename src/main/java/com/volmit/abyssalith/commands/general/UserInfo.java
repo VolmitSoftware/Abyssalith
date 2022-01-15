@@ -18,7 +18,7 @@
 package com.volmit.abyssalith.commands.general;
 
 import art.arcane.quill.format.Form;
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -44,18 +44,18 @@ public class UserInfo extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Revealing User Statistics");
+        Abyss.info("Revealing User Statistics");
         VolmitEmbed embed = new VolmitEmbed(" User Info!", e.getMessage());
-        User u = Main.getLoader().getUser(e.getAuthor().getIdLong());
+        User u = Abyss.getLoader().getUser(e.getAuthor().getIdLong());
         String ments = u.recentMentions().toString()
-                .replaceAbs("{", "")
-                .replaceAbs("}", "")
-                .replaceAbs(", ", "\n")
-                .replaceAbs("0=[", "- [")
-                .replaceAbs("1=[", "- [")
-                .replaceAbs("2=[", "- [")
-                .replaceAbs("3=[", "- [")
-                .replaceAbs("4=[", "- [");
+                .replace("{", "")
+                .replace("}", "")
+                .replace(", ", "\n")
+                .replace("0=[", "- [")
+                .replace("1=[", "- [")
+                .replace("2=[", "- [")
+                .replace("3=[", "- [")
+                .replace("4=[", "- [");
 
         embed.setDescription("These are your Stats that are stored in the server for usages, logging, and preventative measures!");
         embed.addField("Your Id", "`" + u.id() + "`", false);

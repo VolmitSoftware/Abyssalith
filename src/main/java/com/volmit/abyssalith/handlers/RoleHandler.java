@@ -26,12 +26,12 @@ public class RoleHandler {
     public static void addRole(Member member, String roleNameIgnoreCase) {
         Guild g = member.getGuild();
         Role r = g.getRolesByName(roleNameIgnoreCase, true).get(0);
-        System.println("[INFO]-> Added The role:" + r + " to " + member);
+        System.out.println("[INFO]-> Added The role:" + r + " to " + member);
 
         if (r != null) {
             g.addRoleToMember(member, r).queue();
         } else {
-            System.println("Cant find Role By that name");
+            System.out.println("Cant find Role By that name");
         }
 
     }
@@ -39,30 +39,30 @@ public class RoleHandler {
     public static void addRole(Member member, Role role) {
         Guild g = member.getGuild();
         g.removeRoleFromMember(member, role).queue();
-        System.println("[INFO]-> Added The role:" + role + " to " + member);
+        System.out.println("[INFO]-> Added The role:" + role + " to " + member);
     }
 
     public static void addRole(Member member, Long ID) {
         Guild g = member.getGuild();
         Role r = g.getRoleById(ID);
-        System.println("[INFO]-> Added The role:" + r + " to " + member);
+        System.out.println("[INFO]-> Added The role:" + r + " to " + member);
 
         if (r != null) {
             g.addRoleToMember(member, r).queue();
         } else {
-            System.println("Cant find Role By that name");
+            System.out.println("Cant find Role By that name");
         }
     }
 
     public static void removeRole(Member member, String roleNameIgnoreCase) {
         Guild g = member.getGuild();
         Role r = g.getRolesByName(roleNameIgnoreCase, true).get(0);
-        System.println("[INFO]-> Removed The role:" + r + " from " + member);
+        System.out.println("[INFO]-> Removed The role:" + r + " from " + member);
 
         if (r != null) {
             g.removeRoleFromMember(member, r).queue();
         } else {
-            System.println("Cant find Role By that name");
+            System.out.println("Cant find Role By that name");
         }
 
     }
@@ -70,18 +70,18 @@ public class RoleHandler {
     public static void removeRole(Member member, Role role) {
         Guild g = member.getGuild();
         g.removeRoleFromMember(member, role).queue();
-        System.println("[INFO]-> Removed The role:" + role + " from " + member);
+        System.out.println("[INFO]-> Removed The role:" + role + " from " + member);
     }
 
     public static void removeRole(Member member, Long ID) {
         Guild g = member.getGuild();
         Role r = g.getRoleById(ID);
-        System.println("[INFO]-> Removed The role:" + r + " from " + member);
+        System.out.println("[INFO]-> Removed The role:" + r + " from " + member);
 
         if (r != null) {
             g.removeRoleFromMember(member, r).queue();
         } else {
-            System.println("Cant find Role By that name");
+            System.out.println("Cant find Role By that name");
         }
     }
 }

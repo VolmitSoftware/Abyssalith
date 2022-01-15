@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.commands.moderation.warning;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
@@ -45,7 +45,7 @@ public class PurgeWarns extends VolmitCommand {
     public void handle(List<String> args, MessageReceivedEvent e) {
         String[] s = e.getMessage().getContentRaw().split(" ");
         if (e.getMessage().getMentionedMembers().size() == 0 && e.getGuild().getMemberById(s[2].toString()) != null) {
-            User u = Main.getLoader().getUser(e.getGuild().getMemberById(s[2].toString()).getIdLong());
+            User u = Abyss.getLoader().getUser(e.getGuild().getMemberById(s[2].toString()).getIdLong());
 
             WarningHandler.purge(u, e.getMessage().getChannel());
 

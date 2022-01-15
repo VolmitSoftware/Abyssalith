@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.listeners;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.handlers.RoleHandler;
 import com.volmit.abyssalith.toolbox.Kit;
@@ -36,21 +36,21 @@ public class PersistentRoleListener extends ListenerAdapter {
 
     public void onGuildMemberJoin(GuildMemberJoinEvent e) {
         if (!e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
-            i("Attempting to reattach roles for: " + e.getMember().getEffectiveName());
+            Abyss.info("Attempting to reattach roles for: " + e.getMember().getEffectiveName());
 
-            User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
+            User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
             if (!lRoles.isEmpty() && e.getMember().getRoles().isEmpty()) {
                 for (String r : lRoles) {
                     RoleHandler.addRole(e.getMember(), e.getGuild().getRoleById(r));
 
                 }
-                i("Reattached cached roles for: " + e.getMember().getEffectiveName());
+                Abyss.info("Reattached cached roles for: " + e.getMember().getEffectiveName());
             }
             if (lRoles.isEmpty() && !e.getMember().getRoles().isEmpty()) {
                 for (Role r : e.getMember().getRoles()) {
                     u.roleIds().add(r.getId());
-                    w("Reached Failsafe for role attachment for: " + e.getMember().getEffectiveName() + ", Probably had no roles?");
+                    Abyss.warn("Reached Failsafe for role attachment for: " + e.getMember().getEffectiveName() + ", Probably had no roles?");
                 }
             }
         }
@@ -58,34 +58,34 @@ public class PersistentRoleListener extends ListenerAdapter {
 
     public void onGuildMemberRoleAdd(GuildMemberRoleAddEvent e) {
         if (!e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
-            User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
+            User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             u.roleIds().add(e.getRoles().get(0).getId());
-            i("Attached updated roles to : " + e.getMember().getEffectiveName() + "Role ID: " + e.getRoles().get(0).getId());
+            Abyss.info("Attached updated roles to : " + e.getMember().getEffectiveName() + "Role ID: " + e.getRoles().get(0).getId());
         }
     }
 
     public void onGuildMemberRoleRemove(GuildMemberRoleRemoveEvent e) {
         if (!e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
-            User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
+            User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             u.roleIds().remove(e.getRoles().get(0).getId());
-            i("Removed role from : " + e.getMember().getEffectiveName() + " Role ID: " + e.getRoles().get(0).getId());
+            Abyss.info("Removed role from : " + e.getMember().getEffectiveName() + " Role ID: " + e.getRoles().get(0).getId());
         }
     }
 
     public void onMessageReceived(MessageReceivedEvent e) { // THIS IS A FALLBACK TO KEEP ROLES UPDATED
-        User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
+        User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
         Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
         if (lRoles.size() < e.getMember().getRoles().size() && !e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
             for (Role r : e.getMember().getRoles()) {
                 u.roleIds().add(r.getId());
             }
-            i("Found Missing Roles, Rebinding to : " + e.getMember().getEffectiveName());
+            Abyss.info("Found Missing Roles, Rebinding to : " + e.getMember().getEffectiveName());
         }
         if (lRoles.size() > e.getMember().getRoles().size() && !e.getMember().getUser().isBot()) {
             for (Role r : e.getMember().getRoles()) {
                 u.roleIds().add(r.getId());
             }
-            w("ROLE MISMATCH, REFACTORING ROLES IN USER: " + e.getMember().getEffectiveName());
+            Abyss.warn("ROLE MISMATCH, REFACTORING ROLES IN USER: " + e.getMember().getEffectiveName());
         }
     }
 }

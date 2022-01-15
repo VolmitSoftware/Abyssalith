@@ -17,6 +17,7 @@
  */
 package com.volmit.abyssalith.commands.general;
 
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -40,7 +41,7 @@ public class Links extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Links Posted");
+        Abyss.info("Links Posted");
         VolmitEmbed embed = new VolmitEmbed(" Here you go!", e.getMessage());
         //Commands
         embed.addField("**WIKI LINKS**:", "" +

@@ -18,7 +18,7 @@
 package com.volmit.abyssalith.commands.moderation.eco;
 
 import art.arcane.quill.format.Form;
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
@@ -44,18 +44,18 @@ public class Get extends VolmitCommand {
     // Handle
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        i("Eco.Get Instanced");
+        Abyss.info("Eco.Get Instanced");
         String moneyName = Kit.get().MoneyName;
         String moneyEmoji = Kit.get().MoneyEmoji;
         if (!e.getMessage().getMentionedMembers().isEmpty()) {
-            User u = Main.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
+            User u = Abyss.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
 
             VolmitEmbed embed = new VolmitEmbed("Balance Page Report!", e.getMessage());
             embed.addField(moneyEmoji + moneyName + " Total: ", Form.f(u.money()), false);
             embed.addField("Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
             embed.send(e.getMessage(), true, 1000);
         } else {
-            User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong());
+            User u = Abyss.getLoader().getUser(e.getMessage().getAuthor().getIdLong());
             VolmitEmbed embed = new VolmitEmbed("Balance Page Report!", e.getMessage());
             embed.addField(moneyEmoji + moneyName + " Total: ", Form.f(u.money()), false);
             embed.addField("Total For " + e.getMessage().getAuthor().getName() + ": ", Form.f(u.money()), false);

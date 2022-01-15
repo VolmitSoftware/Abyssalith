@@ -18,7 +18,7 @@
 package com.volmit.abyssalith.io.storage;
 
 import art.arcane.quill.io.IO;
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.io.StorageAccess;
 
 import java.io.File;
@@ -30,7 +30,7 @@ public class FileSystemStorageAccess implements StorageAccess {
 
     public FileSystemStorageAccess(File root) {
         this.root = root;
-        Main.info("Created Storage Access (File System) in " + root.getAbsolutePath());
+        Abyss.info("Created Storage Access (File System) in " + root.getAbsolutePath());
     }
 
     private File fileFor(String typeName, Long key) {

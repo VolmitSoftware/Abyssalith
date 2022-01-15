@@ -17,7 +17,7 @@
  */
 package com.volmit.abyssalith.util;
 
-import com.volmit.abyssalith.Main;
+import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.toolbox.Kit;
 import lombok.Getter;
 import net.dv8tion.jda.api.entities.Message;
@@ -115,7 +115,7 @@ public class VolmitCommand extends ListenerAdapter {
             if (noPermission(Objects.requireNonNull(e.getMember()).getRoles(), e.getAuthor().getId())) return;
         }
         // Print info message
-        Main.info("Command passed checks: " + getName());
+        Abyss.info("Command passed checks: " + getName());
 
         // If it doesn't require arguments just pass it with null
         if (!needsArguments) {
@@ -128,7 +128,7 @@ public class VolmitCommand extends ListenerAdapter {
                 // Print subcommands
                 StringBuilder subs = new StringBuilder("Subs: ");
                 for (VolmitCommand cmd : getSubcommands()) subs.append(cmd.getName()).append((" "));
-                Main.info(subs.toString());
+                Abyss.info(subs.toString());
                 // Pass to subcommands
                 for (VolmitCommand sub : getSubcommands()) {
                     for (String commandAlias : sub.getCommands()) {
@@ -144,7 +144,7 @@ public class VolmitCommand extends ListenerAdapter {
             sendHelp(e.getMessage());
             // Pass to (overwritten) handle
         } else {
-            Main.info("Final command. Running: " + getName());
+            Abyss.info("Final command. Running: " + getName());
             handle(args, e);
         }
     }
@@ -211,7 +211,7 @@ public class VolmitCommand extends ListenerAdapter {
 
     /* Sends a category help message for this category in the channel of the specified message */
     protected void sendCategoryHelp(Message message) {
-        VolmitEmbed embed = new VolmitEmbed(getName().capitalizeWords() + " Command Usage", message);
+        VolmitEmbed embed = new VolmitEmbed(getName() + " Command Usage", message);
         String menuName = getName();
         getSubcommands().forEach(command -> {
             String cmd = Kit.get().BotPrefix + menuName + " " + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
@@ -224,7 +224,7 @@ public class VolmitCommand extends ListenerAdapter {
                                 (command.getCommands().size() == 2 ?
                                         command.getCommands().get(1) :
                                         " " + command.getCommands().subList(1, command.getCommands().size())).toString()
-                                        .replaceAbs("[", "").replaceAbs("]", "") +
+                                        .replace("[", "").replace("]", "") +
                                 "`\n" +
                                 command.getDescription() +
                                 (command.getExample() != null ? "\n**usage:**\n`" + Kit.get().BotPrefix + command.getExample() + "`" : "");

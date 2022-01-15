@@ -18,6 +18,7 @@
 package com.volmit.abyssalith.listeners;
 
 import art.arcane.quill.execution.J;
+import com.volmit.abyssalith.Abyss;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -25,7 +26,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class BotListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
-        if (!e.getMessage().imUser()
+        if (e.getMessage().getAuthor().isBot()
                 && !e.getMessage().getEmbeds().isEmpty()
                 && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
         ) {
@@ -42,7 +43,7 @@ public class BotListener extends ListenerAdapter {
         ) {
 
             J.a(() -> {
-                i(" Cleaning bot response as requested");
+                Abyss.info(" Cleaning bot response as requested");
                 e.getChannel().retrieveMessageById(e.getMessageId()).complete().delete().queue();
             });
         }
