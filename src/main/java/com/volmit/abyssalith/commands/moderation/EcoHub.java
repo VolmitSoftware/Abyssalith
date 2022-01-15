@@ -23,7 +23,7 @@ import com.volmit.abyssalith.commands.moderation.eco.Remove;
 import com.volmit.abyssalith.commands.moderation.eco.Set;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class EcoHub extends VolmitCommand {
         );
     }
 
-    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+    public void handle(List<String> args, MessageReceivedEvent e) {
         i("Eco List Initialized");
         e.getMessage().delete().queue(); // delete the sent message
     }

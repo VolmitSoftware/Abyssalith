@@ -23,7 +23,7 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -43,15 +43,18 @@ public class ServerInfo extends VolmitCommand {
         );
     }
 
-    private class GuildStats {
+    private static class GuildStats {
 
         private final String name;
         private final String id;
-        private final String region;
         private final String avatar;
         private final String afk;
         private final String roles;
         private final int textChans;
+        private final int threadChans;
+        private final int newsChans;
+        private final int stageChans;
+        private final int storeChans;
         private final int voiceChans;
         private final int categories;
         private final int rolesCount;
@@ -69,9 +72,12 @@ public class ServerInfo extends VolmitCommand {
 
             this.name = g.getName();
             this.id = g.getId();
-            this.region = g.getRegion().getName();
             this.avatar = g.getIconUrl() == null ? "not set" : g.getIconUrl();
             this.textChans = g.getTextChannels().size();
+            this.stageChans = g.getStageChannels().size();
+            this.threadChans = g.getThreadChannels().size();
+            this.newsChans = g.getNewsChannels().size();
+            this.storeChans = g.getStoreChannels().size();
             this.voiceChans = g.getVoiceChannels().size();
             this.categories = g.getCategories().size();
             this.rolesCount = g.getRoles().size();
@@ -97,13 +103,16 @@ public class ServerInfo extends VolmitCommand {
 
     // Handle
     @Override
-    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+    public void handle(List<String> args, MessageReceivedEvent e) {
         Guild g = e.getGuild();
 
         GuildStats gs = new GuildStats(g);
 
         String usersText = String.format(
-                "**All Clients:**   %d\n" + "**Members:**   %d   (Online:  %d)\n" + "**Bots:**   %d   (Online:  %d)",
+                """
+                        **All Clients:**   %d
+                        **Members:**   %d   (Online:  %d)
+                        """ + "**Bots:**   %d   (Online:  %d)",
                 gs.all, gs.users, gs.onlineUsers, gs.bots, gs.onlineBots
         );
         EmbedBuilder eb = new EmbedBuilder()
@@ -112,8 +121,7 @@ public class ServerInfo extends VolmitCommand {
                 .addField("Name:", gs.name, false)
                 .addField("ID:", gs.id, false)
                 .addField("Owner:", gs.owner.getUser().getName() + "#" + gs.owner.getUser().getDiscriminator(), false)
-                .addField("Server Region:", gs.region, false)
-                .addField("Channels", "**Text Channels:**  " + gs.textChans + "\n**Voice Channels:**  " + gs.voiceChans, false)
+                .addField("Channels", "**Text Channels:**  " + gs.textChans + "\n**Voice Channels:**  " + gs.voiceChans +  "**Stage Channels:**  " + gs.stageChans + "**Thread Channels:**  " + gs.threadChans + "**Store Channels:**  " + gs.storeChans +"**News Channels:**  " + gs.newsChans    , false)
                 .addField("Members:", usersText, false)
                 .addField("Roles (" + gs.rolesCount + "): ", gs.roles, false)
                 .addField("AFK Channel", gs.afk, false)
@@ -121,7 +129,7 @@ public class ServerInfo extends VolmitCommand {
 
         if (!gs.avatar.equals("not set"))
             eb.setThumbnail(gs.avatar);
-        e.getMessage().getTextChannel().sendMessage(eb.build()).queue();
+        e.getMessage().getChannel().sendMessageEmbeds(eb.build()).queue();
         e.getMessage().delete().queue(); // delete the sent message
 
     }

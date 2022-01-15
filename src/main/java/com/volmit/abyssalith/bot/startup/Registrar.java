@@ -18,7 +18,6 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Main;
-import com.volmit.abyssalith.commands.botmaster.Debug2;
 import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.commands.moderation.EcoHub;
 import com.volmit.abyssalith.commands.moderation.ModHub;
@@ -32,7 +31,6 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class Registrar extends ListenerAdapter {
 
     public static void All(JDA jda) {
-        //https://github.com/DV8FromTheWorld/JDA/releases/tag/v4.3.0 REMINDER FOR LATER TO ADD ALL AS SLASH COMMANDS
 
 //        jda.addEventListener(new Debug());
 //        jda.addEventListener(new Shutdown());
@@ -64,9 +62,6 @@ public class Registrar extends ListenerAdapter {
         jda.addEventListener(new Passive());
         jda.addEventListener(new RoleMenu());
         jda.addEventListener(new Log());
-
-        jda.addEventListener(new Debug2()); // dev
-
 
         jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last
     }

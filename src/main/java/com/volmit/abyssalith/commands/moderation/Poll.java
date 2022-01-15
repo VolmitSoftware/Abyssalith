@@ -20,7 +20,7 @@ package com.volmit.abyssalith.commands.moderation;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -43,7 +43,7 @@ public class Poll extends VolmitCommand {
 
     // Handle
     @Override
-    public void handle(List<String> args, GuildMessageReceivedEvent event) {
+    public void handle(List<String> args, MessageReceivedEvent event) {
         i("Poll System Initalized");
 
         String msg = event.getMessage().getContentRaw();
@@ -64,7 +64,7 @@ public class Poll extends VolmitCommand {
             for (int i = 0; i < counter; i++) {
                 poll.appendDescription(emoji[i] + ": **" + pollArgs.get(i).trim() + "**\n");
             }
-            event.getChannel().sendMessage(poll.build()).queue(reactPoll -> {
+            event.getChannel().sendMessageEmbeds(poll.build()).queue(reactPoll -> {
                 for (int i = 0; i < counter; i++) {
                     reactPoll.addReaction(unicodeEmoji[i]).queue();
                 }

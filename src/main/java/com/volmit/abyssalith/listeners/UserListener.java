@@ -22,16 +22,16 @@ import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.XP;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
+import net.dv8tion.jda.api.events.message.react.MessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
 
 
 public class UserListener extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+    public void onMessageReceived(MessageReceivedEvent e) {
         if (e.getMessage().imUser()) {
             User u = Main.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
             u.experience(u.experience() + Kit.get().XpPerMessage.rand()); //XP
@@ -46,7 +46,7 @@ public class UserListener extends ListenerAdapter {
         }
     }
 
-    public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
+    public void onMessageReactionAdd(MessageReactionAddEvent e) {
         if (!e.getUser().isBot()) {
             User u = Main.getLoader().getUser(e.getUser().getIdLong());
             u.experience((u.experience() + Kit.get().XpPerMessage.rand()));
@@ -54,7 +54,7 @@ public class UserListener extends ListenerAdapter {
         }
     }
 
-    public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent e) {
+    public void onMessageReactionRemove(MessageReactionRemoveEvent e) {
         long uid = e.getUserIdLong();
         if (Main.getJDA().getSelfUser().getIdLong() != uid) {
             e.getUserId();
@@ -64,7 +64,7 @@ public class UserListener extends ListenerAdapter {
         }
     }
 
-    private void roleManager(GuildMessageReceivedEvent e, String role, int v) {
+    private void roleManager(MessageReceivedEvent e, String role, int v) {
         Role r;
         try {
             if (e.getGuild().hasRole(role)) {
@@ -96,7 +96,7 @@ public class UserListener extends ListenerAdapter {
         }
     }
 
-    private void roleValidator(GuildMessageReceivedEvent e, String role) {
+    private void roleValidator(MessageReceivedEvent e, String role) {
         if (e.getGuild().getRolesByName(role, false).size() < 1) {
             e.getGuild().createRole().setName(role).setMentionable(false).complete();
             i("[RV] - New Maximum level created!");

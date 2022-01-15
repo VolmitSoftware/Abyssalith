@@ -21,7 +21,7 @@ import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class Commands extends VolmitCommand {
 
     // Handle
     @Override
-    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+    public void handle(List<String> args, MessageReceivedEvent e) {
         i("Command List Initialized");
 
         // Init embed

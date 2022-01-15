@@ -19,14 +19,14 @@ package com.volmit.abyssalith.listeners;
 
 import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
 
 
 public class PhishingListener extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+    public void onMessageReceived(MessageReceivedEvent e) {
         for (String p : Kit.get().Phishing) {
             if (e.getMessage().lower().contains(p)) {
                 e.getMessage().delete().queue();

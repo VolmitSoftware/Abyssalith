@@ -23,13 +23,13 @@ import com.github.pemistahl.lingua.api.LanguageDetectorBuilder;
 import com.volmit.abyssalith.toolbox.Kit;
 import lombok.SneakyThrows;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 
 public class LanguageListener extends ListenerAdapter {
     @SneakyThrows
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+    public void onMessageReceived(MessageReceivedEvent e) {
         if (e.getMessage().imUser() && e.getMessage().getContentRaw().length() > 5 && !e.getMessage().getContentRaw().contains("https:") && Kit.get().UseLingua) {
             final LanguageDetector detector = LanguageDetectorBuilder.fromLanguages(
                     Language.ENGLISH, // Default language

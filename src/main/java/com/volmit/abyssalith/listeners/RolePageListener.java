@@ -20,14 +20,14 @@ package com.volmit.abyssalith.listeners;
 import com.volmit.abyssalith.handlers.MenuHandler;
 import com.volmit.abyssalith.handlers.PermHandler;
 import com.volmit.abyssalith.toolbox.Kit;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
 
 
 public class RolePageListener extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+    public void onMessageReceived(MessageReceivedEvent e) {
         String Message = e.getMessage().getContentRaw();
         if (!e.getMessage().getAuthor().isBot() // not a bot
                 && e.getMessage().getMentionedRoles().size() > 0 // mentioning roles

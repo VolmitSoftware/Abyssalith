@@ -19,7 +19,7 @@ package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class Passive extends VolmitCommand {
 
     // Handle
     @Override
-    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+    public void handle(List<String> args, MessageReceivedEvent e) {
         i("Revealing Passive Statistics");
         VolmitEmbed embed = new VolmitEmbed(" Passives!", e.getMessage());
         embed.setDescription("While im on your server im doing a lot of things in the background to make things run really smoothly, and store as minimal data as possible! This command is to show you the transparency that i wished many other bot authors did, but dont.");

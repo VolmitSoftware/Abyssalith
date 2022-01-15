@@ -19,7 +19,7 @@ package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class Links extends VolmitCommand {
 
     // Handle
     @Override
-    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+    public void handle(List<String> args, MessageReceivedEvent e) {
         i("Links Posted");
         VolmitEmbed embed = new VolmitEmbed(" Here you go!", e.getMessage());
         //Commands

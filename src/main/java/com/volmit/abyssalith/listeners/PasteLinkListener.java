@@ -17,13 +17,13 @@
  */
 package com.volmit.abyssalith.listeners;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Button;
 
 
 public class PasteLinkListener extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+    public void onMessageReceived(MessageReceivedEvent e) {
         if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://pastebin.com/")) {
             i("Started the Paste Service");
             String str = e.getMessage().getContentRaw();

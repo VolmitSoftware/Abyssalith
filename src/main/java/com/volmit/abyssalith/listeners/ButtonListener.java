@@ -39,7 +39,7 @@ public class ButtonListener extends ListenerAdapter {
 
 
 //--------HOW TO MAKE A BUTTON-----------//
-//public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+//public void onMessageReceived(MessageReceivedEvent e) {
 //    if (!e.getMessage().getAuthor().isBot()) {
 //        if (e.getMessage().getContentRaw().toLowerCase().contains(".button")) {
 //            e.getChannel().sendMessage("Click a button").queue(f -> {

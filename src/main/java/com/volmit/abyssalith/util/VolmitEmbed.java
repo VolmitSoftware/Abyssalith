@@ -21,7 +21,7 @@ import com.volmit.abyssalith.Main;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.MessageChannel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -103,12 +103,12 @@ public class VolmitEmbed extends EmbedBuilder {
     }
 
     // Send embed in `channel`
-    public void send(TextChannel channel) {
+    public void send(MessageChannel channel) {
         this.send(null, channel, false, 0);
     }
 
     // Send embed in `channel` with reactions `reactions`
-    public void send(TextChannel channel, List<String> reactions) {
+    public void send(MessageChannel channel, List<String> reactions) {
         this.send(null, channel, false, 0, reactions);
     }
 
@@ -146,12 +146,12 @@ public class VolmitEmbed extends EmbedBuilder {
 
 
     // Send embed in channel of `message` (if null, send in `channel` instead), delete if `deleteMSG` after `deleteAfterMS`
-    public void send(Message message, TextChannel channel, boolean deleteMSG, int deleteAfterMS) {
+    public void send(Message message, MessageChannel channel, boolean deleteMSG, int deleteAfterMS) {
         send(message, channel, deleteMSG, deleteAfterMS, null);
     }
 
     // Send embed in channel of `message` (if null, send in `channel` instead), delete if `deleteMSG` after `deleteAfterMS`, with reactions `reactions`
-    public void send(Message message, TextChannel channel, boolean deleteMSG, int deleteAfterMS, List<String> reactions) {
+    public void send(Message message, MessageChannel channel, boolean deleteMSG, int deleteAfterMS, List<String> reactions) {
         if (reactions == null) reactions = new ArrayList<>();
         if (message == null && channel == null) {
             Main.error("No channel and message specified.");

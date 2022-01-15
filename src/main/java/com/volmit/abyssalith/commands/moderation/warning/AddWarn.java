@@ -21,7 +21,7 @@ import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class AddWarn extends VolmitCommand {
 
     // Handle
     @Override
-    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+    public void handle(List<String> args, MessageReceivedEvent e) {
         i("MESSAGE: " + e.getMessage().getContentRaw());
 
         if (e.getMessage().getMentionedMembers().size() == 1) {

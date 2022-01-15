@@ -25,7 +25,7 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleRemoveEvent;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
@@ -72,7 +72,7 @@ public class PersistentRoleListener extends ListenerAdapter {
         }
     }
 
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) { // THIS IS A FALLBACK TO KEEP ROLES UPDATED
+    public void onMessageReceived(MessageReceivedEvent e) { // THIS IS A FALLBACK TO KEEP ROLES UPDATED
         User u = Main.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
         Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
         if (lRoles.size() < e.getMember().getRoles().size() && !e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {

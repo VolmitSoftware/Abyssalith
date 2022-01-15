@@ -23,7 +23,7 @@ import com.volmit.abyssalith.data.User;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class UserInfo extends VolmitCommand {
 
     // Handle
     @Override
-    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+    public void handle(List<String> args, MessageReceivedEvent e) {
         i("Revealing User Statistics");
         VolmitEmbed embed = new VolmitEmbed(" User Info!", e.getMessage());
         User u = Main.getLoader().getUser(e.getAuthor().getIdLong());

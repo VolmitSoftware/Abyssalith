@@ -18,13 +18,13 @@
 package com.volmit.abyssalith.listeners;
 
 import art.arcane.quill.execution.J;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 
 public class BotListener extends ListenerAdapter {
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+    public void onMessageReceived(MessageReceivedEvent e) {
         if (!e.getMessage().imUser()
                 && !e.getMessage().getEmbeds().isEmpty()
                 && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
@@ -33,17 +33,17 @@ public class BotListener extends ListenerAdapter {
         }
     }
 
-    public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent e) {
+    public void onMessageReactionAdd(MessageReactionAddEvent e) {
         if (!e.getUser().isBot()  // is the reactor a user
-                && e.getMessage().getAuthor().isBot()  // is author a bot
+                && e.getMember().getUser().isBot()
                 && e.getReaction().toString().contains("U+274c")  // is the X reaction there
-                && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
+                && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getActionRows().size() == 0 // Are their no clickable actions
 
         ) {
 
             J.a(() -> {
                 i(" Cleaning bot response as requested");
-                e.getMessage().delete().queue();
+                e.getChannel().retrieveMessageById(e.getMessageId()).complete().delete().queue();
             });
         }
     }

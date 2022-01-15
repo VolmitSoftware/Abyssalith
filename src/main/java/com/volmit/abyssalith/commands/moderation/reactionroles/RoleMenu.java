@@ -19,7 +19,7 @@ package com.volmit.abyssalith.commands.moderation.reactionroles;
 
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class RoleMenu extends VolmitCommand {
 
     // Handle
     @Override
-    public void handle(List<String> args, GuildMessageReceivedEvent e) {
+    public void handle(List<String> args, MessageReceivedEvent e) {
         i("Reaction Role List Initialized");
         e.getMessage().delete().queue(); // delete the sent message
     }

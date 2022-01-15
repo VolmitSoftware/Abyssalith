@@ -23,8 +23,8 @@ import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import java.util.Objects;
 
 public class WarningHandler {
 
-    public static void warn(Member m, GuildMessageReceivedEvent e) { //intended for setting warnings
+    public static void warn(Member m, MessageReceivedEvent e) { //intended for setting warnings
         System.println("Starting Warn Sequence");
         List<String> strList = new ArrayList<>(Arrays.asList(e.getMessage().getContentRaw().split(" ")));
         User u = Main.getLoader().getUser(m.getIdLong());
@@ -45,7 +45,7 @@ public class WarningHandler {
         String ss = strList.toString().replaceAbs(",", "").replaceAbs("[", "").replaceAbs("]", ""); // Un-Fuck String
 
         warnToFile(u, Objects.requireNonNull(e.getMember()), ss); // Add to file
-        e.getMessage().getTextChannel().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue(); // Build / Send
+        e.getMessage().getChannel().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue(); // Build / Send
         m.getUser().openPrivateChannel().complete().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue();
 
         if (u.warnings().size() == 4) {
@@ -62,11 +62,11 @@ public class WarningHandler {
     }
 
 
-    public static void warnShow(User u, TextChannel textChannel) {
+    public static void warnShow(User u, MessageChannel messageChannel) {
         VolmitEmbed embed = new VolmitEmbed("**[ User's Warnings ]**");
         embed.addField("Warnings: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : ").replaceAbs("]", ""), false);
         embed.setColor(Color.WHITE);
-        textChannel.sendMessageEmbeds(embed.build()).queue();
+        messageChannel.sendMessageEmbeds(embed.build()).queue();
 
     }
 
@@ -109,21 +109,21 @@ public class WarningHandler {
         System.println("[INFO]-> Attempting to Perm Ban: " + m + "for sending phishing links," + msg);
     }
 
-    public static void deleteLatestWarn(User u, TextChannel textChannel) {
+    public static void deleteLatestWarn(User u, MessageChannel messageChannel) {
         u.warnings().remove(u.warnings().size() - 1);
         u.warnings().clear();
         VolmitEmbed embed = new VolmitEmbed("**[ User's Updated Warnings ]**");
         embed.addField("New Warning List: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : "), false);
         embed.setColor(Color.GREEN);
-        textChannel.sendMessageEmbeds(embed.build()).queue();
+        messageChannel.sendMessageEmbeds(embed.build()).queue();
     }
 
-    public static void purge(User u, TextChannel textChannel) {
+    public static void purge(User u, MessageChannel messageChannel) {
         u.warnings().clear();
         VolmitEmbed embed = new VolmitEmbed("**[ User's Updated Warnings ]**");
         embed.addField("New Warning List: ", u.warnings().toString().replaceAbs("], ", "\n").replaceAbs("{", "").replaceAbs("}", "").replaceAbs("=[", ": ").replaceAbs("][", " : "), false);
         embed.setColor(Color.GREEN);
-        textChannel.sendMessageEmbeds(embed.build()).queue();
+        messageChannel.sendMessageEmbeds(embed.build()).queue();
 
     }
 }
