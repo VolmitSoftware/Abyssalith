@@ -33,8 +33,8 @@ concept.
 - This bot also has a language system that you can use to automatically determine the language someone is speaking,
   however **THIS USES A LOT OF MEMORY** like up to 2gigs, if you are using every language
   from [Lingua](https://github.com/pemistahl/lingua) 's systems
-- [Manifold](https://plugins.jetbrains.com/plugin/10057-manifold) for
-  using [Amulet](https://github.com/ArcaneArts/Amulet)
+~~- [Manifold](https://plugins.jetbrains.com/plugin/10057-manifold) for
+  using [Amulet](https://github.com/ArcaneArts/Amulet)~~
 
 ### Installing
 
