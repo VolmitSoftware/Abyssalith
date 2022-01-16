@@ -28,9 +28,7 @@ public interface IBotProvider {
     default BotInstance get() {
         try {
             return getFuture().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return null;

@@ -62,6 +62,7 @@ public class Kit extends ListenerAdapter {
         env("BOT_XP_MAX_LEVELS", (f) -> xpMaxLevels = Integer.parseInt(f));
         env("BOT_XP_BASE_MULTIPLIER", (f) -> xpBaseMultiplier = Double.parseDouble(f));
         env("BOT_REDIS", (f) -> useRedis = Boolean.parseBoolean(f));
+        env("BOT_ROLE_SYSTEM", (f) -> useRoleSystem = Boolean.parseBoolean(f));
         env("BOT_REDIS_ADDRESS", (f) -> redisAddress = f);
         env("BOT_REDIS_PORT", (f) -> redisPort = Integer.parseInt(f));
         env("BOT_REDIS_PASSWORD", (f) -> redisPassword = f);
@@ -89,6 +90,7 @@ public class Kit extends ListenerAdapter {
     public String usageModules = "ALL";
     public boolean useRedis = false;
     public boolean useBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
+    public boolean useRoleSystem = true;
     public boolean useLingua = true;
     public boolean usePersistentRoles = true;
     public Range xpPerMessage = Range.jitter(0.85f, 0.15f);

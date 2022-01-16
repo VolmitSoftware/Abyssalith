@@ -85,10 +85,12 @@ public class Abyss extends ListenerAdapter {
     @Override
     public void onReady(@NonNull ReadyEvent e) {
         System.out.println(e.getJDA().getSelfUser().getAsTag()+" IS WATCHING THE UNIVERSE");
-        J.a(() -> {
-            J.sleep(1500);
-            RoleCleanup.Cleaner(getJDA());
-        });
+        if(Kit.get().useRoleSystem){
+            J.a(() -> {
+                J.sleep(1500);
+                RoleCleanup.Cleaner(getJDA());
+            });
+        }
         info("BOT HAS STARTED!");
     }
 

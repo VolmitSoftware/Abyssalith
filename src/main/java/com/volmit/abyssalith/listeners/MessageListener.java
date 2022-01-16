@@ -36,7 +36,7 @@ import net.dv8tion.jda.api.interactions.components.Button;
 import java.util.Objects;
 import java.util.Set;
 
-public class MessageReceivedListener extends ListenerAdapter {
+public class MessageListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
         Abyss.debug("Message Received");
 

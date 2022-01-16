@@ -122,7 +122,7 @@ public class ServerInfo extends VolmitCommand {
                 .addField("Name:", gs.name, false)
                 .addField("ID:", gs.id, false)
                 .addField("Owner:", gs.owner.getUser().getName() + "#" + gs.owner.getUser().getDiscriminator(), false)
-                .addField("Channels", "**Text Channels:**  " + gs.textChans + "\n**Voice Channels:**  " + gs.voiceChans +  "**Stage Channels:**  " + gs.stageChans + "**Thread Channels:**  " + gs.threadChans + "**Store Channels:**  " + gs.storeChans +"**News Channels:**  " + gs.newsChans    , false)
+                .addField("Channels", "**Text Channels:**  " + gs.textChans + "\n**Voice Channels:**  " + gs.voiceChans +  "\n**Stage Channels:**  " + gs.stageChans + "\n**Thread Channels:**  " + gs.threadChans + "\n**Store Channels:**  " + gs.storeChans +"\n**News Channels:**  " + gs.newsChans +"\n**Categories:**  " + gs.categories    , false)
                 .addField("Members:", usersText, false)
                 .addField("Roles (" + gs.rolesCount + "): ", gs.roles, false)
                 .addField("AFK Channel", gs.afk, false)

@@ -18,6 +18,7 @@
 package com.volmit.abyssalith.bot.startup;
 
 import com.volmit.abyssalith.Abyss;
+import com.volmit.abyssalith.commands.botmaster.Shutdown;
 import com.volmit.abyssalith.commands.general.*;
 import com.volmit.abyssalith.commands.moderation.EcoHub;
 import com.volmit.abyssalith.commands.moderation.ModHub;
@@ -31,28 +32,54 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class Registrar extends ListenerAdapter {
 
     public static void All(JDA jda) {
+        // Main bits, Regardless of platform
+        jda.addEventListener(new Abyss()); // [ DONT TOUCH THESE  LISTENERS ]
+        jda.addEventListener(new Kit());  // [ DONT TOUCH THESE  LISTENERS ]
+        jda.addEventListener(new Shutdown());  // [ DONT TOUCH THESE  LISTENERS ]
 
-        //Listeners
-        jda.addEventListener(new Abyss()); // [ DONT TOUCH THESE TWO LISTENERS ]
-        jda.addEventListener(new Kit());  // [ DONT TOUCH THESE TWO LISTENERS ]
+        String modules = Kit.get().usageModules;
 
-        jda.addEventListener(new ButtonListener());
-        jda.addEventListener(new PasteListener());
-        jda.addEventListener(new GuildListener()); // Persistent Roles
-        jda.addEventListener(new SelectionMenuListener());
-        jda.addEventListener(new MessageReactionListener()); // Watches the User's instances for stuff
-        jda.addEventListener(new MessageReceivedListener()); // Watches the User's messages for stuff
+        switch (modules) {
+            case "MPM":
+//                jda.addEventListener(new ServerInfo()); HELTH STUFF
 
-        // Commands
-        jda.addEventListener(new EcoHub()); // Money Subcommand
-        jda.addEventListener(new ModHub()); // Money Subcommand
-        jda.addEventListener(new Links());
-        jda.addEventListener(new Paste());
-        jda.addEventListener(new ServerInfo());
-        jda.addEventListener(new UserInfo());
-        jda.addEventListener(new Passive());
-        jda.addEventListener(new RoleMenu());
-        jda.addEventListener(new Log());
+                break;
+
+            case "DEV":
+//                jda.addEventListener(new ServerInfo()); DEVELOPMENT KEY
+
+                break;
+
+            case "MOD":
+//                Usually just for moderation or whatever
+                jda.addEventListener(new ModHub()); // Money Subcommand
+                jda.addEventListener(new Passive());
+                jda.addEventListener(new UserInfo());
+                jda.addEventListener(new EcoHub()); // Money Subcommand
+                jda.addEventListener(new ServerInfo());
+
+                break;
+            default: // What it all has to offer
+                //Listeners
+                jda.addEventListener(new ButtonListener());
+                jda.addEventListener(new PasteListener());
+                jda.addEventListener(new GuildListener()); // Persistent Roles
+                jda.addEventListener(new SelectionMenuListener());
+                jda.addEventListener(new MessageReactionListener()); // Watches the User's instances for stuff
+                jda.addEventListener(new MessageListener()); // Watches the User's messages for stuff
+
+                // Commands
+                jda.addEventListener(new EcoHub()); // Money Subcommand
+                jda.addEventListener(new ModHub()); // Money Subcommand
+                jda.addEventListener(new Links());
+                jda.addEventListener(new Paste());
+                jda.addEventListener(new ServerInfo());
+                jda.addEventListener(new UserInfo());
+                jda.addEventListener(new Passive());
+                jda.addEventListener(new RoleMenu());
+                jda.addEventListener(new Log());
+                break;
+        }
 
         jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last
     }
