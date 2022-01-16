@@ -25,7 +25,6 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 
 import java.util.List;
 
-
 public class MenuHandler { // get and send menu
     public static void RoleListMenu(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
         sendMenu(genMenuMultipleSelect(id, PlaceholderText, mentionedRoles, messageChannel), messageChannel);
@@ -63,7 +62,7 @@ public class MenuHandler { // get and send menu
         SelectionMenu.Builder menu = SelectionMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
         int mr = mentionedRoles.size();
         Guild g = mentionedRoles.get(0).getGuild();
-
+        menu.setMinValues(0);
         for (Role r : mentionedRoles) {
             if (!g.getEmotesByName(r.getName(), true).isEmpty())
                 menu.addOption(r.getName(), r.getId(), Emoji.fromEmote(g.getEmotesByName(r.getName(), true).get(0)));

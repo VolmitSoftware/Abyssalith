@@ -36,7 +36,7 @@ public class RoleHandler {
 
     public static void addRole(Member member, Role role) {
         Guild g = member.getGuild();
-        g.removeRoleFromMember(member, role).queue();
+        g.addRoleToMember(member, role).queue();
         System.out.println("[INFO]-> Added The role:" + role + " to " + member);
     }
 
@@ -54,9 +54,9 @@ public class RoleHandler {
     public static void removeRole(Member member, String roleNameIgnoreCase) {
         Guild g = member.getGuild();
         Role r = g.getRolesByName(roleNameIgnoreCase, true).get(0);
-        System.out.println("[INFO]-> Removed The role:" + r + " from " + member);
         if (r != null) {
             g.removeRoleFromMember(member, r).queue();
+            System.out.println("[INFO]-> Removed The role:" + r + " from " + member);
         } else {
             System.out.println("Cant find Role By that name");
         }

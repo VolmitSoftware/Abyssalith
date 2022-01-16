@@ -55,6 +55,7 @@ public class MentionRoles extends VolmitCommand {
                 + "@role1 @role2  @role3\n"
                 + "*__SERVER MUST HAVE CORRESPONDING EMOTES TO NAMES OF ROLES__* ie: if you have a role called SolarFlare, you need a `:SolarFlare:` emote matching the name, This is not required, but it assigns an emoji to a role on use", false);
         embed.send(e.getMessage(), true, 1000);
+        e.getMessage().delete().queue(); // delete the sent message
 
     }
 }
