@@ -99,7 +99,6 @@ public class Abyss extends ListenerAdapter {
             RoleCleanup.Cleaner(getJDA());
         });
         info("BOT HAS STARTED!");
-        getJDA().getUserById(Kit.get().BotOwnerID).openPrivateChannel().complete().sendMessage("AHH").queue();
     }
 
     public static void shutdown() {
