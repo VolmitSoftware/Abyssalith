@@ -38,10 +38,14 @@ public class PasteListener extends ListenerAdapter {
     private static final KList<Definition> definitions = new KList<>(
             new Definition("[Iris]: Couldn't find Object:", "Objects are Broken!", "- Iris cant find certain objects in your pack"),
             new Definition("Ambiguous plugin name", "Duplicate Plugin Names", "- You have duplicate plugins on the server, this causes startup issues"),
+            new Definition("No biome provided", "Bad Biome NSM key", "- The Biome-Type in a dimension file is not correct"),
+            new Definition("Custom Biomes: 0", "Overworld Pack Issue", "- You either have a misconfigured pack, or something else... ask support"),
             new Definition("Couldn't read Biome file:", "You have a typo in a Biome file", "- There is a typo in one of the files in your pack folder!"),
             new Definition("[Iris]: Unknown Block Data:", "Unknown Block Data", "- Iris cant find block data (nbt mapping issue) "),
+            new Definition("Could not parse data: minecraft:beetroots[age=7]", "BeetRootBug", "- Just an error with an object, safe to ignore"),
             new Definition("IT IS HIGHLY RECOMMENDED YOU RESTART THE SERVER BEFORE GENERATING!", "Restart your server", "- Iris needs to restart the server for the datapacks to work properly"),
             new Definition("[Multiverse-Core]", "Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),
+            new Definition(s -> !s.contains("Server type & version: git-Purpur"), "Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),
             new Definition("DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH", "Paper Watchdog Spam", "**PLEASE turn off the paper spam!** \n https://docs.volmit.com/iris/plugin/faq"),
             new Definition(s -> !s.contains("[Iris] Enabling Iris"), "Iris not installed / not a full log", "This does not contain a **full** log with Iris installed, perhaps try again if you want more information.")
     );
