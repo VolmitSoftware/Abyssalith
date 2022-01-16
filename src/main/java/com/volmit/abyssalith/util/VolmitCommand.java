@@ -82,11 +82,11 @@ public class VolmitCommand extends ListenerAdapter {
 
     // Override me!
     public void handle(List<String> args, MessageReceivedEvent e) {
-        e.getMessage().reply("The command you ran is improperly written. The handle() must be overwritten.");
+        e.getMessage().reply("The command you ran is improperly written. The handle() must be overwritten.").complete();
     }
 
     // Handles prefix, handles bot users.
-    public void onMessageRecieved(MessageReceivedEvent e) {
+    public void onMessageReceived(MessageReceivedEvent e) {
 
         // Prevent bot user
         if (e.getAuthor().isBot()) return;
@@ -223,7 +223,7 @@ public class VolmitCommand extends ListenerAdapter {
                         "\n`" +
                                 (command.getCommands().size() == 2 ?
                                         command.getCommands().get(1) :
-                                        " " + command.getCommands().subList(1, command.getCommands().size())).toString()
+                                        " " + command.getCommands().subList(1, command.getCommands().size()))
                                         .replace("[", "").replace("]", "") +
                                 "`\n" +
                                 command.getDescription() +

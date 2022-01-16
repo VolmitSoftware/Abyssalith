@@ -39,16 +39,16 @@ import java.util.Objects;
 
 
 public class Abyss extends ListenerAdapter {
-    public static final IBotProvider provider = new BotProvider();
-
-    @Getter
-    private static DataLoader loader;
-
-    public static JDA getJDA() {
-        return provider.get().getJDA();
-    }
 
     public static void main(String[] args) {
+
+        //This sets the threading priorities to work on Droplet
+        final int cores = Runtime.getRuntime().availableProcessors();
+        if (cores <= 1) {
+            System.out.println("Available Cores \"" + cores + "\", Attempting to set Parallelism Flag");
+            System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "1");
+            System.out.println("Parallelism Set!");
+        }
 
         envInject();
 
@@ -80,6 +80,17 @@ public class Abyss extends ListenerAdapter {
         Kit.get().envInject();
     }
 
+    public static final IBotProvider provider = new BotProvider();
+
+    @Getter
+    private static DataLoader loader;
+
+    public static JDA getJDA() {
+
+
+        return provider.get().getJDA();
+    }
+
     @Override
     public void onReady(@NonNull ReadyEvent e) {
         System.out.println(e.getJDA().getSelfUser().getAsTag()+" IS WATCHING THE UNIVERSE");
@@ -88,6 +99,7 @@ public class Abyss extends ListenerAdapter {
             RoleCleanup.Cleaner(getJDA());
         });
         info("BOT HAS STARTED!");
+        getJDA().getUserById(Kit.get().BotOwnerID).openPrivateChannel().complete().sendMessage("AHH").queue();
     }
 
     public static void shutdown() {
@@ -100,19 +112,15 @@ public class Abyss extends ListenerAdapter {
     private static void log(String tag, Object t) {
         System.out.println("[" + tag + "]-> " + t);
     }
-
     public static void warn(Object message) {
         log("WARN", message);
     }
-
     public static void info(Object message) {
         log("INFO", message);
     }
-
     public static void error(Object message) {
         log("ERROR", message);
     }
-
     public static void debug(Object message) {
         log("DEBUG", message);
     }

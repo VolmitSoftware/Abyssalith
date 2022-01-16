@@ -30,9 +30,10 @@ import javax.security.auth.login.LoginException;
 
 
 public class BotInstance {
-    private final JDA jda;
 
+    private final JDA jda;
     public BotInstance(String s) throws LoginException {
+
         jda = JDABuilder.createDefault(s)
                 .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
                 .setMemberCachePolicy(MemberCachePolicy.ALL) // ignored if chunking enabled
