@@ -33,7 +33,7 @@ public class Banish extends VolmitCommand {
         super(
                 "banish",
                 new String[]{"banish", "bok", "silence"},
-                new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleModerator, Kit.get().roleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This command Applies the Banished Role to the person mentioned, or prints them",
                 true,
                 "mod bok @psycho"

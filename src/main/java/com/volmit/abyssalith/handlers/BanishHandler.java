@@ -25,18 +25,18 @@ import net.dv8tion.jda.api.entities.Role;
 public class BanishHandler {
 
     public static void bok(Member m) {
-        if (m.getGuild().getRolesByName(Kit.get().RoleBanished, true).size() == 1) {
-            Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
-            RoleHandler.addRole(m, Kit.get().RoleBanished);
+        if (m.getGuild().getRolesByName(Kit.get().roleBanished, true).size() == 1) {
+            Role banishedRole = m.getGuild().getRolesByName(Kit.get().roleBanished, true).get(0);
+            RoleHandler.addRole(m, Kit.get().roleBanished);
         }
     }
 
     public static boolean ifbok(Member m) {
-        return (m.getRoles().contains(m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0)));
+        return (m.getRoles().contains(m.getGuild().getRolesByName(Kit.get().roleBanished, true).get(0)));
     }
 
     public static void unbok(Member m) {
-        Role banishedRole = m.getGuild().getRolesByName(Kit.get().RoleBanished, true).get(0);
-        RoleHandler.removeRole(m, Kit.get().RoleBanished);
+        Role banishedRole = m.getGuild().getRolesByName(Kit.get().roleBanished, true).get(0);
+        RoleHandler.removeRole(m, Kit.get().roleBanished);
     }
 }

@@ -32,25 +32,16 @@ public class Registrar extends ListenerAdapter {
 
     public static void All(JDA jda) {
 
-//        jda.addEventListener(new Debug());
-//        jda.addEventListener(new Shutdown());
-
-
         //Listeners
         jda.addEventListener(new Abyss()); // [ DONT TOUCH THESE TWO LISTENERS ]
         jda.addEventListener(new Kit());  // [ DONT TOUCH THESE TWO LISTENERS ]
 
-        jda.addEventListener(new BotListener()); // Watches the Bot instance's for stuff
         jda.addEventListener(new ButtonListener());
         jda.addEventListener(new PasteListener());
-        jda.addEventListener(new LanguageListener());
-        jda.addEventListener(new PasteLinkListener());
-        jda.addEventListener(new PersistentRoleListener()); // Persistent Roles
-        jda.addEventListener(new PhishingListener()); // Persistent Roles
-        jda.addEventListener(new RolePageListener());
+        jda.addEventListener(new GuildListener()); // Persistent Roles
         jda.addEventListener(new SelectionMenuListener());
-        jda.addEventListener(new MentionListener());
-        jda.addEventListener(new UserListener()); // Watches the User's instances for stuff
+        jda.addEventListener(new MessageReactionListener()); // Watches the User's instances for stuff
+        jda.addEventListener(new MessageReceivedListener()); // Watches the User's messages for stuff
 
         // Commands
         jda.addEventListener(new EcoHub()); // Money Subcommand

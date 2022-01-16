@@ -34,7 +34,7 @@ public class Give extends VolmitCommand {
         super(
                 "give", //Name
                 new String[]{}, //Alias's
-                new String[]{Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "Gives a Number of currency to the user", // Description
                 true, // Does it use Args
                 "eco give 10 @Psycho" //Example - the prefix
@@ -45,8 +45,8 @@ public class Give extends VolmitCommand {
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
         Abyss.info("Eco.Give Instanced");
-        String moneyName = Kit.get().MoneyName;
-        String moneyEmoji = Kit.get().MoneyEmoji;
+        String moneyName = Kit.get().moneyName;
+        String moneyEmoji = Kit.get().moneyEmoji;
 
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji + moneyName + " given: ", args.get(1) + " From: " + e.getAuthor().getAsMention(), false);

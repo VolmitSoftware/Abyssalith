@@ -51,7 +51,6 @@ public class VolmitCommand extends ListenerAdapter {
     @Getter
     public List<VolmitCommand> subcommands;
 
-
     // Creator sets name, command aliases, requires any one of entered roles, and adds a description and example
     public VolmitCommand(String name, String[] commands, String[] roles, String description, boolean needsArguments, String example) {
         if (commands == null || commands.length == 0) commands = new String[]{name};
@@ -65,7 +64,6 @@ public class VolmitCommand extends ListenerAdapter {
         this.category = null;
         this.subcommands = null;
     }
-
     // Creator sets name, command aliases, requires any of entered roles, adds a category description,
     public VolmitCommand(String name, String[] commands, String[] roles, String description, boolean needsArguments, String category, VolmitCommand[] subcommands) {
         if (commands == null || commands.length == 0) commands = new String[]{name};
@@ -79,44 +77,34 @@ public class VolmitCommand extends ListenerAdapter {
         this.category = category;
         this.subcommands = Arrays.asList(subcommands);
     }
-
     // Override me!
     public void handle(List<String> args, MessageReceivedEvent e) {
         e.getMessage().reply("The command you ran is improperly written. The handle() must be overwritten.").complete();
     }
-
     // Handles prefix, handles bot users.
     public void onMessageReceived(MessageReceivedEvent e) {
-
         // Prevent bot user
         if (e.getAuthor().isBot()) return;
-
         // Prevent non-permitted users
         if (noPermission(Objects.requireNonNull(e.getMember()).getRoles(), e.getAuthor().getId())) return;
-
         // Convert args
-        List<String> args = new LinkedList<>(Arrays.asList(e.getMessage().getContentRaw().replace(Kit.get().BotPrefix, "").split(" ")));
+        List<String> args = new LinkedList<>(Arrays.asList(e.getMessage().getContentRaw().replace(Kit.get().botPrefix, "").split(" ")));
         List<String> argc = new LinkedList<>(Arrays.asList(e.getMessage().getContentRaw().split(" ")));
-        if (!argc.get(0).contains(Kit.get().BotPrefix)) return; // ignore
-
-
+        if (!argc.get(0).contains(Kit.get().botPrefix)) return; // ignore
         // Check match command
         if (!checkCommand(args.get(0))) return;
-
         // Print success and continue
         continueToHandle(args, e);
     }
 
     // Handle
     public void continueToHandle(List<String> args, MessageReceivedEvent e) {
-
         // Check for permissions (again, but required when passing to here directly)
         if (getRoles() != null && getRoles().size() != 0) {
             if (noPermission(Objects.requireNonNull(e.getMember()).getRoles(), e.getAuthor().getId())) return;
         }
         // Print info message
         Abyss.info("Command passed checks: " + getName());
-
         // If it doesn't require arguments just pass it with null
         if (!needsArguments) {
             handle(null, e);
@@ -148,7 +136,6 @@ public class VolmitCommand extends ListenerAdapter {
             handle(args, e);
         }
     }
-
     /* Checks if the author has any of the specified roles, or if the ID matches */
     private boolean noPermission(List<Role> roles, String ID) {
         if (getRoles() != null && getRoles().size() != 0) {
@@ -168,7 +155,6 @@ public class VolmitCommand extends ListenerAdapter {
         }
         return true;
     }
-
     /* Checks if the specified command is this command */
     private boolean checkCommand(String command) {
         if (command.equalsIgnoreCase(name)) return true;
@@ -179,19 +165,17 @@ public class VolmitCommand extends ListenerAdapter {
         }
         return false;
     }
-
-
     /* Sends a help message for this command's usage in the specified message's channel */
     public void sendHelp(Message message) {
-        VolmitEmbed embed = new VolmitEmbed(Kit.get().BotPrefix + getName() + " Command Usage", message);
-        embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().BotPrefix + "`");
+        VolmitEmbed embed = new VolmitEmbed(Kit.get().botPrefix + getName() + " Command Usage", message);
+        embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().botPrefix + "`");
         String cmd = /*Kit.get().BotPrefix +*/ getName().substring(0, 1).toUpperCase() + getName().substring(1);
         if (getCommands().size() < 2) {
             embed.addField(cmd, "`*no aliases*`\n" + getDescription(), true);
         } else {
             embed.addField(
                     cmd,
-                    "\n`" + Kit.get().BotPrefix +
+                    "\n`" + Kit.get().botPrefix +
                             (getCommands().size() == 2 ?
                                     getCommands().get(1) :
                                     " " + getCommands().subList(1, getCommands().size()).toString()
@@ -201,20 +185,19 @@ public class VolmitCommand extends ListenerAdapter {
             );
         }
         if (getExample() != null) {
-            embed.addField("**Usage**", "`" + Kit.get().BotPrefix + getExample() + "`", false);
+            embed.addField("**Usage**", "`" + Kit.get().botPrefix + getExample() + "`", false);
         }
         if (getRoles() != null && getRoles().size() != 0) {
             embed.addField("**Permitted for role(s)**", "`" + getRoles().toString() + "`", false);
         }
         embed.send(message);
     }
-
     /* Sends a category help message for this category in the channel of the specified message */
     protected void sendCategoryHelp(Message message) {
         VolmitEmbed embed = new VolmitEmbed(getName() + " Command Usage", message);
         String menuName = getName();
         getSubcommands().forEach(command -> {
-            String cmd = Kit.get().BotPrefix + menuName + " " + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+            String cmd = Kit.get().botPrefix + menuName + " " + command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
 
             if (command.getCommands().size() < 2) {
                 embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), true);
@@ -227,7 +210,7 @@ public class VolmitCommand extends ListenerAdapter {
                                         .replace("[", "").replace("]", "") +
                                 "`\n" +
                                 command.getDescription() +
-                                (command.getExample() != null ? "\n**usage:**\n`" + Kit.get().BotPrefix + command.getExample() + "`" : "");
+                                (command.getExample() != null ? "\n**usage:**\n`" + Kit.get().botPrefix + command.getExample() + "`" : "");
                 embed.addField(
                         cmd,
                         body,

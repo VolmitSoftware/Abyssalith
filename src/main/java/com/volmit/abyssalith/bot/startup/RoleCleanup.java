@@ -36,7 +36,7 @@ public class RoleCleanup extends ListenerAdapter {
         for (Role r : jda.getGuilds().get(0).getRoles()) {
             Role role = jda.getGuilds().get(0).getRoleById(jda.getGuilds().get(0).getRolesByName(r.getName(), false).get(0).getIdLong());
             List<Member> members = jda.getGuilds().get(0).getMembersWithRoles(role);
-            if (members.size() == 0 && r.getName().contains(Kit.get().LevelName)) {
+            if (members.size() == 0 && r.getName().contains(Kit.get().levelName)) {
                 jda.getGuilds().get(0).getRolesByName(r.getName(), true).get(0).delete().queue();
                 ff.add(jda.getGuilds().get(0).getRolesByName(r.getName(), true).get(0).getName());
             }

@@ -24,12 +24,12 @@ import net.dv8tion.jda.api.entities.Role;
 
 public class PermHandler {
     public static boolean hasAdmin(Member m) {
-        Role r = m.getGuild().getRolesByName(Kit.get().RoleAdministrator, false).get(0);
+        Role r = m.getGuild().getRolesByName(Kit.get().roleAdministrator, false).get(0);
         return m.getRoles().contains(r);
     }
 
     public static boolean hasMod(Member m) {
-        Role r = m.getGuild().getRolesByName(Kit.get().RoleModerator, false).get(0);
+        Role r = m.getGuild().getRolesByName(Kit.get().roleModerator, false).get(0);
         return m.getRoles().contains(r);
     }
 }

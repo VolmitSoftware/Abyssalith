@@ -34,7 +34,7 @@ public class Get extends VolmitCommand {
         super(
                 "Get", //Name
                 new String[]{"bal", "balance"}, //Alias's
-                new String[]{Kit.get().RoleModerator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleModerator}, // Always permitted if empty. User must have at least one if specified.
                 "Get's the users balance", // Description
                 false, // Does it use Args
                 "eco get @Psycho" //Example - the prefix
@@ -45,8 +45,8 @@ public class Get extends VolmitCommand {
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
         Abyss.info("Eco.Get Instanced");
-        String moneyName = Kit.get().MoneyName;
-        String moneyEmoji = Kit.get().MoneyEmoji;
+        String moneyName = Kit.get().moneyName;
+        String moneyEmoji = Kit.get().moneyEmoji;
         if (!e.getMessage().getMentionedMembers().isEmpty()) {
             User u = Abyss.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
 

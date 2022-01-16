@@ -33,7 +33,7 @@ public class UnBanish extends VolmitCommand {
         super(
                 "unbanish",
                 new String[]{"unbanish", "unbok", "unsilence"},
-                new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleModerator, Kit.get().roleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This command removes the banished role from the person mentioned, or prints them",
                 true,
                 "mod unbok @psycho"

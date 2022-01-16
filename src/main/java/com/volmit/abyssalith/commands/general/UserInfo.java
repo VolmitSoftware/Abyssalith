@@ -59,7 +59,7 @@ public class UserInfo extends VolmitCommand {
 
         embed.setDescription("These are your Stats that are stored in the server for usages, logging, and preventative measures!");
         embed.addField("Your Id", "`" + u.id() + "`", false);
-        embed.addField("Bank Balance", "They have: `" + Form.f(u.money()) + "` " + Kit.get().MoneyName, false);
+        embed.addField("Bank Balance", "They have: `" + Form.f(u.money()) + "` " + Kit.get().moneyName, false);
         embed.addField("Your Experience", Form.f(u.experience()) + "**xp**", false);
         embed.addField("Micro Stats", "" + "Messages sent:" + u.messagesSent() + "\n" + "Reactions added:" + u.reactions(), false);
         embed.addField("Warnings Received", u.warnings().size() + " Total Warnings", false);

@@ -19,35 +19,46 @@ package com.volmit.abyssalith.listeners;
 
 import art.arcane.quill.execution.J;
 import com.volmit.abyssalith.Abyss;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import com.volmit.abyssalith.data.User;
+import com.volmit.abyssalith.toolbox.Kit;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
+import net.dv8tion.jda.api.events.message.react.MessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 
-public class BotListener extends ListenerAdapter {
-    public void onMessageReceived(MessageReceivedEvent e) {
-        if (e.getMessage().getAuthor().isBot()
-                && !e.getMessage().getEmbeds().isEmpty()
-                && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
-        ) {
-            e.getMessage().addReaction("U+274C").queue();
-        }
-    }
-
+public class MessageReactionListener extends ListenerAdapter {
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
+        Abyss.debug("Reaction Added");
+        Message m = e.getChannel().retrieveMessageById(e.getMessageId()).complete();
+        if (!e.getUser().isBot()) {
+            User u = Abyss.getLoader().getUser(e.getUser().getIdLong());
+            u.experience((u.experience() + Kit.get().xpPerMessage.rand()));
+            u.reactions(u.reactions() + 1);
+        }
+
         if (!e.getUser().isBot()  // is the reactor a user
-                && e.getMember().getUser().isBot()
+                && m.getAuthor().isBot()
                 && e.getReaction().toString().contains("U+274c")  // is the X reaction there
-                && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getActionRows().size() == 0 // Are their no clickable actions
-
-        ) {
-
+                && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getActionRows().size() == 0 /* Are their no clickable actions*/) {
             J.a(() -> {
                 Abyss.info(" Cleaning bot response as requested");
                 e.getChannel().retrieveMessageById(e.getMessageId()).complete().delete().queue();
             });
         }
+
     }
+
+    public void onMessageReactionRemove(MessageReactionRemoveEvent e) {
+        Abyss.debug("Reaction Removed");
+        long uid = e.getUserIdLong();
+        if (Abyss.getJDA().getSelfUser().getIdLong() != uid) {
+            e.getUserId();
+            User u = Abyss.getLoader().getUser(e.getUserIdLong());
+            u.reactions(u.reactions() - 1);
+            u.experience(u.experience() - Kit.get().xpPerMessage.rand());
+        }
+    }
+
+
 }
-
-

@@ -33,7 +33,7 @@ public class PurgeWarns extends VolmitCommand {
         super(
                 "purgewarns",
                 new String[]{"purgewarns", "purge", "pw"},
-                new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleModerator, Kit.get().roleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This command removes all warnings from a user",
                 false,
                 "mod purgewarns <ID>"

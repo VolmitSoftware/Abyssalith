@@ -39,7 +39,7 @@ public class Commands extends VolmitCommand {
                 "Commands",
                 new String[]{"commands", "?", "help"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
-                "Sends the command help page (this one) If you would like to see the Passives that this bot does you can type `" + Kit.get().BotPrefix + "passive` and see what this bot does Passively",
+                "Sends the command help page (this one) If you would like to see the Passives that this bot does you can type `" + Kit.get().botPrefix + "passive` and see what this bot does Passively",
                 false,
                 null
         );
@@ -57,21 +57,21 @@ public class Commands extends VolmitCommand {
         // Add explanation
         embed.addField(
                 "All commands you can use",
-                Kit.get().BotPrefix + "<command> for more help on the command",
+                Kit.get().botPrefix + "<command> for more help on the command",
                 true
         );
 
         // Loop over and add all commands with their respective information
         for (VolmitCommand command : botCommands) {
-            String cmd = /*Kit.get().BotPrefix + */ command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
-            embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().BotPrefix + "`");
+            String cmd = command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
+            embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().botPrefix + "`");
             if (command.getCommands().size() < 2) {
                 embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), false);
             } else {
                 StringBuilder body = new StringBuilder();
                 body
                         .append("\n`")
-                        .append(Kit.get().BotPrefix)
+                        .append(Kit.get().botPrefix)
                         .append(
                                 command.getCommands().size() == 2 ?
                                         command.getCommands().get(1) :

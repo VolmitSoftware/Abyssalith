@@ -34,7 +34,7 @@ public class Set extends VolmitCommand {
         super(
                 "set", //Name
                 new String[]{}, //Alias's
-                new String[]{Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "Sets the users balance", // Description
                 true, // Does it use Args
                 "eco set 10 @Psycho" //Example - the prefix
@@ -45,8 +45,8 @@ public class Set extends VolmitCommand {
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
         Abyss.info("Eco.Set Instanced");
-        String moneyName = Kit.get().MoneyName;
-        String moneyEmoji = Kit.get().MoneyEmoji;
+        String moneyName = Kit.get().moneyName;
+        String moneyEmoji = Kit.get().moneyEmoji;
 
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji + moneyName + " set: ", args.get(1) + " Set By: " + e.getAuthor().getAsMention(), false);

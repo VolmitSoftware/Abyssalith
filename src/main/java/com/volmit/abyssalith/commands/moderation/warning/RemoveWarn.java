@@ -33,7 +33,7 @@ public class RemoveWarn extends VolmitCommand {
         super(
                 "unwarn",
                 new String[]{"unwarn", "delwarn", "rw"},
-                new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleModerator, Kit.get().roleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This command removes the Latest warning from a user",
                 false,
                 "mod unwarn <ID>"

@@ -39,7 +39,7 @@ public class BotProvider implements IBotProvider {
     }
 
     private String realToken() {
-        return Kit.get().BotToken;
+        return Kit.get().botToken;
     }
 
     @Override

@@ -89,7 +89,6 @@ public class MenuHandler { // get and send menu
                 menu.addOption(r.getName(), r.getId());
         }
         return menu;
-
     }
 }
 

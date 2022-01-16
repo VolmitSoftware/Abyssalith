@@ -34,7 +34,7 @@ public class Remove extends VolmitCommand {
         super(
                 "remove", //Name
                 new String[]{}, //Alias's
-                new String[]{Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "Takes a Number of currency to the user", // Description
                 true, // Does it use Args
                 "eco remove 10 @Psycho" //Example - the prefix
@@ -45,8 +45,8 @@ public class Remove extends VolmitCommand {
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
         Abyss.info("Eco.Remove Instanced");
-        String moneyName = Kit.get().MoneyName;
-        String moneyEmoji = Kit.get().MoneyEmoji;
+        String moneyName = Kit.get().moneyName;
+        String moneyEmoji = Kit.get().moneyEmoji;
 
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji + moneyName + " removed: ", args.get(1) + " Removed By: " + e.getAuthor().getAsMention(), false);

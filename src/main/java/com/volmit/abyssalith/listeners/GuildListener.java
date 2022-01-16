@@ -25,19 +25,17 @@ import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleRemoveEvent;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
 import java.util.Set;
 
 
-public class PersistentRoleListener extends ListenerAdapter {
+public class GuildListener extends ListenerAdapter {
 
     public void onGuildMemberJoin(GuildMemberJoinEvent e) {
-        if (!e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
+        if (!e.getMember().getUser().isBot() && Kit.get().usePersistentRoles) {
             Abyss.info("Attempting to reattach roles for: " + e.getMember().getEffectiveName());
-
             User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
             if (!lRoles.isEmpty() && e.getMember().getRoles().isEmpty()) {
@@ -57,7 +55,7 @@ public class PersistentRoleListener extends ListenerAdapter {
     }
 
     public void onGuildMemberRoleAdd(GuildMemberRoleAddEvent e) {
-        if (!e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
+        if (!e.getMember().getUser().isBot() && Kit.get().usePersistentRoles) {
             User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             u.roleIds().add(e.getRoles().get(0).getId());
             Abyss.info("Attached updated roles to : " + e.getMember().getEffectiveName() + "Role ID: " + e.getRoles().get(0).getId());
@@ -65,27 +63,11 @@ public class PersistentRoleListener extends ListenerAdapter {
     }
 
     public void onGuildMemberRoleRemove(GuildMemberRoleRemoveEvent e) {
-        if (!e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
+        if (!e.getMember().getUser().isBot() && Kit.get().usePersistentRoles) {
             User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
             u.roleIds().remove(e.getRoles().get(0).getId());
             Abyss.info("Removed role from : " + e.getMember().getEffectiveName() + " Role ID: " + e.getRoles().get(0).getId());
         }
     }
 
-    public void onMessageReceived(MessageReceivedEvent e) { // THIS IS A FALLBACK TO KEEP ROLES UPDATED
-        User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
-        Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
-        if (lRoles.size() < e.getMember().getRoles().size() && !e.getMember().getUser().isBot() && Kit.get().UsePersistentRoles) {
-            for (Role r : e.getMember().getRoles()) {
-                u.roleIds().add(r.getId());
-            }
-            Abyss.info("Found Missing Roles, Rebinding to : " + e.getMember().getEffectiveName());
-        }
-        if (lRoles.size() > e.getMember().getRoles().size() && !e.getMember().getUser().isBot()) {
-            for (Role r : e.getMember().getRoles()) {
-                u.roleIds().add(r.getId());
-            }
-            Abyss.warn("ROLE MISMATCH, REFACTORING ROLES IN USER: " + e.getMember().getEffectiveName());
-        }
-    }
 }

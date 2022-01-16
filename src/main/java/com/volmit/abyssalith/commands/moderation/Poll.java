@@ -35,7 +35,7 @@ public class Poll extends VolmitCommand {
         super(
                 "poll",
                 new String[]{"poll", "query"},
-                new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
+                new String[]{Kit.get().roleModerator, Kit.get().roleAdministrator}, // Add role name here. Empty: always / 1+: at least one.
                 "Poll creator. (max 20 options separated by commas)",
                 true,
                 null
@@ -60,7 +60,7 @@ public class Poll extends VolmitCommand {
             EmbedBuilder poll = new EmbedBuilder()
                     .setTitle("Poll")
                     .setDescription("Please React to the poll!")
-                    .setColor(Color.decode(Kit.get().BotColor))
+                    .setColor(Color.decode(Kit.get().botColor))
                     .setFooter("React to this poll with the emoji corresponding to each option.");
             for (int i = 0; i < counter; i++) {
                 poll.appendDescription(emoji[i] + ": **" + pollArgs.get(i).trim() + "**\n");

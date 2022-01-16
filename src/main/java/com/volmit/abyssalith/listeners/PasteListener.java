@@ -44,18 +44,12 @@ public class PasteListener extends ListenerAdapter {
             new Definition("[Multiverse-Core]", "Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),
             new Definition("DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH", "Paper Watchdog Spam", "**PLEASE turn off the paper spam!** \n https://docs.volmit.com/iris/plugin/faq"),
             new Definition(s -> !s.contains("[Iris] Enabling Iris"), "Iris not installed / not a full log", "This does not contain a **full** log with Iris installed, perhaps try again if you want more information.")
-
     );
 
     @Override
     public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
-
-        if (e.getComponentId().equals("no")) {
-            Objects.requireNonNull(e.getMessage()).delete().queue();
-        } else if (e.getComponentId().equals("hastebinlinknew") || e.getComponentId().equals("pastbinlinknew") || e.getComponentId().equals("mcloglinknew")) {
-
-
-            Abyss.info("Starting Interpreter Paste Service");
+        if (e.getComponentId().equals("hastebinlinknew") || e.getComponentId().equals("pastbinlinknew") || e.getComponentId().equals("mcloglinknew")) {
+            Abyss.info("Initializing Paste Service Interpreter");
             String properURL = null;
             Document doc;
             if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://pastebin.com")) {
@@ -91,13 +85,10 @@ public class PasteListener extends ListenerAdapter {
             embed.setDescription("Hello user! This is A.D.D. and I will do my best to read your file!\n" + "||Paste: " + properURL + "||");
             Abyss.info("PROCESSING PASTEBIN FILE FROM " + properURL);
             int problems = test(doc.text(), embed);
-
-
             // NO PROBLEMS
             if (problems == 0) {
                 embed.addField("Well, This is not good.", "I cant seem to figure anything out; try asking the support team about the issue!", false);
             }
-
             embed.send(e.getMessage(), true, 1000);
         }
     }
@@ -118,7 +109,6 @@ public class PasteListener extends ListenerAdapter {
                 problems.getAndIncrement();
             }
         });
-
         return problems.get();
     }
 

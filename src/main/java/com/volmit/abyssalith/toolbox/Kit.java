@@ -40,59 +40,60 @@ public class Kit extends ListenerAdapter {
 
 
     public void envInject() {
-        env("BOT_DUMMY_PORT", (f) -> DummyPort = Integer.parseInt(f));
-        env("BOT_TOKEN", (f) -> BotToken = f);
-        env("BOT_COMPANY", (f) -> BotCompany = f);
-        env("BOT_GIF", (f) -> BotGIF = f);
-        env("BOT_COLOR", (f) -> BotColor = f);
-        env("BOT_OWNER_ID", (f) -> BotOwnerID = f);
-        env("BOT_PREFIX", (f) -> BotPrefix = f);
-        env("BOT_LEVEL_NAME", (f) -> LevelName = f);
-        env("BOT_MONEY_NAME", (f) -> MoneyName = f);
-        env("BOT_MONEY_EMOJI", (f) -> MoneyEmoji = f);
-        env("BOT_REACTION_ROLE_STRING", (f) -> ReactionRoleString = f);
-        env("BOT_ROLE_BANISHED", (f) -> RoleBanished = f);
-        env("BOT_ROLE_MODERATOR", (f) -> RoleModerator = f);
-        env("BOT_ROLE_ADMINISTRATOR", (f) -> RoleAdministrator = f);
-        env("BOT_USE_BANISHED_INSTEAD_KICK", (f) -> UseBanishedInsteadOfKick = Boolean.parseBoolean(f));
-        env("BOT_USE_LINGUA", (f) -> UseLingua = Boolean.parseBoolean(f));
-        env("BOT_USE_PERSISTENT_ROLES", (f) -> UsePersistentRoles = Boolean.parseBoolean(f));
-        env("BOT_XP_PER_MESSAGE", (f) -> XpPerMessage = new Range(Float.parseFloat(f.split("_")[0]), Float.parseFloat(f.split("_")[1])));
-        env("BOT_XP_MAX_LEVELS", (f) -> XpMaxLevels = Integer.parseInt(f));
-        env("BOT_XP_BASE_MULTIPLIER", (f) -> XpBaseMultiplier = Double.parseDouble(f));
-        env("BOT_REDIS", (f) -> UseRedis = Boolean.parseBoolean(f));
-        env("BOT_REDIS_ADDRESS", (f) -> RedisAddress = f);
-        env("BOT_REDIS_PORT", (f) -> RedisPort = Integer.parseInt(f));
-        env("BOT_REDIS_PASSWORD", (f) -> RedisPassword = f);
+        env("BOT_DUMMY_PORT", (f) -> dummyPort = Integer.parseInt(f));
+        env("BOT_TOKEN", (f) -> botToken = f);
+        env("BOT_COMPANY", (f) -> botCompany = f);
+        env("BOT_GIF", (f) -> botGIF = f);
+        env("BOT_COLOR", (f) -> botColor = f);
+        env("BOT_OWNER_ID", (f) -> botOwnerID = f);
+        env("BOT_PREFIX", (f) -> botPrefix = f);
+        env("BOT_LEVEL_NAME", (f) -> levelName = f);
+        env("BOT_MONEY_NAME", (f) -> moneyName = f);
+        env("BOT_MONEY_EMOJI", (f) -> moneyEmoji = f);
+        env("BOT_REACTION_ROLE_STRING", (f) -> reactionRoleString = f);
+        env("BOT_ROLE_BANISHED", (f) -> roleBanished = f);
+        env("BOT_ROLE_MODERATOR", (f) -> roleModerator = f);
+        env("BOT_ROLE_ADMINISTRATOR", (f) -> roleAdministrator = f);
+        env("BOT_USAGE_MODULES", (f) -> usageModules = f);
+        env("BOT_USE_BANISHED_INSTEAD_KICK", (f) -> useBanishedInsteadOfKick = Boolean.parseBoolean(f));
+        env("BOT_USE_LINGUA", (f) -> useLingua = Boolean.parseBoolean(f));
+        env("BOT_USE_PERSISTENT_ROLES", (f) -> usePersistentRoles = Boolean.parseBoolean(f));
+        env("BOT_XP_PER_MESSAGE", (f) -> xpPerMessage = new Range(Float.parseFloat(f.split("_")[0]), Float.parseFloat(f.split("_")[1])));
+        env("BOT_XP_MAX_LEVELS", (f) -> xpMaxLevels = Integer.parseInt(f));
+        env("BOT_XP_BASE_MULTIPLIER", (f) -> xpBaseMultiplier = Double.parseDouble(f));
+        env("BOT_REDIS", (f) -> useRedis = Boolean.parseBoolean(f));
+        env("BOT_REDIS_ADDRESS", (f) -> redisAddress = f);
+        env("BOT_REDIS_PORT", (f) -> redisPort = Integer.parseInt(f));
+        env("BOT_REDIS_PASSWORD", (f) -> redisPassword = f);
     }
 
     // Set from config
-
-    public String BotCompany = "VolmitSoftware";
-    public String BotGIF = "https://images-ext-2.discordapp.net/external/RTML29qcfmg0O2AdcxVRfTo_G8wNRz53le_CGIMyxR8/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/173261518572486656/a_63b6f52a118e915f11bc771985a078c8.gif";
-    public String BotColor = "0xffff00";
-    public String BotToken = ""; // LEAVE BLANK FOR TOKEN
-    public int DummyPort = 8187;
-    public String BotOwnerID = "173261518572486656";
-    public String BotPrefix = ".";
-    public String LevelName = "Level ";
-    public String MoneyName = "VolmitCoin";
-    public String MoneyEmoji = ":coin:";
-    public List<String> Phishing = Arrays.asList("discordgift.site", "dicsordapp.co" ,"discord.link", "dis.cord", "disc0rd.gg", "discord.gift", "discorcl.click", "gavenitro.com", "discodnitro.info", "discord-airdrop.com", "steamnltros.ru", "discord-app.net", "discord-give.com", "diiscord.com");
-    public String RedisAddress = "";
-    public int RedisPort = 0;
-    public String RedisPassword = "";
-    public String ReactionRoleString = "**ReactionRoles**";
-    public String RoleBanished = "Banished";
-    public String RoleModerator = "Support";
-    public String RoleAdministrator = "Administrator";
-    public boolean UseRedis = false;
-    public boolean UseBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
-    public boolean UseLingua = true;
-    public boolean UsePersistentRoles = true;
-    public Range XpPerMessage = Range.jitter(0.85f, 0.15f);
-    public int XpMaxLevels = 50; // Max roles that can be made by this bot (Level)
-    public double XpBaseMultiplier = 2.13d;
+    public String botCompany = "VolmitSoftware";
+    public String botGIF = "https://images-ext-2.discordapp.net/external/RTML29qcfmg0O2AdcxVRfTo_G8wNRz53le_CGIMyxR8/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/173261518572486656/a_63b6f52a118e915f11bc771985a078c8.gif";
+    public String botColor = "0xffff00";
+    public String botToken = ""; // LEAVE BLANK FOR TOKEN
+    public int dummyPort = 8187;
+    public String botOwnerID = "173261518572486656";
+    public String botPrefix = ".";
+    public String levelName = "Level ";
+    public String moneyName = "VolmitCoin";
+    public String moneyEmoji = ":coin:";
+    public List<String> phishing = Arrays.asList("discordgift.site", "dicsordapp.co" ,"discord.link", "dis.cord", "disc0rd.gg", "discord.gift", "discorcl.click", "gavenitro.com", "discodnitro.info", "discord-airdrop.com", "steamnltros.ru", "discord-app.net", "discord-give.com", "diiscord.com");
+    public String redisAddress = "";
+    public int redisPort = 0;
+    public String redisPassword = "";
+    public String reactionRoleString = "**ReactionRoles**";
+    public String roleBanished = "Banished";
+    public String roleModerator = "Support";
+    public String roleAdministrator = "Administrator";
+    public String usageModules = "ALL";
+    public boolean useRedis = false;
+    public boolean useBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
+    public boolean useLingua = true;
+    public boolean usePersistentRoles = true;
+    public Range xpPerMessage = Range.jitter(0.85f, 0.15f);
+    public int xpMaxLevels = 50; // Max roles that can be made by this bot (Level)
+    public double xpBaseMultiplier = 2.13d;
 
     // Set from main class
     public transient Long botID;

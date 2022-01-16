@@ -17,23 +17,30 @@
  */
 package com.volmit.abyssalith.listeners;
 
+import com.volmit.abyssalith.Abyss;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
+import java.util.Objects;
 
 
 public class ButtonListener extends ListenerAdapter {
 
     @Override
     public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
+        Abyss.debug("Button Clicked");
+        if (e.getComponentId().equals("no")) {
+            Objects.requireNonNull(e.getMessage()).delete().queue();
+        }
         if (e.getComponentId().equals("success")) {
             e.getUser().openPrivateChannel().complete().sendMessage("Hello!").queue();
             e.editButton(e.getButton()).complete();
-
-        } else if (e.getComponentId().equals("secondary")) {
+        }
+        if (e.getComponentId().equals("secondary")) {
             e.getUser().openPrivateChannel().complete().sendMessage("Hello!").queue();
             e.editButton(e.getButton()).complete();
-
         }
+
     }
 }
 

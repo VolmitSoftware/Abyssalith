@@ -41,25 +41,20 @@ import java.util.Objects;
 public class Abyss extends ListenerAdapter {
 
     public static void main(String[] args) {
-
-        //This sets the threading priorities to work on Droplet
+        //This sets the threading priorities to work on Droplet :(
         final int cores = Runtime.getRuntime().availableProcessors();
         if (cores <= 1) {
             System.out.println("Available Cores \"" + cores + "\", Attempting to set Parallelism Flag");
             System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "1");
             System.out.println("Parallelism Set!");
         }
-
         envInject();
-
-        if (Kit.get().UseRedis) {
+        if (Kit.get().useRedis) {
             Kit k = Kit.get();
-            loader = new DataLoader(new RedisStorageAccess(k.RedisAddress, k.RedisPort, k.RedisPassword));
+            loader = new DataLoader(new RedisStorageAccess(k.redisAddress, k.redisPort, k.redisPassword));
         } else {
             loader = new DataLoader(new FileSystemStorageAccess(new File("Data/BotData")));
         }
-
-        org.slf4j.simple.SimpleServiceProvider.class.getSimpleName();
         System.out.println("Initializing");
         Kit.get().botID = getJDA().getSelfUser().getIdLong();
         Kit.get().botUser = getJDA().getUserById(Kit.get().botID);
@@ -79,15 +74,11 @@ public class Abyss extends ListenerAdapter {
     private static void envInject() {
         Kit.get().envInject();
     }
-
     public static final IBotProvider provider = new BotProvider();
 
     @Getter
     private static DataLoader loader;
-
     public static JDA getJDA() {
-
-
         return provider.get().getJDA();
     }
 

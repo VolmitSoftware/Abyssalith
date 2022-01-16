@@ -32,7 +32,7 @@ public class Shutdown extends VolmitCommand {
         super(
                 "stop",
                 new String[]{"stop", "kill", "s"},
-                new String[]{Kit.get().RoleModerator, Kit.get().RoleAdministrator},
+                new String[]{Kit.get().roleModerator, Kit.get().roleAdministrator},
                 "Stops the Bot boi",
                 false,
                 null
@@ -44,7 +44,7 @@ public class Shutdown extends VolmitCommand {
     public void handle(List<String> args, MessageReceivedEvent e) {
         Abyss.warn("Terminating the Bot");
         String oidcheck = e.getMessage().getAuthor().getId();
-        if (oidcheck.equals(Kit.get().BotOwnerID)) {
+        if (oidcheck.equals(Kit.get().botOwnerID)) {
             Abyss.warn("KILLING BOT");
             e.getMessage().delete().queue();
             Abyss.shutdown();

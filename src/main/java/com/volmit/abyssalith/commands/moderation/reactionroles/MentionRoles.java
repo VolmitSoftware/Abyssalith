@@ -33,7 +33,7 @@ public class MentionRoles extends VolmitCommand {
         super(
                 "mentionroles", //Name
                 new String[]{"mr", "m"}, //Alias's
-                new String[]{Kit.get().RoleAdministrator}, // Always permitted if empty. User must have at least one if specified.
+                new String[]{Kit.get().roleAdministrator}, // Always permitted if empty. User must have at least one if specified.
                 "This makes the Mentionable Roles applicable to users", // Description
                 false, // Does it use Args
                 "rr m" //Example - the prefix
@@ -48,10 +48,10 @@ public class MentionRoles extends VolmitCommand {
         User u = Abyss.getLoader().getUser(e.getAuthor().getIdLong());
         embed.setDescription("*This should explain how to use the reaction roles system, should you have any questions!*");
         embed.addField("Create a Reaction-able Message!", " First of all your message needs to contain the following: `"
-                + Kit.get().ReactionRoleString
+                + Kit.get().reactionRoleString
                 + "`, anywhere in the message, AND you need to be an Admin", false);
         embed.addField("Example: ", "" +
-                " - " + Kit.get().ReactionRoleString + " - \n"
+                " - " + Kit.get().reactionRoleString + " - \n"
                 + "@role1 @role2  @role3\n"
                 + "*__SERVER MUST HAVE CORRESPONDING EMOTES TO NAMES OF ROLES__* ie: if you have a role called SolarFlare, you need a `:SolarFlare:` emote matching the name, This is not required, but it assigns an emoji to a role on use", false);
         embed.send(e.getMessage(), true, 1000);
