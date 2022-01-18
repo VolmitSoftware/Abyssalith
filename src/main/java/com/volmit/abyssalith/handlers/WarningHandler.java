@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class WarningHandler {
 
@@ -47,14 +48,17 @@ public class WarningHandler {
         e.getMessage().getChannel().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue(); // Build / Send
         m.getUser().openPrivateChannel().complete().sendMessageEmbeds(warnEmbedBuilder(m, ss, Objects.requireNonNull(e.getMessage().getMember())).build()).queue();
         if (u.warnings().size() == 4) {
+            m.timeoutFor(1, TimeUnit.MINUTES).complete();
             warnFinal(m);
         } else if (u.warnings().size() == 5) {
+            m.timeoutFor(1, TimeUnit.DAYS).complete();
             goodBye(m);
         }
     }
 
     public static void warn(Member m, String string) { //intended for setting warnings
         System.out.println("Starting Warn Sequence");
+        m.timeoutFor(1, TimeUnit.MINUTES).complete();
         User u = Abyss.getLoader().getUser(m.getIdLong());
         warnToFile(u, string); // Add to file
     }
@@ -103,14 +107,14 @@ public class WarningHandler {
 
     public static void deleteLatestWarn(User u, MessageChannel messageChannel) {
         u.warnings().remove(u.warnings().size() - 1);
-        u.warnings().clear();
-        VolmitEmbed embed = new VolmitEmbed("**[ User's Updated Warnings ]**");
-        embed.addField("New Warning List: ", u.warnings().toString().replace("], ", "\n").replace("{", "").replace("}", "").replace("=[", ": ").replace("][", " : "), false);
-        embed.setColor(Color.GREEN);
-        messageChannel.sendMessageEmbeds(embed.build()).queue();
+        pWarn(u, messageChannel);
     }
 
     public static void purge(User u, MessageChannel messageChannel) {
+        pWarn(u, messageChannel);
+    }
+
+    private static void pWarn(User u, MessageChannel messageChannel) {
         u.warnings().clear();
         VolmitEmbed embed = new VolmitEmbed("**[ User's Updated Warnings ]**");
         embed.addField("New Warning List: ", u.warnings().toString().replace("], ", "\n").replace("{", "").replace("}", "").replace("=[", ": ").replace("][", " : "), false);

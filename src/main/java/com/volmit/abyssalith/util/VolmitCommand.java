@@ -109,6 +109,7 @@ public class VolmitCommand extends ListenerAdapter {
         if (!needsArguments) {
             handle(null, e);
         } else if (getCategory() != null) {
+            e.getMessage().delete().queue(); // delete the sent message
             // If it's a category do:
             if (args.size() < 2) {
                 sendCategoryHelp(e.getMessage());
@@ -121,7 +122,6 @@ public class VolmitCommand extends ListenerAdapter {
                 for (VolmitCommand sub : getSubcommands()) {
                     for (String commandAlias : sub.getCommands()) {
                         if (commandAlias.equalsIgnoreCase(args.get(1))) {
-                            sub.continueToHandle(args.subList(1, args.size()), e);
                             return;
                         }
                     }

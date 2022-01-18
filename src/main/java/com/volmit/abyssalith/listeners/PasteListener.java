@@ -41,7 +41,10 @@ public class PasteListener extends ListenerAdapter {
             new Definition("No biome provided", "Bad Biome NSM key", "- The Biome-Type in a dimension file is not correct"),
             new Definition("Custom Biomes: 0", "Overworld Pack Issue", "- You either have a misconfigured pack, or something else... ask support"),
             new Definition("Couldn't read Biome file:", "You have a typo in a Biome file", "- There is a typo in one of the files in your pack folder!"),
+            new Definition("Failed to download 'overworld'", "Broken Overworld", "- Your server cant download Packs Do it m" +
+                    "anually"),
             new Definition("[Iris]: Unknown Block Data:", "Unknown Block Data", "- Iris cant find block data (nbt mapping issue) "),
+            new Definition("iris.core.nms.v18_1.NMSBinding18_1.registry", "Your Version is WRONG", "- Either your Server, Jar, or PurPur is wrong, Ensure you are up to date! "),
             new Definition("Could not parse data: minecraft:beetroots[age=7]", "BeetRootBug", "- Just an error with an object, safe to ignore"),
             new Definition("IT IS HIGHLY RECOMMENDED YOU RESTART THE SERVER BEFORE GENERATING!", "Restart your server", "- Iris needs to restart the server for the datapacks to work properly"),
             new Definition("[Multiverse-Core]", "Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),

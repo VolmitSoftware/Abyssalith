@@ -38,18 +38,21 @@ import java.util.Set;
 
 public class MessageListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
-        Abyss.debug("Message Received");
+
 
         // XP APPLICATION FOR THE USER ---
         if (!e.getMessage().getAuthor().isBot()) {
+//            Abyss.debug("XP Check");
             User u = Abyss.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
             u.experience(u.experience() + Kit.get().xpPerMessage.rand()); //XP
             u.messagesSent(u.messagesSent() + 1);
             double uxp = u.experience();
             int validator = XP.getLevelForXp(uxp);
             if (validator < Kit.get().xpMaxLevels) {
-                roleValidator(e, Kit.get().levelName + XP.getLevelForXp(uxp));
-                roleManager(e, Kit.get().levelName + XP.getLevelForXp(uxp), validator);
+                if (Kit.get().useRoleSystem) {
+                    roleValidator(e, Kit.get().levelName + XP.getLevelForXp(uxp));
+                    roleManager(e, Kit.get().levelName + XP.getLevelForXp(uxp), validator);
+                }
             }
         }
 
@@ -66,7 +69,7 @@ public class MessageListener extends ListenerAdapter {
         }
 
         // REACTIONS FOR BOT TO DELETE ITSELF ---
-        if (e.getMessage().getAuthor().isBot()
+        if (e.getMessage().getAuthor().getAvatarUrl().contains("875973161890508830")
                 && !e.getMessage().getEmbeds().isEmpty()
                 && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
         ) {
@@ -79,6 +82,7 @@ public class MessageListener extends ListenerAdapter {
                 && e.getMessage().getMentionedRoles().size() > 0 // mentioning roles
                 && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) // Has admin permissions
                 && e.getMessage().getContentRaw().contains(Kit.get().reactionRoleString)) { // Contains reaction role string
+            Abyss.debug("ReactionRoles Instanced");
             if (e.getMessage().getMentionedRoles().size() > 1) {
                 MenuHandler.RoleListMenu("rolepage",
                         "Choose your Role(s)!",
@@ -92,12 +96,12 @@ public class MessageListener extends ListenerAdapter {
 
         //LINGUA PARTITIONER ---
         if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().length() > 5 && !e.getMessage().getContentRaw().contains("https:") && Kit.get().useLingua) {
+            Abyss.debug("Lingua Check");
             final LanguageDetector detector = LanguageDetectorBuilder.fromLanguages(
                     Language.ENGLISH, // Default language
                     Language.FRENCH, Language.GERMAN, Language.SPANISH, // Only what i can read or write is here
                     Language.TURKISH, Language.PORTUGUESE, Language.POLISH,
                     Language.KOREAN, Language.DUTCH, Language.CZECH).build();
-
             if (!detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()).equals(Language.ENGLISH)) {
                 //todo: Figure out why this is necessary, and implement a better way to detect/use languages
                 Abyss.info("Someone is speaking: " + "" + detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()));
@@ -114,6 +118,7 @@ public class MessageListener extends ListenerAdapter {
         for (String p : Kit.get().phishing) {
             if (e.getMessage().getContentRaw().toLowerCase().contains(p)) {
                 e.getMessage().delete().queue();
+                Abyss.debug("Phishing Check");
                 Objects.requireNonNull(e.getMember()).getUser().openPrivateChannel().complete().sendMessage("Hello, You have been banned from volmit for sending Phishing links: `\n" +
                         e.getMessage() +
                         "`\nIf you feel this is a mistake, please send a friend request to: `⋈-NestorPsycho-⋈#0001` and explain the problem, otherwise your account was compromised, or you were unaware of what you were sending \n" +
@@ -126,58 +131,59 @@ public class MessageListener extends ListenerAdapter {
         }
 
         //PASTEBIN REGISTRAR ---
-        if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://pastebin.com/")) {
-            Abyss.info("Initializing  Paste Service");
-            String str = e.getMessage().getContentRaw();
-            String[] pbArr = str.split(" ");
-            for (String s : pbArr) {
-                if (s.contains("https://pastebin.com/")) {
-                    e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
-                        f.editMessageComponents().setActionRow(
-                                Button.success("pastbinlinknew", "Yes please!"),
-                                Button.danger("no", "No, go away!")
-                        ).queue();
-                        Abyss.info("Sent Paste Service Buttons");
-                    });
+        if (Kit.get().usePasteService) {
+            if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://pastebin.com/")) {
+                Abyss.info("Initializing  Paste Service");
+                String str = e.getMessage().getContentRaw();
+                String[] pbArr = str.split(" ");
+                for (String s : pbArr) {
+                    if (s.contains("https://pastebin.com/")) {
+                        e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
+                            f.editMessageComponents().setActionRow(
+                                    Button.success("pastbinlinknew", "Yes please!"),
+                                    Button.danger("no", "No, go away!")
+                            ).queue();
+                            Abyss.info("Sent Paste Service Buttons");
+                        });
+                    }
                 }
             }
-        }
-        if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://mclo.gs/")) {
-            Abyss.info("Initializing McLogs Service");
-            String str = e.getMessage().getContentRaw();
-            String[] pbArr = str.split(" ");
-            for (String s : pbArr) {
-                if (s.contains("https://mclo.gs/")) {
-                    e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
-                        f.editMessageComponents().setActionRow(
-                                Button.success("mcloglinknew", "Yes please!"),
-                                Button.danger("no", "No, go away!")
-                        ).queue();
-                        Abyss.info("Sent McLog Service Buttons");
-                    });
+            if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://mclo.gs/")) {
+                Abyss.info("Initializing McLogs Service");
+                String str = e.getMessage().getContentRaw();
+                String[] pbArr = str.split(" ");
+                for (String s : pbArr) {
+                    if (s.contains("https://mclo.gs/")) {
+                        e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
+                            f.editMessageComponents().setActionRow(
+                                    Button.success("mcloglinknew", "Yes please!"),
+                                    Button.danger("no", "No, go away!")
+                            ).queue();
+                            Abyss.info("Sent McLog Service Buttons");
+                        });
+                    }
                 }
             }
-        }
-
-        if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://hastebin.com/")) {
-            Abyss.info("Started the Hastebin Service");
-            String str = e.getMessage().getContentRaw();
-            String[] pbArr = str.split(" ");
-            for (String s : pbArr) {
-                if (s.contains("https://hastebin.com/")) {
-                    e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
-                        f.editMessageComponents().setActionRow(
-                                Button.success("hastebinlinknew", "Yes please!"),
-                                Button.danger("no", "No, go away!")
-                        ).queue();
-                        Abyss.info("Sent HasteBin Service Buttons");
-                    });
+            if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://hastebin.com/")) {
+                Abyss.info("Started the Hastebin Service");
+                String str = e.getMessage().getContentRaw();
+                String[] pbArr = str.split(" ");
+                for (String s : pbArr) {
+                    if (s.contains("https://hastebin.com/")) {
+                        e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
+                            f.editMessageComponents().setActionRow(
+                                    Button.success("hastebinlinknew", "Yes please!"),
+                                    Button.danger("no", "No, go away!")
+                            ).queue();
+                            Abyss.info("Sent HasteBin Service Buttons");
+                        });
+                    }
                 }
             }
         }
 
         //ROLE MANAGEMENT FINAL RESULT
-        User u = Abyss.getLoader().getUser(Objects.requireNonNull(e.getMember()).getIdLong()); // Load the user object
+        User u = Abyss.getLoader().getUser(e.getMember().getIdLong()); // Load the user object
         Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
         if (lRoles.size() < e.getMember().getRoles().size() && !e.getMember().getUser().isBot() && Kit.get().usePersistentRoles) {
             for (Role r : e.getMember().getRoles()) {
@@ -201,7 +207,7 @@ public class MessageListener extends ListenerAdapter {
             if (e.getGuild().getRolesByName(role, false).size() == 1 && e.getGuild().getRolesByName(role, false).contains(e.getGuild().getRolesByName(role, true).get(0))) {
                 r = e.getGuild().getRolesByName(role, true).get(0);
                 if (r != null) {
-                    e.getGuild().addRoleToMember(Objects.requireNonNull(e.getMember()).getIdLong(), r).queue();
+                    e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
                     if (v > 0) {
                         for (Role rol : e.getMember().getRoles()) {
                             if (rol.getName().contains(Kit.get().levelName)) {

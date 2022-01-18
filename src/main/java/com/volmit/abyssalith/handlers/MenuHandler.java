@@ -63,13 +63,7 @@ public class MenuHandler { // get and send menu
         int mr = mentionedRoles.size();
         Guild g = mentionedRoles.get(0).getGuild();
         menu.setMinValues(0);
-        for (Role r : mentionedRoles) {
-            if (!g.getEmotesByName(r.getName(), true).isEmpty())
-                menu.addOption(r.getName(), r.getId(), Emoji.fromEmote(g.getEmotesByName(r.getName(), true).get(0)));
-
-            if (g.getEmotesByName(r.getName(), true).isEmpty())
-                menu.addOption(r.getName(), r.getId());
-        }
+        roleLoop(mentionedRoles, menu, g);
         menu.setMaxValues(mr);
         return menu;
 
@@ -80,6 +74,11 @@ public class MenuHandler { // get and send menu
         SelectionMenu.Builder menu = SelectionMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
         Guild g = mentionedRoles.get(0).getGuild();
 
+        roleLoop(mentionedRoles, menu, g);
+        return menu;
+    }
+
+    private static void roleLoop(List<Role> mentionedRoles, SelectionMenu.Builder menu, Guild g) {
         for (Role r : mentionedRoles) {
             if (!g.getEmotesByName(r.getName(), true).isEmpty())
                 menu.addOption(r.getName(), r.getId(), Emoji.fromEmote(g.getEmotesByName(r.getName(), true).get(0)));
@@ -87,7 +86,6 @@ public class MenuHandler { // get and send menu
             if (g.getEmotesByName(r.getName(), true).isEmpty())
                 menu.addOption(r.getName(), r.getId());
         }
-        return menu;
     }
 }
 

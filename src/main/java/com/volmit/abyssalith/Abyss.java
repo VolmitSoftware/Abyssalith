@@ -22,7 +22,7 @@ import art.arcane.quill.execution.Looper;
 import com.volmit.abyssalith.bot.instance.BotProvider;
 import com.volmit.abyssalith.bot.instance.IBotProvider;
 import com.volmit.abyssalith.bot.startup.Registrar;
-import com.volmit.abyssalith.bot.startup.RoleCleanup;
+import com.volmit.abyssalith.handlers.RoleCleanup;
 import com.volmit.abyssalith.io.DataLoader;
 import com.volmit.abyssalith.io.storage.FileSystemStorageAccess;
 import com.volmit.abyssalith.io.storage.RedisStorageAccess;
@@ -89,6 +89,7 @@ public class Abyss extends ListenerAdapter {
             J.a(() -> {
                 J.sleep(1500);
                 RoleCleanup.Cleaner(getJDA());
+                // Startup Roles maybe?
             });
         }
         info("BOT HAS STARTED!");

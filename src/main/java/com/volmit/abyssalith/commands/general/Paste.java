@@ -30,7 +30,7 @@ public class Paste extends VolmitCommand {
     public Paste() {
         super(
                 "paste",
-                new String[]{"plink"},
+                new String[]{"paste", "plink"},
                 new String[]{}, // Always permitted if empty. User must have at least one if specified.
                 "This command shows the possible paste locations",
                 false,

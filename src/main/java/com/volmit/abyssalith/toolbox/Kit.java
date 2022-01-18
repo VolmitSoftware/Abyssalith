@@ -92,6 +92,7 @@ public class Kit extends ListenerAdapter {
     public boolean useBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
     public boolean useRoleSystem = true;
     public boolean useLingua = true;
+    public boolean usePasteService = true;
     public boolean usePersistentRoles = true;
     public Range xpPerMessage = Range.jitter(0.85f, 0.15f);
     public int xpMaxLevels = 50; // Max roles that can be made by this bot (Level)

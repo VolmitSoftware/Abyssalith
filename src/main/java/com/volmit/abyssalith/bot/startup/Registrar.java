@@ -50,15 +50,22 @@ public class Registrar extends ListenerAdapter {
 
                 break;
 
-            case "MOD":
-//                Usually just for moderation or whatever
-                jda.addEventListener(new ModHub()); // Money Subcommand
-                jda.addEventListener(new Passive());
+            case "VOL":
+//                jda.addEventListener(new ServerInfo()); VOLMIT SERVER STANDARDS
+                jda.addEventListener(new ButtonListener());
+                jda.addEventListener(new PasteListener());
+
+                jda.addEventListener(new Log());
                 jda.addEventListener(new UserInfo());
-                jda.addEventListener(new EcoHub()); // Money Subcommand
-                jda.addEventListener(new ServerInfo());
+                jda.addEventListener(new GuildListener()); // Persistent Roles
+                jda.addEventListener(new MessageListener()); // Watches the User's messages for stuff
+                jda.addEventListener(new MessageReactionListener()); // Watches the User's instances for stuff
+                jda.addEventListener(new Paste());
+                jda.addEventListener(new Passive());
+                jda.addEventListener(new ModHub()); // Mod Subcommand
 
                 break;
+
             default: // What it all has to offer
                 //Listeners
                 jda.addEventListener(new ButtonListener());
