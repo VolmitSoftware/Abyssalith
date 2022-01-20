@@ -50,7 +50,8 @@ public class PasteListener extends ListenerAdapter {
             new Definition("[Multiverse-Core]", "Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),
             new Definition(s -> !s.contains("Server type & version: git-Purpur"), "Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),
             new Definition("DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH", "Paper Watchdog Spam", "**PLEASE turn off the paper spam!** \n https://docs.volmit.com/iris/plugin/faq"),
-            new Definition(s -> !s.contains("[Iris] Enabling Iris"), "Iris not installed / not a full log", "This does not contain a **full** log with Iris installed, perhaps try again if you want more information.")
+            new Definition(s -> !s.contains("[Iris] Enabling Iris"), "Iris not installed / not a full log", "This does not contain a **full** log with Iris installed, perhaps try again if you want more information."),
+            new Definition(s -> s.contains("java.lang.NoClassDefFoundError: net/kyori/adventure/platform/bukkit/BukkitAudiences"), "Gradle Build task used wrongfully", "If you built Iris yourself, you need to use `shadowJar` instead of `build`.")
     );
 
     @Override
