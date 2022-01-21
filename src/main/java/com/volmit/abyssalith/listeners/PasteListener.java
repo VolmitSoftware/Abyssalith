@@ -23,6 +23,7 @@ import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -41,8 +42,7 @@ public class PasteListener extends ListenerAdapter {
             new Definition("No biome provided", "Bad Biome NSM key", "- The Biome-Type in a dimension file is not correct"),
             new Definition("Custom Biomes: 0", "Overworld Pack Issue", "- You either have a misconfigured pack, or something else... ask support"),
             new Definition("Couldn't read Biome file:", "You have a typo in a Biome file", "- There is a typo in one of the files in your pack folder!"),
-            new Definition("Failed to download 'overworld'", "Broken Overworld", "- Your server cant download Packs Do it m" +
-                    "anually"),
+            new Definition("Failed to download 'overworld'", "Broken Overworld", "- Your server cant download Packs Do it manually"),
             new Definition("[Iris]: Unknown Block Data:", "Unknown Block Data", "- Iris cant find block data (nbt mapping issue) "),
             new Definition("iris.core.nms.v18_1.NMSBinding18_1.registry", "Your Version is WRONG", "- Either your Server, Jar, or PurPur is wrong, Ensure you are up to date! "),
             new Definition("Could not parse data: minecraft:beetroots[age=7]", "BeetRootBug", "- Just an error with an object, safe to ignore"),
@@ -57,7 +57,7 @@ public class PasteListener extends ListenerAdapter {
     public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
         if (e.getComponentId().equals("hastebinlinknew") || e.getComponentId().equals("pastbinlinknew") || e.getComponentId().equals("mcloglinknew")) {
             Abyss.info("Initializing Paste Service Interpreter");
-            String properURL = null;
+            String properURL;
             Document doc;
             if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://pastebin.com")) {
                 Abyss.info("Reached Pasebin");
@@ -77,6 +77,8 @@ public class PasteListener extends ListenerAdapter {
                 Abyss.info(args[3]);
                 String stem = args[3];
                 properURL = "https://hastebin.com/raw/" + stem;
+            } else {
+                return;
             }
 
             try {
@@ -91,6 +93,7 @@ public class PasteListener extends ListenerAdapter {
             embed.setTitle("Automated Detriment Detector");
             embed.setDescription("Hello user! This is A.D.D. and I will do my best to read your file!\n" + "||Paste: " + properURL + "||");
             Abyss.info("PROCESSING PASTEBIN FILE FROM " + properURL);
+            embed.setDescription(getServerDetails(doc.text()));
             int problems = test(doc.text(), embed);
             // NO PROBLEMS
             if (problems == 0) {
@@ -98,6 +101,16 @@ public class PasteListener extends ListenerAdapter {
             }
             embed.send(e.getMessage(), true, 1000);
         }
+    }
+
+    /**
+     * Get server details (jar flavour, java version, MC version, plugins, etc)
+     * @param text the test to process
+     * @return a description of the server
+     */
+    private static @NotNull String getServerDetails(String text) {
+        StringBuilder details = new StringBuilder();
+        return details.toString();
     }
 
     /**
