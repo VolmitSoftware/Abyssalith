@@ -40,6 +40,6 @@ public class Install extends VolmitCommand {
                         true
                 ))
         .build()).queue();
-        e.getMessage().reply("https://youtu.be/WOvaq5ZkXn8").queue();
+        e.getChannel().sendMessage("https://youtu.be/WOvaq5ZkXn8").queue();
     }
 }
