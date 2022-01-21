@@ -29,8 +29,10 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
 
@@ -89,11 +91,16 @@ public class PasteListener extends ListenerAdapter {
                 return;
             }
 
+            Abyss.info("PROCESSING PASTEBIN FILE FROM " + properURL);
             VolmitEmbed embed = new VolmitEmbed("Automated Error Detector", e.getMessage());
             embed.setTitle("Automated Detriment Detector");
             embed.setDescription("Hello user! This is A.D.D. and I will do my best to read your file!\n" + "||Paste: " + properURL + "||");
-            Abyss.info("PROCESSING PASTEBIN FILE FROM " + properURL);
-            embed.setDescription(getServerDetails(doc.text()));
+            embed.addField(new MessageEmbed.Field(
+                    "Server Details",
+                    getServerDetails(List.of(doc.text().split("(\\[[0-9:]*] )"))), // Splits using [22:07:02] prefix for console messages in paste
+                    true,
+                    true)
+            );
             int problems = test(doc.text(), embed);
             // NO PROBLEMS
             if (problems == 0) {
@@ -105,12 +112,40 @@ public class PasteListener extends ListenerAdapter {
 
     /**
      * Get server details (jar flavour, java version, MC version, plugins, etc)
-     * @param text the test to process
      * @return a description of the server
      */
-    private static @NotNull String getServerDetails(String text) {
-        StringBuilder details = new StringBuilder();
-        return details.toString();
+    private static @NotNull String getServerDetails(List<String> lines) {
+        AtomicReference<String> serverFlavour = new AtomicReference<>("Unknown");
+        AtomicReference<String> minecraftVersion = new AtomicReference<>("Unknown");
+        AtomicReference<String> irisVersion = new AtomicReference<>("Unknown");
+        AtomicReference<String> javaVersion = new AtomicReference<>("Unknown");
+        AtomicReference<String> bukkitVersion = new AtomicReference<>("Unknown");
+        AtomicReference<String> customBiomesLoaded = new AtomicReference<>("Unknown");
+
+        lines.forEach(l -> {
+            if (l.startsWith("[Server thread/INFO]: Starting minecraft server version")) {
+                minecraftVersion.set(l.replace("[Server thread/INFO]: Starting minecraft server version ", ""));
+            } else if (l.startsWith("[Server thread/INFO]: This server is running")) {
+                serverFlavour.set(l.replace("[Server thread/INFO]: This server is running ", ""));
+            } else if (l.startsWith("[Server thread/INFO]: [Iris] Enabling Iris ")) {
+                irisVersion.set(l.replace("[Server thread/INFO]: [Iris] Enabling Iris ", "Iris "));
+            } else if (l.startsWith("[Server thread/INFO]: [Iris]: Java version:")) {
+                javaVersion.set(l.replace("[Server thread/INFO]: [Iris]: Java version: ", ""));
+            } else if (l.startsWith("[Server thread/INFO]: [Iris]: Custom Biomes: ")) {
+                customBiomesLoaded.set(l.replace("[Server thread/INFO]: [Iris]: Custom Biomes: ", ""));
+            } else if (l.startsWith("[Server thread/INFO]: [Iris]: Bukkit version: ")) {
+                bukkitVersion.set(l.replace("[Server thread/INFO]: [Iris]: Bukkit version: ", ""));
+            }
+        });
+
+        return String.join("\n", new String[]{
+                " - Minecraft Version: " + minecraftVersion.get(),
+                " - Server Flavour: " + serverFlavour.get(),
+                " - Java Version: " + javaVersion.get(),
+                " - Bukkit Version: " + bukkitVersion.get(),
+                " - Iris Version: " + irisVersion.get(),
+                " - Custom Biomes: " + customBiomesLoaded.get()
+        });
     }
 
     /**
@@ -124,11 +159,12 @@ public class PasteListener extends ListenerAdapter {
         AtomicInteger problems = new AtomicInteger();
 
         definitions.forEach(definition -> {
-            if (definition.appliesOn(text)) {
+            if (definition.appliesOn((text))) {
                 embed.addField(definition.getField());
                 problems.getAndIncrement();
             }
         });
+
         return problems.get();
     }
 
