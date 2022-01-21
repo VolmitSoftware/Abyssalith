@@ -38,7 +38,7 @@ public class MessageReactionListener extends ListenerAdapter {
         }
 
         if (!e.getUser().isBot()  // is the reactor a user
-                && m.getAuthor().getAvatarUrl().contains("875973161890508830")
+                && m.getAuthor().getIdLong() == e.getJDA().getSelfUser().getIdLong()
                 && e.getReaction().toString().contains("U+274c")  // is the X reaction there
                 && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getActionRows().size() == 0 /* Are their no clickable actions*/) {
             J.a(() -> {

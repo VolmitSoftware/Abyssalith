@@ -69,7 +69,7 @@ public class MessageListener extends ListenerAdapter {
         }
 
         // REACTIONS FOR BOT TO DELETE ITSELF ---
-        if (e.getMessage().getAuthor().getAvatarUrl().contains("875973161890508830")
+        if (e.getMessage().getAuthor().getIdLong() == e.getJDA().getSelfUser().getIdLong()
                 && !e.getMessage().getEmbeds().isEmpty()
                 && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
         ) {
