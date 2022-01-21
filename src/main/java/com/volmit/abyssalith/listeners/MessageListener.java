@@ -33,6 +33,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Button;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -184,18 +185,39 @@ public class MessageListener extends ListenerAdapter {
 
         //ROLE MANAGEMENT FINAL RESULT
         User u = Abyss.getLoader().getUser(e.getMember().getIdLong()); // Load the user object
-        Set<String> lRoles = u.roleIds(); // Load the Roles from the user file
-        if (lRoles.size() < e.getMember().getRoles().size() && !e.getMember().getUser().isBot() && Kit.get().usePersistentRoles) {
-            for (Role r : e.getMember().getRoles()) {
-                u.roleIds().add(r.getId());
-            }
-            Abyss.info("Found Missing Roles, Rebinding to : " + e.getMember().getEffectiveName());
+        Set<String> fRoles = u.roleIds(); // Load the Roles from the user file
+        Set<String> sRoles = new HashSet<>(); // Load the Roles from the server
+        for (Role r : e.getMember().getRoles()){
+            sRoles.add(r.getId());
         }
-        if (lRoles.size() > e.getMember().getRoles().size() && !e.getMember().getUser().isBot()) {
-            for (Role r : e.getMember().getRoles()) {
-                u.roleIds().add(r.getId());
+        if (fRoles.containsAll(sRoles) && sRoles.containsAll(fRoles)){
+            //same server, same roles, all is well. Do nothing. but ill add something here later
+        } else {
+            if(!fRoles.equals(sRoles) && sRoles.size() != 0){ // They have roles, that dont match what they have on file
+                u.roleIds(sRoles);
+                Abyss.info("Roles on user, dont match file. Rebinding file to match: " + e.getMember().getEffectiveName() + "' Server roles");
+            } else if(!fRoles.equals(sRoles) && sRoles.size() == 0  && Kit.get().usePersistentRoles ) { //If they have Roles on file, and zero roles on the server
+                boolean shr = true;
+                for (String fr : fRoles){
+                    if (e.getGuild().getRoleById(fr) == null){
+                        shr = false;
+                    }
+                }
+                if (shr){
+                    Abyss.info("Reapplying PersistentRoles to: " + e.getMember().getEffectiveName());
+                    for (String f : fRoles) {
+                        if (e.getMessage().getGuild().getRoleById(f) != null) {
+                            e.getMessage().getGuild().addRoleToMember(e.getMember(), e.getMessage().getGuild().getRoleById(f)).complete();
+                        }
+                    }
+                } else {
+                    u.roleIds(sRoles);
+                    Abyss.info("Server Role ReSync: " + e.getMember().getEffectiveName());
+                }
+
+
+
             }
-            Abyss.warn("ROLE MISMATCH, REFACTORING ROLES IN USER: " + e.getMember().getEffectiveName());
         }
     }
 

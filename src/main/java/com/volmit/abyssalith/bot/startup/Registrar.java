@@ -54,7 +54,7 @@ public class Registrar extends ListenerAdapter {
 //                jda.addEventListener(new ServerInfo()); VOLMIT SERVER STANDARDS
                 jda.addEventListener(new ButtonListener());
                 jda.addEventListener(new PasteListener());
-
+                jda.addEventListener(new Install());
                 jda.addEventListener(new Log());
                 jda.addEventListener(new UserInfo());
                 jda.addEventListener(new GuildListener()); // Persistent Roles

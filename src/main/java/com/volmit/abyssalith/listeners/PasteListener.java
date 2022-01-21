@@ -53,9 +53,8 @@ public class PasteListener extends ListenerAdapter {
             new Definition(s -> !s.contains("Server type & version: git-Purpur"), "Using Multiverse", "- You are using multiverse, are you using that for an iris world?"),
             new Definition("DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH", "Paper Watchdog Spam", "**PLEASE turn off the paper spam!** \n https://docs.volmit.com/iris/plugin/faq"),
             new Definition(s -> !s.contains("[Iris] Enabling Iris"), "Iris not installed / not a full log", "This does not contain a **full** log with Iris installed, perhaps try again if you want more information."),
-            new Definition(s -> s.contains("java.lang.NoClassDefFoundError: net/kyori/adventure/platform/bukkit/BukkitAudiences"), "Gradle Build task used wrongfully", "If you built Iris yourself, you need to use `shadowJar` instead of `build`.")
-            new Definition("[Server thread/INFO]: [Iris]: Atomic cache failure!", "Atomic Cache Failure", "The atomic cache failure bug is a known bug within Iris. Because it happens randomly," +
-                    " it is very hard to pin-point the issue. Please try to recreate the world until it does not happen. If it still happens after 5 tries, please contact us again.")
+            new Definition(s -> s.contains("java.lang.NoClassDefFoundError: net/kyori/adventure/platform/bukkit/BukkitAudiences"), "Gradle Build task used wrongfully", "If you built Iris yourself, you need to use `shadowJar` instead of `build`."),
+            new Definition("[Server thread/INFO]: [Iris]: Atomic cache failure!", "Atomic Cache Failure", "The atomic cache failure bug is a known bug within Iris. Because it happens randomly, it is very hard to pin-point the issue. Please try to recreate the world until it does not happen. If it still happens after 5 tries, please contact us again.")
     );
 
     @Override

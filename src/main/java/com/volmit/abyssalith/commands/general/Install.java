@@ -10,8 +10,8 @@ import java.util.List;
 public class Install extends VolmitCommand {
     public Install() {
         super(
-                "Install",
-                new String[]{"1.16", "116", "MC16", "1.17", "1.17", "MC17", "install", "1.18", "MC18", "118"},
+                "install",
+                new String[]{"install", "1.16", "116", "MC16", "1.17", "1.17", "MC17", "1.18", "MC18", "118"},
                 new String[]{},
                 "Get installation steps for 1.16.x - 1.18.x",
                 false,
@@ -21,7 +21,8 @@ public class Install extends VolmitCommand {
 
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        e.getMessage().replyEmbeds(new VolmitEmbed()
+        e.getMessage().delete().queue();
+        e.getChannel().sendMessageEmbeds(new VolmitEmbed()
                 .setTitle("Iris Installation Guides")
                 .addField(new MessageEmbed.Field("1.18.X (Latest)",
                         "The guide on the wiki is up-to-date for 1.18.X:\n" +
@@ -36,10 +37,10 @@ public class Install extends VolmitCommand {
                             that puts your server at risk of being hacked and destroyed.
                             With that said, here is a video tutorial for those
                             reckless enough to make a new Iris world on these versions:
+                            Legacy install video here: https://youtu.be/WOvaq5ZkXn8
                         """,
                         true
                 ))
         .build()).queue();
-        e.getMessage().reply("https://youtu.be/WOvaq5ZkXn8").queue();
     }
 }
