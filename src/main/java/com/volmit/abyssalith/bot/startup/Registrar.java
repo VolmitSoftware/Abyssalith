@@ -79,7 +79,7 @@ public class Registrar extends ListenerAdapter {
                 jda.addEventListener(new EcoHub()); // Money Subcommand
                 jda.addEventListener(new ModHub()); // Money Subcommand
                 jda.addEventListener(new Links());
-                jda.addEventListener(new OneDotSixteen());
+                jda.addEventListener(new Install());
                 jda.addEventListener(new Paste());
                 jda.addEventListener(new ServerInfo());
                 jda.addEventListener(new UserInfo());
