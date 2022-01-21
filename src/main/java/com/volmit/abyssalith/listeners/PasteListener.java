@@ -23,13 +23,16 @@ import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
 
@@ -41,8 +44,7 @@ public class PasteListener extends ListenerAdapter {
             new Definition("No biome provided", "Bad Biome NSM key", "- The Biome-Type in a dimension file is not correct"),
             new Definition("Custom Biomes: 0", "Overworld Pack Issue", "- You either have a misconfigured pack, or something else... ask support"),
             new Definition("Couldn't read Biome file:", "You have a typo in a Biome file", "- There is a typo in one of the files in your pack folder!"),
-            new Definition("Failed to download 'overworld'", "Broken Overworld", "- Your server cant download Packs Do it m" +
-                    "anually"),
+            new Definition("Failed to download 'overworld'", "Broken Overworld", "- Your server cant download Packs Do it manually"),
             new Definition("[Iris]: Unknown Block Data:", "Unknown Block Data", "- Iris cant find block data (nbt mapping issue) "),
             new Definition("iris.core.nms.v18_1.NMSBinding18_1.registry", "Your Version is WRONG", "- Either your Server, Jar, or PurPur is wrong, Ensure you are up to date! "),
             new Definition("Could not parse data: minecraft:beetroots[age=7]", "BeetRootBug", "- Just an error with an object, safe to ignore"),
@@ -52,13 +54,15 @@ public class PasteListener extends ListenerAdapter {
             new Definition("DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH", "Paper Watchdog Spam", "**PLEASE turn off the paper spam!** \n https://docs.volmit.com/iris/plugin/faq"),
             new Definition(s -> !s.contains("[Iris] Enabling Iris"), "Iris not installed / not a full log", "This does not contain a **full** log with Iris installed, perhaps try again if you want more information."),
             new Definition(s -> s.contains("java.lang.NoClassDefFoundError: net/kyori/adventure/platform/bukkit/BukkitAudiences"), "Gradle Build task used wrongfully", "If you built Iris yourself, you need to use `shadowJar` instead of `build`.")
+            new Definition("[Server thread/INFO]: [Iris]: Atomic cache failure!", "Atomic Cache Failure", "The atomic cache failure bug is a known bug within Iris. Because it happens randomly," +
+                    " it is very hard to pin-point the issue. Please try to recreate the world until it does not happen. If it still happens after 5 tries, please contact us again.")
     );
 
     @Override
     public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
         if (e.getComponentId().equals("hastebinlinknew") || e.getComponentId().equals("pastbinlinknew") || e.getComponentId().equals("mcloglinknew")) {
             Abyss.info("Initializing Paste Service Interpreter");
-            String properURL = null;
+            String properURL;
             Document doc;
             if (Objects.requireNonNull(e.getMessage()).getContentRaw().contains("https://pastebin.com")) {
                 Abyss.info("Reached Pasebin");
@@ -78,6 +82,8 @@ public class PasteListener extends ListenerAdapter {
                 Abyss.info(args[3]);
                 String stem = args[3];
                 properURL = "https://hastebin.com/raw/" + stem;
+            } else {
+                return;
             }
 
             try {
@@ -88,17 +94,62 @@ public class PasteListener extends ListenerAdapter {
                 return;
             }
 
+            Abyss.info("PROCESSING PASTEBIN FILE FROM " + properURL);
             VolmitEmbed embed = new VolmitEmbed("Automated Error Detector", e.getMessage());
             embed.setTitle("Automated Detriment Detector");
             embed.setDescription("Hello user! This is A.D.D. and I will do my best to read your file!\n" + "||Paste: " + properURL + "||");
-            Abyss.info("PROCESSING PASTEBIN FILE FROM " + properURL);
+            embed.addField(new MessageEmbed.Field(
+                    "Server Details",
+                    getServerDetails(List.of(doc.text().split("(\\[[0-9:]*] )"))), // Splits using [22:07:02] prefix for console messages in paste
+                    true,
+                    true)
+            );
             int problems = test(doc.text(), embed);
             // NO PROBLEMS
             if (problems == 0) {
                 embed.addField("Well, This is not good.", "I cant seem to figure anything out; try asking the support team about the issue!", false);
             }
+
             embed.send(e.getMessage(), true, 1000);
         }
+    }
+
+    /**
+     * Get server details (jar flavour, java version, MC version, plugins, etc)
+     * @return a description of the server
+     */
+    private static @NotNull String getServerDetails(List<String> lines) {
+        AtomicReference<String> serverFlavour = new AtomicReference<>("Unknown");
+        AtomicReference<String> minecraftVersion = new AtomicReference<>("Unknown");
+        AtomicReference<String> irisVersion = new AtomicReference<>("Unknown");
+        AtomicReference<String> javaVersion = new AtomicReference<>("Unknown");
+        AtomicReference<String> bukkitVersion = new AtomicReference<>("Unknown");
+        AtomicReference<String> customBiomesLoaded = new AtomicReference<>("Unknown");
+
+        lines.forEach(l -> {
+            if (l.startsWith("[Server thread/INFO]: Starting minecraft server version")) {
+                minecraftVersion.set(l.replace("[Server thread/INFO]: Starting minecraft server version ", ""));
+            } else if (l.startsWith("[Server thread/INFO]: This server is running")) {
+                serverFlavour.set(l.replace("[Server thread/INFO]: This server is running ", ""));
+            } else if (l.startsWith("[Server thread/INFO]: [Iris] Enabling Iris ")) {
+                irisVersion.set(l.replace("[Server thread/INFO]: [Iris] Enabling Iris ", "Iris "));
+            } else if (l.startsWith("[Server thread/INFO]: [Iris]: Java version:")) {
+                javaVersion.set(l.replace("[Server thread/INFO]: [Iris]: Java version: ", ""));
+            } else if (l.startsWith("[Server thread/INFO]: [Iris]: Custom Biomes: ")) {
+                customBiomesLoaded.set(l.replace("[Server thread/INFO]: [Iris]: Custom Biomes: ", ""));
+            } else if (l.startsWith("[Server thread/INFO]: [Iris]: Bukkit version: ")) {
+                bukkitVersion.set(l.replace("[Server thread/INFO]: [Iris]: Bukkit version: ", ""));
+            }
+        });
+
+        return String.join("\n", new String[]{
+                " - Minecraft Version: " + minecraftVersion.get(),
+                " - Server Flavour: " + serverFlavour.get(),
+                " - Java Version: " + javaVersion.get(),
+                " - Bukkit Version: " + bukkitVersion.get(),
+                " - Iris Version: " + irisVersion.get(),
+                " - Custom Biomes: " + customBiomesLoaded.get()
+        });
     }
 
     /**
@@ -112,11 +163,12 @@ public class PasteListener extends ListenerAdapter {
         AtomicInteger problems = new AtomicInteger();
 
         definitions.forEach(definition -> {
-            if (definition.appliesOn(text)) {
+            if (definition.appliesOn((text))) {
                 embed.addField(definition.getField());
                 problems.getAndIncrement();
             }
         });
+
         return problems.get();
     }
 
