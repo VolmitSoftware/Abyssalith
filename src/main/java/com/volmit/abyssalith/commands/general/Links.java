@@ -44,16 +44,18 @@ public class Links extends VolmitCommand {
         Abyss.info("Links Posted");
         VolmitEmbed embed = new VolmitEmbed(" Here you go!", e.getMessage());
         //Commands
-        embed.addField("**WIKI LINKS**:", "" +
-                "**React Wiki:**\n" +
-                "*https://iris-worldgen.gitbook.io/project/getting-started*\n" +
-                "**Iris Wiki:**\n" +
-                "*https://iris-worldgen.gitbook.io/project/getting-started*\n" +
-                "**Wormholes Wiki:**\n" +
-                "*https://www.theraleighregister.com/httpswwwyoutubecomwatchvdqw4w9wgxcq5.html*\n", false);
-        embed.addField("**OTHER LINKS**:", "" +
-                "**Patreon:**\n" +
-                "*https://www.patreon.com/volmitsoftware*\n", false);
+        embed.addField("**WIKI LINKS**:", """
+                **React Wiki:**
+                *https://iris-worldgen.gitbook.io/project/getting-started*
+                **Iris Wiki:**
+                *https://iris-worldgen.gitbook.io/project/getting-started*
+                **Wormholes Wiki:**
+                *https://www.theraleighregister.com/httpswwwyoutubecomwatchvdqw4w9wgxcq5.html*
+                """, false);
+        embed.addField("**OTHER LINKS**:", """
+                **Patreon:**
+                *https://www.patreon.com/volmitsoftware*
+                """, false);
         embed.send(e.getMessage(), true, 1000);
     }
 }
