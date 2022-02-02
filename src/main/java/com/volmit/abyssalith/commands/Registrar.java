@@ -20,42 +20,25 @@ package com.volmit.abyssalith.commands;
 import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.commands.general.Shutdown;
 import com.volmit.abyssalith.commands.general.*;
-import com.volmit.abyssalith.commands.moderation.EcoHub;
 import com.volmit.abyssalith.commands.moderation.ModHub;
-import com.volmit.abyssalith.commands.moderation.reactionroles.RoleMenu;
 import com.volmit.abyssalith.commands.listeners.*;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import okhttp3.internal.annotations.EverythingIsNonNull;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import java.util.stream.Stream;
 
+@SkipCommand
 public class Registrar extends ListenerAdapter {
 
     /**
-     * Command package paths. Add more here if you make a new subdirectory!
+     * Command package path. Recursively searched for commands not annotated by {@link SkipCommand}
      */
-    private static final String[] commandPackagePaths = new String[]{
-            Registrar.class.getPackage().getName() + ".general",
-            Registrar.class.getPackage().getName() + ".listeners",
-            Registrar.class.getPackage().getName() + ".moderation",
-            Registrar.class.getPackage().getName() + ".moderation.banish",
-            Registrar.class.getPackage().getName() + ".moderation.eco",
-            Registrar.class.getPackage().getName() + ".moderation.reactionroles",
-            Registrar.class.getPackage().getName() + ".moderation.warning",
-    };
-
-    static {
-        Abyss.info("Command packages registered: " + Arrays.toString(commandPackagePaths));
-    }
+    private static final String commandPackagePath = Registrar.class.getPackage().getName();
 
     public static void All(JDA jda) {
         // Main bits, Regardless of platform
@@ -94,7 +77,7 @@ public class Registrar extends ListenerAdapter {
 
             default:
                 Abyss.debug("Registering commands...");
-                registerAllCommands(jda);
+                registerAllCommands(commandPackagePath, jda);
                 break;
         }
 
@@ -102,37 +85,34 @@ public class Registrar extends ListenerAdapter {
     }
 
     /**
-     * Get and register all command classes available.
-     * @param jda the JDA to register to.
+     * Register all commands
+     * @param jda the {@link JDA} to register to
      */
-    private static void registerAllCommands(JDA jda) {
-        for (String commandPackagePath : commandPackagePaths) {
-            List<String> loadedCommands = new ArrayList<>();
-            getAllCommands(commandPackagePath).forEach(c -> {
-                jda.addEventListener(c);
-                loadedCommands.add(c.getClass().getSimpleName());
-            });
-            Abyss.debug("Loaded " + String.join(", ", loadedCommands) + " from package " + commandPackagePath);
-        }
-    }
+    private static void registerAllCommands(String packagePath, JDA jda) throws NullPointerException {
 
-    /**
-     * Get all classes from a package.
-     * @param packageName the package name
-     * @return a set of ListenerAdapter classes (empty if none found)
-     */
-    private static @NotNull Stream<ListenerAdapter> getAllCommands(@NotNull String packageName) throws NullPointerException {
+        // Get stream of class data
         InputStream stream = ClassLoader.getSystemClassLoader()
-                .getResourceAsStream(packageName.replaceAll("[.]", "/"));
+                .getResourceAsStream(packagePath.replaceAll("[.]", "/"));
 
+        // If stream not accessible (null)
         if (stream == null) {
-            throw new NullPointerException("Command loading, package not found: " + packageName);
+            throw new NullPointerException("Command loading, package not found: " + packagePath);
         }
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        return reader.lines()
-                .filter(line -> line.endsWith(".class"))
-                .map(line -> getCommandClass(line, packageName))
+        List<String> loadedCommands = new ArrayList<>();
+        new BufferedReader(new InputStreamReader(stream))
+                .lines()
+                .filter(line -> {
+                    if (line.endsWith(".class")) {
+                        return true;
+                    }
+
+                    if (!line.contains(".")) {
+                        registerAllCommands(packagePath + "." + line, jda);
+                    }
+                    return false;
+                })
+                .map(line -> getCommandClass(line, packagePath))
                 .filter(Objects::nonNull)
                 .filter(c -> !c.isAnnotationPresent(SkipCommand.class))
                 .map(cmdClass -> {
@@ -147,7 +127,12 @@ public class Registrar extends ListenerAdapter {
                     }
                     return null;
                 })
-                .filter(Objects::nonNull);
+                .filter(Objects::nonNull)
+                .forEach(c -> {
+                    jda.addEventListener(c);
+                    loadedCommands.add(c.getClass().getSimpleName());
+                });
+        Abyss.debug("Loaded " + (loadedCommands.isEmpty() ? "NONE" : String.join(", ", loadedCommands)) + " from package " + packagePath);
     }
 
     /**

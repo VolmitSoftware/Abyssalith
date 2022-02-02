@@ -11,4 +11,5 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE_USE})
+@SkipCommand
 public @interface SkipCommand {}
