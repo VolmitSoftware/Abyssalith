@@ -86,6 +86,7 @@ public class Registrar extends ListenerAdapter {
                 jda.addEventListener(new Passive());
                 jda.addEventListener(new RoleMenu());
                 jda.addEventListener(new Log());
+                jda.addEventListener(new Chunky());
                 break;
         }
 
