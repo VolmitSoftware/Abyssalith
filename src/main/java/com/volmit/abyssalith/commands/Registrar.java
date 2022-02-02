@@ -27,6 +27,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
@@ -77,7 +78,12 @@ public class Registrar extends ListenerAdapter {
 
             default:
                 Abyss.debug("Registering commands...");
-                registerAllCommands(commandPackagePath, jda);
+                try {
+                    registerAllCommands(commandPackagePath, jda);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Abyss.debug("Failed to close input stream for reading command classes!");
+                }
                 break;
         }
 
@@ -88,7 +94,7 @@ public class Registrar extends ListenerAdapter {
      * Register all commands
      * @param jda the {@link JDA} to register to
      */
-    private static void registerAllCommands(String packagePath, JDA jda) throws NullPointerException {
+    private static void registerAllCommands(String packagePath, JDA jda) throws NullPointerException, IOException {
 
         // Get stream of class data
         InputStream stream = ClassLoader.getSystemClassLoader()
@@ -108,7 +114,11 @@ public class Registrar extends ListenerAdapter {
                     }
 
                     if (!line.contains(".")) {
-                        registerAllCommands(packagePath + "." + line, jda);
+                        try {
+                            registerAllCommands(packagePath + "." + line, jda);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                     return false;
                 })
@@ -132,6 +142,7 @@ public class Registrar extends ListenerAdapter {
                     jda.addEventListener(c);
                     loadedCommands.add(c.getClass().getSimpleName());
                 });
+        stream.close();
         Abyss.debug("Loaded " + (loadedCommands.isEmpty() ? "NONE" : String.join(", ", loadedCommands)) + " from package " + packagePath);
     }
 
@@ -145,11 +156,10 @@ public class Registrar extends ListenerAdapter {
         try {
             Class<?> c = Class.forName(packageName + "."
                     + className.substring(0, className.lastIndexOf('.')));
-            if (!c.isAssignableFrom(ListenerAdapter.class)) {
-                return c;
-            } else {
+            if (c.isAssignableFrom(ListenerAdapter.class)) {
                 Abyss.debug("Unable to load class: " + c.getName() + " because it does not extend ListenerAdapter");
             }
+            return c;
         } catch (ClassNotFoundException e) {
             // handle the exception
         }
