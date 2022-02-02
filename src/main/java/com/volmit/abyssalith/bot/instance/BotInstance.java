@@ -34,7 +34,7 @@ public class BotInstance {
     private final JDA jda;
     public BotInstance(String s) throws LoginException {
 
-        jda = JDABuilder.createDefault(s)
+        jda = JDABuilder.createDefault("OTM0MDM2ODU2OTc3Mzc5MzQ4.YeqPnA.NN8zgUaeAJp8AQDPfiHs0pQHVZA")
                 .setChunkingFilter(ChunkingFilter.ALL) // enable member chunking for all guilds
                 .setMemberCachePolicy(MemberCachePolicy.ALL) // ignored if chunking enabled
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)

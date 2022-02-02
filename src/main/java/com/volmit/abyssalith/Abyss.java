@@ -21,7 +21,7 @@ import art.arcane.quill.execution.J;
 import art.arcane.quill.execution.Looper;
 import com.volmit.abyssalith.bot.instance.BotProvider;
 import com.volmit.abyssalith.bot.instance.IBotProvider;
-import com.volmit.abyssalith.bot.startup.Registrar;
+import com.volmit.abyssalith.commands.Registrar;
 import com.volmit.abyssalith.handlers.RoleCleanup;
 import com.volmit.abyssalith.io.DataLoader;
 import com.volmit.abyssalith.io.storage.FileSystemStorageAccess;
