@@ -56,6 +56,7 @@ public class Registrar extends ListenerAdapter {
                 jda.addEventListener(new PasteListener());
                 jda.addEventListener(new Install());
                 jda.addEventListener(new Log());
+                jda.addEventListener(new Chunky());
                 jda.addEventListener(new UserInfo());
                 jda.addEventListener(new GuildListener()); // Persistent Roles
                 jda.addEventListener(new MessageListener()); // Watches the User's messages for stuff
