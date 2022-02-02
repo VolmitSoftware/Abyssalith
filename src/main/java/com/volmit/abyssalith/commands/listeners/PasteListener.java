@@ -19,6 +19,7 @@ package com.volmit.abyssalith.commands.listeners;
 
 import art.arcane.quill.collections.KList;
 import com.volmit.abyssalith.Abyss;
+import com.volmit.abyssalith.commands.SkipCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
@@ -171,6 +172,7 @@ public class PasteListener extends ListenerAdapter {
         return problems.get();
     }
 
+    @SkipCommand
     private static class Definition {
         private final boolean fullWidth;
         private final String helpBody;

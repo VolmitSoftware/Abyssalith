@@ -27,14 +27,16 @@ import com.volmit.abyssalith.commands.listeners.*;
 import com.volmit.abyssalith.toolbox.Kit;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import okhttp3.internal.annotations.EverythingIsNonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import java.util.stream.Collectors;
-
+import java.util.stream.Stream;
 
 public class Registrar extends ListenerAdapter {
 
@@ -52,7 +54,7 @@ public class Registrar extends ListenerAdapter {
     };
 
     static {
-        Abyss.info("Command packages loaded: " + Arrays.toString(commandPackagePaths));
+        Abyss.info("Command packages registered: " + Arrays.toString(commandPackagePaths));
     }
 
     public static void All(JDA jda) {
@@ -90,53 +92,28 @@ public class Registrar extends ListenerAdapter {
 
                 break;
 
-            default: // What it all has to offer
-                //Listeners
-                jda.addEventListener(new ButtonListener());
-                jda.addEventListener(new PasteListener());
-                jda.addEventListener(new GuildListener()); // Persistent Roles
-                jda.addEventListener(new SelectionMenuListener());
-                jda.addEventListener(new MessageReactionListener()); // Watches the User's instances for stuff
-                jda.addEventListener(new MessageListener()); // Watches the User's messages for stuff
-
-                // Commands
-                jda.addEventListener(new EcoHub()); // Money Subcommand
-                jda.addEventListener(new ModHub()); // Money Subcommand
-                jda.addEventListener(new Links());
-                jda.addEventListener(new Install());
-                jda.addEventListener(new Paste());
-                jda.addEventListener(new ServerInfo());
-                jda.addEventListener(new UserInfo());
-                jda.addEventListener(new Passive());
-                jda.addEventListener(new RoleMenu());
-                jda.addEventListener(new Log());
+            default:
+                Abyss.debug("Registering commands...");
+                registerAllCommands(jda);
                 break;
         }
 
         jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last
     }
 
-    private void registerAllCommands() {
-
-    }
-
     /**
-     * Get all command instances in a list of packages.
-     * @param packages the list of packages
-     * @return the set of command instances
+     * Get and register all command classes available.
+     * @param jda the JDA to register to.
      */
-    private Set<ListenerAdapter> getAllCommands(String[] packages) {
-        Set<ListenerAdapter> listenerAdapters = new HashSet<>();
-        for (String subPackage : packages) {
-            getAllCommandClasses(subPackage).forEach(c -> {
-                try {
-                    listenerAdapters.add((ListenerAdapter) c.getConstructors()[0].newInstance());
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+    private static void registerAllCommands(JDA jda) {
+        for (String commandPackagePath : commandPackagePaths) {
+            List<String> loadedCommands = new ArrayList<>();
+            getAllCommands(commandPackagePath).forEach(c -> {
+                jda.addEventListener(c);
+                loadedCommands.add(c.getClass().getSimpleName());
             });
+            Abyss.debug("Loaded " + String.join(", ", loadedCommands) + " from package " + commandPackagePath);
         }
-        return listenerAdapters;
     }
 
     /**
@@ -144,18 +121,33 @@ public class Registrar extends ListenerAdapter {
      * @param packageName the package name
      * @return a set of ListenerAdapter classes (empty if none found)
      */
-    private Set<Class<? extends ListenerAdapter>> getAllCommandClasses(String packageName) {
+    private static @NotNull Stream<ListenerAdapter> getAllCommands(@NotNull String packageName) throws NullPointerException {
         InputStream stream = ClassLoader.getSystemClassLoader()
                 .getResourceAsStream(packageName.replaceAll("[.]", "/"));
+
         if (stream == null) {
-            return new HashSet<>();
+            throw new NullPointerException("Command loading, package not found: " + packageName);
         }
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         return reader.lines()
                 .filter(line -> line.endsWith(".class"))
                 .map(line -> getCommandClass(line, packageName))
                 .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+                .filter(c -> !c.isAnnotationPresent(SkipCommand.class))
+                .map(cmdClass -> {
+                    try {
+                        return (ListenerAdapter) cmdClass.getConstructors()[0].newInstance();
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
+                        e.printStackTrace();
+                        Abyss.debug("Failed to load command " + cmdClass.getName() + " with empty constructor!");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                        Abyss.debug("Failed to load command " + cmdClass.getName() + " due to no constructor being present!");
+                    }
+                    return null;
+                })
+                .filter(Objects::nonNull);
     }
 
     /**
@@ -164,12 +156,12 @@ public class Registrar extends ListenerAdapter {
      * @param packageName path to the package
      * @return the class or null if not a {@link ListenerAdapter}
      */
-    private Class<? extends ListenerAdapter> getCommandClass(String className, String packageName) {
+    private static Class<?> getCommandClass(String className, String packageName) {
         try {
             Class<?> c = Class.forName(packageName + "."
                     + className.substring(0, className.lastIndexOf('.')));
             if (!c.isAssignableFrom(ListenerAdapter.class)) {
-                return (Class<? extends ListenerAdapter>) c;
+                return c;
             } else {
                 Abyss.debug("Unable to load class: " + c.getName() + " because it does not extend ListenerAdapter");
             }

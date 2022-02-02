@@ -18,6 +18,7 @@
 package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.Abyss;
+import com.volmit.abyssalith.commands.SkipCommand;
 import com.volmit.abyssalith.util.VolmitCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -44,6 +45,7 @@ public class ServerInfo extends VolmitCommand {
         );
     }
 
+    @SkipCommand
     private static class GuildStats {
 
         private final String name;
