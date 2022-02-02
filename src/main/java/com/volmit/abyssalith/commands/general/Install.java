@@ -21,26 +21,43 @@ public class Install extends VolmitCommand {
 
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        VolmitEmbed em = new VolmitEmbed("Iris Installation Guides", e.getMessage());
-        em.addField(new MessageEmbed.Field(
-                "1.18.X (Latest)",
-                """
-                The guide on the wiki is up-to-date for 1.18.X:
-                https://docs.volmit.com/iris/getting-started""",
-                true
-        ));
-        em.addField(new MessageEmbed.Field("1.16.X (Unsupported) & 1.17.X (Supported)", """
-                Please note that 1.16 is a very old version and that Iris has a lot of bugs in that version.
-                1.17 is now no longer the most recent version, and we will drop support for it too.
-                On top of being old and Iris having bugs,
-                Minecraft has a known security exploit in both versions
-                that puts your server at risk of being hacked and destroyed.
-                With that said, here is a video tutorial for those
-                reckless enough to make a new Iris world on these versions:
-                Legacy install video here: https://youtu.be/WOvaq5ZkXn8
-            """,
-            true
-        ));
-        em.send(e.getMessage(), true);
+        e.getMessage().delete().queue();
+        e.getChannel().sendMessageEmbeds(new VolmitEmbed()
+                .setTitle("Iris Installation Guides")
+                .addField(new MessageEmbed.Field("1.18.X (Latest)",
+                        "The guide on the wiki is up-to-date for 1.18.X:\n" +
+                                "https://docs.volmit.com/iris/getting-started",
+                        false
+                ))
+                .addField(new MessageEmbed.Field("Legacy warning", """
+                            Any version older than 1.18 by default has a security exploit known as the Log4j exploit.
+                            We **strongly** recommend using 1.18 for this reason, as it makes your and our lives easier.
+                            Thank you for your cooperation!
+                        """,
+                        false
+                ))
+                .addField(new MessageEmbed.Field("1.17.X", """
+                            **1.17.X** is a bit older now and the pack that is automatically downloaded is no longer correct.
+                            So you need to take some additional steps. We still recommend using 1.18.X though.
+                            If you really cannot use 1.18.X, here is a video: https://youtu.be/WOvaq5ZkXn8
+                            
+                             - https://api.purpurmc.org/v2/purpur/1.17.1/1428/download
+                             - https://www.spigotmc.org/resources/iris-world-gen-custom-biome-colors.84586/download?version=433999
+                             - https://github.com/IrisDimensions/overworld/archive/refs/tags/2017.zip
+                        """,
+                        false
+                ))
+                .addField(new MessageEmbed.Field("1.16.X", """
+                            **1.16.X** is a very old version and that Iris has a lot of bugs in that version.
+                            A lot of those bugs have been fixed, so we will not support the version anymore.
+                            If you're crazy, here is a video: https://youtu.be/WOvaq5ZkXn8
+                            
+                             - https://api.purpurmc.org/v2/purpur/1.16.5/1171/download
+                             - https://www.spigotmc.org/resources/iris-world-gen-custom-biome-colors.84586/download?version=405004
+                             - https://github.com/IrisDimensions/overworld/archive/refs/heads/1.16.zip
+                        """,
+                        false
+                ))
+        .build()).queue();
     }
 }
