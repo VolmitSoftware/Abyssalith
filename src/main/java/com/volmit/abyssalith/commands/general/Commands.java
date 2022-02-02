@@ -18,6 +18,7 @@
 package com.volmit.abyssalith.commands.general;
 
 import com.volmit.abyssalith.Abyss;
+import com.volmit.abyssalith.commands.SkipCommand;
 import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.VolmitCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
@@ -27,7 +28,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@SkipCommand
 public class Commands extends VolmitCommand {
 
     // Commands stored
