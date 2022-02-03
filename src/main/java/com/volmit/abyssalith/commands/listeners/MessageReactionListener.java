@@ -31,20 +31,22 @@ public class MessageReactionListener extends ListenerAdapter {
     public void onMessageReactionAdd(MessageReactionAddEvent e) {
         Abyss.debug("Reaction Added");
         Message m = e.getChannel().retrieveMessageById(e.getMessageId()).complete();
-        if (!e.getUser().isBot()) {
-            User u = Abyss.getLoader().getUser(e.getUser().getIdLong());
-            u.experience((u.experience() + Kit.get().xpPerMessage.rand()));
-            u.reactions(u.reactions() + 1);
-        }
+        if (e.getUser() != null) {
+            if (!e.getUser().isBot()) {
+                User u = Abyss.getLoader().getUser(e.getUser().getIdLong());
+                u.experience((u.experience() + Kit.get().xpPerMessage.rand()));
+                u.reactions(u.reactions() + 1);
+            }
 
-        if (!e.getUser().isBot()  // is the reactor a user
-                && m.getAuthor().getIdLong() == e.getJDA().getSelfUser().getIdLong()
-                && e.getReaction().toString().contains("U+274c")  // is the X reaction there
-                && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getActionRows().size() == 0 /* Are their no clickable actions*/) {
-            J.a(() -> {
-                Abyss.info(" Cleaning bot response as requested");
-                e.getChannel().retrieveMessageById(e.getMessageId()).complete().delete().queue();
-            });
+            if (!e.getUser().isBot()  // is the reactor a user
+                    && m.getAuthor().getIdLong() == e.getJDA().getSelfUser().getIdLong()
+                    && e.getReaction().toString().contains("U+274c")  // is the X reaction there
+                    && e.getChannel().retrieveMessageById(e.getMessageId()).complete().getActionRows().size() == 0 /* Are their no clickable actions*/) {
+                J.a(() -> {
+                    Abyss.info(" Cleaning bot response as requested");
+                    e.getChannel().retrieveMessageById(e.getMessageId()).complete().delete().queue();
+                });
+            }
         }
 
     }

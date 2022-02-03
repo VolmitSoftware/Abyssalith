@@ -39,183 +39,185 @@ import java.util.Set;
 
 public class MessageListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
+        //nullchecks for bots now ig or webhooks to be more specific (ie: discord/Git bit causing a no-id Error)
+        if (e.getMember() != null) {
 
 
-        // XP APPLICATION FOR THE USER ---
-        if (!e.getMessage().getAuthor().isBot()) {
+            // XP APPLICATION FOR THE USER ---
+            if (!e.getMessage().getAuthor().isBot()) {
 //            Abyss.debug("XP Check");
-            User u = Abyss.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
-            u.experience(u.experience() + Kit.get().xpPerMessage.rand()); //XP
-            u.messagesSent(u.messagesSent() + 1);
-            double uxp = u.experience();
-            int validator = XP.getLevelForXp(uxp);
-            if (validator < Kit.get().xpMaxLevels) {
-                if (Kit.get().useRoleSystem) {
-                    roleValidator(e, Kit.get().levelName + XP.getLevelForXp(uxp));
-                    roleManager(e, Kit.get().levelName + XP.getLevelForXp(uxp), validator);
+                User u = Abyss.getLoader().getUser(e.getMessage().getAuthor().getIdLong()); // USER LOADER
+                u.experience(u.experience() + Kit.get().xpPerMessage.rand()); //XP
+                u.messagesSent(u.messagesSent() + 1);
+                double uxp = u.experience();
+                int validator = XP.getLevelForXp(uxp);
+                if (validator < Kit.get().xpMaxLevels) {
+                    if (Kit.get().useRoleSystem) {
+                        roleValidator(e, Kit.get().levelName + XP.getLevelForXp(uxp));
+                        roleManager(e, Kit.get().levelName + XP.getLevelForXp(uxp), validator);
+                    }
                 }
             }
-        }
 
-        //ANTI-GHOST MENTION PORTION ---
-        if (e.getMessage().getMentionedMembers().size() > 0) {
-            Abyss.debug("User Mention Noticed, and Logged");
-            for (Member m : e.getMessage().getMentionedMembers()) {
-                User u = Abyss.getLoader().getUser(m.getIdLong());
-                if (u.recentMentions().size() > 2) {
-                    u.recentMentions().remove(u.recentMentions().size() - 1);
-                }
-                u.recentMentions().put(u.recentMentions().size(), "[**USER**]" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " [**SAID**]: " + e.getMessage().getContentRaw());
-            }
-        }
-
-        // REACTIONS FOR BOT TO DELETE ITSELF ---
-        if (e.getMessage().getAuthor().getIdLong() == e.getJDA().getSelfUser().getIdLong()
-                && !e.getMessage().getEmbeds().isEmpty()
-                && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
-        ) {
-            Abyss.debug("Adding Delete Button");
-            e.getMessage().addReaction("U+274C").queue();
-        }
-
-        //REACTION-ROLE VISTA
-        if (!e.getMessage().getAuthor().isBot() // not a bot
-                && e.getMessage().getMentionedRoles().size() > 0 // mentioning roles
-                && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) // Has admin permissions
-                && e.getMessage().getContentRaw().contains(Kit.get().reactionRoleString)) { // Contains reaction role string
-            Abyss.debug("ReactionRoles Instanced");
-            if (e.getMessage().getMentionedRoles().size() > 1) {
-                MenuHandler.RoleListMenu("rolepage",
-                        "Choose your Role(s)!",
-                        e.getMessage().getMentionedRoles(),
-                        e.getChannel());
-            } else {
-                e.getChannel().sendMessage("CAn you mention more than 1 role please...").queue();
-            }
-            e.getMessage().delete().queue();
-        }
-
-        //LINGUA PARTITIONER ---
-        if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().length() > 5 && !e.getMessage().getContentRaw().contains("https:") && Kit.get().useLingua) {
-            Abyss.debug("Lingua Check");
-            final LanguageDetector detector = LanguageDetectorBuilder.fromLanguages(
-                    Language.ENGLISH, // Default language
-                    Language.FRENCH, Language.GERMAN, Language.SPANISH, // Only what i can read or write is here
-                    Language.TURKISH, Language.PORTUGUESE, Language.POLISH,
-                    Language.KOREAN, Language.DUTCH, Language.CZECH).build();
-            if (!detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()).equals(Language.ENGLISH)) {
-                //todo: Figure out why this is necessary, and implement a better way to detect/use languages
-                Abyss.info("Someone is speaking: " + "" + detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()));
-                if (detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()) != Language.UNKNOWN) {
-                    Role langRole = e.getGuild().getRolesByName("" + detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()), false).get(0);
-                    e.getChannel().sendMessage("Debugging the langRole System! " + langRole.getAsMention()).queue();
-                    //todo Actual system here should be something useful
-                    Abyss.debug("Language Debug: " + detector.computeLanguageConfidenceValues(e.getMessage().getContentRaw().toLowerCase()));
+            //ANTI-GHOST MENTION PORTION ---
+            if (e.getMessage().getMentionedMembers().size() > 0) {
+                Abyss.debug("User Mention Noticed, and Logged");
+                for (Member m : e.getMessage().getMentionedMembers()) {
+                    User u = Abyss.getLoader().getUser(m.getIdLong());
+                    if (u.recentMentions().size() > 2) {
+                        u.recentMentions().remove(u.recentMentions().size() - 1);
+                    }
+                    u.recentMentions().put(u.recentMentions().size(), "[**USER**]" + Objects.requireNonNull(e.getMember()).getEffectiveName() + " [**SAID**]: " + e.getMessage().getContentRaw());
                 }
             }
-        }
 
-        //PHISHING DILEMMA
-        for (String p : Kit.get().phishing) {
-            if (e.getMessage().getContentRaw().toLowerCase().contains(p)) {
+            // REACTIONS FOR BOT TO DELETE ITSELF ---
+            if (e.getMessage().getAuthor().getIdLong() == e.getJDA().getSelfUser().getIdLong()
+                    && !e.getMessage().getEmbeds().isEmpty()
+                    && e.getMessage().getActionRows().size() == 0 // Are their no clickable actions
+            ) {
+                Abyss.debug("Adding Delete Button");
+                e.getMessage().addReaction("U+274C").queue();
+            }
+
+            //REACTION-ROLE VISTA
+            if (!e.getMessage().getAuthor().isBot() // not a bot
+                    && e.getMessage().getMentionedRoles().size() > 0 // mentioning roles
+                    && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) // Has admin permissions
+                    && e.getMessage().getContentRaw().contains(Kit.get().reactionRoleString)) { // Contains reaction role string
+                Abyss.debug("ReactionRoles Instanced");
+                if (e.getMessage().getMentionedRoles().size() > 1) {
+                    MenuHandler.RoleListMenu("rolepage",
+                            "Choose your Role(s)!",
+                            e.getMessage().getMentionedRoles(),
+                            e.getChannel());
+                } else {
+                    e.getChannel().sendMessage("CAn you mention more than 1 role please...").queue();
+                }
                 e.getMessage().delete().queue();
-                Abyss.debug("Phishing Check");
-                Objects.requireNonNull(e.getMember()).getUser().openPrivateChannel().complete().sendMessage("Hello, You have been banned from volmit for sending Phishing links: `\n" +
-                        e.getMessage() +
-                        "`\nIf you feel this is a mistake, please send a friend request to: `⋈-NestorPsycho-⋈#0001` and explain the problem, otherwise your account was compromised, or you were unaware of what you were sending \n" +
-                        "regardless, you have been banned, until you either fix your account, or handle the situation").queue();
-                try {
-                    WarningHandler.phishBan(e.getMember(), e.getGuild(), e.getMessage()); // ez ban
-                } catch (Exception ignored) {
-                } // Don't care about exceptions here, the only possible one is a permission one, and the bot needs to be able to handle it elsewhere
             }
-        }
 
-        //PASTEBIN REGISTRAR ---
-        if (Kit.get().usePasteService) {
-            if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://pastebin.com/")) {
-                Abyss.info("Initializing  Paste Service");
-                String str = e.getMessage().getContentRaw();
-                String[] pbArr = str.split(" ");
-                for (String s : pbArr) {
-                    if (s.contains("https://pastebin.com/")) {
-                        e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
-                            f.editMessageComponents().setActionRow(
-                                    Button.success("pastbinlinknew", "Yes please!"),
-                                    Button.danger("no", "No, go away!")
-                            ).queue();
-                            Abyss.info("Sent Paste Service Buttons");
-                        });
+            //LINGUA PARTITIONER ---
+            if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().length() > 5 && !e.getMessage().getContentRaw().contains("https:") && Kit.get().useLingua) {
+                Abyss.debug("Lingua Check");
+                final LanguageDetector detector = LanguageDetectorBuilder.fromLanguages(
+                        Language.ENGLISH, // Default language
+                        Language.FRENCH, Language.GERMAN, Language.SPANISH, // Only what i can read or write is here
+                        Language.TURKISH, Language.PORTUGUESE, Language.POLISH,
+                        Language.KOREAN, Language.DUTCH, Language.CZECH).build();
+                if (!detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()).equals(Language.ENGLISH)) {
+                    //todo: Figure out why this is necessary, and implement a better way to detect/use languages
+                    Abyss.info("Someone is speaking: " + "" + detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()));
+                    if (detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()) != Language.UNKNOWN) {
+                        Role langRole = e.getGuild().getRolesByName("" + detector.detectLanguageOf(e.getMessage().getContentRaw().toLowerCase()), false).get(0);
+                        e.getChannel().sendMessage("Debugging the langRole System! " + langRole.getAsMention()).queue();
+                        //todo Actual system here should be something useful
+                        Abyss.debug("Language Debug: " + detector.computeLanguageConfidenceValues(e.getMessage().getContentRaw().toLowerCase()));
                     }
                 }
             }
-            if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://mclo.gs/")) {
-                Abyss.info("Initializing McLogs Service");
-                String str = e.getMessage().getContentRaw();
-                String[] pbArr = str.split(" ");
-                for (String s : pbArr) {
-                    if (s.contains("https://mclo.gs/")) {
-                        e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
-                            f.editMessageComponents().setActionRow(
-                                    Button.success("mcloglinknew", "Yes please!"),
-                                    Button.danger("no", "No, go away!")
-                            ).queue();
-                            Abyss.info("Sent McLog Service Buttons");
-                        });
-                    }
-                }
-            }
-            if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://hastebin.com/")) {
-                Abyss.info("Started the Hastebin Service");
-                String str = e.getMessage().getContentRaw();
-                String[] pbArr = str.split(" ");
-                for (String s : pbArr) {
-                    if (s.contains("https://hastebin.com/")) {
-                        e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
-                            f.editMessageComponents().setActionRow(
-                                    Button.success("hastebinlinknew", "Yes please!"),
-                                    Button.danger("no", "No, go away!")
-                            ).queue();
-                            Abyss.info("Sent HasteBin Service Buttons");
-                        });
-                    }
-                }
-            }
-        }
 
-        //ROLE MANAGEMENT FINAL RESULT
-        User u = Abyss.getLoader().getUser(e.getMember().getIdLong()); // Load the user object
-        Set<String> fRoles = u.roleIds(); // Load the Roles from the user file
-        Set<String> sRoles = new HashSet<>(); // Load the Roles from the server
-        for (Role r : e.getMember().getRoles()){
-            sRoles.add(r.getId());
-        }
-        if (fRoles.containsAll(sRoles) && sRoles.containsAll(fRoles)){
-            //same server, same roles, all is well. Do nothing. but ill add something here later
-        } else {
-            if(!fRoles.equals(sRoles) && sRoles.size() != 0){ // They have roles, that dont match what they have on file
-                u.roleIds(sRoles);
-                Abyss.info("Roles on user, dont match file. Rebinding file to match: " + e.getMember().getEffectiveName() + "' Server roles");
-            } else if(!fRoles.equals(sRoles) && sRoles.size() == 0  && Kit.get().usePersistentRoles ) { //If they have Roles on file, and zero roles on the server
-                boolean shr = true;
-                for (String fr : fRoles){
-                    if (e.getGuild().getRoleById(fr) == null){
-                        shr = false;
-                    }
+            //PHISHING DILEMMA
+            for (String p : Kit.get().phishing) {
+                if (e.getMessage().getContentRaw().toLowerCase().contains(p)) {
+                    e.getMessage().delete().queue();
+                    Abyss.debug("Phishing Check");
+                    Objects.requireNonNull(e.getMember()).getUser().openPrivateChannel().complete().sendMessage("Hello, You have been banned from volmit for sending Phishing links: `\n" +
+                            e.getMessage() +
+                            "`\nIf you feel this is a mistake, please send a friend request to: `⋈-NestorPsycho-⋈#0001` and explain the problem, otherwise your account was compromised, or you were unaware of what you were sending \n" +
+                            "regardless, you have been banned, until you either fix your account, or handle the situation").queue();
+                    try {
+                        WarningHandler.phishBan(e.getMember(), e.getGuild(), e.getMessage()); // ez ban
+                    } catch (Exception ignored) {
+                    } // Don't care about exceptions here, the only possible one is a permission one, and the bot needs to be able to handle it elsewhere
                 }
-                if (shr){
-                    Abyss.info("Reapplying PersistentRoles to: " + e.getMember().getEffectiveName());
-                    for (String f : fRoles) {
-                        if (e.getMessage().getGuild().getRoleById(f) != null) {
-                            e.getMessage().getGuild().addRoleToMember(e.getMember(), e.getMessage().getGuild().getRoleById(f)).complete();
+            }
+
+            //PASTEBIN REGISTRAR ---
+            if (Kit.get().usePasteService) {
+                if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://pastebin.com/")) {
+                    Abyss.info("Initializing  Paste Service");
+                    String str = e.getMessage().getContentRaw();
+                    String[] pbArr = str.split(" ");
+                    for (String s : pbArr) {
+                        if (s.contains("https://pastebin.com/")) {
+                            e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
+                                f.editMessageComponents().setActionRow(
+                                        Button.success("pastbinlinknew", "Yes please!"),
+                                        Button.danger("no", "No, go away!")
+                                ).queue();
+                                Abyss.info("Sent Paste Service Buttons");
+                            });
                         }
                     }
-                } else {
-                    u.roleIds(sRoles);
-                    Abyss.info("Server Role ReSync: " + e.getMember().getEffectiveName());
                 }
+                if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://mclo.gs/")) {
+                    Abyss.info("Initializing McLogs Service");
+                    String str = e.getMessage().getContentRaw();
+                    String[] pbArr = str.split(" ");
+                    for (String s : pbArr) {
+                        if (s.contains("https://mclo.gs/")) {
+                            e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
+                                f.editMessageComponents().setActionRow(
+                                        Button.success("mcloglinknew", "Yes please!"),
+                                        Button.danger("no", "No, go away!")
+                                ).queue();
+                                Abyss.info("Sent McLog Service Buttons");
+                            });
+                        }
+                    }
+                }
+                if (!e.getMessage().getAuthor().isBot() && e.getMessage().getContentRaw().contains("https://hastebin.com/")) {
+                    Abyss.info("Started the Hastebin Service");
+                    String str = e.getMessage().getContentRaw();
+                    String[] pbArr = str.split(" ");
+                    for (String s : pbArr) {
+                        if (s.contains("https://hastebin.com/")) {
+                            e.getChannel().sendMessage("Would you like me to scan this for you?: <" + s + ">").queue(f -> {
+                                f.editMessageComponents().setActionRow(
+                                        Button.success("hastebinlinknew", "Yes please!"),
+                                        Button.danger("no", "No, go away!")
+                                ).queue();
+                                Abyss.info("Sent HasteBin Service Buttons");
+                            });
+                        }
+                    }
+                }
+            }
 
+            //ROLE MANAGEMENT FINAL RESULT
+            User u = Abyss.getLoader().getUser(e.getMember().getIdLong()); // Load the user object
+            Set<String> fRoles = u.roleIds(); // Load the Roles from the user file
+            Set<String> sRoles = new HashSet<>(); // Load the Roles from the server
+            for (Role r : e.getMember().getRoles()) {
+                sRoles.add(r.getId());
+            }
+            if (fRoles.containsAll(sRoles) && sRoles.containsAll(fRoles)) {
+                //same server, same roles, all is well. Do nothing. but ill add something here later
+            } else {
+                if (!fRoles.equals(sRoles) && sRoles.size() != 0) { // They have roles, that don't match what they have on file
+                    u.roleIds(sRoles);
+                    Abyss.info("Roles on user, dont match file. Rebinding file to match: " + e.getMember().getEffectiveName() + "' Server roles");
+                } else if (!fRoles.equals(sRoles) && sRoles.size() == 0 && Kit.get().usePersistentRoles) { //If they have Roles on file, and zero roles on the server
+                    boolean shr = true;
+                    for (String fr : fRoles) {
+                        if (e.getGuild().getRoleById(fr) == null) {
+                            shr = false;
+                        }
+                    }
+                    if (shr) {
+                        Abyss.info("Reapplying PersistentRoles to: " + e.getMember().getEffectiveName());
+                        for (String f : fRoles) {
+                            if (e.getMessage().getGuild().getRoleById(f) != null) {
+                                e.getMessage().getGuild().addRoleToMember(e.getMember(), Objects.requireNonNull(e.getMessage().getGuild().getRoleById(f))).complete();
+                            }
+                        }
+                    } else {
+                        u.roleIds(sRoles);
+                        Abyss.info("Server Role ReSync: " + e.getMember().getEffectiveName());
+                    }
 
+                }
 
             }
         }
@@ -228,7 +230,7 @@ public class MessageListener extends ListenerAdapter {
         try {
             if (e.getGuild().getRolesByName(role, false).size() == 1 && e.getGuild().getRolesByName(role, false).contains(e.getGuild().getRolesByName(role, true).get(0))) {
                 r = e.getGuild().getRolesByName(role, true).get(0);
-                if (r != null) {
+                if (r != null && e.getMember() != null) {
                     e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
                     if (v > 0) {
                         for (Role rol : e.getMember().getRoles()) {

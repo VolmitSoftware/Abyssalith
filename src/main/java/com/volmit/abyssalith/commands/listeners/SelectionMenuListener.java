@@ -31,25 +31,27 @@ import java.util.Set;
 public class SelectionMenuListener extends ListenerAdapter {
     public void onSelectionMenu(SelectionMenuEvent e) {
         Abyss.debug("Menu Selection Recorded");
-        if (e.getComponentId().equalsIgnoreCase("menu:rolepage")) {
-            Abyss.info("Subjugating selection Menu");
+        if (e.getMember() != null) {
+            if (e.getComponentId().equalsIgnoreCase("menu:rolepage")) {
+                Abyss.info("Subjugating selection Menu");
 
-            Set<String> roles = new HashSet<>(); // Null Set of Roles
-            List<SelectOption> sel = e.getSelectedOptions(); // Selected Options
-            List<SelectOption> other = e.getComponent().getOptions(); // All  Options
+                Set<String> roles = new HashSet<>(); // Null Set of Roles
+                List<SelectOption> sel = e.getSelectedOptions(); // Selected Options
+                List<SelectOption> other = e.getComponent().getOptions(); // All  Options
 
-            for (SelectOption S : other) {
-                RoleHandler.removeRole(e.getMember(), S.getLabel());
+                for (SelectOption S : other) {
+                    RoleHandler.removeRole(e.getMember(), S.getLabel());
+                }
+
+                for (SelectOption S : sel) {
+                    RoleHandler.addRole(e.getMember(), S.getLabel());
+                    roles.add(S.getLabel());
+                }
+
+                e.reply("Your new roles are:" + roles).setEphemeral(true).queue();
+            } else {
+                e.reply("Please contact an administrator, i cant see any roles!").setEphemeral(true).queue();
             }
-
-            for (SelectOption S : sel) {
-                RoleHandler.addRole(e.getMember(), S.getLabel());
-                roles.add(S.getLabel());
-            }
-
-            e.reply("Your new roles are:" + roles).setEphemeral(true).queue();
-        } else {
-            e.reply("Please contact an administrator, i cant see any roles!").setEphemeral(true).queue();
         }
     }
 }

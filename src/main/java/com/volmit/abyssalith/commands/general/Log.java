@@ -61,6 +61,9 @@ public class Log extends VolmitCommand {
                         **-**  Go to <https://pastebin.com/> And paste that file there.
                         **-**  Alternatively <https://mclo.gs/> and paste it there.
                         **-**  Or just send the file""", false);
+        if(e.getMessage().getMentionedMembers().get(0) != null){
+            embed.setTitle("This was for: " +e.getMessage().getMentionedMembers().get(0).getAsMention() +"");
+        }
 
         //Commands
         //embed.addField("Name Here", "" + "Value here", false);
