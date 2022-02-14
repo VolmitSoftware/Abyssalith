@@ -18,7 +18,7 @@
 package com.volmit.abyssalith.commands.listeners;
 
 import com.volmit.abyssalith.Abyss;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
@@ -26,8 +26,7 @@ import java.util.Objects;
 
 public class ButtonListener extends ListenerAdapter {
 
-    @Override
-    public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
+    public void onButtonClick(ButtonInteractionEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
         Abyss.debug("Button Clicked");
         if (e.getComponentId().equals("no")) {
             Objects.requireNonNull(e.getMessage()).delete().queue();

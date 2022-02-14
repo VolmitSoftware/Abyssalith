@@ -67,7 +67,7 @@ public class Commands extends VolmitCommand {
             String cmd = command.getName().substring(0, 1).toUpperCase() + command.getName().substring(1);
             embed.setFooter("All Non-SubCommands are prefaced with the prefix: `" + Kit.get().botPrefix + "`");
             if (command.getCommands().size() < 2) {
-                embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), false);
+                embed.addField(cmd, "`*no aliases*`\n" + command.getDescription(), true);
             } else {
                 StringBuilder body = new StringBuilder();
                 body
@@ -93,7 +93,7 @@ public class Commands extends VolmitCommand {
                 embed.addField(
                         cmd,
                         body.toString(),
-                        false
+                        true
                 );
             }
         }

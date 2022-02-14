@@ -21,7 +21,7 @@ import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
+import net.dv8tion.jda.api.interactions.components.selections.SelectMenu;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class MenuHandler { // get and send menu
     }
 
     // return built menu for future modification
-    public static SelectionMenu.Builder RoleListMenuGen(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
+    public static SelectMenu.Builder RoleListMenuGen(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
         return genMenuMultipleSelect(id, PlaceholderText, mentionedRoles, messageChannel);
     }
 
@@ -41,14 +41,14 @@ public class MenuHandler { // get and send menu
     }
 
     // return built menu for future modification
-    public static SelectionMenu.Builder SingleRoleListMenuGen(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
+    public static SelectMenu.Builder SingleRoleListMenuGen(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
         return genMenuSingleSelect(id, PlaceholderText, mentionedRoles, messageChannel);
     }
     // Top one are callables, and instance the lists
 
 
     // Bottom are functions for the code
-    private static void sendMenu(SelectionMenu.Builder menu, MessageChannel messageChannel) {
+    private static void sendMenu(SelectMenu.Builder menu, MessageChannel messageChannel) {
         messageChannel.sendMessage("Select the roles that you want!") // Send it to the chat!
                 .setActionRow(menu.build())
                 .queue(f -> {
@@ -57,9 +57,9 @@ public class MenuHandler { // get and send menu
 
     }
 
-    private static SelectionMenu.Builder genMenuMultipleSelect(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
+    private static SelectMenu.Builder genMenuMultipleSelect(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
         // This method returns an editable object for chaining purposes
-        SelectionMenu.Builder menu = SelectionMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
+        SelectMenu.Builder menu = SelectMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
         int mr = mentionedRoles.size();
         Guild g = mentionedRoles.get(0).getGuild();
         menu.setMinValues(0);
@@ -69,16 +69,16 @@ public class MenuHandler { // get and send menu
 
     }
 
-    private static SelectionMenu.Builder genMenuSingleSelect(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
+    private static SelectMenu.Builder genMenuSingleSelect(String id, String PlaceholderText, List<Role> mentionedRoles, MessageChannel messageChannel) {
         // This method returns an editable object for chaining purposes
-        SelectionMenu.Builder menu = SelectionMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
+        SelectMenu.Builder menu = SelectMenu.create("menu:" + id).setPlaceholder(PlaceholderText);
         Guild g = mentionedRoles.get(0).getGuild();
 
         roleLoop(mentionedRoles, menu, g);
         return menu;
     }
 
-    private static void roleLoop(List<Role> mentionedRoles, SelectionMenu.Builder menu, Guild g) {
+    private static void roleLoop(List<Role> mentionedRoles, SelectMenu.Builder menu, Guild g) {
         for (Role r : mentionedRoles) {
             if (!g.getEmotesByName(r.getName(), true).isEmpty())
                 menu.addOption(r.getName(), r.getId(), Emoji.fromEmote(g.getEmotesByName(r.getName(), true).get(0)));

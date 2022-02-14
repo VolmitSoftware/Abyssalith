@@ -19,7 +19,7 @@ package com.volmit.abyssalith.commands.listeners;
 
 import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.handlers.RoleHandler;
-import net.dv8tion.jda.api.events.interaction.SelectionMenuEvent;
+import net.dv8tion.jda.api.events.interaction.component.SelectMenuInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.selections.SelectOption;
 
@@ -28,8 +28,8 @@ import java.util.List;
 import java.util.Set;
 
 
-public class SelectionMenuListener extends ListenerAdapter {
-    public void onSelectionMenu(SelectionMenuEvent e) {
+public class SelectMenuListener extends ListenerAdapter {
+    public void onSelectionMenu(SelectMenuInteractionEvent e) {
         Abyss.debug("Menu Selection Recorded");
         if (e.getMember() != null) {
             if (e.getComponentId().equalsIgnoreCase("menu:rolepage")) {

@@ -22,7 +22,7 @@ import com.volmit.abyssalith.Abyss;
 import com.volmit.abyssalith.commands.SkipCommand;
 import com.volmit.abyssalith.util.VolmitEmbed;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
@@ -61,8 +61,7 @@ public class PasteListener extends ListenerAdapter {
             new Definition("net.minecraft.ReportedException: Exception ticking world", "World Tick Bug", "You unfortunately ran into a known bug. Please try restarting the world or, if there is a new version, updating to a more recent version of Iris.")
     );
 
-    @Override
-    public void onButtonClick(ButtonClickEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
+    public void onButtonClick(ButtonInteractionEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
         if (e.getComponentId().equals("hastebinlinknew") || e.getComponentId().equals("pastbinlinknew") || e.getComponentId().equals("mcloglinknew")) {
             Abyss.info("Initializing Paste Service Interpreter");
             String properURL;
