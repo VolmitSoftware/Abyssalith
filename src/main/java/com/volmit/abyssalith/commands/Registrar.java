@@ -63,6 +63,7 @@ public class Registrar extends ListenerAdapter {
             case "VOL":
 //                jda.addEventListener(new ServerInfo()); VOLMIT SERVER STANDARDS
                 jda.addEventListener(new ButtonListener());
+                jda.addEventListener(new SelectMenuListener());  // [ DONT TOUCH THESE  LISTENERS ]
                 jda.addEventListener(new PasteListener());
                 jda.addEventListener(new Install());
                 jda.addEventListener(new Log());

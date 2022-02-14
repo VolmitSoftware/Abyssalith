@@ -26,7 +26,7 @@ import java.util.Objects;
 
 public class ButtonListener extends ListenerAdapter {
 
-    public void onButtonClick(ButtonInteractionEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
+    public void onButtonInteraction(ButtonInteractionEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
         Abyss.debug("Button Clicked");
         if (e.getComponentId().equals("no")) {
             Objects.requireNonNull(e.getMessage()).delete().queue();

@@ -29,7 +29,7 @@ import java.util.Set;
 
 
 public class SelectMenuListener extends ListenerAdapter {
-    public void onSelectionMenu(SelectMenuInteractionEvent e) {
+    public void onSelectMenuInteraction(SelectMenuInteractionEvent e) {
         Abyss.debug("Menu Selection Recorded");
         if (e.getMember() != null) {
             if (e.getComponentId().equalsIgnoreCase("menu:rolepage")) {

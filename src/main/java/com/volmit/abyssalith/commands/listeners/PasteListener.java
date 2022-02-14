@@ -61,7 +61,7 @@ public class PasteListener extends ListenerAdapter {
             new Definition("net.minecraft.ReportedException: Exception ticking world", "World Tick Bug", "You unfortunately ran into a known bug. Please try restarting the world or, if there is a new version, updating to a more recent version of Iris.")
     );
 
-    public void onButtonClick(ButtonInteractionEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
+    public void onButtonInteraction(ButtonInteractionEvent e) { //TODO--------------THIS  IS THE BUTTON MANAGER---------------------//
         if (e.getComponentId().equals("hastebinlinknew") || e.getComponentId().equals("pastbinlinknew") || e.getComponentId().equals("mcloglinknew")) {
             Abyss.info("Initializing Paste Service Interpreter");
             String properURL;

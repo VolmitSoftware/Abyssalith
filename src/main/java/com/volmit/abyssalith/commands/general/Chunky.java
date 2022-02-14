@@ -9,7 +9,7 @@ import java.util.List;
 public class Chunky extends VolmitCommand {
     public Chunky() {
         super(
-                "Chunky or Iris Pregen",
+                "Chunky",
                 new String[]{"chunky"},
                 new String[0],
                 "Why to use Iris' built-in pregenerator and not Chunky",
