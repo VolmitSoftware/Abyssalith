@@ -43,7 +43,7 @@ public class Log extends VolmitCommand {
     public void handle(List<String> args, MessageReceivedEvent e) {
         Abyss.info("Compliance is everything");
         VolmitEmbed embed = new VolmitEmbed("**WHAT IS A LOG?**", e.getMessage());
-        embed.setDescription("This message was sent because we are asking for a log, and you don't know how to get one, or sent something that is not a log. *If you are worried about privacy you can have a private thread for support, just ask the support team and we can get that setup for you!*");
+        embed.setDescription("This message was sent because we are asking for a log, and you don't know how to get one, or sent something that is not a log. *If you are worried about privacy you can use <https://mclo.gs/> and paste it there or have a private thread for support, just ask the support team and we can get that setup for you!*");
         embed.addField("*__Why do we ask for Logs__*",
                 """
                         **1:** So we can see what  the actual problem is.
