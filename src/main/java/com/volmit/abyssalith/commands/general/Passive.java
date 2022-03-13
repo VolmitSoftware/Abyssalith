@@ -48,7 +48,7 @@ public class Passive extends VolmitCommand {
         embed.addField("What data am I saving? (GUILD)", "__Here is a list of what i save for Guilds__: \n*- Guild ID & Chat ID's*\n*- Member ID's (Cached and removed on a per message Basis)*", false);
         embed.addField("Where is it saved?", "*- Based on the settings, Either a local file server or a Redis Server*", false);
         embed.addField("Other Monitoring", "- Ensuring you don't post Phishing links (instant ban)\n- Server statistics (roles, and so on)", false);
-        embed.send(e.getMessage(), true, 1000);
+        embed.send(e.getMessage());
 
     }
 }

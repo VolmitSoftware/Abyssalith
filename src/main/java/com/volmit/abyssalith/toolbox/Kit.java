@@ -54,7 +54,6 @@ public class Kit extends ListenerAdapter {
         env("BOT_ROLE_BANISHED", (f) -> roleBanished = f);
         env("BOT_ROLE_MODERATOR", (f) -> roleModerator = f);
         env("BOT_ROLE_ADMINISTRATOR", (f) -> roleAdministrator = f);
-        env("BOT_USAGE_MODULES", (f) -> usageModules = f);
         env("BOT_USE_BANISHED_INSTEAD_KICK", (f) -> useBanishedInsteadOfKick = Boolean.parseBoolean(f));
         env("BOT_USE_LINGUA", (f) -> useLingua = Boolean.parseBoolean(f));
         env("BOT_USE_PERSISTENT_ROLES", (f) -> usePersistentRoles = Boolean.parseBoolean(f));
@@ -87,7 +86,6 @@ public class Kit extends ListenerAdapter {
     public String roleBanished = "Banished";
     public String roleModerator = "Support";
     public String roleAdministrator = "Administrator";
-    public String usageModules = "ALL";
     public boolean useRedis = false;
     public boolean useBanishedInsteadOfKick = true; // TODO implement a warning / penalty system
     public boolean useRoleSystem = true;

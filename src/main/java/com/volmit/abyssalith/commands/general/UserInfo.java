@@ -66,6 +66,6 @@ public class UserInfo extends VolmitCommand {
         embed.addField("Recent Mentions", ments, false);
 
 
-        embed.send(e.getMessage(), true, 1000);
+        embed.send(e.getMessage());
     }
 }

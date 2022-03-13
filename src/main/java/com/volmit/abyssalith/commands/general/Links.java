@@ -56,6 +56,6 @@ public class Links extends VolmitCommand {
                 **Patreon:**
                 *https://www.patreon.com/volmitsoftware*
                 """, false);
-        embed.send(e.getMessage(), true, 1000);
+        embed.send(e.getMessage());
     }
 }

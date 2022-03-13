@@ -47,46 +47,17 @@ public class Registrar extends ListenerAdapter {
         jda.addEventListener(new Kit());  // [ DONT TOUCH THESE  LISTENERS ]
         jda.addEventListener(new Shutdown());  // [ DONT TOUCH THESE  LISTENERS ]
 
-        String modules = Kit.get().usageModules;
+        //Commands - General
+        jda.addEventListener(new Chunky());
+        jda.addEventListener(new Install());
+        jda.addEventListener(new Links());
+        jda.addEventListener(new Log());
+        jda.addEventListener(new Passive());
+        jda.addEventListener(new Paste());
+        jda.addEventListener(new ServerInfo());
+        jda.addEventListener(new UserInfo());
 
-        switch (modules) {
-            case "MPM":
-//                jda.addEventListener(new ServerInfo()); HELTH STUFF
 
-                break;
-
-            case "DEV":
-//                jda.addEventListener(new ServerInfo()); DEVELOPMENT KEY
-
-                break;
-
-            case "VOL":
-//                jda.addEventListener(new ServerInfo()); VOLMIT SERVER STANDARDS
-                jda.addEventListener(new ButtonListener());
-                jda.addEventListener(new SelectMenuListener());  // [ DONT TOUCH THESE  LISTENERS ]
-                jda.addEventListener(new PasteListener());
-                jda.addEventListener(new Install());
-                jda.addEventListener(new Log());
-                jda.addEventListener(new UserInfo());
-                jda.addEventListener(new GuildListener()); // Persistent Roles
-                jda.addEventListener(new MessageListener()); // Watches the User's messages for stuff
-                jda.addEventListener(new MessageReactionListener()); // Watches the User's instances for stuff
-                jda.addEventListener(new Paste());
-                jda.addEventListener(new Passive());
-                jda.addEventListener(new ModHub()); // Mod Subcommand
-
-                break;
-
-            default:
-                Abyss.debug("Registering commands...");
-                try {
-                    registerAllCommands(commandPackagePath, jda);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Abyss.debug("Failed to close input stream for reading command classes!");
-                }
-                break;
-        }
 
         jda.addEventListener(new com.volmit.abyssalith.commands.general.Commands(jda)); // This one MUST be last
     }

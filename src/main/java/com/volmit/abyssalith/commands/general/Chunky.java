@@ -32,6 +32,6 @@ public class Chunky extends VolmitCommand {
                 Plus, Iris' pregenerator makes use of the MCA world file system that Minecraft uses,
                 and writes directly to those files so the worlds can be generated much more quickly.
         """);
-        em.send(e.getMessage(), true);
+        em.send(e.getMessage());
     }
 }

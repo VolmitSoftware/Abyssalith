@@ -46,10 +46,9 @@ public class Shutdown extends VolmitCommand {
         String oidcheck = e.getMessage().getAuthor().getId();
         if (oidcheck.equals(Kit.get().botOwnerID)) {
             Abyss.warn("KILLING BOT");
-            e.getMessage().delete().queue();
             Abyss.shutdown();
         } else {
-            e.getChannel().sendMessage("uR noT my DAddY!").queue();
+            e.getMessage().reply("uR noT my DAddY!").queue();
         }
     }
 }

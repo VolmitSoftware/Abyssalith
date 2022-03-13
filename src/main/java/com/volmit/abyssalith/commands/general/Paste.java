@@ -49,7 +49,7 @@ public class Paste extends VolmitCommand {
                 "https://hastebin.com/ `400kb`\n" +
                 "https://gist.github.com/ `100mb`(need GitHub, **Free**)\n" +
                 "https://mclo.gs/ `2mb`, Hides IP's/sensitive info, [Bot Supported]\n", false);
-        embed.send(e.getMessage(), true, 1000);
+        embed.send(e.getMessage());
 
     }
 }
