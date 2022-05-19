@@ -131,7 +131,6 @@ public class ServerInfo extends VolmitCommand {
         if (!gs.avatar.equals("not set"))
             eb.setThumbnail(gs.avatar);
         e.getMessage().getChannel().sendMessageEmbeds(eb.build()).queue();
-        e.getMessage().delete().queue(); // delete the sent message
 
     }
 

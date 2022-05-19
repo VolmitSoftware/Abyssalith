@@ -64,7 +64,7 @@ public class Log extends VolmitCommand {
 
         //Commands
         //embed.addField("Name Here", "" + "Value here", false);
-        embed.send(e.getMessage(), true, 1000);
+        embed.send(e.getMessage());
 
     }
 }

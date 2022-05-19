@@ -21,7 +21,6 @@ public class Install extends VolmitCommand {
 
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
-        e.getMessage().delete().queue();
         e.getChannel().sendMessageEmbeds(new VolmitEmbed()
                 .setTitle("Iris Installation Guides")
                 .addField(new MessageEmbed.Field("1.18.X (Latest)",
