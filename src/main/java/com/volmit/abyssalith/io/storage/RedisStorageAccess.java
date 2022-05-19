@@ -22,7 +22,7 @@ import redis.clients.jedis.Jedis;
 
 
 public class RedisStorageAccess implements StorageAccess {
-    private Jedis jedis;
+    private final Jedis jedis;
 
     public RedisStorageAccess(String address, int port, String password) {
         jedis = new Jedis(address, port);

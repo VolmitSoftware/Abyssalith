@@ -51,11 +51,11 @@ public class Give extends VolmitCommand {
         VolmitEmbed embed = new VolmitEmbed("Transaction Receipt!", e.getMessage());
         embed.addField(moneyEmoji + moneyName + " given: ", args.get(1) + " From: " + e.getAuthor().getAsMention(), false);
 
-        User u = Abyss.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
+        User u = Abyss.getLoader().getUser(e.getMessage().getMentions().getMembers().get(0).getIdLong());
 
         u.money(Float.parseFloat(args.get(1)) + u.money());
 
-        embed.addField("New Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", "" + Form.f(u.money()), false);
+        embed.addField("New Total For " + e.getMessage().getMentions().getMembers().get(0).getEffectiveName() + ": ", "" + Form.f(u.money()), false);
         embed.send(e.getMessage(), true, 1000);
     }
 }

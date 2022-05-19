@@ -47,12 +47,12 @@ public class Get extends VolmitCommand {
         Abyss.info("Eco.Get Instanced");
         String moneyName = Kit.get().moneyName;
         String moneyEmoji = Kit.get().moneyEmoji;
-        if (!e.getMessage().getMentionedMembers().isEmpty()) {
-            User u = Abyss.getLoader().getUser(e.getMessage().getMentionedMembers().get(0).getIdLong());
+        if (!e.getMessage().getMentions().getMembers().isEmpty()) {
+            User u = Abyss.getLoader().getUser(e.getMessage().getMentions().getMembers().get(0).getIdLong());
 
             VolmitEmbed embed = new VolmitEmbed("Balance Page Report!", e.getMessage());
             embed.addField(moneyEmoji + moneyName + " Total: ", Form.f(u.money()), false);
-            embed.addField("Total For " + e.getMessage().getMentionedMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
+            embed.addField("Total For " + e.getMessage().getMentions().getMembers().get(0).getEffectiveName() + ": ", Form.f(u.money()), false);
             embed.send(e.getMessage(), true, 1000);
         } else {
             User u = Abyss.getLoader().getUser(e.getMessage().getAuthor().getIdLong());

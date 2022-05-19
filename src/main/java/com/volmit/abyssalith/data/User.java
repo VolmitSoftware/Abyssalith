@@ -39,7 +39,6 @@ public class User implements DataType {
     private double experience = 0.0f;
     private double money = 0.00f;
 
-    //private UserStatistics stats = new UserStatistics();
     private long messagesSent = 0;
     private long reactions = 0;
     private Set<String> roleIds = new HashSet<>();

@@ -44,7 +44,7 @@ public class ListWarn extends VolmitCommand {
     @Override
     public void handle(List<String> args, MessageReceivedEvent e) {
         String[] s = e.getMessage().getContentRaw().split(" ");
-        if (e.getMessage().getMentionedMembers().size() == 0 && e.getGuild().getMemberById(s[2].toString()) != null) {
+        if (e.getMessage().getMentions().getMembers().size() == 0 && e.getGuild().getMemberById(s[2].toString()) != null) {
             User u = Abyss.getLoader().getUser(e.getGuild().getMemberById(s[2].toString()).getIdLong());
 
             WarningHandler.warnShow(u, e.getChannel());

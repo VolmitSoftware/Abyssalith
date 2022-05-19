@@ -29,6 +29,7 @@ import com.volmit.abyssalith.toolbox.Kit;
 import com.volmit.abyssalith.util.XP;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.UserSnowflake;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
@@ -60,9 +61,9 @@ public class MessageListener extends ListenerAdapter {
             }
 
             //ANTI-GHOST MENTION PORTION ---
-            if (e.getMessage().getMentionedMembers().size() > 0) {
+            if (e.getMessage().getMentions().getMembers().size() > 0) {
                 Abyss.debug("User Mention Noticed, and Logged");
-                for (Member m : e.getMessage().getMentionedMembers()) {
+                for (Member m : e.getMessage().getMentions().getMembers()) {
                     User u = Abyss.getLoader().getUser(m.getIdLong());
                     if (u.recentMentions().size() > 2) {
                         u.recentMentions().remove(u.recentMentions().size() - 1);
@@ -82,14 +83,14 @@ public class MessageListener extends ListenerAdapter {
 
             //REACTION-ROLE VISTA
             if (!e.getMessage().getAuthor().isBot() // not a bot
-                    && e.getMessage().getMentionedRoles().size() > 0 // mentioning roles
+                    && e.getMessage().getMentions().getRoles().size() > 0 // mentioning roles
                     && PermHandler.hasAdmin(Objects.requireNonNull(e.getMember())) // Has admin permissions
                     && e.getMessage().getContentRaw().contains(Kit.get().reactionRoleString)) { // Contains reaction role string
                 Abyss.debug("ReactionRoles Instanced");
-                if (e.getMessage().getMentionedRoles().size() > 1) {
+                if (e.getMessage().getMentions().getRoles().size() > 1) {
                     MenuHandler.RoleListMenu("rolepage",
                             "Choose your Role(s)!",
-                            e.getMessage().getMentionedRoles(),
+                            e.getMessage().getMentions().getRoles(),
                             e.getChannel());
                 } else {
                     e.getChannel().sendMessage("CAn you mention more than 1 role please...").queue();
@@ -231,17 +232,17 @@ public class MessageListener extends ListenerAdapter {
             if (e.getGuild().getRolesByName(role, false).size() == 1 && e.getGuild().getRolesByName(role, false).contains(e.getGuild().getRolesByName(role, true).get(0))) {
                 r = e.getGuild().getRolesByName(role, true).get(0);
                 if (r != null && e.getMember() != null) {
-                    e.getGuild().addRoleToMember(e.getMember().getIdLong(), r).queue();
+                    e.getGuild().addRoleToMember(UserSnowflake.fromId(e.getMember().getIdLong()), r).queue();
                     if (v > 0) {
                         for (Role rol : e.getMember().getRoles()) {
                             if (rol.getName().contains(Kit.get().levelName)) {
                                 int rint = Integer.parseInt(rol.getName().replace(Kit.get().levelName, ""));
                                 if (v > rint) {
-                                    e.getGuild().removeRoleFromMember(e.getMember().getId(), e.getGuild().getRolesByName(
+                                    e.getGuild().removeRoleFromMember(UserSnowflake.fromId(e.getMember().getId()), e.getGuild().getRolesByName(
                                             Kit.get().levelName + rint, false).get(0)).complete();
                                     Abyss.info("Removed, excessive child roles from user: " + e.getMember().getId());
                                 } else if (v != rint) {
-                                    e.getGuild().removeRoleFromMember(e.getMember().getId(), e.getGuild().getRolesByName(
+                                    e.getGuild().removeRoleFromMember(UserSnowflake.fromId(e.getMember().getId()), e.getGuild().getRolesByName(
                                             Kit.get().levelName + rint, false).get(0)).complete();
                                     Abyss.warn("Removed a role that was not possible to have reached, or something that does not match: " + e.getMember().getId());
                                 }

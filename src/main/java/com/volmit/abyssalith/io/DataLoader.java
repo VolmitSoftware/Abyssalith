@@ -23,9 +23,7 @@ import com.volmit.abyssalith.data.Message;
 import com.volmit.abyssalith.data.User;
 
 
-/**
- * Just like irisdata!
- */
+
 public class DataLoader {
     private final StorageAccess storage;
     private final KMap<Class<? extends DataType>, TypedLoader<?>> loaders = new KMap<>();

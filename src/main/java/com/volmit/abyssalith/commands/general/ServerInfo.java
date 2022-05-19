@@ -57,7 +57,6 @@ public class ServerInfo extends VolmitCommand {
         private final int threadChans;
         private final int newsChans;
         private final int stageChans;
-        private final int storeChans;
         private final int voiceChans;
         private final int categories;
         private final int rolesCount;
@@ -80,7 +79,6 @@ public class ServerInfo extends VolmitCommand {
             this.stageChans = g.getStageChannels().size();
             this.threadChans = g.getThreadChannels().size();
             this.newsChans = g.getNewsChannels().size();
-            this.storeChans = g.getStoreChannels().size();
             this.voiceChans = g.getVoiceChannels().size();
             this.categories = g.getCategories().size();
             this.rolesCount = g.getRoles().size();
@@ -124,7 +122,7 @@ public class ServerInfo extends VolmitCommand {
                 .addField("Name:", gs.name, false)
                 .addField("ID:", gs.id, false)
                 .addField("Owner:", gs.owner.getUser().getName() + "#" + gs.owner.getUser().getDiscriminator(), false)
-                .addField("Channels", "**Text Channels:**  " + gs.textChans + "\n**Voice Channels:**  " + gs.voiceChans +  "\n**Stage Channels:**  " + gs.stageChans + "\n**Thread Channels:**  " + gs.threadChans + "\n**Store Channels:**  " + gs.storeChans +"\n**News Channels:**  " + gs.newsChans +"\n**Categories:**  " + gs.categories    , false)
+                .addField("Channels", "**Text Channels:**  " + gs.textChans + "\n**Voice Channels:**  " + gs.voiceChans +  "\n**Stage Channels:**  " + gs.stageChans + "\n**Thread Channels:**  " + gs.threadChans +"\n**News Channels:**  " + gs.newsChans +"\n**Categories:**  " + gs.categories    , false)
                 .addField("Members:", usersText, false)
                 .addField("Roles (" + gs.rolesCount + "): ", gs.roles, false)
                 .addField("AFK Channel", gs.afk, false)

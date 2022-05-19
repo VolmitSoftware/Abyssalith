@@ -45,8 +45,8 @@ public class Banish extends VolmitCommand {
     public void handle(List<String> args, MessageReceivedEvent e) {
         Abyss.info("Applied Banish: " + e.getMessage().getContentRaw());
 
-        if (e.getMessage().getMentionedMembers().size() == 1) {
-            Member m = e.getMessage().getMentionedMembers().get(0);
+        if (e.getMessage().getMentions().getMembers().size() == 1) {
+            Member m = e.getMessage().getMentions().getMembers().get(0);
             BanishHandler.bok(m);
         }
         e.getMessage().delete().queue();
