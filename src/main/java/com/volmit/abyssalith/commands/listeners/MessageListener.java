@@ -26,17 +26,17 @@ import com.volmit.abyssalith.handlers.MenuHandler;
 import com.volmit.abyssalith.handlers.PermHandler;
 import com.volmit.abyssalith.handlers.WarningHandler;
 import com.volmit.abyssalith.toolbox.Kit;
+import com.volmit.abyssalith.util.VolmitEmbed;
 import com.volmit.abyssalith.util.XP;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.UserSnowflake;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class MessageListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent e) {
@@ -58,6 +58,14 @@ public class MessageListener extends ListenerAdapter {
                         roleManager(e, Kit.get().levelName + XP.getLevelForXp(uxp), validator);
                     }
                 }
+            }
+
+            // 1.19 fuckers
+            if (e.getMessage().getContentRaw().contains("1.19")) {
+                VolmitEmbed embed = new VolmitEmbed();
+                embed.setTitle("1.19 Iris update").appendDescription("Iris will start working on an update after Spigot, Paper and Purpur have released their non-experimental 1.19 versions. Please stop asking.");
+                embed.send();
+                e.getMessage().delete().queue();
             }
 
             //ANTI-GHOST MENTION PORTION ---
