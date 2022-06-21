@@ -44,16 +44,16 @@ public class Links extends VolmitCommand {
         Abyss.info("Links Posted");
         VolmitEmbed embed = new VolmitEmbed(" Here you go!", e.getMessage());
         //Commands
-        embed.addField("**WIKI LINKS**:", """
-                **React Wiki:**
-                *https://iris-worldgen.gitbook.io/project/getting-started*
-                **Iris Wiki:**
-                *https://iris-worldgen.gitbook.io/project/getting-started*
-                **Wormholes Wiki:**
-                *https://www.theraleighregister.com/httpswwwyoutubecomwatchvdqw4w9wgxcq5.html*
+        embed.addField("**IRIS WIKI**:", """
+                Main *https://docs.volmit.com/iris/*
+                Getting-Started *https://docs.volmit.com/iris/getting-started*
+                Pregen *https://docs.volmit.com/iris/pregeneration*
+                FAQ *https://docs.volmit.com/iris/plugin/faq*
+                Updating Iris *https://docs.volmit.com/iris/plugin/faq#when-to-update-iris*
+                Atomic Cache Failure *https://docs.volmit.com/iris/plugin/faq#atomic-cache-failure*
+                Uninstalling Iris *https://docs.volmit.com/iris/plugin/faq#uninstalling-iris*
                 """, false);
-        embed.addField("**OTHER LINKS**:", """
-                **Patreon:**
+        embed.addField("**PATREON**:", """
                 *https://www.patreon.com/volmitsoftware*
                 """, false);
         embed.send(e.getMessage());
