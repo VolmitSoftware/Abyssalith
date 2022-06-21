@@ -11,7 +11,7 @@ public class Install extends VolmitCommand {
     public Install() {
         super(
                 "install",
-                new String[]{"install", "1.16", "116", "MC16", "1.17", "1.17", "MC17", "1.18", "MC18", "118"},
+                new String[]{"install", "i"},
                 new String[]{},
                 "Get installation steps for 1.16.x - 1.18.x",
                 false,
