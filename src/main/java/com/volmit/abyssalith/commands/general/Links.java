@@ -45,16 +45,19 @@ public class Links extends VolmitCommand {
         VolmitEmbed embed = new VolmitEmbed(" Here you go!", e.getMessage());
         //Commands
         embed.addField("**WIKI LINKS**:", """
-                **React Wiki:**
-                *https://iris-worldgen.gitbook.io/project/getting-started*
-                **Iris Wiki:**
-                *https://iris-worldgen.gitbook.io/project/getting-started*
-                **Wormholes Wiki:**
-                *https://www.theraleighregister.com/httpswwwyoutubecomwatchvdqw4w9wgxcq5.html*
+                **Adapt:**
+                *https://volmitsoftware.gitbook.io/adapt/*
+                *https://www.spigotmc.org/resources/adapt-leveling-skills-and-abilities.103790/*
+                **Iris:**
+                *https://volmitsoftware.gitbook.io/iris/*
+                *https://www.spigotmc.org/resources/iris-world-gen-custom-biome-colors.84586/*
                 """, false);
         embed.addField("**OTHER LINKS**:", """
                 **Patreon:**
                 *https://www.patreon.com/volmitsoftware*
+                **Discord Links:**
+                *discord.gg/volmit*
+                *https://canary.discord.com/channels/189665083817852928/770736450558754817/847589978694877194*
                 """, false);
         embed.send(e.getMessage());
     }
